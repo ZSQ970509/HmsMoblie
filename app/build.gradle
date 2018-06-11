@@ -39,4 +39,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     /* 通用的适配器 */
     compile 'com.classic.adapter:commonadapter:2.0'
+    /* 刷新适配器 */
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 }
