@@ -65,6 +65,7 @@
                 android:layout_marginTop="32dp">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tvLoginUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="账号" />
@@ -75,6 +76,7 @@
                 android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tvLoginUserPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="密码" />

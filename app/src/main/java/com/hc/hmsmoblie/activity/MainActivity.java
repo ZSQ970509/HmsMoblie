@@ -1,6 +1,8 @@
 package com.hc.hmsmoblie.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +23,9 @@ public class MainActivity extends YcAppCompatActivity {
     DrawerLayout mDrawerLayout;
     @BindView(R.id.main_navigationView)
     NavigationView mNavigationView;
-
+    public static void newInstance(Activity activity) {
+        activity.startActivity(new Intent(activity, MainActivity.class));
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.main_activity;

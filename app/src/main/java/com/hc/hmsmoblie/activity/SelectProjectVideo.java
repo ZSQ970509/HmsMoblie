@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.contact.SelectProjectVideoC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
@@ -30,7 +29,7 @@ public class SelectProjectVideo  extends YcMvpAppCompatActivity<SelectProjectVid
     EditText editSearchSelectProject;
     @BindView(R.id.rv_SelectProject)
     RecyclerView recyclerViewSelectProject;
-    SelectProjectVideoAdapter selectProjectVideoAdapter;
+//    SelectProjectVideoAdapter selectProjectVideoAdapter;
     @Override
     protected SelectProjectVideoP loadPresenter() {
         return new SelectProjectVideoP();
@@ -45,7 +44,7 @@ public class SelectProjectVideo  extends YcMvpAppCompatActivity<SelectProjectVid
     protected void initView(Bundle bundle) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectProject.setLayoutManager(linearLayoutManager);
-        selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);
+//        selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);
     }
     @OnClick({R.id.btn_Search_SelectProject})
     void onClick(View v) {
