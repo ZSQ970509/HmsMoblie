@@ -3,7 +3,6 @@ package com.hc.hmsmoblie.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,9 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
 import com.hc.hmsmoblie.bean.domain.ProjectVideoBean;
-import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.contact.SelectProjectVideoC;
-import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.hc.hmsmoblie.mvp.presenter.SelectProjectVideoP;
 import com.hc.hmsmoblie.widget.CustomLoadMoreView;
 import com.yc.yclibrary.base.YcMvpAppCompatActivity;
@@ -52,7 +49,7 @@ public class SelectProjectVideoActivity extends YcMvpAppCompatActivity<SelectPro
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_select_project_video;
+        return R.layout.video_select_project_activity;
     }
 
     @Override
@@ -61,7 +58,7 @@ public class SelectProjectVideoActivity extends YcMvpAppCompatActivity<SelectPro
         recyclerViewSelectProject.setLayoutManager(linearLayoutManager);
         selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);
         recyclerViewSelectProject.setAdapter(selectProjectVideoAdapter);
-        recyclerViewSelectProject.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        //recyclerViewSelectProject.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         selectProjectVideoAdapter.setLoadMoreView(new CustomLoadMoreView());
         selectProjectVideoAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
