@@ -1,16 +1,16 @@
 package com.hc.hmsmoblie.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
+import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.bean.json.LoginJs;
+import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.yc.yclibrary.base.YcMvpAppCompatActivity;
-import com.yc.yclibrary.mvp.BasePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,11 +20,12 @@ import butterknife.OnClick;
  */
 
 public class LoginActivity extends YcMvpAppCompatActivity<LoginP> implements LoginC.V {
-    @BindView(R.id.tvLoginUserName)
-    TextInputEditText mUserNameTv;
+    @BindView(R.id.tvLoginUserAccount)
+    TextInputEditText mUserAccountTv;
     @BindView(R.id.tvLoginUserPassword)
     TextInputEditText mUserPasswordTv;
-
+    @BindView(R.id.login_save_password_cb)
+    CheckBox mIsSavePasswordCb;
     @Override
     protected LoginP loadPresenter() {
         return new LoginP();
@@ -37,11 +38,16 @@ public class LoginActivity extends YcMvpAppCompatActivity<LoginP> implements Log
 
     @Override
     protected void initView(Bundle bundle) {
-
+        if(UserInfoPref.getSavePassWord()){
+            mUserAccountTv.setText(UserInfoPref.getUserAccount());
+            mUserPasswordTv.setText(UserInfoPref.getUserPassword());
+            mIsSavePasswordCb.setChecked(UserInfoPref.getSavePassWord());
+        }
     }
 
     @Override
     public void onLoginSuccess(LoginJs loginJs) {
+        UserInfoPref.setSavePassWord(mIsSavePasswordCb.isChecked());
         MainActivity.newInstance(getActivity());
     }
 
@@ -50,11 +56,14 @@ public class LoginActivity extends YcMvpAppCompatActivity<LoginP> implements Log
         showToast(msg);
     }
 
-    @OnClick({R.id.btnLogin})
+    @OnClick({R.id.btnLogin,R.id.login_save_password_tv})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                mPresenter.login(mUserNameTv.getText().toString(), mUserPasswordTv.getText().toString());
+                mPresenter.login(mUserAccountTv.getText().toString(), mUserPasswordTv.getText().toString());
+                break;
+            case R.id.login_save_password_tv:
+                mIsSavePasswordCb.setChecked(!mIsSavePasswordCb.isChecked());
                 break;
         }
     }
