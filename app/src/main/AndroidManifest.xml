@@ -19,6 +19,7 @@
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.MainActivity"/>
         <activity android:name=".activity.LadderControlActivity"/>
+        <activity android:name=".activity.SelectProjectVideoActivity"/>
     </application>
 
 </manifest>

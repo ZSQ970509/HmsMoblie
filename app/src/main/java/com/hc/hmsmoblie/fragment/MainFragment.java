@@ -10,6 +10,7 @@ import com.classic.adapter.CommonAdapter;
 import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.activity.LadderControlActivity;
+import com.hc.hmsmoblie.activity.SelectProjectVideoActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
 import com.yc.yclibrary.base.YcLazyFragment;
 
@@ -44,12 +45,19 @@ public class MainFragment extends YcLazyFragment {
         commonAdapter = new CommonRecyclerAdapter<MainItemBean>(getActivity(), R.layout.main_item) {
             @Override
             public void onUpdate(BaseAdapterHelper helper, MainItemBean item, int position) {
+
                 helper.setText(R.id.tvMainItem, item.getName());
             }
         };
         commonAdapter.addAll(tempData);
         commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
-            LadderControlActivity.newInstance(getActivity());
+            switch (position){
+                case 0:
+                    SelectProjectVideoActivity.newInstance(getActivity());
+                    break;
+
+            }
+           // LadderControlActivity.newInstance(getActivity());
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
