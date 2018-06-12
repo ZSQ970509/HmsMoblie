@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.ProjectVideoBean;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.contact.SelectProjectVideoC;
@@ -30,7 +31,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/6/11.
  */
 
-public class SelectProjectVideoActivity extends YcMvpAppCompatActivity<SelectProjectVideoP> implements SelectProjectVideoC.V{
+public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVideoP> implements SelectProjectVideoC.V{
     @BindView(R.id.btn_Search_SelectProject)
     Button btnSearchSelectProject;
     @BindView(R.id.edit_Search_SelectProject)

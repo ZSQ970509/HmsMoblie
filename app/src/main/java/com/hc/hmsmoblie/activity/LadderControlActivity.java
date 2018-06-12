@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.mvp.contact.LadderControlC;
 import com.hc.hmsmoblie.mvp.presenter.LadderControlP;
 import com.yc.yclibrary.base.YcMvpAppCompatActivity;
@@ -16,7 +17,7 @@ import butterknife.OnClick;
  *
  */
 
-public class LadderControlActivity extends YcMvpAppCompatActivity<LadderControlP> implements LadderControlC.V {
+public class LadderControlActivity extends BaseMvpActivity<LadderControlP> implements LadderControlC.V {
     public static void newInstance(Activity activity) {
         Intent intent = new Intent(activity, LadderControlActivity.class);
         activity.startActivity(intent);

@@ -13,12 +13,14 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.base.BaseActivity;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.fragment.MainFragment;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 
 import butterknife.BindView;
 
-public class MainActivity extends YcAppCompatActivity {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.main_drawerLayout)
     DrawerLayout mDrawerLayout;
     @BindView(R.id.main_navigationView)
