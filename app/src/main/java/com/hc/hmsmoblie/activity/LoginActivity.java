@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.LoginJs;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
@@ -19,7 +20,7 @@ import butterknife.OnClick;
  *
  */
 
-public class LoginActivity extends YcMvpAppCompatActivity<LoginP> implements LoginC.V {
+public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     @BindView(R.id.tvLoginUserAccount)
     TextInputEditText mUserAccountTv;
     @BindView(R.id.tvLoginUserPassword)
