@@ -10,7 +10,7 @@ import com.yc.yclibrary.mvp.IView;
 
 public class SelectProjectVideoC {
     public interface V extends IView{
-        void onGetVideoProjectSuccess(ProjectVideoBean projectVideoBean);
+        void onGetVideoProjectSuccess(ProjectVideoBean dataBean);
 
         void onGetVideoProjectFail(String msg);
     }

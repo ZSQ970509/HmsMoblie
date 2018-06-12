@@ -37,7 +37,7 @@ public class SelectProjectVideoActivity extends YcMvpAppCompatActivity<SelectPro
     EditText editSearchSelectProject;
     @BindView(R.id.rv_SelectProject)
     RecyclerView recyclerViewSelectProject;
-    ArrayList<ProjectVideoBean.DataBean> dataList = new ArrayList<ProjectVideoBean.DataBean>();
+    ArrayList<ProjectVideoBean.ListBean> dataList = new ArrayList<ProjectVideoBean.ListBean>();
     SelectProjectVideoAdapter selectProjectVideoAdapter;
     int pageIndex = 0;
     int sumPage;
@@ -107,21 +107,21 @@ public class SelectProjectVideoActivity extends YcMvpAppCompatActivity<SelectPro
                 selectProjectVideoAdapter.notifyDataSetChanged();
                 //userbean 暂时写死
                 //sysId:11视频监控、26超视野、31梯控、21环境
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex + "", "10", "","100039");
+                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex + "", "10", "11","100039");
                 break;
         }
     }
 
     @Override
-    public void onGetVideoProjectSuccess(ProjectVideoBean projectVideoBean) {
-        if (projectVideoBean.getData().size() == 0) {
+    public void onGetVideoProjectSuccess(ProjectVideoBean dataBean) {
+        if (dataBean.getList().size() == 0) {
             showToast("暂无数据！");
         } else {
             showToast("数据加载成功！");
         }
-        dataList.addAll(projectVideoBean.getData());
+        dataList.addAll(dataBean.getList());
         selectProjectVideoAdapter.notifyDataSetChanged();
-        //sumPage = (projectBean.getTotalCount() + 10 - 1) / 10;
+        sumPage = (dataBean.getTotal() + 10 - 1) / 10;
         if (pageIndex <= sumPage) {
             pageIndex++;
         }
