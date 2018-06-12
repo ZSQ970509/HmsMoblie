@@ -47,8 +47,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_gravity="center"
             android:padding="16dp">
 
             <ImageView
@@ -56,7 +57,6 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <android.support.design.widget.TextInputLayout
@@ -65,7 +65,7 @@
                 android:layout_marginTop="32dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/tvLoginUserName"
+                    android:id="@+id/tvLoginUserAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="账号" />

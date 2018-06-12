@@ -12,10 +12,10 @@ import io.reactivex.Observable;
  */
 
 public class LoginM implements IModel{
-    public Observable login(String userName, String userPassword) {
+    public Observable login(String userAccount, String userPassword) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .login(userName, userPassword)
+                .login(userAccount, userPassword)
                 .compose(NetTransformer.compose());
     }
 }
