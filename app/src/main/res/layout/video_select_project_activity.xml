@@ -5,13 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/actionbar_layout" />
+
     <EditText
         android:id="@+id/edit_Search_SelectProject"
         android:layout_width="@dimen/x580"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_Search_SelectProject"
         android:layout_alignBottom="@+id/btn_Search_SelectProject"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="13dp"
         android:ems="10"
         android:hint="请输入项目名称"
         android:inputType="textPersonName" />
@@ -21,17 +26,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/titleBar"
+        android:layout_marginTop="5dp"
         android:text="搜索" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_SelectProject"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/edit_Search_SelectProject"
-        android:layout_marginTop="39dp" />
+        android:layout_below="@+id/btn_Search_SelectProject"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
 
 
 </RelativeLayout>

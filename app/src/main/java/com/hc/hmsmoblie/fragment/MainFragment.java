@@ -9,7 +9,7 @@ import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
 
 import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
-import com.hc.hmsmoblie.activity.SelectProjectVideoActivity;
+import com.hc.hmsmoblie.activity.VideoSelectProjectActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
 import com.yc.yclibrary.base.YcLazyFragment;
 
@@ -51,7 +51,7 @@ public class MainFragment extends YcLazyFragment {
         commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
             switch (position){
                 case 0:
-                    SelectProjectVideoActivity.newInstance(getActivity());
+                    VideoSelectProjectActivity.newInstance(getActivity());
                     break;
                 case 1:
                     LadderControlProjectListActivity.newInstance(getActivity());

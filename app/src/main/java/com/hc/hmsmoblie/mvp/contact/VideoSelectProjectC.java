@@ -7,7 +7,7 @@ import com.yc.yclibrary.mvp.IView;
  *
  */
 
-public class SelectProjectVideoC {
+public class VideoSelectProjectC {
     public interface V extends IView{
         void onGetVideoProjectSuccess(ProjectJson dataBean);
 

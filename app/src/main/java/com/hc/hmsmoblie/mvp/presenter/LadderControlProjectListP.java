@@ -4,7 +4,6 @@ import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LadderControlProjectListC;
 import com.hc.hmsmoblie.mvp.model.LadderControlProjectListM;
-import com.hc.hmsmoblie.mvp.model.SelectProjectVideoM;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
 import com.yc.yclibrary.exception.ApiException;

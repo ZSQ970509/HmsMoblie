@@ -11,7 +11,7 @@ import io.reactivex.Observable;
  *
  */
 
-public class SelectProjectVideoM implements IModel{
+public class VideoSelectProjectM implements IModel{
     public Observable getCameraList(String keyword, int pageindex, int pagesize, String sysId, String userid) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
