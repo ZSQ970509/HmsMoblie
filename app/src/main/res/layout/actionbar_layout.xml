@@ -5,67 +5,80 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        toolbar:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        toolbar:titleTextAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary">
 
-        <ImageView
-            android:id="@+id/actionbar_left_btn"
-            android:layout_width="@dimen/activity_margin_big"
-            android:layout_height="@dimen/activity_margin_big"
-            android:layout_gravity="center_vertical|left"
+        <LinearLayout
+            android:id="@+id/LlActionbarLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:minWidth="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/activity_margin">
 
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:scaleType="center"
-            android:src="@drawable/ic_back" />
+            <ImageView
+                android:id="@+id/ivActionbarLeft"
+                android:layout_width="@dimen/activity_margin"
+                android:layout_height="@dimen/activity_margin"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tvActionbarLeft"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="返回"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/actionbar_left_tv"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical|left"
-            android:clickable="true"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:text="返回"
-            android:visibility="gone" />
-        <TextView
-            android:id="@+id/actionbar_mid_tv"
+            android:id="@+id/tvActionbarMid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
+            android:layout_centerInParent="true"
             android:text="@string/app_name"
-            android:textSize="18sp"
-            android:textColor="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/actionbar_right_btn"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical|right"
-            android:clickable="true"
-            android:scaleType="center"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/actionbar_right_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
-            android:clickable="true"
-            android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:text="保存"
-            android:visibility="gone" />
-    </android.support.v7.widget.Toolbar>
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/LlActionbarRight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right"
+            android:minWidth="48dp"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/activity_margin">
+
+            <ImageView
+                android:id="@+id/ivActionbarRight"
+                android:layout_width="@dimen/activity_margin"
+                android:layout_height="@dimen/activity_margin"
+                android:layout_gravity="center_vertical|right"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tvActionbarRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:clickable="true"
+                android:text="保存"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </FrameLayout>

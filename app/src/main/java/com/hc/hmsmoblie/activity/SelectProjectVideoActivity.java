@@ -13,11 +13,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
-import com.hc.hmsmoblie.bean.domain.ProjectVideoBean;
+import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.mvp.contact.SelectProjectVideoC;
 import com.hc.hmsmoblie.mvp.presenter.SelectProjectVideoP;
 import com.hc.hmsmoblie.widget.CustomLoadMoreView;
-import com.yc.yclibrary.base.YcMvpAppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -28,21 +27,23 @@ import butterknife.OnClick;
  * Created by Administrator on 2018/6/11.
  */
 
-public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVideoP> implements SelectProjectVideoC.V{
+public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVideoP> implements SelectProjectVideoC.V {
     @BindView(R.id.btn_Search_SelectProject)
     Button btnSearchSelectProject;
     @BindView(R.id.edit_Search_SelectProject)
     EditText editSearchSelectProject;
     @BindView(R.id.rv_SelectProject)
     RecyclerView recyclerViewSelectProject;
-    ArrayList<ProjectVideoBean.ListBean> dataList = new ArrayList<ProjectVideoBean.ListBean>();
+    ArrayList<ProjectJson.ListBean> dataList = new ArrayList<ProjectJson.ListBean>();
     SelectProjectVideoAdapter selectProjectVideoAdapter;
     int pageIndex = 0;
     int sumPage;
+
     public static void newInstance(Activity activity) {
-        Intent intent = new Intent(activity, SelectProjectVideoActivity.class) ;
+        Intent intent = new Intent(activity, SelectProjectVideoActivity.class);
         activity.startActivity(intent);
     }
+
     @Override
     protected SelectProjectVideoP loadPresenter() {
         return new SelectProjectVideoP();
@@ -73,7 +74,7 @@ public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVid
                         } else {
                             //userbean 暂时写死
                             //sysId:11视频监控、26超视野、31梯控、21环境
-                            mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex + "", "10", "11","100039");
+                            mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "11", "100039");
                         }
 
                     }
@@ -97,6 +98,7 @@ public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVid
             }
         });
     }
+
     @OnClick({R.id.btn_Search_SelectProject})
     void onClick(View v) {
         switch (v.getId()) {
@@ -105,13 +107,13 @@ public class SelectProjectVideoActivity extends BaseMvpActivity<SelectProjectVid
                 selectProjectVideoAdapter.notifyDataSetChanged();
                 //userbean 暂时写死
                 //sysId:11视频监控、26超视野、31梯控、21环境
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex + "", "10", "11","100039");
+                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "11", "100039");
                 break;
         }
     }
 
     @Override
-    public void onGetVideoProjectSuccess(ProjectVideoBean dataBean) {
+    public void onGetVideoProjectSuccess(ProjectJson dataBean) {
         if (dataBean.getList().size() == 0) {
             showToast("暂无数据！");
         } else {

@@ -3,12 +3,12 @@
     package="com.hc.hmsmoblie">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
@@ -16,12 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"
+        <activity
+            android:name=".activity.LoginActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MainActivity"/>
-        <activity android:name=".activity.LadderControlActivity"/>
-        <activity android:name=".activity.SelectProjectVideoActivity"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.LadderControlProjectListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LadderControlDeviceListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.SelectProjectVideoActivity" />
     </application>
 
 </manifest>

@@ -22,16 +22,14 @@ public abstract class BaseActivity extends YcAppCompatActivity {
      * 设置标题栏
      */
     protected void setToolBar(String title) {
-        mTitle = (TextView) findViewById(R.id.actionbar_mid_tv);
+        mTitle = (TextView) findViewById(R.id.tvActionbarMid);
         mTitle.setText(title);
-        mLeftBtn = (ImageView) findViewById(R.id.actionbar_left_btn);
-        mLeftTv = (TextView) findViewById(R.id.actionbar_left_tv);
-        mRightBtn = (ImageView) findViewById(R.id.actionbar_right_btn);
-        mRightTv = (TextView) findViewById(R.id.actionbar_right_tv);
-        mLeftBtn.setOnClickListener(v -> onLeftClick(v));
-        mLeftTv.setOnClickListener(v -> onLeftClick(v));
-        mRightBtn.setOnClickListener(v -> onRightClick(v));
-        mRightTv.setOnClickListener(v -> onRightClick(v));
+        mLeftBtn = (ImageView) findViewById(R.id.ivActionbarLeft);
+        mLeftTv = (TextView) findViewById(R.id.tvActionbarLeft);
+        mRightBtn = (ImageView) findViewById(R.id.ivActionbarRight);
+        mRightTv = (TextView) findViewById(R.id.tvActionbarRight);
+        findViewById(R.id.LlActionbarLeft).setOnClickListener(v -> onLeftClick(v));
+        findViewById(R.id.LlActionbarRight).setOnClickListener(v -> onRightClick(v));
     }
 
     /**

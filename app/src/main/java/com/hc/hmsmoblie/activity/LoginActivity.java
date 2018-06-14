@@ -7,11 +7,10 @@ import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
-import com.hc.hmsmoblie.bean.json.LoginJs;
+import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
-import com.yc.yclibrary.base.YcMvpAppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,7 +46,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     }
 
     @Override
-    public void onLoginSuccess(LoginJs loginJs) {
+    public void onLoginSuccess(LoginJson loginJs) {
         UserInfoPref.setSavePassWord(mIsSavePasswordCb.isChecked());
         MainActivity.newInstance(getActivity());
     }

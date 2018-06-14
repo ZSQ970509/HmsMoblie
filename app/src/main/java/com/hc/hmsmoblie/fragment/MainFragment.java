@@ -1,20 +1,18 @@
 package com.hc.hmsmoblie.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.classic.adapter.BaseAdapterHelper;
-import com.classic.adapter.CommonAdapter;
 import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.activity.LadderControlActivity;
+
+import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
 import com.hc.hmsmoblie.activity.SelectProjectVideoActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
 import com.yc.yclibrary.base.YcLazyFragment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,9 +53,12 @@ public class MainFragment extends YcLazyFragment {
                 case 0:
                     SelectProjectVideoActivity.newInstance(getActivity());
                     break;
+                case 1:
+                    LadderControlProjectListActivity.newInstance(getActivity());
+                    break;
 
             }
-           // LadderControlActivity.newInstance(getActivity());
+           // LadderControlProjectListActivity.newInstance(getActivity());
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);

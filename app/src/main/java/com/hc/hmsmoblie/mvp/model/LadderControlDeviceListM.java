@@ -11,11 +11,11 @@ import io.reactivex.Observable;
  *
  */
 
-public class SelectProjectVideoM implements IModel{
-    public Observable getCameraList(String keyword, int pageindex, int pagesize, String sysId, String userid) {
+public class LadderControlDeviceListM implements IModel{
+    public Observable getTowerCraneDevList(String keyword, int pageIndex, int pageSize, String proId) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getCameraList(keyword, pageindex,pagesize,sysId,userid)
+                .getTowerCraneDevList(keyword, pageIndex,pageSize,proId)
                 .compose(NetTransformer.compose());
     }
 }

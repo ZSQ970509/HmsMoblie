@@ -1,12 +1,10 @@
 package com.hc.hmsmoblie.net;
 
-import com.hc.hmsmoblie.bean.domain.ProjectVideoBean;
-import com.hc.hmsmoblie.bean.json.LoginJs;
-
-import java.util.List;
+import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+import com.hc.hmsmoblie.bean.json.ProjectJson;
+import com.hc.hmsmoblie.bean.json.LoginJson;
 
 import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -19,9 +17,13 @@ import retrofit2.http.Query;
 
 public interface ApiServer {
     @GET(UrlHelper.BASE_API + "hmsLogin")
-    Observable<HttpResponse<LoginJs>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
+    Observable<HttpResponse<LoginJson>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameraList")
-    Observable<HttpResponse<ProjectVideoBean>> getCameraList(@Field ("keyword") String keyword, @Field("pageindex") String pageindex
-            , @Field("pagesize") String pagesize, @Field("sysId") String sysId, @Field("userid") String userid);
+    Observable<HttpResponse<ProjectJson>> getCameraList(@Field ("keyword") String keyword, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid);
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetTowerCraneDevList")
+    Observable<HttpResponse<LadderControlDeviceListJson>> getTowerCraneDevList(@Field ("keyword") String keyword, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize, @Field("projId") String proId);
 }

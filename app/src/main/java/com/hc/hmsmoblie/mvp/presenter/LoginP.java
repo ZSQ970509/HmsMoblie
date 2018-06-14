@@ -1,6 +1,6 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
-import com.hc.hmsmoblie.bean.json.LoginJs;
+import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.model.LoginM;
@@ -8,7 +8,6 @@ import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
 import com.yc.yclibrary.exception.ApiException;
 import com.yc.yclibrary.mvp.BasePresenter;
-import com.yc.yclibrary.net.BaseObserver;
 
 /**
  *
@@ -21,9 +20,9 @@ public class LoginP extends BasePresenter<LoginC.V> implements LoginC.P {
         new LoginM()
                 .login(userAccount, userPassword)
                 .compose(getIView().bindLifecycle())
-                .subscribe(new NetObserver<HttpResponse<LoginJs>>() {
+                .subscribe(new NetObserver<HttpResponse<LoginJson>>() {
                     @Override
-                    public void onSuccess(HttpResponse<LoginJs> loginBean) {
+                    public void onSuccess(HttpResponse<LoginJson> loginBean) {
                         UserInfoPref.setUserId(loginBean.getData().getUserID());
                         UserInfoPref.setUserAccount(userAccount);
                         UserInfoPref.setUserName(loginBean.getData().getUserName());

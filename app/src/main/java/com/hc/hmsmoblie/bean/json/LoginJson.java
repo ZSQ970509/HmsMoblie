@@ -4,7 +4,7 @@ package com.hc.hmsmoblie.bean.json;
  *
  */
 
-public class LoginJs {
+public class LoginJson {
 
     /**
      * $id : 1

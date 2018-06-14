@@ -1,13 +1,13 @@
-package com.hc.hmsmoblie.bean.domain;
+package com.hc.hmsmoblie.bean.json;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/6/11.
+ *
  */
 
-public class ProjectVideoBean implements Serializable{
+public class ProjectJson implements Serializable{
 
 
     /**
@@ -55,7 +55,7 @@ public class ProjectVideoBean implements Serializable{
         private String ProjAddress;
         private String ProjStatusCurrent;
         private int ProjStatusCurrId;
-        private int ProjID;
+        private String ProjID;
         private String ProjLat;
         private String ProjLng;
         private int ProjRegionCode;
@@ -103,11 +103,11 @@ public class ProjectVideoBean implements Serializable{
             this.ProjStatusCurrId = ProjStatusCurrId;
         }
 
-        public int getProjID() {
+        public String getProjID() {
             return ProjID;
         }
 
-        public void setProjID(int ProjID) {
+        public void setProjID(String ProjID) {
             this.ProjID = ProjID;
         }
 

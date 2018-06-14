@@ -1,7 +1,9 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
 import com.hc.hmsmoblie.bean.json.ProjectJson;
-import com.hc.hmsmoblie.mvp.contact.SelectProjectVideoC;
+import com.hc.hmsmoblie.db.UserInfoPref;
+import com.hc.hmsmoblie.mvp.contact.LadderControlProjectListC;
+import com.hc.hmsmoblie.mvp.model.LadderControlProjectListM;
 import com.hc.hmsmoblie.mvp.model.SelectProjectVideoM;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
@@ -12,24 +14,22 @@ import com.yc.yclibrary.mvp.BasePresenter;
  *
  */
 
-public class SelectProjectVideoP extends BasePresenter<SelectProjectVideoC.V> implements SelectProjectVideoC.P{
+public class LadderControlProjectListP extends BasePresenter<LadderControlProjectListC.V> implements LadderControlProjectListC.P {
+
     @Override
-    public void getVideoProject(String keyword, int pageindex, int pagesize, String sysId, String userid) {
-        getIView().showLoading("正在搜索中...");
-        new SelectProjectVideoM()
-                .getCameraList(keyword,pageindex,pagesize,sysId,userid)
+    public void getProjectList(String keyword, int pageIndex, int pageSize, String sysId) {
+        new LadderControlProjectListM()
+                .getCameraList(keyword, pageIndex, pageSize, sysId, UserInfoPref.getUserId())
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<ProjectJson>>() {
                     @Override
                     public void onSuccess(HttpResponse<ProjectJson> loginBean) {
-                        getIView().hideLoading();
-                        getIView().onGetVideoProjectSuccess(loginBean.getData());
+                        getIView().onGetProjectListSuccess(loginBean.getData());
                     }
 
                     @Override
                     public void onFail(ApiException msg) {
-                        getIView().hideLoading();
-                        getIView().onGetVideoProjectFail(msg.getMessage());
+                        getIView().onGetProjectListFail(msg);
                     }
                 });
     }
