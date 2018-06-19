@@ -29,6 +29,10 @@
             android:name=".activity.LadderControlDeviceListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.LadderControlDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity android:name=".activity.VideoSelectProjectActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>

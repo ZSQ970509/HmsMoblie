@@ -1,5 +1,6 @@
 package com.hc.hmsmoblie.net;
 
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
 import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
@@ -23,9 +24,10 @@ import retrofit2.http.Query;
 public interface ApiServer {
     @GET(UrlHelper.BASE_API + "hmsLogin")
     Observable<HttpResponse<LoginJson>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
+
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameraList")
-    Observable<HttpResponse<ProjectJson>> getCameraList(@Field ("keyword") String keyword, @Field("pageindex") int pageindex
+    Observable<HttpResponse<ProjectJson>> getCameraList(@Field("keyword") String keyword, @Field("pageindex") int pageindex
             , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid);
 
     @FormUrlEncoded
@@ -42,6 +44,11 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetTowerCraneDevList")
-    Observable<HttpResponse<LadderControlDeviceListJson>> getTowerCraneDevList(@Field ("keyword") String keyword, @Field("pageindex") int pageindex
+    Observable<HttpResponse<LadderControlDeviceListJson>> getTowerCraneDevList(@Field("keyword") String keyword, @Field("pageindex") int pageindex
             , @Field("pagesize") int pagesize, @Field("projId") String proId);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetErrlog")
+    Observable<HttpResponse<LadderControlDetailsErrorJson>> GetErrlog(@Field("projId") String projId, @Field("keyword") String keyword, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize);
 }

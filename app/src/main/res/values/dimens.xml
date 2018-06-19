@@ -2,4 +2,11 @@
     <dimen name="activity_margin_small">8dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="activity_margin_big">32dp</dimen>
+
+    <dimen name="card_view_radius">4dp</dimen>
+    <dimen name="item_title_size">20sp</dimen>
+    <dimen name="item_content_size">16sp</dimen>
+    <dimen name="small_size">14sp</dimen>
+
+    <dimen name="left_margin">@dimen/x10</dimen>
 </resources>

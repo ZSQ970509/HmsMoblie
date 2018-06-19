@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.mvp.contact.LadderControlDeviceListC;
 import com.hc.hmsmoblie.mvp.presenter.LadderControlDeviceListP;
 import com.hc.hmsmoblie.utils.EmptyUtils;
@@ -91,9 +92,9 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
             initRefreshAndLoadMore();
             searchDeviceList();
         });
-        mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
-//                JumpAc.toTakePhotoInstallOpenSelectTypeAc(getActivity(), mProjectListData.get(position), mProTypeId, mProTypeName);
-        });
+        mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
+                LadderControlDetailsActivity.newInstance(getActivity(), mProID, ((LadderControlDeviceListJson.ListBean) adapter.getItem(position)).getId())
+        );
 
     }
 
