@@ -99,10 +99,10 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.video_Project_Detail_Online_Time:
-                Toast.makeText(getActivity(),"video_Project_Detail_Online_Time",Toast.LENGTH_SHORT).show();
+               OnlineTimeActivity.newInstance(getActivity(),mProID);
                 break;
             case R.id.video_Project_Detail_Driver_List:
-                Toast.makeText(getActivity(),"video_Project_Detail_Driver_List",Toast.LENGTH_SHORT).show();
+                VideoSelectDriverActivity.newInstance(getActivity(),mProID);
                 break;
         }
     }

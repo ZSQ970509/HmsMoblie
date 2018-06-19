@@ -35,6 +35,16 @@
         <activity android:name=".activity.VideoProjectDetailsActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activity.OnlineTimeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activity.VideoSelectDriverActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,9 +1,11 @@
 package com.hc.hmsmoblie.net;
 
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
 import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.LoginJson;
+import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 
 import java.util.ArrayList;
 
@@ -25,9 +27,18 @@ public interface ApiServer {
     @POST(UrlHelper.BASE_API + "getCameraList")
     Observable<HttpResponse<ProjectJson>> getCameraList(@Field ("keyword") String keyword, @Field("pageindex") int pageindex
             , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid);
+
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameradetails")
     Observable<HttpResponse<ArrayList<ProjectDetailsJson>>> getCameradetails(@Field ("projId") String projId, @Field("systemid") int systemid);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetOnlineRate")
+    Observable<HttpResponse<ArrayList<OnlineTimeJson>>> GetOnlineRate(@Field ("projId") String projId, @Field("startDate") String startDate, @Field("endDate") String endDate);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "getCameraListdetails")
+    Observable<HttpResponse<ArrayList<VideoDriverJson>>> getCameraListdetails(@Field ("projId") String projId, @Field("systemid") String systemid);
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetTowerCraneDevList")

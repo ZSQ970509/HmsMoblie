@@ -43,4 +43,6 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
     /* 加载图片 */
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    /* 日期选择器 */
+    compile 'com.contrarywind:Android-PickerView:3.2.7'
 }

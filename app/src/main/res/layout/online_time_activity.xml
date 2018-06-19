@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/actionbar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y96"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="在线率统计日期:"
+            android:textColor="#000000"
+            android:textSize="@dimen/y26" />
+
+        <TextView
+            android:id="@+id/tv_StartDate_OnlineTime"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y56"
+            android:gravity="center"
+
+            android:text="" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="到"
+            android:textColor="#000000"
+            android:textSize="@dimen/y26" />
+
+        <TextView
+            android:id="@+id/tv_EndDate_OnlineTime"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y56"
+            android:gravity="center"
+
+            android:text=" " />
+        <Button
+            android:id="@+id/btn_Search_OnlineTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/titleBar"
+            android:text="查询" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_OnlineTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
