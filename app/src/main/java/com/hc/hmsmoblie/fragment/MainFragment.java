@@ -11,6 +11,7 @@ import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
 import com.hc.hmsmoblie.activity.VideoSelectProjectActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
+import com.hc.hmsmoblie.widget.CommonDialog;
 import com.yc.yclibrary.base.YcLazyFragment;
 
 import java.util.Arrays;
@@ -49,16 +50,33 @@ public class MainFragment extends YcLazyFragment {
         };
         commonAdapter.addAll(tempData);
         commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
-            switch (position){
+            switch (position) {
                 case 0:
                     VideoSelectProjectActivity.newInstance(getActivity());
                     break;
                 case 1:
                     LadderControlProjectListActivity.newInstance(getActivity());
                     break;
-
+                case 2:
+                    CommonDialog.newInstance(getActivity())
+                            .setTitle("标题")
+                            .setMsg("内容")
+                            .setLeftBtnText("左侧按钮")
+                            .setRightBtnText("右侧按钮")
+                            .setLeftClick(v -> showToast("点击了左侧按钮"))
+                            .setRightClick(v -> showToast("点击右侧按钮"))
+                            .show();
+                    break;
+                case 3:
+                    CommonDialog.newInstanceSingle(getActivity())
+                            .setTitle("标题")
+                            .setMsg("内容")
+                            .setSingleBtnText("按钮")
+                            .setSingleClick(v -> showToast("点击了按钮"))
+                            .show();
+                    break;
             }
-           // LadderControlProjectListActivity.newInstance(getActivity());
+            // LadderControlProjectListActivity.newInstance(getActivity());
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);

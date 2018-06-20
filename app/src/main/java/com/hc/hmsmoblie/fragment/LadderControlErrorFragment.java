@@ -62,7 +62,7 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
                 helper.setText(R.id.tvDetailsErrorName, "操作员：" + item.getRealName());
                 helper.setText(R.id.tvDetailsErrorAccount, "操作账号：" + item.getUserName());
                 helper.setText(R.id.tvDetailsErrorState, "操作情况：" + (item.getState() == 0 ? "打开" : "关闭"));
-                helper.setText(R.id.tvDetailsErrorTime, "操作员" + item.getCreateTime());
+                helper.setText(R.id.tvDetailsErrorTime, "操作时间：" + item.getCreateTime());
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {
