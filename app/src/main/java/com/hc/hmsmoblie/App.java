@@ -3,6 +3,9 @@ package com.hc.hmsmoblie;
 import android.app.Application;
 
 import com.hc.hmsmoblie.net.UrlHelper;
+import com.hik.mcrsdk.MCRSDK;
+import com.hik.mcrsdk.rtsp.RtspClient;
+import com.hikvision.sdk.VMSNetSDK;
 import com.yc.yclibrary.EasyCode;
 
 /**
@@ -21,5 +24,12 @@ public class App extends Application {
         super.onCreate();
         EasyCode.init(this, UrlHelper.BASE_URL);
         mApp = this;
+        //海康8700初始化
+        MCRSDK.init();
+        // 初始化RTSP
+        RtspClient.initLib();
+        MCRSDK.setPrint(1, null);
+        // SDK初始化
+        VMSNetSDK.init(this);
     }
 }
