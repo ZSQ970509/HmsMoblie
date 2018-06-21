@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
+import com.hc.hmsmoblie.adapter.SelectDriverVideoAdapter;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.VideoDriverJson;
@@ -36,8 +36,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
     private String mProID;
     @BindView(R.id.rv_SelectDriver)
     RecyclerView recyclerViewSelectDriver;
-    ArrayList<ProjectJson.ListBean> dataList = new ArrayList<ProjectJson.ListBean>();
-    SelectProjectVideoAdapter selectProjectVideoAdapter;
+    ArrayList<VideoDriverJson> dataList = new ArrayList<VideoDriverJson>();
+    SelectDriverVideoAdapter selectDriverVideoAdapter;
 
     public static void newInstance(Activity activity, String proId) {
         Intent intent = new Intent(activity, VideoSelectDriverActivity.class);
@@ -61,13 +61,33 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
         mProID = getIntent().getStringExtra(PRO_ID);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectDriver.setLayoutManager(linearLayoutManager);
-        selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);
-        recyclerViewSelectDriver.setAdapter(selectProjectVideoAdapter);
-        selectProjectVideoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        selectDriverVideoAdapter = new SelectDriverVideoAdapter(R.layout.item_select_driver_video, dataList);
+        recyclerViewSelectDriver.setAdapter(selectDriverVideoAdapter);
+        selectDriverVideoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+                if (dataList.get(position).getCamFlowState() != 16) {
+                    if (dataList.get(position).getDevStatus().equals("1")) {
+                        //通电";
+                        if (dataList.get(0).getDevNetStatus().equals("1")) {
+                            //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+                            //通网";
+                        } else if (dataList.get(0).getDevNetStatus().equals("0")) {
+                            //断网";
+                        } else {
+                            //未开通断网设备";
+                        }
 
+                    } else if (dataList.get(position).getDevStatus().equals("0")) {
+                        //断电";
+                    } else {
+                        //未开通断电设备";
+                    }
+                    //通网
+
+                }else{
+                    //设备维修中
+                }
             }
         });
         showLoading("正在搜索中...");
@@ -76,13 +96,14 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
 
     @Override
     public void onGetCameraListdetailsSuccess(ArrayList<VideoDriverJson> dataBean) {
-        if (dataBean.get(0).getList().size() == 0) {
+        dataList.clear();
+        if (dataBean.size() == 0) {
             showToast("暂无数据！");
         } else {
             showToast("数据加载成功！");
         }
-       // dataList.addAll(dataBean.get(0).getList());
-        //selectProjectVideoAdapter.notifyDataSetChanged();
+        dataList.addAll(dataBean);
+        selectDriverVideoAdapter.notifyDataSetChanged();
 
     }
 

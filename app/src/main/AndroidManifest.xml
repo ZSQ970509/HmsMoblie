@@ -53,7 +53,14 @@
         <activity
             android:name=".activity.VideoSelectDriverActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activity.EnvironmentSelectProjectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

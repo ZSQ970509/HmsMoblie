@@ -8,10 +8,10 @@ import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
 
+import com.hc.hmsmoblie.activity.EnvironmentSelectProjectActivity;
 import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
 import com.hc.hmsmoblie.activity.VideoSelectProjectActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
-import com.hc.hmsmoblie.widget.CommonDialog;
 import com.yc.yclibrary.base.YcLazyFragment;
 
 import java.util.Arrays;
@@ -40,7 +40,7 @@ public class MainFragment extends YcLazyFragment {
 
     @Override
     public void initView() {
-        List<MainItemBean> tempData = Arrays.asList(new MainItemBean("1", "视频监控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"));
+        List<MainItemBean> tempData = Arrays.asList(new MainItemBean("1", "视频监控"), new MainItemBean("2", "梯控"), new MainItemBean("3", "环境监控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"));
         commonAdapter = new CommonRecyclerAdapter<MainItemBean>(getActivity(), R.layout.main_item) {
             @Override
             public void onUpdate(BaseAdapterHelper helper, MainItemBean item, int position) {
@@ -50,7 +50,7 @@ public class MainFragment extends YcLazyFragment {
         };
         commonAdapter.addAll(tempData);
         commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
-            switch (position) {
+            switch (position){
                 case 0:
                     VideoSelectProjectActivity.newInstance(getActivity());
                     break;
@@ -58,25 +58,10 @@ public class MainFragment extends YcLazyFragment {
                     LadderControlProjectListActivity.newInstance(getActivity());
                     break;
                 case 2:
-                    CommonDialog.newInstance(getActivity())
-                            .setTitle("标题")
-                            .setMsg("内容")
-                            .setLeftBtnText("左侧按钮")
-                            .setRightBtnText("右侧按钮")
-                            .setLeftClick(v -> showToast("点击了左侧按钮"))
-                            .setRightClick(v -> showToast("点击右侧按钮"))
-                            .show();
-                    break;
-                case 3:
-                    CommonDialog.newInstanceSingle(getActivity())
-                            .setTitle("标题")
-                            .setMsg("内容")
-                            .setSingleBtnText("按钮")
-                            .setSingleClick(v -> showToast("点击了按钮"))
-                            .show();
+                    EnvironmentSelectProjectActivity.newInstance(getActivity());
                     break;
             }
-            // LadderControlProjectListActivity.newInstance(getActivity());
+           // LadderControlProjectListActivity.newInstance(getActivity());
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
