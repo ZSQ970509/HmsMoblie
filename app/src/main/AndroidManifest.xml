@@ -37,7 +37,7 @@
             android:name=".activity.LadderControlPictureActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@style/TranceTheme" />
         <activity
             android:name=".activity.VideoSelectProjectActivity"
             android:launchMode="singleTop"

@@ -67,7 +67,7 @@ public class LadderControlDetailsActivity extends BaseActivity {
         try {
             mProId = getIntent().getStringExtra(PRO_ID);
             mDeviceId = getIntent().getStringExtra(DEVICE_ID);
-            setToolBar("数据报表");
+            setToolBar("操作详情");
 //            String schemeID = getIntent().getStringExtra(JumpToUtils.KEY_SCHEME_ID);
             LadderControlDetailsAdapter mHomeAdapter = new LadderControlDetailsAdapter(getSupportFragmentManager(),mProId,mDeviceId);
             mViewPager.setOffscreenPageLimit(4);//设置缓存

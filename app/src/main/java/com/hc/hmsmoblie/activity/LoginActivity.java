@@ -38,6 +38,8 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
 
     @Override
     protected void initView(Bundle bundle) {
+        mUserAccountTv.setText("admin");
+        mUserPasswordTv.setText("hckj1234");
         if(UserInfoPref.getSavePassWord()){
             mUserAccountTv.setText(UserInfoPref.getUserAccount());
             mUserPasswordTv.setText(UserInfoPref.getUserPassword());

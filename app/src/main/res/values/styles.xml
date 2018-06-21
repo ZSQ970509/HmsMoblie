@@ -7,14 +7,22 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="TranceTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/colorTrance2</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
     <style name="ItemTitleTv">
         <item name="android:textColor">@color/itemTitleColor</item>
         <item name="android:textSize">@dimen/item_title_size</item>
     </style>
+
     <style name="ItemContentTv">
         <item name="android:textColor">@color/itemContentColor</item>
         <item name="android:textSize">@dimen/item_content_size</item>
     </style>
+
     <style name="SmallTv">
         <item name="android:textColor">@color/itemContentColor</item>
         <item name="android:textSize">@dimen/small_size</item>

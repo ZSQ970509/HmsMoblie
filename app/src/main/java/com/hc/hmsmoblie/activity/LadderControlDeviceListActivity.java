@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
@@ -57,6 +58,7 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
 
     @Override
     protected int getLayoutId() {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS); // 必须
         return R.layout.ladder_control_projcet_list_activity;
     }
 
@@ -75,6 +77,7 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
                         .setText(R.id.tvLadderControlDeviceBattle, "电池电量：" + EmptyUtils.getString(item.getBattleVolta()))
                         .setText(R.id.tvLadderControlDeviceBattleState, "充电状态：" + EmptyUtils.getString(item.getCharging()))
                         .setText(R.id.tvLadderControlDeviceTime, "最后一次操作：" + EmptyUtils.getString(item.getLastTime(), "暂时没有任何操作"));
+
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {

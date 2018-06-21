@@ -17,7 +17,7 @@ public class LoadImgUtils {
                 .load(imgUrl)//拿到头像本地存放路径
                 .error(R.mipmap.ic_launcher)//失败默认
                 .placeholder(R.mipmap.ic_launcher)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)//不单独缓存
+                .diskCacheStrategy(DiskCacheStrategy.ALL)//不单独缓存
                 .skipMemoryCache(true)
                 .into(imageView);
     }

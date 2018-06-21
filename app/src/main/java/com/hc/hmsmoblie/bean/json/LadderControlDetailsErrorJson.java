@@ -1,5 +1,6 @@
 package com.hc.hmsmoblie.bean.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class LadderControlDetailsErrorJson {
         this.List = List;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable {
         /**
          * id : 15879
          * memberId : 2322

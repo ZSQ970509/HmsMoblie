@@ -1,15 +1,22 @@
 package com.hc.hmsmoblie.fragment;
 
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.activity.LadderControlDetailsActivity;
+import com.hc.hmsmoblie.activity.LadderControlPictureActivity;
+import com.hc.hmsmoblie.adapter.LadderControlErrorAdapter;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
@@ -36,7 +43,7 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
     private final int mPageSize = 10;
     private int mPageTotal = 1;
     private String mProId;
-    private BaseItemDraggableAdapter<LadderControlDetailsErrorJson.ListBean, BaseViewHolder> mAdapter;
+    private LadderControlErrorAdapter mAdapter;
 
     public static LadderControlErrorFragment newInstance(String proId) {
         LadderControlErrorFragment fragment = new LadderControlErrorFragment();
@@ -56,15 +63,16 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
 
     @Override
     public void initView() {
-        mAdapter = new BaseItemDraggableAdapter<LadderControlDetailsErrorJson.ListBean, BaseViewHolder>(R.layout.ladder_control_details_error_item, null) {
+        mAdapter = new LadderControlErrorAdapter(null, new LadderControlErrorAdapter.OnItemClickListener() {
             @Override
-            protected void convert(BaseViewHolder helper, LadderControlDetailsErrorJson.ListBean item) {
-                helper.setText(R.id.tvDetailsErrorName, "操作员：" + item.getRealName());
-                helper.setText(R.id.tvDetailsErrorAccount, "操作账号：" + item.getUserName());
-                helper.setText(R.id.tvDetailsErrorState, "操作情况：" + (item.getState() == 0 ? "打开" : "关闭"));
-                helper.setText(R.id.tvDetailsErrorTime, "操作时间：" + item.getCreateTime());
+            public void onItemClick(View tvBottom, View tvVerification, LadderControlDetailsErrorJson.ListBean item) {
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(getActivity(),
+                                new Pair<>(tvBottom, getString(R.string.transitionNameBottomImg)),
+                                new Pair<>(tvVerification, getString(R.string.transitionNameVerificationImg)));
+                LadderControlPictureActivity.newInstance(getActivity(),item.getRealName(),item.getOrigin(),item.getPhoto(),optionsCompat);
             }
-        };
+        });
         mAdapter.setOnLoadMoreListener(() -> {
             if (mPageIndex >= mPageTotal) {
                 showToast("已经是最后一页了！");
