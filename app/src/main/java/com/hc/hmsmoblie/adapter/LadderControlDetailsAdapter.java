@@ -30,7 +30,7 @@ public class LadderControlDetailsAdapter extends FragmentPagerAdapter {
         if (fragments[position] == null) {
             switch (position) {
                 case 0:
-                    fragments[position] = LadderControlOperationFragment.newInstance();
+                    fragments[position] = LadderControlOperationFragment.newInstance(mDeviceId);
                     break;
                 case 1:
                     fragments[position] = LadderControlErrorFragment.newInstance(mProId);

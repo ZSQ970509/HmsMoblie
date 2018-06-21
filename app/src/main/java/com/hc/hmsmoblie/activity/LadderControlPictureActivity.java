@@ -54,7 +54,7 @@ public class LadderControlPictureActivity extends BaseActivity {
     @Override
     protected void initView(Bundle bundle) {
         Intent intent = getIntent();
-        mTvName.setText("" + intent.getStringExtra(NAME));
+        mTvName.setText("人脸查看(" + intent.getStringExtra(NAME)+")");
         LoadImgUtils.loadImg(getActivity(), intent.getStringExtra(IMG_URL1), mIv1);
         LoadImgUtils.loadImg(getActivity(), intent.getStringExtra(IMG_URL2), mIv2);
     }

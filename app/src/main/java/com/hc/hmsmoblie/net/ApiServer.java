@@ -1,6 +1,7 @@
 package com.hc.hmsmoblie.net;
 
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
 import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
@@ -50,5 +51,9 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetErrlog")
     Observable<HttpResponse<LadderControlDetailsErrorJson>> GetErrlog(@Field("projId") String projId, @Field("keyword") String keyword, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize);
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetTowerCraneListByPaging")
+    Observable<HttpResponse<LadderControlDetailsOperationJson>> GetTowerCraneListByPaging(@Field("devId") String projId, @Field("keyword") String keyword, @Field("pageindex") int pageindex
             , @Field("pagesize") int pagesize);
 }

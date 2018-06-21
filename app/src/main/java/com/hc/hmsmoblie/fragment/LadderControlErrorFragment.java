@@ -84,14 +84,26 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
         }, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mSwipeRefreshLayout.setOnRefreshListener(() -> {
-            initRefreshAndLoadMore();
-            searchDeviceList();
-        });
+        mSwipeRefreshLayout.setOnRefreshListener(() -> initRefreshAndLoadMore());
     }
 
-    private void searchDeviceList() {
-        mPresenter.getDetailsError(mProId, mPageIndex, mPageSize);
+    @Override
+    protected void lazyLoad() {
+        if (mIsFragmentVisible && mIsInitView && mIsFirstLazyLoad) {
+            mIsFirstLazyLoad = false;
+            if (mIsDataEmpty) {
+                showToast(R.string.view_empty);
+            } else {
+                mSwipeRefreshLayout.setRefreshing(true);
+            }
+        }
+    }
+
+    private void initRefreshAndLoadMore() {
+        mPageIndex = 1;
+        mPageTotal = 1;
+        mAdapter.setNewData(null);//重新开启下拉加载更多
+        searchDeviceList();
     }
 
     private void finishRefreshAndLoadMore() {
@@ -104,11 +116,8 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
         hideLoading();
     }
 
-    private void initRefreshAndLoadMore() {
-        mSwipeRefreshLayout.setRefreshing(true);
-        mPageIndex = 1;
-        mPageTotal = 1;
-        mAdapter.setNewData(null);//重新开启下拉加载更多
+    private void searchDeviceList() {
+        mPresenter.getDetailsError(mProId, mPageIndex, mPageSize);
     }
 
     @Override
