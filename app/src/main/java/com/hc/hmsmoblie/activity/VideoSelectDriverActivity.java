@@ -83,14 +83,14 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                 if (videoBean.getCamFlowState().equals("15")) {
                                     String type = videoBean.getmType();
                                     //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
-                                    if (type.equals("2") || type.equals("5") || type.equals("8")) {
-                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
-                                    } else if (type.equals("15")) {//海康8700
-                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
-                                    } else {
-                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
-
-                                    }
+//                                    if (type.equals("2") || type.equals("5") || type.equals("8")) {
+//                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
+//                                    } else if (type.equals("15")) {//海康8700
+//                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+//                                    } else {
+//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
+//
+//                                    }
                                 } else {
                                     showToast("此视频维护或不在线");
                                 }

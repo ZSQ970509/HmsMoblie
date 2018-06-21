@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputEditText;
 import android.view.View;
 import android.widget.CheckBox;
 
+import com.ffcs.surfingscene.function.SurfingScenePlayer;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.VideoBean;
@@ -61,7 +62,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                mPresenter.login(mUserAccountTv.getText().toString(), mUserPasswordTv.getText().toString());
+//                mPresenter.login(mUserAccountTv.getText().toString(), mUserPasswordTv.getText().toString());
                 break;
             case R.id.login_save_password_tv:
                 mIsSavePasswordCb.setChecked(!mIsSavePasswordCb.isChecked());
