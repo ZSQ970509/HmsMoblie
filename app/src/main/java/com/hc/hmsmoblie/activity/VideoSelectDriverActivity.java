@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.adapter.SelectDriverVideoAdapter;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
+import com.hc.hmsmoblie.bean.domain.VideoBean;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
@@ -20,6 +21,8 @@ import com.hc.hmsmoblie.mvp.contact.VideoSelectDriverC;
 import com.hc.hmsmoblie.mvp.contact.VideoSelectProjectC;
 import com.hc.hmsmoblie.mvp.presenter.VideoSelectDriverP;
 import com.hc.hmsmoblie.mvp.presenter.VideoSelectProjectP;
+import com.hc.hmsmoblie.utils.VideoBeanXmlUtil;
+import com.hc.hmsmoblie.widget.CommonDialog;
 import com.hc.hmsmoblie.widget.CustomLoadMoreView;
 
 import java.util.ArrayList;
@@ -70,23 +73,71 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                     if (dataList.get(position).getDevStatus().equals("1")) {
                         //通电";
                         if (dataList.get(0).getDevNetStatus().equals("1")) {
-                            //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
                             //通网";
+                            try {
+                                VideoBean videoBean  = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
+
+                                //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
+                                videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
+                                videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
+                                if (videoBean.getCamFlowState().equals("15")) {
+                                    String type = videoBean.getmType();
+                                    //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
+                                    if (type.equals("2") || type.equals("5") || type.equals("8")) {
+                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
+                                    } else if (type.equals("15")) {//海康8700
+                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+                                    } else {
+                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
+
+                                    }
+                                } else {
+                                    showToast("此视频维护或不在线");
+                                }
+                            //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         } else if (dataList.get(0).getDevNetStatus().equals("0")) {
                             //断网";
+                            CommonDialog.newInstance(getActivity())
+                                    .setTitle("警告")
+                                    .setMsg("设备处于断网状态!")
+                                    .setSingleBtnText("确定")
+                                    .show();
                         } else {
                             //未开通断网设备";
+                            CommonDialog.newInstance(getActivity())
+                                    .setTitle("警告")
+                                    .setMsg("未开通断网设备!")
+                                    .setSingleBtnText("确定")
+                                    .show();
                         }
 
                     } else if (dataList.get(position).getDevStatus().equals("0")) {
                         //断电";
+                        CommonDialog.newInstance(getActivity())
+                                .setTitle("警告")
+                                .setMsg("设备处于断电状态!")
+                                .setSingleBtnText("确定")
+                                .show();
                     } else {
                         //未开通断电设备";
+                        CommonDialog.newInstance(getActivity())
+                                .setTitle("警告")
+                                .setMsg("未开通断电设备!")
+                                .setSingleBtnText("确定")
+                                .show();
                     }
-                    //通网
 
                 }else{
                     //设备维修中
+                    CommonDialog.newInstance(getActivity())
+                            .setTitle("警告")
+                            .setMsg("设备维护中...")
+                            .setSingleBtnText("确定")
+                            .show();
                 }
             }
         });

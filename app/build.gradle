@@ -24,6 +24,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/ffcs-android-client-api-1.02.jar')
+    compile files('libs/tyjx.jar')
+    compile files('libs/ivms_8700_sdk_library.jar')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
