@@ -37,10 +37,10 @@ public class HuXinUtil {
     }
 
     public static void initVideo(SurfingScenePlayer splay, GLSurfaceView glv, String puId, String userName, onPlayListener listener) {
+
         glv.setVisibility(View.VISIBLE);
         splay.init(glv);
         splay.getProgressValue();
-
         splay.setPlayListener(listener);
 
         splay.playerVideoByPuId("086591-1435552375", 2, "350100", 2, 1, userName, 1);

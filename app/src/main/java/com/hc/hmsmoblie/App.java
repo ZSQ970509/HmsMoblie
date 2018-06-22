@@ -26,7 +26,7 @@ public class App extends Application {
         mApp = this;
         //海康8700初始化
         MCRSDK.init();
-        // 初始化RTSP
+//        // 初始化RTSP
         RtspClient.initLib();
         MCRSDK.setPrint(1, null);
         // SDK初始化
