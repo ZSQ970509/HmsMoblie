@@ -69,8 +69,7 @@ public class EnvironmentSelectProjectActivity extends BaseMvpActivity<VideoSelec
                 showToast("已经是最后一页了");
                 selectProjectVideoAdapter.loadMoreEnd();
             } else {
-                //sysId:11视频监控、26超视野、31梯控、21环境
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "21",  UserInfoPref.getUserId());
+                getData();
             }
 
         }, 1000), recyclerViewSelectProject);
@@ -78,23 +77,15 @@ public class EnvironmentSelectProjectActivity extends BaseMvpActivity<VideoSelec
         selectProjectVideoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
-
+//                VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+                EnvironmentDeviceListActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
             }
         });
     }
 
-    @OnClick({R.id.btn_Search_SelectProject})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_Search_SelectProject:
-                dataList.clear();
-                selectProjectVideoAdapter.notifyDataSetChanged();
-                //sysId:11视频监控、26超视野、31梯控、21环境
-                showLoading("正在搜索中...");
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "11",  UserInfoPref.getUserId());
-                break;
-        }
+    private void getData() {
+        //sysId:11视频监控、26超视野、31梯控、21环境
+        mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "21", UserInfoPref.getUserId());
     }
 
     @Override
@@ -118,4 +109,18 @@ public class EnvironmentSelectProjectActivity extends BaseMvpActivity<VideoSelec
     public void onGetVideoProjectFail(String msg) {
         showToast(msg);
     }
+
+    @OnClick({R.id.btn_Search_SelectProject})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_Search_SelectProject:
+                dataList.clear();
+                selectProjectVideoAdapter.notifyDataSetChanged();
+                //sysId:11视频监控、26超视野、31梯控、21环境
+                showLoading("正在搜索中...");
+                getData();
+                break;
+        }
+    }
+
 }

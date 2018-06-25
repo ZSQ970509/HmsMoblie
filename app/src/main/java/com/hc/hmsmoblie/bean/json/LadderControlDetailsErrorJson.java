@@ -62,19 +62,19 @@ public class LadderControlDetailsErrorJson {
         private int deviceId;
         private String createTime;
         private int state;
-        private Object companyId;
-        private Object deptId;
+        private String companyId;
+        private String deptId;
         private int opertion;
         private String photo;
         private String origin;
         private int projectId;
         private String province;
         private String city;
-        private Object area;
-        private Object stationId;
+        private String area;
+        private String stationId;
         private String deviceName;
         private String project;
-        private Object AreaName;
+        private String AreaName;
         private String userName;
         private String realName;
 
@@ -118,19 +118,19 @@ public class LadderControlDetailsErrorJson {
             this.state = state;
         }
 
-        public Object getCompanyId() {
+        public String getCompanyId() {
             return companyId;
         }
 
-        public void setCompanyId(Object companyId) {
+        public void setCompanyId(String companyId) {
             this.companyId = companyId;
         }
 
-        public Object getDeptId() {
+        public String getDeptId() {
             return deptId;
         }
 
-        public void setDeptId(Object deptId) {
+        public void setDeptId(String deptId) {
             this.deptId = deptId;
         }
 
@@ -182,19 +182,19 @@ public class LadderControlDetailsErrorJson {
             this.city = city;
         }
 
-        public Object getArea() {
+        public String getArea() {
             return area;
         }
 
-        public void setArea(Object area) {
+        public void setArea(String area) {
             this.area = area;
         }
 
-        public Object getStationId() {
+        public String getStationId() {
             return stationId;
         }
 
-        public void setStationId(Object stationId) {
+        public void setStationId(String stationId) {
             this.stationId = stationId;
         }
 
@@ -214,11 +214,11 @@ public class LadderControlDetailsErrorJson {
             this.project = project;
         }
 
-        public Object getAreaName() {
+        public String getAreaName() {
             return AreaName;
         }
 
-        public void setAreaName(Object AreaName) {
+        public void setAreaName(String AreaName) {
             this.AreaName = AreaName;
         }
 

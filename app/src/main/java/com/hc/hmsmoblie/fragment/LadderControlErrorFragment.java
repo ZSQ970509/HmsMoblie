@@ -95,8 +95,10 @@ public class LadderControlErrorFragment extends YcMvpLazyFragment<LadderControlD
                 showToast(R.string.view_empty);
             } else {
                 mSwipeRefreshLayout.setRefreshing(true);
+                initRefreshAndLoadMore();
             }
         }
+
     }
 
     private void initRefreshAndLoadMore() {

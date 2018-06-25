@@ -61,7 +61,7 @@ public class LadderControlOperationFragment extends YcMvpLazyFragment<LadderCont
             protected void convert(BaseViewHolder helper, LadderControlDetailsOperationJson.ListBean item) {
                 helper.setText(R.id.tvDetailsErrorName, "操作员：" + EmptyUtils.getString(item.getRealName()));
                 helper.setText(R.id.tvDetailsErrorAccount, "操作账号：" + EmptyUtils.getString(item.getUserName()));
-                helper.setText(R.id.tvDetailsErrorState, "操作情况：" + (item.getState() == 0 ? "打开" : "关闭"));
+                helper.setText(R.id.tvDetailsErrorState, "操作情况：" + item.getText());
                 helper.setText(R.id.tvDetailsErrorTime, "操作时间：" + EmptyUtils.getString(item.getCreateTime()));
                 helper.setVisible(R.id.llDetailsErrorImg,false);
             }

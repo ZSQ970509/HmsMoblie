@@ -77,7 +77,6 @@ public class FormatUtils {
             return new SimpleDateFormat(FORMAT_TIME).format(date.getTime());
         }
     }
-
     public static Date stringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_TIME);
         Date timeDate = null;

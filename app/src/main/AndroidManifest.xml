@@ -73,17 +73,26 @@
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".activity.EnvironmentSelectProjectActivity"
+        <activity
+            android:name=".activity.EnvironmentSelectProjectActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".activity.HuXinVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EnvironmentDeviceListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EnvironmentDetailsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HuXinVideoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape">
 
         </activity>
-        <activity android:name=".activity.HKVideoActivity"
+        <activity
+            android:name=".activity.HKVideoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="landscape">
 
