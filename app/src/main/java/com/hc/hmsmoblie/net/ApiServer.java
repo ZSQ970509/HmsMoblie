@@ -11,16 +11,29 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
+import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
+import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
+import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
+import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
+import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
+import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
+import com.hc.hmsmoblie.bean.json.ProjectJson;
+import com.hc.hmsmoblie.bean.json.LoginJson;
+import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-        import io.reactivex.Observable;
-        import retrofit2.http.Field;
-        import retrofit2.http.FormUrlEncoded;
-        import retrofit2.http.GET;
-        import retrofit2.http.POST;
-        import retrofit2.http.Query;
+import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 实际接口
@@ -78,4 +91,17 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getEnvironmentalListdetails")
     Observable<HttpResponse<List<EnvironmentDeviceListJson>>> getEnvironmentDeviceList(@Field("projId") String projId, @Field("systemid") String systemid);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetPanoramaImg")
+    Observable<HttpResponse<ImageLogPanoramaListJson>> getPanoramaList(@Field("camId") String camId, @Field("startime") String starTime, @Field("endTime") String endTime, @Field("pageindex") int pageIndex, @Field("pagesize") int pageSize);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetRangeNodeImgNew")
+    Observable<HttpResponse<ImageLogWideAngleJson>> getWideAngle(@Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetRangeNodeImgDetail")
+    Observable<HttpResponse<ImageLogNodeJson>> getNode(@Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY, @Field("aha") String aha, @Field("ava") String ava);
+
 }

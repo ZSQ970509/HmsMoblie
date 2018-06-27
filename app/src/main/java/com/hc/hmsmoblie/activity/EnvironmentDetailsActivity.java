@@ -85,7 +85,6 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
     private static final String SEQ_ID = "seq_id";
     private static final String PRO_ID = "pro_id";
     private Date mSelectTimed = new Date();
-//    private EnvironmentDetailsJson mChartData;
 
     public static void newInstance(Activity activity, String camId, String seqId, String proId) {
         Intent intent = new Intent(activity, EnvironmentDetailsActivity.class);

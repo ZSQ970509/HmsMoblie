@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/rlActionbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/colorAccent">

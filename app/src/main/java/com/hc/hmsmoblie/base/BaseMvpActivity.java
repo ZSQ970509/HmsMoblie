@@ -2,6 +2,7 @@ package com.hc.hmsmoblie.base;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hc.hmsmoblie.R;
@@ -18,12 +19,13 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends YcMvpAppC
     protected TextView mLeftTv;
     protected ImageView mRightBtn;
     protected TextView mRightTv;
-
+    protected RelativeLayout mActionBarRl;
     /**
      * 设置标题栏
      */
     protected void setToolBar(String title) {
         mTitle = (TextView) findViewById(R.id.tvActionbarMid);
+        mActionBarRl = (RelativeLayout) findViewById(R.id.rlActionbar);
         mTitle.setText(title);
         mLeftBtn = (ImageView) findViewById(R.id.ivActionbarLeft);
         mLeftTv = (TextView) findViewById(R.id.tvActionbarLeft);

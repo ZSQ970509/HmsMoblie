@@ -12,6 +12,7 @@ import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
 
 import com.hc.hmsmoblie.activity.EnvironmentSelectProjectActivity;
+import com.hc.hmsmoblie.activity.ImageLogProjectListActivity;
 import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
 import com.hc.hmsmoblie.activity.MainActivity;
 import com.hc.hmsmoblie.activity.VideoSelectProjectActivity;
