@@ -38,14 +38,17 @@ import butterknife.OnClick;
 public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriverP> implements VideoSelectDriverC.V {
     private static final String PRO_ID = "pro_id";
     private String mProID;
+    private static final String SYS_ID = "sys_id";
+    private  String sysId;
     @BindView(R.id.rv_SelectDriver)
     RecyclerView recyclerViewSelectDriver;
     ArrayList<VideoDriverJson> dataList = new ArrayList<VideoDriverJson>();
     SelectDriverVideoAdapter selectDriverVideoAdapter;
 
-    public static void newInstance(Activity activity, String proId) {
+    public static void newInstance(Activity activity, String proId, String sysId) {
         Intent intent = new Intent(activity, VideoSelectDriverActivity.class);
         intent.putExtra(PRO_ID, proId);
+        intent.putExtra(SYS_ID, sysId);
         activity.startActivity(intent);
     }
 
@@ -62,6 +65,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("设备列表");
+        sysId = getIntent().getStringExtra(SYS_ID);
         mProID = getIntent().getStringExtra(PRO_ID);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectDriver.setLayoutManager(linearLayoutManager);
@@ -172,7 +176,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
             }
         });
         showLoading("正在搜索中...");
-        mPresenter.getCameraListdetails(mProID,"11");
+        mPresenter.getCameraListdetails(mProID,sysId);
     }
 
     @Override

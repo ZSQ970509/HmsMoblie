@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
@@ -46,15 +47,15 @@ public class LadderControlErrorAdapter extends BaseItemDraggableAdapter<LadderCo
     }
 
     public static class Holder extends BaseViewHolder {
-        LinearLayout linearLayout;
+        RelativeLayout linearLayout;
         TextView tvBottom;
         TextView tvVerification;
 
         public Holder(View view) {
             super(view);
             linearLayout = view.findViewById(R.id.llDetailsErrorImg);
-            tvBottom = view.findViewById(R.id.tvDetailsErrorBottomImg);
-            tvVerification = view.findViewById(R.id.tvDetailsErrorVerificationImg);
+            tvBottom = view.findViewById(R.id.tvDetailsErrorBottomImg2);
+            tvVerification = view.findViewById(R.id.tvDetailsErrorVerificationImg2);
         }
     }
 

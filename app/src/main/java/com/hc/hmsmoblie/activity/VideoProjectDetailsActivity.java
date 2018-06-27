@@ -40,6 +40,8 @@ import butterknife.OnClick;
 public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDetailsP> implements VideoProjectDetailsC.V {
     private static final String PRO_ID = "pro_id";
     private String mProID;
+    private static final String SYS_ID = "sys_id";
+    private  String sysId;
     private ProjectDetailsJson proDetailsBean;
     @BindView(R.id.video_Project_Detail_Name)
     TextView videoProjectDetailName;
@@ -72,9 +74,10 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
     @BindView(R.id.video_Project_Detail_Driver_List)
     RelativeLayout videoProjectDetailDriverList;
 
-    public static void newInstance(Activity activity , String proId) {
+    public static void newInstance(Activity activity , String proId, String sysId) {
         Intent intent = new Intent(activity, VideoProjectDetailsActivity.class);
         intent.putExtra(PRO_ID, proId);
+        intent.putExtra(SYS_ID, sysId);
         activity.startActivity(intent);
     }
 
@@ -91,6 +94,7 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("项目详情");
+        sysId = getIntent().getStringExtra(SYS_ID);
         mProID = getIntent().getStringExtra(PRO_ID);
         mPresenter.getCameradetails(mProID,11);
     }
@@ -102,7 +106,7 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
                OnlineTimeActivity.newInstance(getActivity(),mProID);
                 break;
             case R.id.video_Project_Detail_Driver_List:
-                VideoSelectDriverActivity.newInstance(getActivity(),mProID);
+                VideoSelectDriverActivity.newInstance(getActivity(),mProID,sysId);
                 break;
         }
     }

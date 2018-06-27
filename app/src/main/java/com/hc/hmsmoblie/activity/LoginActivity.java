@@ -1,5 +1,7 @@
 package com.hc.hmsmoblie.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
@@ -11,6 +13,7 @@ import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +29,9 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     TextInputEditText mUserPasswordTv;
     @BindView(R.id.login_save_password_cb)
     CheckBox mIsSavePasswordCb;
+    public static void newInstance(Activity activity) {
+        activity.startActivity(new Intent(activity, LoginActivity.class));
+    }
     @Override
     protected LoginP loadPresenter() {
         return new LoginP();
@@ -38,6 +44,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
 
     @Override
     protected void initView(Bundle bundle) {
+        ActivityUtils.INSTANCE.finishOthersActivity(LoginActivity.class);
         mUserAccountTv.setText("admin");
         mUserPasswordTv.setText("hckj1234");
         if(UserInfoPref.getSavePassWord()){

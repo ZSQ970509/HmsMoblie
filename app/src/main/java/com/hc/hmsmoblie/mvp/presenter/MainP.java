@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class MainP extends BasePresenter<MainC.V> implements MainC.P {
     @Override
     public void GetModulesList(String userAccount, String userID) {
-        getIView().showLoading("正在登陆中...");
+        getIView().showLoading("初始化中，请稍后...");
         new MainM()
                 .GetModulesList(userAccount, userID)
                 .compose(getIView().bindLifecycle())

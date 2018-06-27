@@ -21,6 +21,7 @@ import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.fragment.MainFragment;
 import com.yc.yclibrary.base.YcAppCompatActivity;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,7 +53,8 @@ public class MainActivity extends BaseActivity {
     protected void initView(Bundle bundle) {
         initFragment();
 
-        //initNavigationView();
+
+        initNavigationView();
     }
 
     private void initFragment() {
@@ -109,7 +111,8 @@ public class MainActivity extends BaseActivity {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_RelativeLayout_UpadtePass:
-                showToast("修改密码");
+                //showToast("修改密码");
+                ChangePassWordActivity.newInstance(getActivity());
                 break;
             case R.id.main_RelativeLayout_Setting:
                 showToast("权限设置");
@@ -118,7 +121,8 @@ public class MainActivity extends BaseActivity {
                 showToast("关于");
                 break;
             case R.id.main_RelativeLayout_Exit:
-                showToast("退出");
+                ActivityUtils.INSTANCE.exitApp(getActivity());
+               // showToast("退出");
                 break;
         }
     }
@@ -128,8 +132,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (mDrawerLayout.isDrawerOpen(mDrawerLayout.getChildAt(1))) {
-                mDrawerLayout.closeDrawers();
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
             } else {
 //                exitApp();
             }

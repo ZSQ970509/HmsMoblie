@@ -204,7 +204,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         return data;
     }
 
-    private void showPickerView(boolean isShowMonth, boolean isShowDay, String name, TextView tvTime, TextView tvName, TextView tvTimeForDay, TextView tvTimeForMonth, TextView tvTimeForYear, EnvironmentParaTypeEnum paraTypeEnum, EnvironmentTimeTypeEnum timeTypeEnum) {
+    private void showPickerView(boolean isShowMonth, boolean isShowDay, String name, TextView tvTime, TextView tvName, TextView tvTimeForDay, TextView tvTimeForMonth, TextView tvTimeForYear, int type,EnvironmentParaTypeEnum paraTypeEnum, EnvironmentTimeTypeEnum timeTypeEnum) {
         TimePickerUtils.showPickerView(getActivity(), "选择时间", tvTime, isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -212,9 +212,24 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
                 mTimeTypeEnum = timeTypeEnum;
                 tvTime.setText(FormatUtils.dateToString(date, isShowMonth, isShowDay));
                 tvName.setText(name);
-                tvTimeForDay.setBackgroundResource(R.drawable.btn_blue);
-                tvTimeForMonth.setBackgroundResource(R.color.colorWhite);
-                tvTimeForYear.setBackgroundResource(R.color.colorWhite);
+                switch (type){
+                    case 0:
+                        tvTimeForDay.setBackgroundResource(R.drawable.day_on);
+                        tvTimeForMonth.setBackgroundResource(R.drawable.month_off);
+                        tvTimeForYear.setBackgroundResource(R.drawable.year_off);
+                        break;
+                    case 1:
+                        tvTimeForDay.setBackgroundResource(R.drawable.day_off);
+                        tvTimeForMonth.setBackgroundResource(R.drawable.month_on);
+                        tvTimeForYear.setBackgroundResource(R.drawable.year_off);
+                        break;
+                    case 2:
+                        tvTimeForDay.setBackgroundResource(R.drawable.day_off);
+                        tvTimeForMonth.setBackgroundResource(R.drawable.month_off);
+                        tvTimeForYear.setBackgroundResource(R.drawable.year_on);
+                        break;
+                }
+
                 refreshData(paraTypeEnum);
             }
         });
@@ -226,22 +241,22 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnDetailsTimeForDay:
-                showPickerView(true, true, "PM2.5日线图", mTvTime, mTvName, mTvTimeForDay, mTvTimeForMonth, mTvTimeForYear, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Day);
+                showPickerView(true, true, "PM2.5日线图", mTvTime, mTvName, mTvTimeForDay, mTvTimeForMonth, mTvTimeForYear, 0, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Day);
                 break;
             case R.id.btnDetailsTimeForMonth:
-                showPickerView(true, false, "PM2.5月线图", mTvTime, mTvName, mTvTimeForMonth, mTvTimeForDay, mTvTimeForYear, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Month);
+                showPickerView(true, false, "PM2.5月线图", mTvTime, mTvName, mTvTimeForDay, mTvTimeForMonth, mTvTimeForYear, 1, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Month);
                 break;
             case R.id.btnDetailsTimeForYear:
-                showPickerView(false, false, "PM2.5年线图", mTvTime, mTvName, mTvTimeForYear, mTvTimeForMonth, mTvTimeForDay, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Year);
+                showPickerView(false, false, "PM2.5年线图", mTvTime, mTvName, mTvTimeForDay, mTvTimeForMonth, mTvTimeForYear, 2, EnvironmentParaTypeEnum.PM2点5, EnvironmentTimeTypeEnum.Year);
                 break;
             case R.id.btnDetailsTimeForDay2:
-                showPickerView(true, true, "PM10日线图", mTvTime2, mTvName2, mTvTimeForDay2, mTvTimeForMonth2, mTvTimeForYear2, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Day);
+                showPickerView(true, true, "PM10日线图", mTvTime2, mTvName2, mTvTimeForDay2, mTvTimeForMonth2, mTvTimeForYear2, 0, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Day);
                 break;
             case R.id.btnDetailsTimeForMonth2:
-                showPickerView(true, false, "PM10月线图", mTvTime2, mTvName2, mTvTimeForMonth2, mTvTimeForDay2, mTvTimeForYear2, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Month);
+                showPickerView(true, false, "PM10月线图", mTvTime2, mTvName2, mTvTimeForDay2, mTvTimeForMonth2, mTvTimeForYear2, 1, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Month);
                 break;
             case R.id.btnDetailsTimeForYear2:
-                showPickerView(false, false, "PM10年线图", mTvTime2, mTvName2, mTvTimeForYear2, mTvTimeForMonth2, mTvTimeForDay2, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Year);
+                showPickerView(false, false, "PM10年线图", mTvTime2, mTvName2, mTvTimeForDay2, mTvTimeForMonth2, mTvTimeForYear2, 2, EnvironmentParaTypeEnum.PM10, EnvironmentTimeTypeEnum.Year);
                 break;
         }
     }

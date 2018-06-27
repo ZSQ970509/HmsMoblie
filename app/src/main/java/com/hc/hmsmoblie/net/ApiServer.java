@@ -35,6 +35,10 @@ public interface ApiServer {
     Observable<HttpResponse<ArrayList<MainJson>>> GetModulesList(@Field("userAccount") String userAccount, @Field("userID") String userID);
 
     @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "changeHmsPassWord")
+    Observable<HttpResponse> changeHmsPassWord(@Field("userAccount") String userAccount, @Field("UserPwd") String UserPwd, @Field("newPwd") String newPwd);
+
+    @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameraList")
     Observable<HttpResponse<ProjectJson>> getCameraList(@Field("keyword") String keyword, @Field("pageindex") int pageindex
             , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid);

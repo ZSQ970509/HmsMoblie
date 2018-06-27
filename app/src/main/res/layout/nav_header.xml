@@ -32,10 +32,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nav_header_pic" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/y1"
-        android:layout_marginTop="@dimen/y70"
-        android:background="#666666"
-        app:layout_constraintTop_toBottomOf="@id/nav_header_name"></View>
 </android.support.constraint.ConstraintLayout>

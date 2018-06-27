@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_drawerLayout"
@@ -12,40 +12,35 @@
 
     <Button
         android:id="@+id/btnLadderControl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="搜索"
-        app:layout_constraintBottom_toBottomOf="@id/edtLadderControl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/edtLadderControl" />
+        android:layout_width="@dimen/x90"
+        android:layout_height="@dimen/y56"
+        android:layout_below="@+id/titleBar"
+        android:layout_toEndOf="@+id/edtLadderControl"
+        android:background="@drawable/search"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginTop="@dimen/y24"
+        android:text="" />
 
     <EditText
         android:id="@+id/edtLadderControl"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="#63B8FF"
-        android:hint="请输入项目名"
-        app:layout_constraintEnd_toStartOf="@id/btnLadderControl"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleBar" />
+        android:layout_width="@dimen/x600"
+        android:layout_height="@dimen/y56"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/titleBar"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y24"
+        android:background="@drawable/selectprojectsearch"
+        android:ems="10"
+        android:hint="请输入项目名称"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/y30" />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srlLadderControl"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtLadderControl">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btnLadderControl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvLadderControl"
             android:layout_width="match_parent"
@@ -53,4 +48,4 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

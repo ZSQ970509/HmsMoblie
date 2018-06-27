@@ -12,165 +12,184 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginRight="@dimen/x24"
+        android:layout_marginTop="@dimen/y24"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDetailsName"
                 style="@style/ItemTitleTv"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/x300"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:textSize="@dimen/y24"
+                android:textColor="#000"
                 android:text="PM2.5日线图" />
 
             <TextView
                 android:id="@+id/tvComplianceRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="@dimen/x120"
-                android:text="达标率：" />
-        </LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="right"
+                android:text="达标率："
+                android:textSize="@dimen/y24" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_horizontal"
+            android:layout_height="@dimen/y100"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="选择日期："
+                android:layout_height="@dimen/y30"
+                android:layout_alignTop="@+id/tvDetailsTime"
+                android:layout_toStartOf="@+id/tvDetailsTime"
+                android:text="选择时间："
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textSize="@dimen/y24" />
 
             <TextView
                 android:id="@+id/tvDetailsTime"
-                android:layout_width="@dimen/x280"
-                android:layout_height="@dimen/y40"
-                android:layout_centerVertical="true"
+                android:layout_width="@dimen/x188"
+                android:layout_height="@dimen/y30"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/btnDetailsTimeForMonth"
                 android:background="@drawable/bg_frame"
                 android:gravity="center"
-                android:text="" />
+                android:layout_marginTop="@dimen/y10"
+                android:textSize="@dimen/y24" />
 
             <TextView
                 android:id="@+id/btnDetailsTimeForDay"
-                style="@style/TvOnclickDataStyle"
-                android:layout_marginLeft="@dimen/x10"
-                android:background="@drawable/btn_blue"
-                android:paddingRight="@dimen/x5"
-                android:text="按天" />
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/x4"
+                android:layout_toStartOf="@+id/btnDetailsTimeForMonth"
+                android:background="@drawable/day_on" />
 
             <TextView
                 android:id="@+id/btnDetailsTimeForMonth"
-                style="@style/TvOnclickDataStyle"
-                android:paddingLeft="@dimen/x5"
-                android:paddingRight="@dimen/x5"
-                android:text="按月" />
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/x4"
+                android:layout_toStartOf="@+id/btnDetailsTimeForYear"
+                android:background="@drawable/month_off" />
 
             <TextView
                 android:id="@+id/btnDetailsTimeForYear"
-                style="@style/TvOnclickDataStyle"
-                android:paddingLeft="@dimen/x5"
-                android:text="按年" />
-        </LinearLayout>
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:background="@drawable/year_off"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lcDetails"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/y380" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:layout_weight="1"
+        android:layout_height="390dp"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginRight="@dimen/x24"
+        android:layout_marginTop="@dimen/y24"
         android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvDetailsName2"
                 style="@style/ItemTitleTv"
-                android:layout_width="wrap_content"
+                android:layout_width="147dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="PM10日线图" />
+                android:text="PM10日线图"
+                android:textColor="#000"
+                android:textSize="@dimen/y24" />
 
             <TextView
                 android:id="@+id/tvComplianceRate2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="@dimen/x120"
-                android:text="达标率：" />
-        </LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:text="达标率："
+                android:textSize="@dimen/y24"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
+            android:layout_height="@dimen/y100"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="选择日期："
+                android:layout_height="@dimen/y30"
+                android:layout_alignTop="@+id/tvDetailsTime2"
+                android:layout_toStartOf="@+id/tvDetailsTime2"
+                android:text="选择时间："
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textSize="@dimen/y24" />
 
             <TextView
                 android:id="@+id/tvDetailsTime2"
-                android:layout_width="@dimen/x280"
-                android:layout_height="@dimen/y40"
-                android:layout_centerVertical="true"
+                android:layout_width="@dimen/x188"
+                android:layout_height="@dimen/y30"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/btnDetailsTimeForMonth2"
                 android:background="@drawable/bg_frame"
                 android:gravity="center"
-                android:text="" />
-
+                android:layout_marginTop="@dimen/y10"
+                android:textSize="@dimen/y24" />
             <TextView
                 android:id="@+id/btnDetailsTimeForDay2"
-                style="@style/TvOnclickDataStyle"
-                android:layout_marginLeft="@dimen/x10"
-                android:background="@drawable/btn_blue"
-                android:paddingRight="@dimen/x5"
-                android:text="按天" />
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/x4"
+                android:layout_toStartOf="@+id/btnDetailsTimeForMonth2"
+                android:background="@drawable/day_on" />
 
             <TextView
                 android:id="@+id/btnDetailsTimeForMonth2"
-                style="@style/TvOnclickDataStyle"
-                android:paddingLeft="@dimen/x5"
-                android:paddingRight="@dimen/x5"
-                android:text="按月" />
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="@dimen/x4"
+                android:layout_toStartOf="@+id/btnDetailsTimeForYear2"
+                android:background="@drawable/month_off" />
 
             <TextView
                 android:id="@+id/btnDetailsTimeForYear2"
-                style="@style/TvOnclickDataStyle"
-                android:paddingLeft="@dimen/x5"
-                android:text="按年" />
-        </LinearLayout>
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/y44"
+                android:background="@drawable/year_off"
+                android:layout_alignParentEnd="true" />
+            
+
+        </RelativeLayout>
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lcDetails2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/y380" />
     </LinearLayout>
 </LinearLayout>

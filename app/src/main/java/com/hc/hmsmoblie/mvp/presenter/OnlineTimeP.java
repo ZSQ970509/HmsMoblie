@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class OnlineTimeP extends BasePresenter<OnlineTimeC.V> implements OnlineTimeC.P {
     @Override
     public void GetOnlineRate(String projId, String startDate, String endDate) {
-        getIView().showLoading("正在登陆中...");
+        getIView().showLoading("加载数据中...");
         new OnlineTimeM()
                 .GetOnlineRate(projId, startDate, endDate)
                 .compose(getIView().bindLifecycle())

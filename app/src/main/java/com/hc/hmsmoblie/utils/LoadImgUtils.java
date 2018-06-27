@@ -15,7 +15,7 @@ public class LoadImgUtils {
     public static void loadImg(Activity activity, String imgUrl, ImageView imageView) {
         Glide.with(activity)
                 .load(imgUrl)//拿到头像本地存放路径
-                .error(R.mipmap.ic_launcher)//失败默认
+                .error(R.drawable.image)//失败默认
                 .placeholder(R.drawable.image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//不单独缓存
                 .skipMemoryCache(true)

@@ -12,55 +12,79 @@
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/activity_margin"
         android:background="@color/colorWhite"
-        android:padding="@dimen/activity_margin_small">
+        android:paddingBottom="@dimen/y20"
+        >
 
-        <Button
-            android:id="@+id/btnLadderControlPictureClose"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_alignParentRight="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y80"
+            android:background="#499df3"
+            android:id="@+id/relativeLayout">
 
-        <TextView
-            android:id="@+id/tvLadderControlPictureName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/btnLadderControlPictureClose"
-            android:singleLine="true"
-            android:text="人脸查看（XXXX）" />
+            <TextView
+                android:id="@+id/tvLadderControlPictureName"
+                android:layout_width="@dimen/y500"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/y24"
+                android:textColor="#fff"
+                android:singleLine="true"
+                android:layout_marginTop="@dimen/y20"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="人脸查看（XXXX）" />
+
+            <Button
+                android:id="@+id/btnLadderControlPictureClose"
+                android:layout_width="@dimen/y40"
+                android:layout_height="@dimen/y40"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/y20"
+                android:layout_marginRight="@dimen/y20"
+                android:background="@drawable/ladder_close" />
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/ivLadderControlPictureImg1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y240"
-            android:layout_below="@+id/tvLadderControlPictureName"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_width="@dimen/x662"
+            android:layout_height="@dimen/y402"
+            android:layout_alignStart="@+id/ivLadderControlPictureImg2"
+            android:layout_below="@+id/relativeLayout"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_img" />
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginRight="@dimen/x20"
+            android:src="@drawable/image" />
 
         <TextView
+            android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvLadderControlPictureName"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_alignStart="@+id/ivLadderControlPictureImg1"
+            android:layout_alignTop="@+id/ivLadderControlPictureImg1"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y20"
             android:text="底图"
+            android:textColor="#666666"
             android:transitionName="@string/transitionNameBottomImg" />
 
         <ImageView
             android:id="@+id/ivLadderControlPictureImg2"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y240"
+            android:layout_width="@dimen/x662"
+            android:layout_height="@dimen/y402"
             android:layout_below="@+id/ivLadderControlPictureImg1"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_img" />
+            android:src="@drawable/image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ivLadderControlPictureImg1"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_alignStart="@+id/ivLadderControlPictureImg2"
+            android:layout_alignTop="@+id/ivLadderControlPictureImg2"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y20"
             android:text="验证图"
+            android:textColor="#666666"
             android:transitionName="@string/transitionNameVerificationImg" />
     </RelativeLayout>
 </RelativeLayout>

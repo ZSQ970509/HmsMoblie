@@ -50,4 +50,6 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:3.2.7'
     /* 图表 */
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    /* 动态权限 */
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
 }

@@ -29,6 +29,8 @@ import butterknife.OnClick;
  */
 
 public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProjectP> implements VideoSelectProjectC.V {
+    private static final String SYS_ID = "sys_id";
+    private  String sysId;
     @BindView(R.id.btn_Search_SelectProject)
     Button btnSearchSelectProject;
     @BindView(R.id.edit_Search_SelectProject)
@@ -40,8 +42,9 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
     int pageIndex = 0;
     int sumPage;
 
-    public static void newInstance(Activity activity) {
+    public static void newInstance(Activity activity , String sysId) {
         Intent intent = new Intent(activity, VideoSelectProjectActivity.class);
+        intent.putExtra(SYS_ID, sysId);
         activity.startActivity(intent);
     }
 
@@ -58,6 +61,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("选择项目");
+        sysId = getIntent().getStringExtra(SYS_ID);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectProject.setLayoutManager(linearLayoutManager);
         selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);
@@ -70,7 +74,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
                 selectProjectVideoAdapter.loadMoreEnd();
             } else {
                 //sysId:11视频监控、26超视野、31梯控、21环境
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "11",  UserInfoPref.getUserId());
+                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, sysId,  UserInfoPref.getUserId());
             }
 
         }, 1000), recyclerViewSelectProject);
@@ -78,7 +82,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
         selectProjectVideoAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+                VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID(),sysId);
 
             }
         });
@@ -92,7 +96,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
                 selectProjectVideoAdapter.notifyDataSetChanged();
                 //sysId:11视频监控、26超视野、31梯控、21环境
                 showLoading("正在搜索中...");
-                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "11",  UserInfoPref.getUserId());
+                mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, sysId,  UserInfoPref.getUserId());
                 break;
         }
     }

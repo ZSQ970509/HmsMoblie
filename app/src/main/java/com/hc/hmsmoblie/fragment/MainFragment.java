@@ -121,10 +121,10 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
             commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
                 switch (mainJson.get(position).getMdID()){
                     case 1381:
-                        VideoSelectProjectActivity.newInstance(getActivity());
+                        VideoSelectProjectActivity.newInstance(getActivity(),"11");
                         break;
                     case 1382:
-
+                        VideoSelectProjectActivity.newInstance(getActivity(),"13");
                         break;
                     case 1383:
 
