@@ -40,14 +40,14 @@ public class PercentageRing extends View{
 		super(context, attrs);
 		//自定义属性 values/attr
 		TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.PercentageRing);
-		//中间圆的背景颜色  默认为浅紫色
-		mCircleBackground = typedArray.getColor(R.styleable.PercentageRing_circleBackground, 0xffafb4db);
-		//外圆环的颜色  默认为深紫色
-		mRingColor = typedArray.getColor(R.styleable.PercentageRing_ringColor, 0xff6950a1);
+		//中间圆的背景颜色  默认为白色
+		mCircleBackground = typedArray.getColor(R.styleable.PercentageRing_circleBackground, 0xffffffff);
+		//外圆环的颜色  默认为浅蓝色
+		mRingColor = typedArray.getColor(R.styleable.PercentageRing_ringColor, 0xff55f2f2);
 		//中间圆的半径 默认为60
 		mRadius = typedArray.getInt(R.styleable.PercentageRing_radius, 60);
-		//字体颜色 默认为白色
-		mTextColor = typedArray.getColor(R.styleable.PercentageRing_textColor, 0xffffffff);
+		//字体颜色 默认为黑色
+		mTextColor = typedArray.getColor(R.styleable.PercentageRing_textColor, 0xff333333);
 		//最后一定要调用这个 释放掉TypedArray
 		typedArray.recycle();
 		//初始化数据

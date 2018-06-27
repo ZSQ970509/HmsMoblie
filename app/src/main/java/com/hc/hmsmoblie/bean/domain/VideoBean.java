@@ -20,9 +20,11 @@ public class VideoBean implements Serializable {
     private String camName;
     private String mRtsp;
     private String camFlowState;
-
+    private String VideoId;
     public VideoBean() {
     }
+
+
 
     public VideoBean(String mUserName, String mPassword, String mSysCode, String mIp, String mPort, String mType, String cam_Dx_Puid, String camId, String camName, String camFlowState) {
         this.mUserName = mUserName;
@@ -33,11 +35,17 @@ public class VideoBean implements Serializable {
         this.mType = mType;
         Cam_Dx_Puid = cam_Dx_Puid;
         this.camId = camId;
+
         this.camName = camName;
         this.camFlowState = camFlowState;
 
     }
-
+    public String getVideoId() {
+        return VideoId;
+    }
+    public void setVideoId(String VideoId) {
+        this.VideoId = VideoId;
+    }
     public String getmRtsp() {
         return mRtsp;
     }

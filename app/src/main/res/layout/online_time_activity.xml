@@ -11,51 +11,69 @@
         android:id="@+id/titleBar"
         layout="@layout/actionbar_layout" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y96"
-        android:gravity="center_vertical"
+        android:layout_height="@dimen/y104"
         android:orientation="horizontal">
 
 
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y56"
             android:text="在线率统计日期:"
-            android:textColor="#000000"
-            android:textSize="@dimen/y26" />
+            android:textColor="#333333"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/y24"
+            android:layout_marginLeft="@dimen/x24"
+            android:textSize="@dimen/y24"
+            android:id="@+id/textView8" />
 
         <TextView
             android:id="@+id/tv_StartDate_OnlineTime"
-            android:layout_width="@dimen/x200"
+            android:layout_width="@dimen/x180"
             android:layout_height="@dimen/y56"
-            android:gravity="center"
 
+            android:layout_alignTop="@+id/textView8"
+            android:layout_toEndOf="@+id/textView8"
+            android:gravity="center"
+            android:background="@drawable/boder_line"
+            android:textSize="@dimen/y24"
+            android:textColor="#333333"
             android:text="" />
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_dao"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y56"
+            android:layout_alignTop="@+id/tv_StartDate_OnlineTime"
+            android:layout_toEndOf="@+id/tv_StartDate_OnlineTime"
+            android:gravity="center"
             android:text="到"
-            android:textColor="#000000"
-            android:textSize="@dimen/y26" />
+            android:textColor="#333333"
+            android:textSize="@dimen/y24" />
 
         <TextView
             android:id="@+id/tv_EndDate_OnlineTime"
-            android:layout_width="@dimen/x200"
+            android:layout_width="@dimen/x180"
             android:layout_height="@dimen/y56"
             android:gravity="center"
+            android:layout_alignTop="@+id/tv_dao"
+            android:layout_toEndOf="@+id/tv_dao"
+            android:background="@drawable/boder_line"
+            android:textSize="@dimen/y24"
+            android:textColor="#333333"
 
             android:text=" " />
         <Button
             android:id="@+id/btn_Search_OnlineTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/titleBar"
-            android:text="查询" />
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y56"
+            android:background="@drawable/btn_query"
+            android:layout_alignTop="@+id/tv_EndDate_OnlineTime"
+            android:layout_toEndOf="@+id/tv_EndDate_OnlineTime"
+            android:layout_marginLeft="@dimen/x12"
+            android:text="" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_OnlineTime"

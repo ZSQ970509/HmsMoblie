@@ -18,13 +18,15 @@
 
         <ImageView
             android:id="@+id/ivHuXinBack"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/y40"
             android:layout_gravity="center_vertical|left"
+            android:layout_marginTop="@dimen/y64"
             android:layout_marginLeft="@dimen/x24"
-            android:layout_marginTop="@dimen/y24"
-            android:scaleType="center"
-            android:src="@drawable/ic_img" />
+            android:scaleType="fitXY"
+            android:src="@drawable/back" />
+
+
     </RelativeLayout>
 
     <LinearLayout
@@ -46,6 +48,98 @@
             android:text="视频缓存进度0%"
             android:textColor="#ffffff" />
     </LinearLayout>
+    <ImageView
+        android:id="@+id/control_Main"
+        android:layout_width="@dimen/y56"
+        android:layout_height="@dimen/y56"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y100"
+        android:layout_marginRight="@dimen/x100"
+        android:src="@drawable/more" />
+    <ImageView
+        android:id="@+id/control_Speed"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y184"
+        android:layout_marginRight="@dimen/x104"
+        android:src="@drawable/control_speed"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/control_Setting"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y150"
+        android:layout_marginRight="@dimen/x184"
+        android:src="@drawable/setup_video"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/control_Direction"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y68"
+        android:layout_marginRight="@dimen/x175"
+        android:src="@drawable/move"
+        android:visibility="gone"
+        />
 
+    <ImageView
+        android:id="@+id/control_Up"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y184"
+        android:layout_marginRight="@dimen/x104"
+        app:srcCompat="@drawable/up"
+        android:visibility="gone"/>
+
+
+    <ImageView
+        android:id="@+id/control_Left"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y104"
+        android:layout_marginRight="@dimen/x184"
+        app:srcCompat="@drawable/left"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/control_Down"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y24"
+        android:layout_marginRight="@dimen/x104"
+        app:srcCompat="@drawable/down"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/control_Right"
+        android:layout_width="@dimen/y48"
+        android:layout_height="@dimen/y48"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/y104"
+        android:layout_marginRight="@dimen/x24"
+        app:srcCompat="@drawable/right"
+        android:visibility="gone"/>
 
 </RelativeLayout>

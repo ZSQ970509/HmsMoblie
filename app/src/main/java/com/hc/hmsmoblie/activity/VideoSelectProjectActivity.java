@@ -102,7 +102,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
         if (dataBean.getList().size() == 0) {
             showToast("暂无数据！");
         } else {
-            showToast("数据加载成功！");
+           // showToast("数据加载成功！");
         }
         dataList.addAll(dataBean.getList());
         selectProjectVideoAdapter.notifyDataSetChanged();

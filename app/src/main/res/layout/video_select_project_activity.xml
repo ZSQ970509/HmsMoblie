@@ -11,24 +11,28 @@
 
     <EditText
         android:id="@+id/edit_Search_SelectProject"
-        android:layout_width="@dimen/x580"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_Search_SelectProject"
-        android:layout_alignBottom="@+id/btn_Search_SelectProject"
+        android:layout_width="@dimen/x600"
+        android:layout_height="@dimen/y56"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
+        android:layout_below="@+id/titleBar"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y24"
+        android:background="@drawable/selectprojectsearch"
         android:ems="10"
         android:hint="请输入项目名称"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textSize="@dimen/y30" />
 
     <Button
         android:id="@+id/btn_Search_SelectProject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/x90"
+        android:layout_height="@dimen/y56"
         android:layout_below="@+id/titleBar"
-        android:layout_marginTop="5dp"
-        android:text="搜索" />
+        android:layout_toEndOf="@+id/edit_Search_SelectProject"
+        android:background="@drawable/search"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginTop="@dimen/y24"
+        android:text="" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_SelectProject"

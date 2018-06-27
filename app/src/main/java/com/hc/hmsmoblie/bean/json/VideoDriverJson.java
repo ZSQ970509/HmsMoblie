@@ -8,44 +8,45 @@ public class VideoDriverJson {
 
 
     /**
-     * totalTime : 151920
-     * monthTime : 28020
-     * totalMonthTime : 28231
-     * startTime : /Date(1518364800000+0800)/
-     * dayTime : 810
-     * CamId : 1014464
+     * totalTime : 1214210
+     * monthTime : 35340
+     * totalMonthTime : 35557
+     * startTime : /Date(1426694400000+0800)/
+     * dayTime : 930
+     * CamId : 1013749
      * SysID : 11
-     * CamName : 海康测试4G专用2
+     * CamName : 1-4长焦摄像机监控施工电梯
      * CamFlowState : 15
      * Cam_IsTest : false
-     * Cam_DX_VideoId : a280c3baf6d54028b41796e9f1f322ec
+     * Cam_DX_VideoId : 0000000000200000000000007420373:0000000000200000000000006932237:110.84.128.211:086591
      * Cam_WideAngle_IP : null
-     * CamTypeId : 103
+     * CamTypeId : 104
      * CamItemId : null
-     * Cam_Config : 1539.108.99.1268055adminHik12345a280c3baf6d54028b41796e9f1f322ec海康测试4G专用2a280c3baf6d54028b41796e9f1f322ec741381700_00111101446400015f0f5c754fb40b8a9f0138ae7a20be801002654321654321jybysyCamera01a280c3baf6d54028b41796e9f1f322ec96628f2e96704344b33298fb0f3521f30be83d40695011e7981e0f190ed6d2e7903de339885c43cdbe2488f635ae23cd415f0692admin1off119.23.13.3228888
-     * CamInstalPlace :
-     * DevTypeName : 智能测距摄像机
-     * DevTypePic : /lib/images/dev/zhinengceju.png
-     * RfCamfailReslt : null
-     * RfDevFailureTypeId : null
-     * DevStatus : null
-     * DevNetStatus : null
+     * Cam_Config : 20000000000200000000000007420373:0000000000200000000000006932237:110.84.128.211:086591222.77.183.6780hcwl654321
+     * CamInstalPlace : 安装在北侧板房上
+     * DevTypeName : 长焦摄像机
+     * DevTypePic : /lib/images/dev/changjiao.png
+     * RfCamfailReslt : 故障申报
+     * RfDevFailureTypeId : -1
+     * DevStatus : 1
+     * DevNetStatus : 2
+     * VideoId : 086591-2004646346
      */
 
-    private int totalTime;
-    private int monthTime;
-    private int totalMonthTime;
+    private String totalTime;
+    private String monthTime;
+    private String totalMonthTime;
     private String startTime;
-    private int dayTime;
-    private int CamId;
-    private int SysID;
+    private String dayTime;
+    private String CamId;
+    private String SysID;
     private String CamName;
     private int CamFlowState;
     private boolean Cam_IsTest;
     private String Cam_DX_VideoId;
-    private String Cam_WideAngle_IP;
-    private int CamTypeId;
-    private String CamItemId;
+    private Object Cam_WideAngle_IP;
+    private String CamTypeId;
+    private Object CamItemId;
     private String Cam_Config;
     private String CamInstalPlace;
     private String DevTypeName;
@@ -54,28 +55,29 @@ public class VideoDriverJson {
     private String RfDevFailureTypeId;
     private String DevStatus;
     private String DevNetStatus;
+    private String VideoId;
 
-    public int getTotalTime() {
+    public String getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(int totalTime) {
+    public void setTotalTime(String totalTime) {
         this.totalTime = totalTime;
     }
 
-    public int getMonthTime() {
+    public String getMonthTime() {
         return monthTime;
     }
 
-    public void setMonthTime(int monthTime) {
+    public void setMonthTime(String monthTime) {
         this.monthTime = monthTime;
     }
 
-    public int getTotalMonthTime() {
+    public String getTotalMonthTime() {
         return totalMonthTime;
     }
 
-    public void setTotalMonthTime(int totalMonthTime) {
+    public void setTotalMonthTime(String totalMonthTime) {
         this.totalMonthTime = totalMonthTime;
     }
 
@@ -87,27 +89,27 @@ public class VideoDriverJson {
         this.startTime = startTime;
     }
 
-    public int getDayTime() {
+    public String getDayTime() {
         return dayTime;
     }
 
-    public void setDayTime(int dayTime) {
+    public void setDayTime(String dayTime) {
         this.dayTime = dayTime;
     }
 
-    public int getCamId() {
+    public String getCamId() {
         return CamId;
     }
 
-    public void setCamId(int CamId) {
+    public void setCamId(String CamId) {
         this.CamId = CamId;
     }
 
-    public int getSysID() {
+    public String getSysID() {
         return SysID;
     }
 
-    public void setSysID(int SysID) {
+    public void setSysID(String SysID) {
         this.SysID = SysID;
     }
 
@@ -143,27 +145,27 @@ public class VideoDriverJson {
         this.Cam_DX_VideoId = Cam_DX_VideoId;
     }
 
-    public String getCam_WideAngle_IP() {
+    public Object getCam_WideAngle_IP() {
         return Cam_WideAngle_IP;
     }
 
-    public void setCam_WideAngle_IP(String Cam_WideAngle_IP) {
+    public void setCam_WideAngle_IP(Object Cam_WideAngle_IP) {
         this.Cam_WideAngle_IP = Cam_WideAngle_IP;
     }
 
-    public int getCamTypeId() {
+    public String getCamTypeId() {
         return CamTypeId;
     }
 
-    public void setCamTypeId(int CamTypeId) {
+    public void setCamTypeId(String CamTypeId) {
         this.CamTypeId = CamTypeId;
     }
 
-    public String getCamItemId() {
+    public Object getCamItemId() {
         return CamItemId;
     }
 
-    public void setCamItemId(String CamItemId) {
+    public void setCamItemId(Object CamItemId) {
         this.CamItemId = CamItemId;
     }
 
@@ -229,5 +231,13 @@ public class VideoDriverJson {
 
     public void setDevNetStatus(String DevNetStatus) {
         this.DevNetStatus = DevNetStatus;
+    }
+
+    public String getVideoId() {
+        return VideoId;
+    }
+
+    public void setVideoId(String VideoId) {
+        this.VideoId = VideoId;
     }
 }

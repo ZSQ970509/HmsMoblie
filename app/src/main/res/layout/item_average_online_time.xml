@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -21,9 +21,10 @@
 
         <com.hc.hmsmoblie.widget.PercentageRing
             android:id="@+id/pr_Rate_OnlineTime_Item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:radius="90"/>
+            android:layout_width="@dimen/y200"
+            android:layout_height="@dimen/y200"
+            android:layout_marginTop="@dimen/y24"
+            app:radius="180"/>
 
 
 

@@ -23,87 +23,87 @@
      protected void convert(BaseViewHolder helper, VideoDriverJson item) {
          helper.setText(R.id.tv_Driver_Name_Select_Driver,item.getCamName());
          //1:通电" 0:断电 null:未开通断电设备
-         helper.setImageResource(R.id.iv_Power_Select_Driver,EmptyUtils.isState(item.getDevStatus(),R.drawable.cb_select,R.drawable.cb_select,R.drawable.cb_select));
+         helper.setImageResource(R.id.iv_Power_Select_Driver,EmptyUtils.isState(item.getDevStatus(),R.drawable.dian1,R.drawable.dian2,R.drawable.weikaitong));
          //1:通电" 0:断电 null:未开通断电设备
-         helper.setImageResource(R.id.iv_Power_Select_Driver,EmptyUtils.isState(item.getDevNetStatus(),R.drawable.cb_select,R.drawable.cb_select,R.drawable.cb_select));
+         helper.setImageResource(R.id.iv_Net_Select_Driver,EmptyUtils.isState(item.getDevNetStatus(),R.drawable.wang1,R.drawable.wang2,R.drawable.weikaitong));
 
 
          //getCamFlowState() == 16 维护中。
          switch (item.getDevTypePic()) {
              case "/lib/images/dev/zhinengceju.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.zhinengceju_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.zhinengceju);
                  }
                  break;
              case "/lib/images/dev/yuntaikekong.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.yuntaikekong_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.yuntaikekong);
                  }
                  break;
              case "/lib/images/dev/renlian.png":
-                 helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                 helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.image);
                  break;
              case "/lib/images/dev/qiuxing.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.qiuxing_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.qiuxing);
                  }
                  break;
              case "/lib/images/dev/kekong.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.kekong_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.kekong);
                  }
                  break;
              case "/lib/images/dev/wuxian.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.wuxian_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.wuxian);
                  }
                  break;
              case "/lib/images/dev/changjiao.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.changjiao_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.changjiao);
                  }
                  break;
              case "/lib/images/dev/danbing.png":
-                 helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                 helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.image);
                  break;
              case "/lib/images/dev/chaoshiyenew.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.chaoshiye_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.chaoshiye);
                  }
                  break;
              case "/lib/images/dev/chaoshiye.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.chaoshiye_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.chaoshiye);
                  }
                  break;
              case "/lib/images/dev/xunhang.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.xunhang_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.xunhang);
                  }
                  break;
              case "/lib/images/dev/qiangshi.png":
                  if (item.getCamFlowState() == 16) {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.qiangshi_fail);
                  } else {
-                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.cb_select);
+                     helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver,R.drawable.qiangshi);
                  }
                  break;
              default:

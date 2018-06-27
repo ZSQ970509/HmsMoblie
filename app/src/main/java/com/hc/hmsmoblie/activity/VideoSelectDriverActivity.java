@@ -76,6 +76,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                     //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
                     videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
                     videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
+                    videoBean.setVideoId(dataList.get(position).getVideoId() + "");
                     if (videoBean.getCamFlowState().equals("15")) {
                         String type = videoBean.getmType();
                         //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
@@ -180,7 +181,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
         if (dataBean.size() == 0) {
             showToast("暂无数据！");
         } else {
-            showToast("数据加载成功！");
+           // showToast("数据加载成功！");
         }
         dataList.addAll(dataBean);
         selectDriverVideoAdapter.notifyDataSetChanged();

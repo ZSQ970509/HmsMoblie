@@ -47,7 +47,7 @@ dependencies {
     /* 加载图片 */
     compile 'com.github.bumptech.glide:glide:3.7.0'
     /* 日期选择器 */
-    compile 'com.contrarywind:Android-PickerView:3.2.7'
+    implementation 'com.contrarywind:Android-PickerView:3.2.7'
     /* 图表 */
-    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

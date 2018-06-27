@@ -43,7 +43,7 @@ public class HuXinUtil {
         splay.getProgressValue();
         splay.setPlayListener(listener);
 
-        splay.playerVideoByPuId("086591-1435552375", 2, "350100", 2, 1, userName, 1);
+        splay.playerVideoByPuId(puId, 2, "350100", 2, 1, userName, 1);
         //splay.playerVideoByPuId(puId, 2, "350100", 2, 1, userName, 1);
     }
 

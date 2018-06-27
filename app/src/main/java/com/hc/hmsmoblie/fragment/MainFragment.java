@@ -1,8 +1,11 @@
 package com.hc.hmsmoblie.fragment;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonRecyclerAdapter;
@@ -10,29 +13,47 @@ import com.hc.hmsmoblie.R;
 
 import com.hc.hmsmoblie.activity.EnvironmentSelectProjectActivity;
 import com.hc.hmsmoblie.activity.LadderControlProjectListActivity;
+import com.hc.hmsmoblie.activity.MainActivity;
 import com.hc.hmsmoblie.activity.VideoSelectProjectActivity;
 import com.hc.hmsmoblie.bean.domain.MainItemBean;
+import com.hc.hmsmoblie.bean.json.MainJson;
+import com.hc.hmsmoblie.db.UserInfoPref;
+import com.hc.hmsmoblie.mvp.contact.MainC;
+import com.hc.hmsmoblie.mvp.presenter.MainP;
 import com.yc.yclibrary.base.YcLazyFragment;
+import com.yc.yclibrary.base.YcMvpAppCompatActivity;
+import com.yc.yclibrary.base.YcMvpLazyFragment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  *
  */
 
-public class MainFragment extends YcLazyFragment {
+public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
     @BindView(R.id.rvMainFragment)
     RecyclerView mRecyclerView;
-    CommonRecyclerAdapter<MainItemBean> commonAdapter;
-
+    @BindView(R.id.iv_List_Main)
+    ImageView ivListMain;
+    CommonRecyclerAdapter<MainJson> commonAdapter;
+    int [] icon = {R.drawable.main_video,R.drawable.main_super_video,R.drawable.main_reinforced,R.drawable.main_imaging_log
+            ,R.drawable.main_environment,R.drawable.main_moble_attendance,R.drawable.mian_ladder_control,R.drawable.main_outages_network_power,};
+    List<MainItemBean> tempData = new ArrayList<MainItemBean>();
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
         return fragment;
     }
 
+
+    @Override
+    protected MainP loadPresenter() {
+        return new MainP();
+    }
     @Override
     public int getLayoutResId() {
         return R.layout.main_fragment;
@@ -40,33 +61,102 @@ public class MainFragment extends YcLazyFragment {
 
     @Override
     public void initView() {
-        List<MainItemBean> tempData = Arrays.asList(new MainItemBean("1", "视频监控"), new MainItemBean("2", "梯控"), new MainItemBean("3", "环境监控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"), new MainItemBean("2", "梯控"));
-        commonAdapter = new CommonRecyclerAdapter<MainItemBean>(getActivity(), R.layout.main_item) {
-            @Override
-            public void onUpdate(BaseAdapterHelper helper, MainItemBean item, int position) {
+        mPresenter.GetModulesList(UserInfoPref.getUserAccount(),UserInfoPref.getUserId());
 
-                helper.setText(R.id.tvMainItem, item.getName());
-            }
-        };
-        commonAdapter.addAll(tempData);
-        commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
-            switch (position){
-                case 0:
-                    VideoSelectProjectActivity.newInstance(getActivity());
-                    break;
-                case 1:
-                    LadderControlProjectListActivity.newInstance(getActivity());
-                    break;
-                case 2:
-                    EnvironmentSelectProjectActivity.newInstance(getActivity());
-                    break;
-            }
-           // LadderControlProjectListActivity.newInstance(getActivity());
-        });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRecyclerView.setAdapter(commonAdapter);
 
     }
+
+    @OnClick({R.id.iv_List_Main})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_List_Main:
+                Activity activity1 = getActivity();
+                if (activity1 instanceof MainActivity) {
+                    ((MainActivity) activity1).toggleDrawer();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onGetModulesListSuccess(ArrayList<MainJson> mainJson) {
+        if(mainJson.size() == 0 ){
+            showToast("暂无数据！");
+        }else{
+            tempData = Arrays.asList(new MainItemBean("1", "视频监控"), new MainItemBean("2", "超视野移动监控"), new MainItemBean("3", "钢筋鉴证"), new MainItemBean("4", "影像日志"), new MainItemBean("5", "环境远程监测"), new MainItemBean("6", "移动考勤"), new MainItemBean("7", "大型设备操作员认证(梯控)"), new MainItemBean("8", "断电断网"));
+            commonAdapter = new CommonRecyclerAdapter<MainJson>(getActivity(), R.layout.main_item) {
+                @Override
+                public void onUpdate(BaseAdapterHelper helper, MainJson item, int position) {
+
+                    helper.setText(R.id.tvMainItem, item.getMdName());
+                    switch (item.getMdID()){
+                        case 1381:
+                            helper.setImageResource(R.id.ivMainItem,icon[0]);
+                            break;
+                        case 1382:
+                            helper.setImageResource(R.id.ivMainItem,icon[1]);
+                            break;
+                        case 1383:
+                            helper.setImageResource(R.id.ivMainItem,icon[2]);
+                            break;
+                        case 1384:
+                            helper.setImageResource(R.id.ivMainItem,icon[3]);
+                            break;
+                        case 1385:
+                            helper.setImageResource(R.id.ivMainItem,icon[4]);
+                            break;
+                        case 1386:
+                            helper.setImageResource(R.id.ivMainItem,icon[5]);
+                            break;
+                        case 1387:
+                            helper.setImageResource(R.id.ivMainItem,icon[6]);
+                            break;
+                        case 1388:
+                            helper.setImageResource(R.id.ivMainItem,icon[7]);
+                            break;
+                    }
+                }
+            };
+            commonAdapter.addAll(mainJson);
+            commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
+                switch (mainJson.get(position).getMdID()){
+                    case 1381:
+                        VideoSelectProjectActivity.newInstance(getActivity());
+                        break;
+                    case 1382:
+
+                        break;
+                    case 1383:
+
+                        break;
+                    case 1384:
+
+                        break;
+                    case 1385:
+                        EnvironmentSelectProjectActivity.newInstance(getActivity());
+                        break;
+                    case 1386:
+
+                        break;
+                    case 1387:
+                        LadderControlProjectListActivity.newInstance(getActivity());
+                        break;
+                    case 1388:
+                        break;
+                }
+                // LadderControlProjectListActivity.newInstance(getActivity());
+            });
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
+            gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+            mRecyclerView.setLayoutManager(gridLayoutManager);
+            mRecyclerView.setAdapter(commonAdapter);
+        }
+
+    }
+
+    @Override
+    public void onGetModulesListFail(String msg) {
+
+    }
+
 }

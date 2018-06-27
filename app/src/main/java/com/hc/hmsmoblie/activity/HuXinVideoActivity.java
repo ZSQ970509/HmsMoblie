@@ -2,14 +2,19 @@ package com.hc.hmsmoblie.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ffcs.surfingscene.function.GeyeUserLogin;
@@ -25,6 +30,7 @@ import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
+import com.hc.hmsmoblie.utils.AnimationUtil;
 import com.hc.hmsmoblie.utils.HuXinUtil;
 import com.hc.hmsmoblie.widget.CommonDialog;
 
@@ -39,6 +45,22 @@ import butterknife.OnClick;
  */
 
 public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
+    @BindView(R.id.control_Main)
+    ImageView imageView_main;
+    @BindView(R.id.control_Speed)
+    ImageView controlSpeed;
+    @BindView(R.id.control_Setting)
+    ImageView controlSetting;
+    @BindView(R.id.control_Direction)
+    ImageView controlDirection;
+    @BindView(R.id.control_Up)
+    ImageView controlUp;
+    @BindView(R.id.control_Left)
+    ImageView controlLeft;
+    @BindView(R.id.control_Down)
+    ImageView controlDown;
+    @BindView(R.id.control_Right)
+    ImageView controlRight;
     @BindView(R.id.glv_HuXin_Video)
     GLSurfaceView glvHuXinVideo;
     @BindView(R.id.layout_pross)
@@ -48,6 +70,9 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
     private static final String Video_Bean = "video_bean";
     VideoBean videoBean;
     public SurfingScenePlayer splay;
+    int type = 0;
+    int controlType = 0;
+    String speedNum = "1";
     public static void newInstance(Activity activity, VideoBean videoBean) {
         Intent intent = new Intent(activity, HuXinVideoActivity.class);
         intent.putExtra(Video_Bean, videoBean);
@@ -78,7 +103,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
                 if ("1".equals(arg0.getReturnCode())) {
                     hideLoading();
-                    HuXinUtil.initVideo(splay,glvHuXinVideo,"086591-1435552375",videoBean.getmUserName(),new  onPlayListener() {
+                    HuXinUtil.initVideo(splay,glvHuXinVideo,videoBean.getVideoId(),videoBean.getmUserName(),new  onPlayListener() {
 
                         @Override
                         public void setOnPlaysuccess() {
@@ -204,10 +229,142 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
         showToast(msg);
     }
 
-    @OnClick()
+    @OnClick({R.id.control_Main,R.id.control_Speed,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.control_Main:
+                switch (type){
+                    case 0:
+                        AnimationUtil.LeftRotation(imageView_main);
+                        AnimationUtil.getShowAlpha(controlSpeed);
+                        AnimationUtil.getShowAlpha(controlSetting);
+                        AnimationUtil.getShowAlpha(controlDirection);
+                        type = 1;
+                        break;
+                    case 1:
+                        AnimationUtil.rightRotation(imageView_main);
+                        AnimationUtil.getDismissAlpha(controlSpeed);
+                        AnimationUtil.getDismissAlpha(controlSetting);
+                        AnimationUtil.getDismissAlpha(controlDirection);
+                        type = 2;
+                        break;
+                    case 2:
+                        AnimationUtil.rightRotation(imageView_main);
+                        AnimationUtil.getDismissAlpha(controlUp);
+                        AnimationUtil.getDismissAlpha(controlLeft);
+                        AnimationUtil.getDismissAlpha(controlDown);
+                        AnimationUtil.getDismissAlpha(controlRight);
+                        type = 0;
+                        break;
+                }
+                break;
+            case R.id.control_Speed:
+                speedDialogShow();
+                break;
+            case R.id.control_Setting:
+                controlUp.setImageResource(R.drawable.big);
+                controlLeft.setImageResource(R.drawable.bright);
+                controlDown.setImageResource(R.drawable.small);
+                controlRight.setImageResource(R.drawable.dark);
+                AnimationUtil.rightAroundRotation(imageView_main);
+                AnimationUtil.getDismissAndShowAlpha(controlSpeed,controlUp);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlLeft);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlDown);
+                AnimationUtil.getDismissAndShowAlpha(controlSpeed,controlRight);
 
+                controlType = 0;
+                break;
+            case R.id.control_Direction:
+                controlUp.setImageResource(R.drawable.up);
+                controlLeft.setImageResource(R.drawable.left);
+                controlDown.setImageResource(R.drawable.down);
+                controlRight.setImageResource(R.drawable.right);
+                AnimationUtil.rightAroundRotation(imageView_main);
+                AnimationUtil.getDismissAndShowAlpha(controlSpeed,controlUp);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlLeft);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlDown);
+                AnimationUtil.getDismissAndShowAlpha(controlSpeed,controlRight);
+
+                controlType = 1;
+                break;
+            case R.id.control_Up:
+                if(controlType == 1){
+                    splay.control(videoBean.getmUserName(), "1", speedNum);//1 向上
+                }else{
+                    splay.control(videoBean.getmUserName(), "7", speedNum);//7 放大
+                }
+                break;
+            case R.id.control_Left:
+                if(controlType == 1){
+                    splay.control(videoBean.getmUserName(), "3", speedNum);//2 向左
+                }else{
+                    splay.control(videoBean.getmUserName(), "5", speedNum);//5 变亮
+                }
+                break;
+            case R.id.control_Down:
+                if(controlType == 1){
+                    splay.control(videoBean.getmUserName(), "2", speedNum);//3 向下
+                }else{
+                    splay.control(videoBean.getmUserName(), "8", speedNum);//8 缩小
+                }
+                break;
+            case R.id.control_Right:
+                if(controlType == 1){
+                    splay.control(videoBean.getmUserName(), "4", speedNum);//4 向右
+                }else{
+                    splay.control(videoBean.getmUserName(), "6", speedNum);//6 变暗
+                }
+                break;
         }
+    }
+    private void speedDialogShow() {
+        String dqSpeedNum = speedNum;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View v = inflater.inflate(R.layout.dialog_seekbar, null);
+        Button btn_sure = (Button) v.findViewById(R.id.dialog_btn_sure);
+        Button btn_cancel = (Button) v.findViewById(R.id.dialog_btn_cancel);
+        SeekBar sbSpeedDialog = (SeekBar) v.findViewById(R.id.sb_Speed_Dialog);
+        sbSpeedDialog.setProgress(Integer.parseInt(speedNum));
+        TextView tvSpeedDialog = (TextView) v.findViewById(R.id.tv_Speed_Dialog);
+        //builer.setView(v);//这里如果使用builer.setView(v)，自定义布局只会覆盖title和button之间的那部分
+        final Dialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(v);//自定义布局应该在这里添加，要在dialog.show()的后面
+        //dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                speedNum = dqSpeedNum;
+                dialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+
+            }
+        });
+        sbSpeedDialog.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                tvSpeedDialog.setText("当前转速："+ (progress+1));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 }

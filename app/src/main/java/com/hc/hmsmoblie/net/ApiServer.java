@@ -5,6 +5,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
         import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
         import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+        import com.hc.hmsmoblie.bean.json.MainJson;
         import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
         import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
@@ -28,6 +29,10 @@ package com.hc.hmsmoblie.net;
 public interface ApiServer {
     @GET(UrlHelper.BASE_API + "hmsLogin")
     Observable<HttpResponse<LoginJson>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "GetModulesList")
+    Observable<HttpResponse<ArrayList<MainJson>>> GetModulesList(@Field("userAccount") String userAccount, @Field("userID") String userID);
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameraList")
