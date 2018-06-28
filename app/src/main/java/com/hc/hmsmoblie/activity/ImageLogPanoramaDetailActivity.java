@@ -2,9 +2,7 @@ package com.hc.hmsmoblie.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Matrix;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.hc.hmsmoblie.R;
@@ -40,8 +38,16 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
         setToolBar("");
         mActionBarRl.setBackgroundResource(R.color.colorTrance);
         mImgUrl = getIntent().getStringExtra(IMG_Url);
-        mImgUrl ="http://hms.jsqqy.com:7878/Handler/PanoramaHandler.ashx?action=GetPicByPuzzleAuto&path=http://ftp.jsqqy.com:8123/upfile/Puzzle/ptimg/thumbnailsAuto/155655669_001/330807_201806241320062845.jpg&recordId=330807";
+        mImgUrl = "http://hms.jsqqy.com:7878/Handler/PanoramaHandler.ashx?action=GetPicByPuzzleAuto&path=http://ftp.jsqqy.com:8123/upfile/Puzzle/ptimg/thumbnailsAuto/155655669_001/330807_201806241320062845.jpg&recordId=330807";
         mIvPanorama.loadNetImage(mImgUrl);
+        mIvPanorama.setOnDoubleClick(new MatrixImageView.OnDoubleClick() {
+            @Override
+            public void onClick(float pointInViewX, float pointInViewY, double scale) {
+                //点在原始原图的位置
+                double x = pointInViewX * scale;
+                double y = pointInViewY * scale;
+            }
+        });
 //        LoadImgUtils.loadImg(getActivity(), mImgUrl, mIvPanorama);
 //        Glide.with(getActivity())
 //                .load(mImgUrl)

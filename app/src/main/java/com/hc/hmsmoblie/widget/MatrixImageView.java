@@ -8,7 +8,6 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -35,7 +34,7 @@ public class MatrixImageView extends AppCompatImageView {
     private ImageView imageView;
     private PointF mImgInViewPoint = new PointF(0, 0);//图片相对于控件左上角的位置
     private MatrixOnTouchListener mMatrixOnTouchListener;
-
+    private OnDoubleClick mDoubleClick;
     private enum MotionEventModeEnum {
         //拖动图片，放大缩小图片
         DEFAULT, MOVE, SCALE
@@ -63,12 +62,19 @@ public class MatrixImageView extends AppCompatImageView {
             @Override
             public void onClick(PointF imgInViewPoint, float clickX, float clickY, float imageScale) {
                 Log.e("asda", "双击时位置;" + imgInViewPoint.x + "  " + imgInViewPoint.y + " " + imageScale + " " + clickX + " " + clickY);
+                //点在图的坐标
+                float pointInViewX = (clickX - imgInViewPoint.x);
+                float pointInViewY = (clickY - imgInViewPoint.y);
+                mDoubleClick.onClick(pointInViewX,pointInViewY,mOriginalToCurrentScale*imageScale);
+
             }
         });
         setOnTouchListener(mMatrixOnTouchListener);
 //        setOnTouchListener((v,event)->motionEvent(event));
     }
-
+    public void setOnDoubleClick(OnDoubleClick doubleClick){
+        mDoubleClick = doubleClick;
+    }
     /**
      * 加载网络图片
      *
@@ -192,5 +198,8 @@ public class MatrixImageView extends AppCompatImageView {
         Log.i("aa", "getMeasuredHeight:" + getMeasuredHeight() + " getMeasuredWidth:" + getMeasuredWidth());
         Log.i("aa", "getHeight:" + getHeight() + " getWidth" + getWidth());
         Log.i("aa", "----------onSizeChanged-------------");
+    }
+    public interface OnDoubleClick {
+        void onClick(float pointInViewX,float pointInViewY,double scale);
     }
 }

@@ -51,6 +51,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
     private long mClickFirstTime = 0;
     private long mClickDownTime = 0;
     private float mImageScale = 1;//与开始相比缩放的比例
+    private float mImageScaleOne = 1;//单次缩放的比例
     private PointF mImgInViewPoint = new PointF(0, 0);//图片相对于控件左上角的位置
     private DoubleClick mDoubleClick;
 
@@ -97,7 +98,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
                         float scale = endDis / startDis;// 得到缩放倍数
                         matrix.set(currentMatrix);
                         Log.e("asd", "比例" + " " + scale + " " + mImageScale);
-                        mImageScale *= scale;
+                        mImageScaleOne = scale;
                         matrix.postScale(scale, scale, mImgInViewPoint.x, mImgInViewPoint.y);
                         imageView.setImageMatrix(matrix);
                     }
@@ -127,9 +128,8 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_POINTER_UP://多点离开动作
                 mode = 0;
-//                float scalse = distance(event) / startDis;
-//                mImgInViewPoint.x *= scalse;
-//                mImgInViewPoint.y *= scalse;
+                Log.e("asd", "放开时的比例：mImageScale:" + mImageScale + " One:" + mImageScaleOne + " Scale:" + mImageScaleOne * mImageScale);
+                mImageScale *= mImageScaleOne;
                 break;
             // 当屏幕上已经有触点(手指)，再有一个触点压下屏幕
             case MotionEvent.ACTION_POINTER_DOWN://多点触摸动作
