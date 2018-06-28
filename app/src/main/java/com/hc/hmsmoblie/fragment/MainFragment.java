@@ -63,8 +63,6 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
     @Override
     public void initView() {
         mPresenter.GetModulesList(UserInfoPref.getUserAccount(),UserInfoPref.getUserId());
-
-
     }
 
     @OnClick({R.id.iv_List_Main})

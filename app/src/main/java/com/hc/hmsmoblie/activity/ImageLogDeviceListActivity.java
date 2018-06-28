@@ -44,9 +44,6 @@ public class ImageLogDeviceListActivity extends BaseMvpActivity<VideoSelectDrive
     @BindView(R.id.srlEnvironmentDeviceList)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private int mPageIndex = 1;
-    private final int mPageSize = 10;
-    private int mPageTotal = 1;
     private BaseItemDraggableAdapter<VideoDriverJson, BaseViewHolder> mAdapter;
     private String mProId;
     private static final String PRO_ID = "pro_id";
@@ -78,13 +75,8 @@ public class ImageLogDeviceListActivity extends BaseMvpActivity<VideoSelectDrive
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {
-            if (mPageIndex >= mPageTotal) {
-                showToast("已经是最后一页了！");
-                mAdapter.loadMoreEnd();
-            } else {
-                mPageIndex++;
-                searchPro();
-            }
+            showToast("已经是最后一页了！");
+            mAdapter.loadMoreEnd();
         }, mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -94,7 +86,7 @@ public class ImageLogDeviceListActivity extends BaseMvpActivity<VideoSelectDrive
         });
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
             VideoDriverJson item = (VideoDriverJson) adapter.getItem(position);
-            ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId()+"");
+            ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
         });
         initRefreshAndLoadMore();
         searchPro();
@@ -118,8 +110,6 @@ public class ImageLogDeviceListActivity extends BaseMvpActivity<VideoSelectDrive
 
     private void initRefreshAndLoadMore() {
         mSwipeRefreshLayout.setRefreshing(true);
-        mPageIndex = 1;
-        mPageTotal = 1;
         mAdapter.setNewData(null);//重新开启下拉加载更多
     }
 

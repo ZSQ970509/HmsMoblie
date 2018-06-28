@@ -82,30 +82,7 @@ public class MainActivity extends BaseActivity {
         CircleImageView mUserAvatarView = (CircleImageView) headerView.findViewById(R.id.nav_header_pic);
         TextView mUserName = (TextView) headerView.findViewById(R.id.nav_header_name);
         mUserName.setText(UserInfoPref.getUserName());
-
         mNavigationView.setItemIconTintList(null);
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //隐藏侧滑栏
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                switch (item.getItemId()) {
-                    case R.id.nav_menu1:
-                        showToast("点击了菜单1");
-                        return true;
-                    case R.id.nav_menu2:
-                        showToast("点击了菜单2");
-                        return true;
-                    case R.id.nav_menu3:
-                        showToast("点击了菜单3");
-                        return true;
-                    case R.id.nav_menu4:
-                        showToast("点击了菜单4");
-                        return true;
-                }
-                return false;
-            }
-        });
     }
     @OnClick({R.id.main_RelativeLayout_UpadtePass,R.id.main_RelativeLayout_Setting,R.id.main_RelativeLayout_About,R.id.main_RelativeLayout_Exit})
     void onClick(View v) {
