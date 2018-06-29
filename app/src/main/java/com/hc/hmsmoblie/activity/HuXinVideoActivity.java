@@ -27,6 +27,7 @@ import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.VideoBean;
 import com.hc.hmsmoblie.bean.json.LoginJson;
+import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
@@ -93,7 +94,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
         videoBean = (VideoBean) getIntent().getSerializableExtra(Video_Bean);
         splay = new SurfingScenePlayer(this);
-
+        splay.changetofullScreen();
         glvHuXinVideo = (GLSurfaceView) this.findViewById(R.id.glv_HuXin_Video);
         showLoading("正在加载中...");
        // initVideoSDK();
@@ -227,6 +228,16 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
     @Override
     public void onLoginFail(String msg) {
         showToast(msg);
+    }
+
+    @Override
+    public void onUpdatedVersionSuccess(UpdateVersionJson httpResponse) {
+
+    }
+
+    @Override
+    public void onUpdatedVersionFail(String msg) {
+
     }
 
     @OnClick({R.id.control_Main,R.id.control_Speed,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})

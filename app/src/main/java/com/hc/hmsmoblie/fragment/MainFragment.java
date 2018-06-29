@@ -82,7 +82,6 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
         if(mainJson.size() == 0 ){
             showToast("暂无数据！");
         }else{
-            tempData = Arrays.asList(new MainItemBean("1", "视频监控"), new MainItemBean("2", "超视野移动监控"), new MainItemBean("3", "钢筋鉴证"), new MainItemBean("4", "影像日志"), new MainItemBean("5", "环境远程监测"), new MainItemBean("6", "移动考勤"), new MainItemBean("7", "大型设备操作员认证(梯控)"), new MainItemBean("8", "断电断网"));
             commonAdapter = new CommonRecyclerAdapter<MainJson>(getActivity(), R.layout.main_item) {
                 @Override
                 public void onUpdate(BaseAdapterHelper helper, MainJson item, int position) {
@@ -129,6 +128,7 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
 
                         break;
                     case 1384:
+                        ImageLogProjectListActivity.newInstance(getActivity());
 
                         break;
                     case 1385:

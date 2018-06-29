@@ -15,6 +15,7 @@ import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.VideoBean;
 import com.hc.hmsmoblie.bean.json.LoginJson;
+import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
@@ -111,6 +112,16 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
     @Override
     public void onLoginFail(String msg) {
         showToast(msg);
+    }
+
+    @Override
+    public void onUpdatedVersionSuccess(UpdateVersionJson httpResponse) {
+
+    }
+
+    @Override
+    public void onUpdatedVersionFail(String msg) {
+
     }
 
     @Override

@@ -35,7 +35,7 @@ public class CommonDialog extends Dialog {
         return dialog;
     }
 
-    private CommonDialog(Context context) {
+    public CommonDialog(Context context) {
         this(context, R.style.CommonDialogStyle);
     }
 

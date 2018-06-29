@@ -10,6 +10,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
+        import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
@@ -24,15 +25,18 @@ import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.bean.json.VideoDriverJson;
+        import com.yc.yclibrary.EasyCode;
 
-import java.util.ArrayList;
+        import java.lang.reflect.Array;
+        import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
+        import retrofit2.http.Headers;
+        import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -42,6 +46,10 @@ import retrofit2.http.Query;
 public interface ApiServer {
     @GET(UrlHelper.BASE_API + "hmsLogin")
     Observable<HttpResponse<LoginJson>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
+
+    @Headers(EasyCode.OTHER_BASE_URL+":"+UrlHelper.BASE_URL_UPDATE)
+    @GET(UrlHelper.API_UPDATE + "update")
+    Observable<ArrayList<UpdateVersionJson>> updatedVersion(@Query("type") String packageName);
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetModulesList")

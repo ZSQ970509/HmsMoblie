@@ -8,18 +8,15 @@ import com.yc.yclibrary.mvp.IView;
  *
  */
 
-public class LoginC {
+public class AboutC {
     public interface V extends IView{
-        void onLoginSuccess(LoginJson loginJs);
-
-        void onLoginFail(String msg);
 
         void onUpdatedVersionSuccess(UpdateVersionJson httpResponse);
 
         void onUpdatedVersionFail(String msg);
     }
     public interface P {
-        void login(String userName,String userPassword);
+
         void updatedVersion();
     }
 }

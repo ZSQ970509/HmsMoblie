@@ -29,7 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ImageLogPanoramaDetailActivity"
+        <activity android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -115,16 +115,16 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
         </activity>
-        <!--<activity-->
-            <!--android:name=".activity.ImageLogPanoramaListActivity"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:screenOrientation="landscape">-->
-        <!--</activity>-->
-        <!--<activity-->
-            <!--android:name=".activity.ImageLogPanoramaDetailActivity"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:screenOrientation="landscape">-->
-        <!--</activity>-->
+       <activity
+            android:name=".activity.ImageLogPanoramaListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".activity.ImageLogPanoramaDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape">
+        </activity>
         <activity
             android:name=".activity.ImageLogWideAngleActivity"
             android:launchMode="singleTop"

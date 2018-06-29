@@ -11,13 +11,8 @@ import io.reactivex.Observable;
  *
  */
 
-public class LoginM implements IModel{
-    public Observable login(String userAccount, String userPassword) {
-        return RetrofitUtils.Instance
-                .getApiService(ApiServer.class)
-                .login(userAccount, userPassword)
-                .compose(NetTransformer.compose());
-    }
+public class AboutM implements IModel{
+
     public Observable updatedVersion(String packageName) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
