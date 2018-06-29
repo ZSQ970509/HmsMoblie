@@ -7,64 +7,117 @@ import java.util.List;
  */
 
 public class ImageLogNodeJson {
+    private int rowSumAll;
+    private int colSumAll;
+    private int rowSum30;
+    private int colSum30;
+    private List<DataAllBean> dataAll;
+    private List<DataCenterBean> dataCenter;
+    private List<Data30Bean> data30;
 
-    /**
-     * List : [{"RecordId":292583,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-06-06 04:53:57","EndTime":"2018-06-06 04:53:57","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg","ImageTimes":213,"Pictrait":"8917,4429","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg","PanoramicCount":8},{"RecordId":203336,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-16 14:17:45","EndTime":"2018-04-16 14:17:45","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/203336_201804161511121156.jpg","ImageTimes":168,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/203336_201804161511121156.jpg","PanoramicCount":1454},{"RecordId":202949,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-16 07:52:52","EndTime":"2018-04-16 07:52:52","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202949_201804161251136468.jpg","ImageTimes":167,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202949_201804161251136468.jpg","PanoramicCount":1434},{"RecordId":202160,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 19:51:37","EndTime":"2018-04-15 19:51:37","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202160_201804152323467700.jpg","ImageTimes":165,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202160_201804152323467700.jpg","PanoramicCount":1456},{"RecordId":201768,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 14:23:31","EndTime":"2018-04-15 14:23:31","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201768_201804151626121606.jpg","ImageTimes":164,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201768_201804151626121606.jpg","PanoramicCount":1461},{"RecordId":201367,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 07:51:39","EndTime":"2018-04-15 07:51:39","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201367_201804151100376762.jpg","ImageTimes":163,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201367_201804151100376762.jpg","PanoramicCount":1447},{"RecordId":200554,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 19:36:29","EndTime":"2018-04-14 19:36:29","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200554_201804150324135200.jpg","ImageTimes":161,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200554_201804150324135200.jpg","PanoramicCount":1451},{"RecordId":200260,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 14:24:05","EndTime":"2018-04-14 14:24:05","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200260_201804150319537856.jpg","ImageTimes":160,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200260_201804150319537856.jpg","PanoramicCount":1345},{"RecordId":199856,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 07:51:53","EndTime":"2018-04-14 07:51:53","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199856_201804141047488793.jpg","ImageTimes":159,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199856_201804141047488793.jpg","PanoramicCount":1333},{"RecordId":199055,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-13 19:54:07","EndTime":"2018-04-13 19:54:07","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199055_201804140606186293.jpg","ImageTimes":157,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199055_201804140606186293.jpg","PanoramicCount":1373}]
-     * total : 139
-     */
-
-    private int total;
-    private java.util.List<ListBean> List;
-
-    public int getTotal() {
-        return total;
+    public int getRowSumAll() {
+        return rowSumAll;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setRowSumAll(int rowSumAll) {
+        this.rowSumAll = rowSumAll;
     }
 
-    public List<ListBean> getList() {
-        return List;
+    public int getColSumAll() {
+        return colSumAll;
     }
 
-    public void setList(List<ListBean> List) {
-        this.List = List;
+    public void setColSumAll(int colSumAll) {
+        this.colSumAll = colSumAll;
     }
 
-    public static class ListBean {
+    public int getRowSum30() {
+        return rowSum30;
+    }
+
+    public void setRowSum30(int rowSum30) {
+        this.rowSum30 = rowSum30;
+    }
+
+    public int getColSum30() {
+        return colSum30;
+    }
+
+    public void setColSum30(int colSum30) {
+        this.colSum30 = colSum30;
+    }
+
+    public List<DataAllBean> getDataAll() {
+        return dataAll;
+    }
+
+    public void setDataAll(List<DataAllBean> dataAll) {
+        this.dataAll = dataAll;
+    }
+
+    public List<DataCenterBean> getDataCenter() {
+        return dataCenter;
+    }
+
+    public void setDataCenter(List<DataCenterBean> dataCenter) {
+        this.dataCenter = dataCenter;
+    }
+
+    public List<Data30Bean> getData30() {
+        return data30;
+    }
+
+    public void setData30(List<Data30Bean> data30) {
+        this.data30 = data30;
+    }
+
+    public static class DataAllBean {
         /**
-         * RecordId : 292583
-         * CamSn : 155655654_001
-         * CamId : 1032871
-         * ProjId : 38788
-         * StartTime : 2018-06-06 04:53:57
-         * EndTime : 2018-06-06 04:53:57
-         * PuzzleImg : http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg
-         * ImageTimes : 213
-         * Pictrait : 8917,4429
-         * CutImage : http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg
-         * PanoramicCount : 8
+         * RecordId : 472453767
+         * Path : http://ftp.jsqqy.com:8123/upfile/Puzzle/155655669_001/2/1_14_5_11.jpg
+         * CamSn : 155655669_001
+         * FtpPath : null
+         * ImageTimes : 14
+         * ColNum : 11
+         * RowNum : 5
+         * Obd : 0
+         * AddTime : 2018-06-24 14:22:20
+         * adjust_across : null
+         * adjust_vertical : null
+         * adjust_inclined : null
+         * Aha : 166.07400512695312
+         * Ava : 76.0009994506836
          */
 
-        private int RecordId;
+        private String RecordId;
+        private String Path;
         private String CamSn;
-        private int CamId;
-        private int ProjId;
-        private String StartTime;
-        private String EndTime;
-        private String PuzzleImg;
-        private int ImageTimes;
-        private String Pictrait;
-        private String CutImage;
-        private int PanoramicCount;
+        private String FtpPath;
+        private String ImageTimes;
+        private int ColNum;
+        private int RowNum;
+        private double Obd;
+        private String AddTime;
+        private String adjust_across;
+        private String adjust_vertical;
+        private String adjust_inclined;
+        private double Aha;
+        private double Ava;
 
-        public int getRecordId() {
+        public String getRecordId() {
             return RecordId;
         }
 
-        public void setRecordId(int RecordId) {
+        public void setRecordId(String RecordId) {
             this.RecordId = RecordId;
+        }
+
+        public String getPath() {
+            return Path;
+        }
+
+        public void setPath(String Path) {
+            this.Path = Path;
         }
 
         public String getCamSn() {
@@ -75,76 +128,394 @@ public class ImageLogNodeJson {
             this.CamSn = CamSn;
         }
 
-        public int getCamId() {
-            return CamId;
+        public String getFtpPath() {
+            return FtpPath;
         }
 
-        public void setCamId(int CamId) {
-            this.CamId = CamId;
+        public void setFtpPath(String FtpPath) {
+            this.FtpPath = FtpPath;
         }
 
-        public int getProjId() {
-            return ProjId;
-        }
-
-        public void setProjId(int ProjId) {
-            this.ProjId = ProjId;
-        }
-
-        public String getStartTime() {
-            return StartTime;
-        }
-
-        public void setStartTime(String StartTime) {
-            this.StartTime = StartTime;
-        }
-
-        public String getEndTime() {
-            return EndTime;
-        }
-
-        public void setEndTime(String EndTime) {
-            this.EndTime = EndTime;
-        }
-
-        public String getPuzzleImg() {
-            return PuzzleImg;
-        }
-
-        public void setPuzzleImg(String PuzzleImg) {
-            this.PuzzleImg = PuzzleImg;
-        }
-
-        public int getImageTimes() {
+        public String getImageTimes() {
             return ImageTimes;
         }
 
-        public void setImageTimes(int ImageTimes) {
+        public void setImageTimes(String ImageTimes) {
             this.ImageTimes = ImageTimes;
         }
 
-        public String getPictrait() {
-            return Pictrait;
+        public int getColNum() {
+            return ColNum;
         }
 
-        public void setPictrait(String Pictrait) {
-            this.Pictrait = Pictrait;
+        public void setColNum(int ColNum) {
+            this.ColNum = ColNum;
         }
 
-        public String getCutImage() {
-            return CutImage;
+        public int getRowNum() {
+            return RowNum;
         }
 
-        public void setCutImage(String CutImage) {
-            this.CutImage = CutImage;
+        public void setRowNum(int RowNum) {
+            this.RowNum = RowNum;
         }
 
-        public int getPanoramicCount() {
-            return PanoramicCount;
+        public double getObd() {
+            return Obd;
         }
 
-        public void setPanoramicCount(int PanoramicCount) {
-            this.PanoramicCount = PanoramicCount;
+        public void setObd(double Obd) {
+            this.Obd = Obd;
+        }
+
+        public String getAddTime() {
+            return AddTime;
+        }
+
+        public void setAddTime(String AddTime) {
+            this.AddTime = AddTime;
+        }
+
+        public String getAdjust_across() {
+            return adjust_across;
+        }
+
+        public void setAdjust_across(String adjust_across) {
+            this.adjust_across = adjust_across;
+        }
+
+        public String getAdjust_vertical() {
+            return adjust_vertical;
+        }
+
+        public void setAdjust_vertical(String adjust_vertical) {
+            this.adjust_vertical = adjust_vertical;
+        }
+
+        public String getAdjust_inclined() {
+            return adjust_inclined;
+        }
+
+        public void setAdjust_inclined(String adjust_inclined) {
+            this.adjust_inclined = adjust_inclined;
+        }
+
+        public double getAha() {
+            return Aha;
+        }
+
+        public void setAha(double Aha) {
+            this.Aha = Aha;
+        }
+
+        public double getAva() {
+            return Ava;
+        }
+
+        public void setAva(double Ava) {
+            this.Ava = Ava;
+        }
+    }
+
+    public static class DataCenterBean {
+        /**
+         * RecordId : 472464044
+         * Path : http://ftp.jsqqy.com:8123/upfile/Puzzle/155655669_001/2/1_13_21_30.jpg
+         * CamSn : 155655669_001
+         * FtpPath : null
+         * ImageTimes : 14
+         * ColNum : 30
+         * RowNum : 21
+         * Obd : 0
+         * AddTime : 2018-06-24 14:22:49
+         * adjust_across : null
+         * adjust_vertical : null
+         * adjust_inclined : null
+         * Aha : 91.0530014038086
+         * Ava : 64.00399780273438
+         */
+
+        private String RecordId;
+        private String Path;
+        private String CamSn;
+        private String FtpPath;
+        private String ImageTimes;
+        private int ColNum;
+        private int RowNum;
+        private double Obd;
+        private String AddTime;
+        private String adjust_across;
+        private String adjust_vertical;
+        private String adjust_inclined;
+        private double Aha;
+        private double Ava;
+
+        public String getRecordId() {
+            return RecordId;
+        }
+
+        public void setRecordId(String RecordId) {
+            this.RecordId = RecordId;
+        }
+
+        public String getPath() {
+            return Path;
+        }
+
+        public void setPath(String Path) {
+            this.Path = Path;
+        }
+
+        public String getCamSn() {
+            return CamSn;
+        }
+
+        public void setCamSn(String CamSn) {
+            this.CamSn = CamSn;
+        }
+
+        public String getFtpPath() {
+            return FtpPath;
+        }
+
+        public void setFtpPath(String FtpPath) {
+            this.FtpPath = FtpPath;
+        }
+
+        public String getImageTimes() {
+            return ImageTimes;
+        }
+
+        public void setImageTimes(String ImageTimes) {
+            this.ImageTimes = ImageTimes;
+        }
+
+        public int getColNum() {
+            return ColNum;
+        }
+
+        public void setColNum(int ColNum) {
+            this.ColNum = ColNum;
+        }
+
+        public int getRowNum() {
+            return RowNum;
+        }
+
+        public void setRowNum(int RowNum) {
+            this.RowNum = RowNum;
+        }
+
+        public double getObd() {
+            return Obd;
+        }
+
+        public void setObd(double Obd) {
+            this.Obd = Obd;
+        }
+
+        public String getAddTime() {
+            return AddTime;
+        }
+
+        public void setAddTime(String AddTime) {
+            this.AddTime = AddTime;
+        }
+
+        public String getAdjust_across() {
+            return adjust_across;
+        }
+
+        public void setAdjust_across(String adjust_across) {
+            this.adjust_across = adjust_across;
+        }
+
+        public String getAdjust_vertical() {
+            return adjust_vertical;
+        }
+
+        public void setAdjust_vertical(String adjust_vertical) {
+            this.adjust_vertical = adjust_vertical;
+        }
+
+        public String getAdjust_inclined() {
+            return adjust_inclined;
+        }
+
+        public void setAdjust_inclined(String adjust_inclined) {
+            this.adjust_inclined = adjust_inclined;
+        }
+
+        public double getAha() {
+            return Aha;
+        }
+
+        public void setAha(double Aha) {
+            this.Aha = Aha;
+        }
+
+        public double getAva() {
+            return Ava;
+        }
+
+        public void setAva(double Ava) {
+            this.Ava = Ava;
+        }
+    }
+
+    public static class Data30Bean {
+        /**
+         * id : 1
+         * panormamicId : 472463933
+         * imgpath : http://ftp.jsqqy.com:8123/upfile/Puzzle/155655669_001/2/1_13_19_28.jpg
+         * camsn : 155655669_001
+         * imagetimes : 14
+         * ftppath : null
+         * colnum : 28
+         * rownum : 19
+         * Obd : 0
+         * AddTime : 2018-06-24 14:22:49
+         * adjust_across : null
+         * adjust_vertical : null
+         * adjust_inclined : null
+         * Aha : 85.0459976196289
+         * Ava : 58.005001068115234
+         */
+
+        private int id;
+        private int panormamicId;
+        private String imgpath;
+        private String camsn;
+        private int imagetimes;
+        private String ftppath;
+        private int colnum;
+        private int rownum;
+        private int Obd;
+        private String AddTime;
+        private String adjust_across;
+        private String adjust_vertical;
+        private String adjust_inclined;
+        private double Aha;
+        private double Ava;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getPanormamicId() {
+            return panormamicId;
+        }
+
+        public void setPanormamicId(int panormamicId) {
+            this.panormamicId = panormamicId;
+        }
+
+        public String getImgpath() {
+            return imgpath;
+        }
+
+        public void setImgpath(String imgpath) {
+            this.imgpath = imgpath;
+        }
+
+        public String getCamsn() {
+            return camsn;
+        }
+
+        public void setCamsn(String camsn) {
+            this.camsn = camsn;
+        }
+
+        public int getImagetimes() {
+            return imagetimes;
+        }
+
+        public void setImagetimes(int imagetimes) {
+            this.imagetimes = imagetimes;
+        }
+
+        public String getFtppath() {
+            return ftppath;
+        }
+
+        public void setFtppath(String ftppath) {
+            this.ftppath = ftppath;
+        }
+
+        public int getColnum() {
+            return colnum;
+        }
+
+        public void setColnum(int colnum) {
+            this.colnum = colnum;
+        }
+
+        public int getRownum() {
+            return rownum;
+        }
+
+        public void setRownum(int rownum) {
+            this.rownum = rownum;
+        }
+
+        public int getObd() {
+            return Obd;
+        }
+
+        public void setObd(int Obd) {
+            this.Obd = Obd;
+        }
+
+        public String getAddTime() {
+            return AddTime;
+        }
+
+        public void setAddTime(String AddTime) {
+            this.AddTime = AddTime;
+        }
+
+        public String getAdjust_across() {
+            return adjust_across;
+        }
+
+        public void setAdjust_across(String adjust_across) {
+            this.adjust_across = adjust_across;
+        }
+
+        public String getAdjust_vertical() {
+            return adjust_vertical;
+        }
+
+        public void setAdjust_vertical(String adjust_vertical) {
+            this.adjust_vertical = adjust_vertical;
+        }
+
+        public String getAdjust_inclined() {
+            return adjust_inclined;
+        }
+
+        public void setAdjust_inclined(String adjust_inclined) {
+            this.adjust_inclined = adjust_inclined;
+        }
+
+        public double getAha() {
+            return Aha;
+        }
+
+        public void setAha(double Aha) {
+            this.Aha = Aha;
+        }
+
+        public double getAva() {
+            return Ava;
+        }
+
+        public void setAva(double Ava) {
+            this.Ava = Ava;
         }
     }
 }

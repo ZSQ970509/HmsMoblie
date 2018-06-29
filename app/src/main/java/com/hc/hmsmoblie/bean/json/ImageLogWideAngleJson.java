@@ -1,7 +1,5 @@
 package com.hc.hmsmoblie.bean.json;
 
-import java.util.List;
-
 /**
  *
  */
@@ -9,142 +7,146 @@ import java.util.List;
 public class ImageLogWideAngleJson {
 
     /**
-     * List : [{"RecordId":292583,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-06-06 04:53:57","EndTime":"2018-06-06 04:53:57","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg","ImageTimes":213,"Pictrait":"8917,4429","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg","PanoramicCount":8},{"RecordId":203336,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-16 14:17:45","EndTime":"2018-04-16 14:17:45","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/203336_201804161511121156.jpg","ImageTimes":168,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/203336_201804161511121156.jpg","PanoramicCount":1454},{"RecordId":202949,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-16 07:52:52","EndTime":"2018-04-16 07:52:52","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202949_201804161251136468.jpg","ImageTimes":167,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202949_201804161251136468.jpg","PanoramicCount":1434},{"RecordId":202160,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 19:51:37","EndTime":"2018-04-15 19:51:37","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202160_201804152323467700.jpg","ImageTimes":165,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/202160_201804152323467700.jpg","PanoramicCount":1456},{"RecordId":201768,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 14:23:31","EndTime":"2018-04-15 14:23:31","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201768_201804151626121606.jpg","ImageTimes":164,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201768_201804151626121606.jpg","PanoramicCount":1461},{"RecordId":201367,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-15 07:51:39","EndTime":"2018-04-15 07:51:39","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201367_201804151100376762.jpg","ImageTimes":163,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/201367_201804151100376762.jpg","PanoramicCount":1447},{"RecordId":200554,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 19:36:29","EndTime":"2018-04-14 19:36:29","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200554_201804150324135200.jpg","ImageTimes":161,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200554_201804150324135200.jpg","PanoramicCount":1451},{"RecordId":200260,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 14:24:05","EndTime":"2018-04-14 14:24:05","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200260_201804150319537856.jpg","ImageTimes":160,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/200260_201804150319537856.jpg","PanoramicCount":1345},{"RecordId":199856,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-14 07:51:53","EndTime":"2018-04-14 07:51:53","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199856_201804141047488793.jpg","ImageTimes":159,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199856_201804141047488793.jpg","PanoramicCount":1333},{"RecordId":199055,"CamSn":"155655654_001","CamId":1032871,"ProjId":38788,"StartTime":"2018-04-13 19:54:07","EndTime":"2018-04-13 19:54:07","PuzzleImg":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199055_201804140606186293.jpg","ImageTimes":157,"Pictrait":"9027,3772","CutImage":"http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/199055_201804140606186293.jpg","PanoramicCount":1373}]
-     * total : 139
+     * RecordId : 429766210
+     * Path : http://ftp.jsqqy.com:8122/upfile/Puzzle/139449350_001/2/0_239_1_1.jpg
+     * CamSn : 139449350_001
+     * FtpPath : null
+     * ImageTimes : 239
+     * ColNum : 1
+     * RowNum : 1
+     * Obd : 0.0
+     * AddTime : 2018-06-10 14:03:12
+     * adjust_across : null
+     * adjust_vertical : null
+     * adjust_inclined : null
+     * Aha : 16.059999465942383
+     * Ava : 15.984999656677246
      */
 
-    private int total;
-    private java.util.List<ListBean> List;
+    private String RecordId;
+    private String Path;
+    private String CamSn;
+    private String FtpPath;
+    private String ImageTimes;
+    private String ColNum;
+    private String RowNum;
+    private String Obd;
+    private String AddTime;
+    private String adjust_across;
+    private String adjust_vertical;
+    private String adjust_inclined;
+    private String Aha;
+    private String Ava;
 
-    public int getTotal() {
-        return total;
+    public String getRecordId() {
+        return RecordId;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setRecordId(String RecordId) {
+        this.RecordId = RecordId;
     }
 
-    public List<ListBean> getList() {
-        return List;
+    public String getPath() {
+        return Path;
     }
 
-    public void setList(List<ListBean> List) {
-        this.List = List;
+    public void setPath(String Path) {
+        this.Path = Path;
     }
 
-    public static class ListBean {
-        /**
-         * RecordId : 292583
-         * CamSn : 155655654_001
-         * CamId : 1032871
-         * ProjId : 38788
-         * StartTime : 2018-06-06 04:53:57
-         * EndTime : 2018-06-06 04:53:57
-         * PuzzleImg : http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg
-         * ImageTimes : 213
-         * Pictrait : 8917,4429
-         * CutImage : http://ftp.jsqqy.com:8122/upfile/Puzzle/ptimg/155655654_001/292583_201806060558275267.jpg
-         * PanoramicCount : 8
-         */
+    public String getCamSn() {
+        return CamSn;
+    }
 
-        private int RecordId;
-        private String CamSn;
-        private int CamId;
-        private int ProjId;
-        private String StartTime;
-        private String EndTime;
-        private String PuzzleImg;
-        private int ImageTimes;
-        private String Pictrait;
-        private String CutImage;
-        private int PanoramicCount;
+    public void setCamSn(String CamSn) {
+        this.CamSn = CamSn;
+    }
 
-        public int getRecordId() {
-            return RecordId;
-        }
+    public String getFtpPath() {
+        return FtpPath;
+    }
 
-        public void setRecordId(int RecordId) {
-            this.RecordId = RecordId;
-        }
+    public void setFtpPath(String FtpPath) {
+        this.FtpPath = FtpPath;
+    }
 
-        public String getCamSn() {
-            return CamSn;
-        }
+    public String getImageTimes() {
+        return ImageTimes;
+    }
 
-        public void setCamSn(String CamSn) {
-            this.CamSn = CamSn;
-        }
+    public void setImageTimes(String ImageTimes) {
+        this.ImageTimes = ImageTimes;
+    }
 
-        public int getCamId() {
-            return CamId;
-        }
+    public String getColNum() {
+        return ColNum;
+    }
 
-        public void setCamId(int CamId) {
-            this.CamId = CamId;
-        }
+    public void setColNum(String ColNum) {
+        this.ColNum = ColNum;
+    }
 
-        public int getProjId() {
-            return ProjId;
-        }
+    public String getRowNum() {
+        return RowNum;
+    }
 
-        public void setProjId(int ProjId) {
-            this.ProjId = ProjId;
-        }
+    public void setRowNum(String RowNum) {
+        this.RowNum = RowNum;
+    }
 
-        public String getStartTime() {
-            return StartTime;
-        }
+    public String getObd() {
+        return Obd;
+    }
 
-        public void setStartTime(String StartTime) {
-            this.StartTime = StartTime;
-        }
+    public void setObd(String Obd) {
+        this.Obd = Obd;
+    }
 
-        public String getEndTime() {
-            return EndTime;
-        }
+    public String getAddTime() {
+        return AddTime;
+    }
 
-        public void setEndTime(String EndTime) {
-            this.EndTime = EndTime;
-        }
+    public void setAddTime(String AddTime) {
+        this.AddTime = AddTime;
+    }
 
-        public String getPuzzleImg() {
-            return PuzzleImg;
-        }
+    public String getAdjust_across() {
+        return adjust_across;
+    }
 
-        public void setPuzzleImg(String PuzzleImg) {
-            this.PuzzleImg = PuzzleImg;
-        }
+    public void setAdjust_across(String adjust_across) {
+        this.adjust_across = adjust_across;
+    }
 
-        public int getImageTimes() {
-            return ImageTimes;
-        }
+    public String getAdjust_vertical() {
+        return adjust_vertical;
+    }
 
-        public void setImageTimes(int ImageTimes) {
-            this.ImageTimes = ImageTimes;
-        }
+    public void setAdjust_vertical(String adjust_vertical) {
+        this.adjust_vertical = adjust_vertical;
+    }
 
-        public String getPictrait() {
-            return Pictrait;
-        }
+    public String getAdjust_inclined() {
+        return adjust_inclined;
+    }
 
-        public void setPictrait(String Pictrait) {
-            this.Pictrait = Pictrait;
-        }
+    public void setAdjust_inclined(String adjust_inclined) {
+        this.adjust_inclined = adjust_inclined;
+    }
 
-        public String getCutImage() {
-            return CutImage;
-        }
+    public String getAha() {
+        return Aha;
+    }
 
-        public void setCutImage(String CutImage) {
-            this.CutImage = CutImage;
-        }
+    public void setAha(String Aha) {
+        this.Aha = Aha;
+    }
 
-        public int getPanoramicCount() {
-            return PanoramicCount;
-        }
+    public String getAva() {
+        return Ava;
+    }
 
-        public void setPanoramicCount(int PanoramicCount) {
-            this.PanoramicCount = PanoramicCount;
-        }
+    public void setAva(String Ava) {
+        this.Ava = Ava;
     }
 }

@@ -49,4 +49,24 @@
         <item name="android:background">#ffffff</item>
         <item name="android:clickable">true</item>
     </style>
+
+    <style name="IvNetImageStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:src">@drawable/ic_loading</item>
+    </style>
+
+    <style name="LineVerticalStyle">
+        <item name="android:layout_width">2dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#317bf6</item>
+    </style>
+
+    <style name="LineHorizontalStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">#317bf6</item>
+    </style>
 </resources>

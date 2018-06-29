@@ -12,10 +12,10 @@ import io.reactivex.Observable;
  */
 
 public class ImageLogNodeM implements IModel {
-    public Observable getNode(String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava) {
+    public Observable getNode(String camSn, String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getNode(panoramaId, imageTimes, pointX, pointY,aha,ava)
+                .getNode(camSn, panoramaId, imageTimes, pointX, pointY, aha, ava)
                 .compose(NetTransformer.compose());
     }
 }

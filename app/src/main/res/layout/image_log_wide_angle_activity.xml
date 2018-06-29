@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     android:background="@color/colorGray">
 
-    <include layout="@layout/actionbar_layout" />
 
-    <ImageView
-        android:id="@+id/ivImageLogWideAngle"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter" />
+        android:layout_height="match_parent">
+
+        <com.hc.hmsmoblie.widget.MatrixImageView
+            android:id="@+id/ivImageLogWideAngle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="matrix" />
+    </FrameLayout>
+
+    <include layout="@layout/actionbar_layout" />
 </FrameLayout>

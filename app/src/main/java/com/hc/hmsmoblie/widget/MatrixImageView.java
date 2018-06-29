@@ -35,6 +35,7 @@ public class MatrixImageView extends AppCompatImageView {
     private PointF mImgInViewPoint = new PointF(0, 0);//图片相对于控件左上角的位置
     private MatrixOnTouchListener mMatrixOnTouchListener;
     private OnDoubleClick mDoubleClick;
+
     private enum MotionEventModeEnum {
         //拖动图片，放大缩小图片
         DEFAULT, MOVE, SCALE
@@ -65,16 +66,18 @@ public class MatrixImageView extends AppCompatImageView {
                 //点在图的坐标
                 float pointInViewX = (clickX - imgInViewPoint.x);
                 float pointInViewY = (clickY - imgInViewPoint.y);
-                mDoubleClick.onClick(pointInViewX,pointInViewY,mOriginalToCurrentScale*imageScale);
+                mDoubleClick.onClick(pointInViewX, pointInViewY, imageScale * mOriginalToCurrentScale);
 
             }
         });
         setOnTouchListener(mMatrixOnTouchListener);
 //        setOnTouchListener((v,event)->motionEvent(event));
     }
-    public void setOnDoubleClick(OnDoubleClick doubleClick){
+
+    public void setOnDoubleClick(OnDoubleClick doubleClick) {
         mDoubleClick = doubleClick;
     }
+
     /**
      * 加载网络图片
      *
@@ -199,7 +202,8 @@ public class MatrixImageView extends AppCompatImageView {
         Log.i("aa", "getHeight:" + getHeight() + " getWidth" + getWidth());
         Log.i("aa", "----------onSizeChanged-------------");
     }
+
     public interface OnDoubleClick {
-        void onClick(float pointInViewX,float pointInViewY,double scale);
+        void onClick(float pointInViewX, float pointInViewY, double scale);
     }
 }

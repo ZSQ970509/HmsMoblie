@@ -17,7 +17,6 @@ public class LoadImgUtils {
                 .load(imgUrl)//拿到头像本地存放路径
                 .asBitmap()//避免图片变形
                 .error(R.drawable.image)//失败默认
-                .error(R.mipmap.ic_launcher)//失败默认
                 .placeholder(R.drawable.image)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存

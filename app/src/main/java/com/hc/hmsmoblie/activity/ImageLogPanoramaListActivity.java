@@ -92,8 +92,10 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             initRefreshAndLoadMore();
             searchPro();
         });
-        mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
-                ImageLogPanoramaDetailActivity.newInstance(getActivity(), ((ImageLogPanoramaListJson.ListBean) adapter.getItem(position)).getPuzzleImg())
+        mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
+                    ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
+                    ImageLogPanoramaDetailActivity.newInstance(getActivity(), itemData.getPuzzleImg(), itemData.getRecordId() + "", itemData.getImageTimes()+"");
+                }
         );
         searchPro();
     }

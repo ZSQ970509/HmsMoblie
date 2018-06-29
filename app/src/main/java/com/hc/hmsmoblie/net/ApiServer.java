@@ -110,6 +110,6 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetRangeNodeImgDetail")
-    Observable<HttpResponse<ImageLogNodeJson>> getNode(@Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY, @Field("aha") String aha, @Field("ava") String ava);
+    Observable<HttpResponse<ImageLogNodeJson>> getNode(@Field("CamSn") String camSn, @Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY, @Field("aha") String aha, @Field("ava") String ava);
 
 }

@@ -20,11 +20,17 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
     @BindView(R.id.ivImageLogPanoramaDetails)
     MatrixImageView mIvPanorama;
     private String mImgUrl;
-    private static final String IMG_Url = "img_url";
+    private String mPuzzleId;//全景图ID
+    private String mImageTimes;//轮数
+    private static final String IMG_URL = "img_url";
+    private static final String PUZZLE_ID = "puzzle_id";
+    private static final String IMAGE_TIMES = "image_times";
 
-    public static void newInstance(Activity activity, String imgUrl) {
+    public static void newInstance(Activity activity, String imgUrl, String puzzleId, String imageTimes) {
         Intent intent = new Intent(activity, ImageLogPanoramaDetailActivity.class);
-        intent.putExtra(IMG_Url, imgUrl);
+        intent.putExtra(IMG_URL, imgUrl);
+        intent.putExtra(PUZZLE_ID, puzzleId);
+        intent.putExtra(IMAGE_TIMES, imageTimes);
         activity.startActivity(intent);
     }
 
@@ -37,74 +43,19 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
     protected void initView(Bundle bundle) {
         setToolBar("");
         mActionBarRl.setBackgroundResource(R.color.colorTrance);
-        mImgUrl = getIntent().getStringExtra(IMG_Url);
-        mImgUrl = "http://hms.jsqqy.com:7878/Handler/PanoramaHandler.ashx?action=GetPicByPuzzleAuto&path=http://ftp.jsqqy.com:8123/upfile/Puzzle/ptimg/thumbnailsAuto/155655669_001/330807_201806241320062845.jpg&recordId=330807";
+        mImgUrl = getIntent().getStringExtra(IMG_URL);
+        mPuzzleId = getIntent().getStringExtra(PUZZLE_ID);
+        mImageTimes = getIntent().getStringExtra(IMAGE_TIMES);
+//        mImgUrl = "http://hms.jsqqy.com:7878/Handler/PanoramaHandler.ashx?action=GetPicByPuzzleAuto&path=http://ftp.jsqqy.com:8123/upfile/Puzzle/ptimg/thumbnailsAuto/155655669_001/330807_201806241320062845.jpg&recordId=330807";
         mIvPanorama.loadNetImage(mImgUrl);
         mIvPanorama.setOnDoubleClick(new MatrixImageView.OnDoubleClick() {
             @Override
             public void onClick(float pointInViewX, float pointInViewY, double scale) {
                 //点在原始原图的位置
-                double x = pointInViewX * scale;
-                double y = pointInViewY * scale;
+                double x = pointInViewX / scale;
+                double y = pointInViewY / scale;
+                ImageLogWideAngleActivity.newInstance(getActivity(), mPuzzleId, mImageTimes, x + "", y + "");
             }
         });
-//        LoadImgUtils.loadImg(getActivity(), mImgUrl, mIvPanorama);
-//        Glide.with(getActivity())
-//                .load(mImgUrl)
-//                .asBitmap()
-//                .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
-//                    @Override
-//                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-//                        //获取图片原始宽高
-//                        int originalWidth = resource.getWidth();//原始图的宽度
-//                        int originalHeight = resource.getHeight();//原始图的高度
-//
-//                        //获取图片显示（即拉伸后的图）后的宽高
-//                        double currentWidth;//拉伸后图的宽度
-//                        double currentHeight;//拉伸后图的高度
-//                        if (originalWidth / originalHeight - mIvPanorama.getWidth() / mIvPanorama.getHeight() > 0) {//图片的宽大于容器的宽
-//                            double tmpHeight = mIvPanorama.getWidth() * originalHeight / originalWidth;
-//                            if (tmpHeight > mIvPanorama.getHeight()) {
-//                                currentWidth = mIvPanorama.getWidth() * mIvPanorama.getHeight() / tmpHeight;
-//                                currentHeight = mIvPanorama.getHeight();
-//                            } else {
-//                                currentWidth = mIvPanorama.getWidth();
-//                                currentHeight = tmpHeight;
-//                            }
-//                        } else {
-//                            double tmpWidth = mIvPanorama.getHeight() * originalWidth / originalHeight;
-//                            if (tmpWidth > mIvPanorama.getWidth()) {
-//                                currentWidth = mIvPanorama.getWidth();
-//                                currentHeight = mIvPanorama.getHeight() * mIvPanorama.getWidth() / tmpWidth;
-//                            } else {
-//                                currentWidth = tmpWidth;
-//                                currentHeight = mIvPanorama.getHeight();
-//                            }
-//                        }
-//                        Logger.e("当前：" + currentHeight + " " + currentWidth + " " + " 原始：" + originalHeight + " " + originalWidth + " 控件：" + mIvPanorama.getHeight() + " " + mIvPanorama.getWidth());
-//                        //压缩图片
-//                        Matrix matrix = new Matrix();
-//                        matrix.setScale((float) (currentWidth / resource.getWidth()), (float) (currentHeight / resource.getHeight()));
-//                        resource = Bitmap.createBitmap(resource, 0, 0, resource.getWidth(), resource.getHeight(), matrix, true);
-//                        mIvPanorama.setImageBitmap(resource);
-//                        Matrix ivMatrix = mIvPanorama.getMatrix();
-//                        ivMatrix.setTranslate((int) ((mIvPanorama.getWidth() - currentWidth) / 2), (int) ((mIvPanorama.getHeight() - currentHeight) / 2));
-//                        mIvPanorama.setImageMatrix(ivMatrix);
-//                    }
-//                });
-    }
-
-
-    @OnClick({R.id.ivImageLogPanoramaDetails})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivImageLogPanoramaDetails:
-//                Matrix matrix = mIvPanorama.getMatrix();
-//                matrix.postScale(0.5f, 0.5f, 0, 0);
-//                mIvPanorama.setImageMatrix(matrix);
-//                Log.e("asda","点击啦");
-                ImageLogWideAngleActivity.newInstance(getActivity(), "", "", "", "");
-                break;
-        }
     }
 }

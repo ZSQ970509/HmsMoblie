@@ -20,6 +20,7 @@ import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
 import com.hc.hmsmoblie.mvp.contact.ImageLogWideAngleC;
 import com.hc.hmsmoblie.mvp.presenter.ImageLogWideAngleP;
 import com.hc.hmsmoblie.utils.LoadImgUtils;
+import com.hc.hmsmoblie.widget.MatrixImageView;
 import com.yc.yclibrary.exception.ApiException;
 
 import butterknife.BindView;
@@ -31,7 +32,7 @@ import butterknife.OnClick;
 
 public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngleP> implements ImageLogWideAngleC.V {
     @BindView(R.id.ivImageLogWideAngle)
-    ImageView mIvWideAngle;
+    MatrixImageView mIvWideAngle;
 
     private String mPanoramaId;
     private String mImageTimes;
@@ -81,6 +82,16 @@ public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngle
     @Override
     public void onWideAngleSuccess(ImageLogWideAngleJson json) {
         mData = json;
+        mIvWideAngle.loadNetImage(mData.getPath());
+        mIvWideAngle.setOnDoubleClick(new MatrixImageView.OnDoubleClick() {
+            @Override
+            public void onClick(float pointInViewX, float pointInViewY, double scale) {
+                //点在原始原图的位置
+                double x = pointInViewX / scale;
+                double y = pointInViewY / scale;
+                ImageLogNodeActivity.newInstance(getActivity(), mPanoramaId, mData.getImageTimes(), x + "", y + "", mData.getAha(), mData.getAva(), mData.getCamSn());
+            }
+        });
     }
 
     @Override
@@ -88,12 +99,12 @@ public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngle
         showToast(apiException.getMessage());
     }
 
-    @OnClick({R.id.ivImageLogWideAngle})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivImageLogWideAngle:
-                ImageLogNodeActivity.newInstance(getActivity(), "", "", "", "", "", "");
-                break;
-        }
-    }
+//    @OnClick({R.id.ivImageLogWideAngle})
+//    void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.ivImageLogWideAngle:
+//                ImageLogNodeActivity.newInstance(getActivity(), "", "", "", "", "", "");
+//                break;
+//        }
+//    }
 }

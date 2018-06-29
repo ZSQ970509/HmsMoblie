@@ -4,68 +4,71 @@
     android:layout_height="match_parent"
     android:background="@color/colorGray">
 
-    <include layout="@layout/actionbar_layout" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <View style="@style/LineHorizontalStyle" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode11"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode12"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode13"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
         </LinearLayout>
+
+        <View style="@style/LineHorizontalStyle" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode21"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode22"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode23"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
         </LinearLayout>
+
+        <View style="@style/LineHorizontalStyle" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,27 +76,28 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
+            <View style="@style/LineVerticalStyle" />
+
             <ImageView
                 android:id="@+id/ivImageLogNode31"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode32"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
+                style="@style/IvNetImageStyle" />
+
+            <View style="@style/LineVerticalStyle" />
 
             <ImageView
                 android:id="@+id/ivImageLogNode33"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter" />
-        </LinearLayout>
-    </LinearLayout>
+                style="@style/IvNetImageStyle" />
 
+            <View style="@style/LineVerticalStyle" />
+        </LinearLayout>
+
+        <View style="@style/LineHorizontalStyle" />
+    </LinearLayout>
+    <include layout="@layout/actionbar_layout" />
 </FrameLayout>

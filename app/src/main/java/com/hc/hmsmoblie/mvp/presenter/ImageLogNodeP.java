@@ -15,9 +15,9 @@ import com.yc.yclibrary.mvp.BasePresenter;
 public class ImageLogNodeP extends BasePresenter<ImageLogNodeC.V> implements ImageLogNodeC.P {
 
     @Override
-    public void getNode(String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava) {
+    public void getNode(String camSn,String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava) {
         new ImageLogNodeM()
-                .getNode(panoramaId, imageTimes, pointX, pointY, aha, ava)
+                .getNode(camSn,panoramaId, imageTimes, pointX, pointY, aha, ava)
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<ImageLogNodeJson>>() {
                     @Override

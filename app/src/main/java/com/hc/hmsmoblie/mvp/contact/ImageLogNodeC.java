@@ -16,6 +16,6 @@ public class ImageLogNodeC {
     }
 
     public interface P {
-        void getNode(String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava);
+        void getNode(String camSn,String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava);
     }
 }

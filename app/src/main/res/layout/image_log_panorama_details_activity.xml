@@ -5,12 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hc.hmsmoblie.widget.MatrixImageView
+            android:id="@+id/ivImageLogPanoramaDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="matrix" />
+    </FrameLayout>
 
     <include layout="@layout/actionbar_layout" />
-
-    <com.hc.hmsmoblie.widget.MatrixImageView
-        android:id="@+id/ivImageLogPanoramaDetails"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="matrix" />
 </FrameLayout>
