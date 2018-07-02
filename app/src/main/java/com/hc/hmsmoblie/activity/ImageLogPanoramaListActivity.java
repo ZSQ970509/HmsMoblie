@@ -69,7 +69,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
     protected void initView(Bundle bundle) {
         setToolBar("全景图列表");
         mCamId = getIntent().getStringExtra(CAM_ID);
-        mCamId = "1032879";
+//        mCamId = "1032879";
         mAdapter = new BaseItemDraggableAdapter<ImageLogPanoramaListJson.ListBean, BaseViewHolder>(R.layout.image_log_panorama_item, null) {
             @Override
             protected void convert(BaseViewHolder helper, ImageLogPanoramaListJson.ListBean item) {
