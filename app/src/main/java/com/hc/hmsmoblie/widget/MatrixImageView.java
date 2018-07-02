@@ -62,11 +62,12 @@ public class MatrixImageView extends AppCompatImageView {
         mMatrixOnTouchListener = new MatrixOnTouchListener(imageView, new MatrixOnTouchListener.DoubleClick() {
             @Override
             public void onClick(PointF imgInViewPoint, float clickX, float clickY, float imageScale) {
-                Log.e("asda", "双击时位置;" + imgInViewPoint.x + "  " + imgInViewPoint.y + " " + imageScale + " " + clickX + " " + clickY);
+
                 //点在图的坐标
                 float pointInViewX = (clickX - imgInViewPoint.x);
                 float pointInViewY = (clickY - imgInViewPoint.y);
-                mDoubleClick.onClick(pointInViewX, pointInViewY, imageScale * mOriginalToCurrentScale);
+                Log.e("asda", "双击时位置;" + pointInViewX + "  " + pointInViewY + " " + imageScale + " " + clickX + " " + clickY);
+                mDoubleClick.onClick(pointInViewX, pointInViewY, imageScale * mOriginalToCurrentScale, mOriginalImageHeight, mOriginalImageWidth);
 
             }
         });
@@ -204,6 +205,15 @@ public class MatrixImageView extends AppCompatImageView {
     }
 
     public interface OnDoubleClick {
-        void onClick(float pointInViewX, float pointInViewY, double scale);
+        /**
+         * 双击回调
+         *
+         * @param pointInViewX        点在显示的图上面x位置
+         * @param pointInViewY        点在显示的图上面x位置
+         * @param scale               显示的图与原图的比例
+         * @param originalImageHeight 原图的高
+         * @param originalImageWidth  原图的宽
+         */
+        void onClick(float pointInViewX, float pointInViewY, double scale, float originalImageHeight, float originalImageWidth);
     }
 }

@@ -85,10 +85,15 @@ public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngle
         mIvWideAngle.loadNetImage(mData.getPath());
         mIvWideAngle.setOnDoubleClick(new MatrixImageView.OnDoubleClick() {
             @Override
-            public void onClick(float pointInViewX, float pointInViewY, double scale) {
+            public void onClick(float pointInViewX, float pointInViewY, double scale, float originalImageHeight, float originalImageWidth) {
                 //点在原始原图的位置
                 double x = pointInViewX / scale;
                 double y = pointInViewY / scale;
+                //当双击的位置为空白部分时，显示提示
+                if (x < 0 || x > originalImageWidth || y < 0 || y < originalImageHeight) {
+                    showMsg("请点击图片的位置（非空白处）");
+                    return;
+                }
                 ImageLogNodeActivity.newInstance(getActivity(), mPanoramaId, mData.getImageTimes(), x + "", y + "", mData.getAha(), mData.getAva(), mData.getCamSn());
             }
         });

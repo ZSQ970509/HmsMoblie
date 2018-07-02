@@ -97,23 +97,21 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
     @Override
     public void onNodeSuccess(ImageLogNodeJson json) {
         ImageLogNodeJson.DataCenterBean centerData = json.getDataCenter().get(0);//中心图片的数据
-        int midRowIndex = centerData.getRowNum();
-        int midColIndex = centerData.getColNum();
+        double midRowIndex = centerData.getRowNum();
+        double midColIndex = centerData.getColNum();
+        //找中心点位置
         if (midRowIndex >= json.getRowSum30()) {
             midRowIndex = json.getRowSum30() - 1;
         } else if (midRowIndex <= 0) {
             midRowIndex = 1;
         }
-
         if (midColIndex >= json.getColSum30()) {
             midColIndex = json.getColSum30() - 1;
         } else if (midColIndex <= 0) {
             midColIndex = 1;
         }
-        Log.e("asd", "row:" + midRowIndex + " col" + midColIndex);
         for (int i = 0; i < json.getData30().size(); i++) {
             ImageLogNodeJson.Data30Bean data = json.getData30().get(i);
-            Log.e("asd", "data row:" + data.getRownum() + " col" + data.getColnum());
             if (midRowIndex - 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode11);
             } else if (midRowIndex - 1 == data.getRownum() && midColIndex == data.getColnum()) {

@@ -7,43 +7,43 @@ import java.util.List;
  */
 
 public class ImageLogNodeJson {
-    private int rowSumAll;
-    private int colSumAll;
-    private int rowSum30;
-    private int colSum30;
+    private double rowSumAll;
+    private double colSumAll;
+    private double rowSum30;
+    private double colSum30;
     private List<DataAllBean> dataAll;
     private List<DataCenterBean> dataCenter;
     private List<Data30Bean> data30;
 
-    public int getRowSumAll() {
+    public double getRowSumAll() {
         return rowSumAll;
     }
 
-    public void setRowSumAll(int rowSumAll) {
+    public void setRowSumAll(double rowSumAll) {
         this.rowSumAll = rowSumAll;
     }
 
-    public int getColSumAll() {
+    public double getColSumAll() {
         return colSumAll;
     }
 
-    public void setColSumAll(int colSumAll) {
+    public void setColSumAll(double colSumAll) {
         this.colSumAll = colSumAll;
     }
 
-    public int getRowSum30() {
+    public double getRowSum30() {
         return rowSum30;
     }
 
-    public void setRowSum30(int rowSum30) {
+    public void setRowSum30(double rowSum30) {
         this.rowSum30 = rowSum30;
     }
 
-    public int getColSum30() {
+    public double getColSum30() {
         return colSum30;
     }
 
-    public void setColSum30(int colSum30) {
+    public void setColSum30(double colSum30) {
         this.colSum30 = colSum30;
     }
 
@@ -94,8 +94,8 @@ public class ImageLogNodeJson {
         private String CamSn;
         private String FtpPath;
         private String ImageTimes;
-        private int ColNum;
-        private int RowNum;
+        private double ColNum;
+        private double RowNum;
         private double Obd;
         private String AddTime;
         private String adjust_across;
@@ -144,19 +144,19 @@ public class ImageLogNodeJson {
             this.ImageTimes = ImageTimes;
         }
 
-        public int getColNum() {
+        public double getColNum() {
             return ColNum;
         }
 
-        public void setColNum(int ColNum) {
+        public void setColNum(double ColNum) {
             this.ColNum = ColNum;
         }
 
-        public int getRowNum() {
+        public double getRowNum() {
             return RowNum;
         }
 
-        public void setRowNum(int RowNum) {
+        public void setRowNum(double RowNum) {
             this.RowNum = RowNum;
         }
 
@@ -240,8 +240,8 @@ public class ImageLogNodeJson {
         private String CamSn;
         private String FtpPath;
         private String ImageTimes;
-        private int ColNum;
-        private int RowNum;
+        private double ColNum;
+        private double RowNum;
         private double Obd;
         private String AddTime;
         private String adjust_across;
@@ -290,19 +290,19 @@ public class ImageLogNodeJson {
             this.ImageTimes = ImageTimes;
         }
 
-        public int getColNum() {
+        public double getColNum() {
             return ColNum;
         }
 
-        public void setColNum(int ColNum) {
+        public void setColNum(double ColNum) {
             this.ColNum = ColNum;
         }
 
-        public int getRowNum() {
+        public double getRowNum() {
             return RowNum;
         }
 
-        public void setRowNum(int RowNum) {
+        public void setRowNum(double RowNum) {
             this.RowNum = RowNum;
         }
 
@@ -382,15 +382,15 @@ public class ImageLogNodeJson {
          * Ava : 58.005001068115234
          */
 
-        private int id;
-        private int panormamicId;
+        private double id;
+        private double panormamicId;
         private String imgpath;
         private String camsn;
-        private int imagetimes;
+        private double imagetimes;
         private String ftppath;
-        private int colnum;
-        private int rownum;
-        private int Obd;
+        private double colnum;
+        private double rownum;
+        private double Obd;
         private String AddTime;
         private String adjust_across;
         private String adjust_vertical;
@@ -398,19 +398,19 @@ public class ImageLogNodeJson {
         private double Aha;
         private double Ava;
 
-        public int getId() {
+        public double getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(double id) {
             this.id = id;
         }
 
-        public int getPanormamicId() {
+        public double getPanormamicId() {
             return panormamicId;
         }
 
-        public void setPanormamicId(int panormamicId) {
+        public void setPanormamicId(double panormamicId) {
             this.panormamicId = panormamicId;
         }
 
@@ -430,11 +430,11 @@ public class ImageLogNodeJson {
             this.camsn = camsn;
         }
 
-        public int getImagetimes() {
+        public double getImagetimes() {
             return imagetimes;
         }
 
-        public void setImagetimes(int imagetimes) {
+        public void setImagetimes(double imagetimes) {
             this.imagetimes = imagetimes;
         }
 
@@ -446,27 +446,27 @@ public class ImageLogNodeJson {
             this.ftppath = ftppath;
         }
 
-        public int getColnum() {
+        public double getColnum() {
             return colnum;
         }
 
-        public void setColnum(int colnum) {
+        public void setColnum(double colnum) {
             this.colnum = colnum;
         }
 
-        public int getRownum() {
+        public double getRownum() {
             return rownum;
         }
 
-        public void setRownum(int rownum) {
+        public void setRownum(double rownum) {
             this.rownum = rownum;
         }
 
-        public int getObd() {
+        public double getObd() {
             return Obd;
         }
 
-        public void setObd(int Obd) {
+        public void setObd(double Obd) {
             this.Obd = Obd;
         }
 

@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,6 +22,7 @@ import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
 import com.hc.hmsmoblie.mvp.contact.ImageLogPanoramaListC;
 import com.hc.hmsmoblie.mvp.presenter.ImageLogPanoramaListP;
 import com.hc.hmsmoblie.utils.LoadImgUtils;
+import com.hc.hmsmoblie.utils.TimePickerUtils;
 import com.yc.yclibrary.exception.ApiException;
 
 import butterknife.BindView;
@@ -66,7 +69,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
     protected void initView(Bundle bundle) {
         setToolBar("全景图列表");
         mCamId = getIntent().getStringExtra(CAM_ID);
-        mCamId = "1032879";
+//        mCamId = "1032879";
         mAdapter = new BaseItemDraggableAdapter<ImageLogPanoramaListJson.ListBean, BaseViewHolder>(R.layout.image_log_panorama_item, null) {
             @Override
             protected void convert(BaseViewHolder helper, ImageLogPanoramaListJson.ListBean item) {
@@ -94,7 +97,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
         });
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
                     ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
-                    ImageLogPanoramaDetailActivity.newInstance(getActivity(), itemData.getPuzzleImg(), itemData.getRecordId() + "", itemData.getImageTimes()+"");
+                    ImageLogPanoramaDetailActivity.newInstance(getActivity(), itemData.getPuzzleImg(), itemData.getRecordId() + "", itemData.getImageTimes() + "");
                 }
         );
         searchPro();
@@ -134,12 +137,21 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
         hideLoading();
     }
 
-    @OnClick({R.id.tvImageLogPanoramaSearch})
+    @OnClick({R.id.tvImageLogPanoramaSearch, R.id.tvImageLogPanoramaEndTime, R.id.tvImageLogPanoramaStartTime})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvImageLogPanoramaSearch:
                 initRefreshAndLoadMore();
                 searchPro();
+                break;
+            case R.id.tvImageLogPanoramaStartTime:
+                TimePickerUtils.showPickerView(getActivity(), "", mTvStartTime, mTvStartTime.getText().toString(), "1234-10-11", mTvEndTime.getText().toString());
+                break;
+            case R.id.tvImageLogPanoramaEndTime:
+                if (TextUtils.isEmpty(mTvStartTime.getText().toString()))
+                    TimePickerUtils.showPickerView(getActivity(), "", mTvEndTime, mTvEndTime.getText().toString(), "1234-10-11", "");
+                else
+                    TimePickerUtils.showPickerView(getActivity(), "", mTvEndTime, mTvEndTime.getText().toString(), mTvStartTime.getText().toString(), "");
                 break;
         }
     }
