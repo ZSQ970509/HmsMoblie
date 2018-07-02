@@ -55,7 +55,7 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
                 double x = pointInViewX / scale;
                 double y = pointInViewY / scale;
                 //当双击的位置为空白部分时，显示提示
-                if (x < 0 || x > originalImageWidth || y < 0 || y < originalImageHeight) {
+                if (x < 0 || x > originalImageWidth || y < 0 || y > originalImageHeight) {
                     showToast("请点击图片的位置（非空白处）");
                     return;
                 }

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.hc.hmsmoblie.utils.PhoneSystemUtils;
 
 /**
  *
@@ -35,6 +36,7 @@ public class MatrixImageView extends AppCompatImageView {
     private PointF mImgInViewPoint = new PointF(0, 0);//图片相对于控件左上角的位置
     private MatrixOnTouchListener mMatrixOnTouchListener;
     private OnDoubleClick mDoubleClick;
+    private int mStatusBarHeight = 0;
 
     private enum MotionEventModeEnum {
         //拖动图片，放大缩小图片
@@ -62,13 +64,12 @@ public class MatrixImageView extends AppCompatImageView {
         mMatrixOnTouchListener = new MatrixOnTouchListener(imageView, new MatrixOnTouchListener.DoubleClick() {
             @Override
             public void onClick(PointF imgInViewPoint, float clickX, float clickY, float imageScale) {
-
+//                mStatusBarHeight = PhoneSystemUtils.getStatusBarHeight(mContext);
                 //点在图的坐标
                 float pointInViewX = (clickX - imgInViewPoint.x);
                 float pointInViewY = (clickY - imgInViewPoint.y);
                 Log.e("asda", "双击时位置;" + pointInViewX + "  " + pointInViewY + " " + imageScale + " " + clickX + " " + clickY);
                 mDoubleClick.onClick(pointInViewX, pointInViewY, imageScale * mOriginalToCurrentScale, mOriginalImageHeight, mOriginalImageWidth);
-
             }
         });
         setOnTouchListener(mMatrixOnTouchListener);

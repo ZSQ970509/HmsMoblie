@@ -19,6 +19,7 @@ import com.yc.yclibrary.base.YcAppCompatActivity;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -105,7 +106,7 @@ public class PhoneSystemUtils {
      * 下载PDF文件
      *
      * @param activity
-     * @param url 下载地址
+     * @param url      下载地址
      */
     public static void downloadFile(final YcAppCompatActivity activity, final String url) {
         if (null == activity)
@@ -117,7 +118,7 @@ public class PhoneSystemUtils {
 //        deleteFile(url);
 
         org.xutils.http.RequestParams requestParams = new org.xutils.http.RequestParams(url);  // 下载地址
-        String path = Environment.getExternalStorageDirectory().getPath() + File.separator+"cache_download"+File.separator +"slope.apk";
+        String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "cache_download" + File.separator + "slope.apk";
         requestParams.setSaveFilePath(path); // 为RequestParams设置文件下载后的保存路径
 //        requestParams.setAutoRename(false); // 下载完成后自动为文件命名
         ProgressDialog mProgressDialog = new ProgressDialog(activity);
@@ -130,7 +131,7 @@ public class PhoneSystemUtils {
 
             @Override
             public void onSuccess(File result) {
-                installApk(result,activity);
+                installApk(result, activity);
                 mProgressDialog.dismiss();
             }
 
@@ -142,7 +143,7 @@ public class PhoneSystemUtils {
 
             @Override
             public void onCancelled(CancelledException cex) {
-               // L.e("取消下载");
+                // L.e("取消下载");
                 mProgressDialog.dismiss();
             }
 
@@ -187,6 +188,14 @@ public class PhoneSystemUtils {
         } catch (Exception e) {
             //L.e(e.getMessage());
         }
+    }
 
+    public static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }
