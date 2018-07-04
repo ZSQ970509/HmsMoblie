@@ -8,45 +8,68 @@
 
     <include layout="@layout/actionbar_layout" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/y104">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_8"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y56"
+            android:textColor="#333333"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/y24"
+            android:layout_marginLeft="@dimen/x24"
+            android:textSize="@dimen/y24"
             android:text="开始时间" />
 
         <TextView
             android:id="@+id/tvImageLogPanoramaStartTime"
             android:layout_width="@dimen/x180"
-            android:layout_height="@dimen/y40"
-            android:background="@drawable/bg_frame"
+            android:layout_height="@dimen/y56"
+
+            android:layout_alignTop="@+id/tv_8"
+            android:layout_toEndOf="@+id/tv_8"
             android:gravity="center"
+            android:background="@drawable/boder_line"
+            android:textSize="@dimen/y24"
+            android:textColor="#333333"
             android:text="" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tv_9"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y56"
+            android:textColor="#333333"
+            android:gravity="center"
+            android:layout_alignTop="@+id/tvImageLogPanoramaStartTime"
+            android:layout_toEndOf="@+id/tvImageLogPanoramaStartTime"
+            android:textSize="@dimen/y24"
             android:text="结束时间" />
 
         <TextView
             android:id="@+id/tvImageLogPanoramaEndTime"
             android:layout_width="@dimen/x180"
-            android:layout_height="@dimen/y40"
-            android:background="@drawable/bg_frame"
+            android:layout_height="@dimen/y56"
             android:gravity="center"
+            android:layout_alignTop="@+id/tv_9"
+            android:layout_toEndOf="@+id/tv_9"
+            android:background="@drawable/boder_line"
+            android:textSize="@dimen/y24"
+            android:textColor="#333333"
             android:text="" />
 
         <Button
             android:id="@+id/tvImageLogPanoramaSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查询" />
-    </LinearLayout>
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y56"
+            android:background="@drawable/btn_query"
+            android:layout_alignTop="@+id/tvImageLogPanoramaEndTime"
+            android:layout_toEndOf="@+id/tvImageLogPanoramaEndTime"
+            android:layout_marginLeft="@dimen/x12"
+            android:text="" />
+    </RelativeLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srlImageLogPanorama"

@@ -132,6 +132,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             mSwipeRefreshLayout.setRefreshing(false);
         }
         if (mAdapter != null && mAdapter.isLoading()) {
+
             mAdapter.loadMoreComplete();
         }
         hideLoading();

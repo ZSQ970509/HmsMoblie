@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HmsMoblie</string>
+    <string name="app_name">远程视频大数据管控系统</string>
     <string name="view_empty">没有数据~</string>
     <string name="transitionNameBottomImg">bottomImg</string>
     <string name="transitionNameVerificationImg">verificationImg</string>

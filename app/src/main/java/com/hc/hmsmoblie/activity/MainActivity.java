@@ -96,6 +96,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.main_RelativeLayout_About:
                 showToast("关于");
+                AboutActivity.newInstance(getActivity());
                 break;
             case R.id.main_RelativeLayout_Exit:
                 ActivityUtils.INSTANCE.exitApp(getActivity());
@@ -113,6 +114,7 @@ public class MainActivity extends BaseActivity {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
             } else {
 //                exitApp();
+
             }
         }
         return true;
