@@ -23,8 +23,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  */
 
 public class WelcomeActivity extends BaseActivity {
-    private String permissionInfo;
-    private final int SDK_PERMISSION_REQUEST = 127;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_welcome;
@@ -43,7 +41,7 @@ public class WelcomeActivity extends BaseActivity {
 
             @Override
             public void onFail() {
-                showToast("权限被拒绝，无法启动推送！");
+                showToast("权限被拒绝，无法启动！");
             }
         });
 

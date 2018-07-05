@@ -44,13 +44,13 @@ public class AboutActivity extends BaseMvpActivity<AboutP> implements AboutC.V {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_login;
+        return R.layout.activity_about;
     }
 
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("关于");
-        textviewNowVersion.setText("当前版本："+PhoneSystemUtils.getPackageName());
+        textviewNowVersion.setText("当前版本："+PhoneSystemUtils.getVersionName());
     }
 
 
@@ -58,7 +58,7 @@ public class AboutActivity extends BaseMvpActivity<AboutP> implements AboutC.V {
     @Override
     public void onUpdatedVersionSuccess(UpdateVersionJson updateVersionJson) {
         if (updateVersionJson.getUpdateVersionCode() > PhoneSystemUtils.getVersionCode()) {
-            if (updateVersionJson.getUpdateForceUpdate().equals("1")) {
+            if (updateVersionJson.getUpdateForceUpdate().equals("1")) {//是否进行强制更新
                 updatedVersion(updateVersionJson.getUpdateDownLoadUrl());
             } else {
                 CommonDialog commonDialog = new CommonDialog(getActivity());
@@ -66,8 +66,11 @@ public class AboutActivity extends BaseMvpActivity<AboutP> implements AboutC.V {
                         .setTitle("是否更新版本")
                         .setRightBtnText("更新")
                         .setLeftBtnText("取消")
-                        .setRightClick(v -> updatedVersion(updateVersionJson.getUpdateDownLoadUrl()));
+                        .setRightClick(v -> updatedVersion(updateVersionJson.getUpdateDownLoadUrl()))
+                        .show();
             }
+        }else {
+            showMsg("已经是最新版本！");
         }
     }
 

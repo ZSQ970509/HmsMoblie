@@ -20,6 +20,7 @@ import com.hc.hmsmoblie.base.BaseActivity;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.fragment.MainFragment;
+import com.hc.hmsmoblie.utils.PhoneSystemUtils;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 import com.yc.yclibrary.utils.ActivityUtils;
 
@@ -66,6 +67,7 @@ public class MainActivity extends BaseActivity {
                 .show(mainFragment)
                 .commit();
     }
+
     /**
      * DrawerLayout侧滑菜单开关
      */
@@ -87,23 +89,24 @@ public class MainActivity extends BaseActivity {
     @OnClick({R.id.main_RelativeLayout_UpadtePass,R.id.main_RelativeLayout_Setting,R.id.main_RelativeLayout_About,R.id.main_RelativeLayout_Exit})
     void onClick(View v) {
         switch (v.getId()) {
-            case R.id.main_RelativeLayout_UpadtePass:
-                //showToast("修改密码");
+            case R.id.main_RelativeLayout_UpadtePass://修改密码
                 ChangePassWordActivity.newInstance(getActivity());
                 break;
-            case R.id.main_RelativeLayout_Setting:
+            case R.id.main_RelativeLayout_Setting://权限设置（暂时隐藏）
                 showToast("权限设置");
                 break;
-            case R.id.main_RelativeLayout_About:
-                showToast("关于");
+            case R.id.main_RelativeLayout_About://关于
+//                showToast("关于");
                 AboutActivity.newInstance(getActivity());
                 break;
-            case R.id.main_RelativeLayout_Exit:
-                ActivityUtils.INSTANCE.exitApp(getActivity());
-               // showToast("退出");
+            case R.id.main_RelativeLayout_Exit://退出登录
+//                ActivityUtils.INSTANCE.exitApp(getActivity());
+                // showToast("退出");
+                LoginActivity.newInstance(getActivity());
                 break;
         }
     }
+
     /**
      * 监听back键处理DrawerLayout和SearchView
      */
@@ -113,12 +116,12 @@ public class MainActivity extends BaseActivity {
             if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
             } else {
-//                exitApp();
-
+                PhoneSystemUtils.exitApp((BaseActivity) getActivity());
             }
         }
         return true;
     }
+
     /**
      * 解决App重启后导致Fragment重叠的问题
      */

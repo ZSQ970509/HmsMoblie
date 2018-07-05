@@ -32,9 +32,11 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     TextInputEditText mUserPasswordTv;
     @BindView(R.id.login_save_password_cb)
     CheckBox mIsSavePasswordCb;
+
     public static void newInstance(Activity activity) {
         activity.startActivity(new Intent(activity, LoginActivity.class));
     }
+
     @Override
     protected LoginP loadPresenter() {
         return new LoginP();
@@ -49,12 +51,13 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     protected void initView(Bundle bundle) {
         ActivityUtils.INSTANCE.finishOthersActivity(LoginActivity.class);
         mPresenter.updatedVersion();
-        mUserAccountTv.setText("admin");
-        mUserPasswordTv.setText("hckj1234");
-        if(UserInfoPref.getSavePassWord()){
+//        mUserAccountTv.setText("admin");
+//        mUserPasswordTv.setText("hckj1234");
+        boolean isSavePassword = UserInfoPref.getSavePassWord();
+        mIsSavePasswordCb.setChecked(isSavePassword);
+        if (isSavePassword) {
             mUserAccountTv.setText(UserInfoPref.getUserAccount());
             mUserPasswordTv.setText(UserInfoPref.getUserPassword());
-            mIsSavePasswordCb.setChecked(UserInfoPref.getSavePassWord());
         }
     }
 
@@ -89,11 +92,12 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     public void onUpdatedVersionFail(String msg) {
         showToast(msg);
     }
+
     private void updatedVersion(String apkUrl) {
         PhoneSystemUtils.downloadFile(getActivity(), apkUrl);
     }
 
-    @OnClick({R.id.btnLogin,R.id.login_save_password_tv})
+    @OnClick({R.id.btnLogin, R.id.login_save_password_tv})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:

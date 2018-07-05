@@ -14,8 +14,8 @@ import android.text.TextUtils;
 import com.hc.hmsmoblie.App;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseActivity;
-import com.loopj.android.http.RequestParams;
 import com.yc.yclibrary.base.YcAppCompatActivity;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 import org.xutils.common.Callback;
 import org.xutils.x;
@@ -71,9 +71,24 @@ public class PhoneSystemUtils {
         }
         return 0;
     }
-
     /**
      * 获取版本号
+     *
+     * @return
+     */
+    public static String getVersionName() {
+        try {
+            PackageInfo packageInfo = App.getInstance().getPackageManager().getPackageInfo(App.getInstance().getPackageName(), 0);
+            if (packageInfo != null) {
+                return packageInfo.versionName;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+    /**
+     * 获取包名
      *
      * @return
      */
@@ -197,5 +212,19 @@ public class PhoneSystemUtils {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    private static long exitTime;
+
+    /**
+     * 双击退出App
+     */
+    public static void exitApp(BaseActivity activity) {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+            activity.showToast("再按一次退出");
+            exitTime = System.currentTimeMillis();
+        } else {
+            ActivityUtils.INSTANCE.finishAllActivity();
+        }
     }
 }

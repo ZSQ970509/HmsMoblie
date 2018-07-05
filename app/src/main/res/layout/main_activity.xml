@@ -61,6 +61,7 @@
                 android:id="@+id/main_RelativeLayout_Setting"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y100"
+                android:visibility="gone"
                 android:layout_gravity="right"
                 android:gravity="center_vertical">
 
