@@ -37,6 +37,8 @@ import butterknife.OnClick;
  */
 
 public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V ,SurfaceHolder.Callback{
+    @BindView(R.id.ivHuXinBack)
+    ImageView ivHuXinBack;
     @BindView(R.id.control_Main)
     ImageView imageView_main;
     @BindView(R.id.control_Setting)
@@ -89,8 +91,14 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
             @Override
             public void onFailure() {
 //                    mHandler.sendEmptyMessage(LOGIN_FAILED);
-                showToast("登录失败");
+                //showToast("登录失败");
                 Log.e("8700", "登录失败");
+                CommonDialog.newInstance(getActivity())
+                        .setTitle("播放提示")
+                        .setMsg("登录失败")
+                        .setSingleBtnText("确定")
+                        .setSingleClick(v -> finish())
+                        .show();
             }
 
             @Override
@@ -98,7 +106,7 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                 //Log.e("8700", "登录成功");
                 if (obj instanceof LoginData) {
                     int mStreamType = SDKConstant.LiveSDKConstant.MAIN_HIGH_STREAM; // 码流
-                    HKUtil.start(videoBean.getmSysCode(), csvHkVideo, mStreamType);
+                    HKUtil.start(videoBean.getmSysCode(), csvHkVideo, mStreamType, getActivity());
                 }
             }
         });
@@ -141,9 +149,12 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
             showToast("停止成功");
         }
     }
-    @OnClick({R.id.control_Main,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
+    @OnClick({R.id.ivHuXinBack,R.id.control_Main,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ivHuXinBack:
+                finish();
+                break;
             case R.id.control_Main:
                 switch (type){
                     case 0:

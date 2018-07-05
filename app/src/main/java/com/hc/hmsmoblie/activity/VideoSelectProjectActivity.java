@@ -39,7 +39,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
     RecyclerView recyclerViewSelectProject;
     ArrayList<ProjectJson.ListBean> dataList = new ArrayList<ProjectJson.ListBean>();
     SelectProjectVideoAdapter selectProjectVideoAdapter;
-    int pageIndex = 0;
+    int pageIndex = 1;
     int sumPage;
 
     public static void newInstance(Activity activity , String sysId) {
@@ -93,6 +93,7 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
         switch (v.getId()) {
             case R.id.btn_Search_SelectProject:
                 dataList.clear();
+                pageIndex = 1;
                 selectProjectVideoAdapter.notifyDataSetChanged();
                 //sysId:11视频监控、26超视野、31梯控、21环境
                 showLoading("正在搜索中...");

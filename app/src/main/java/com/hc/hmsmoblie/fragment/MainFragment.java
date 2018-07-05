@@ -121,8 +121,12 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
                     case 1381:
                         VideoSelectProjectActivity.newInstance(getActivity(),"11");
                         break;
+
+
+
+
                     case 1382:
-                        VideoSelectProjectActivity.newInstance(getActivity(),"13");
+                        VideoSelectProjectActivity.newInstance(getActivity(),"26");
                         break;
                     case 1383:
 

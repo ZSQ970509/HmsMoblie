@@ -115,7 +115,7 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
     @Override
     public void onGetCameradetailsSuccess(ArrayList<ProjectDetailsJson> dataBean) {
         proDetailsBean = dataBean.get(0);
-        videoProjectDetailName.setText("项目名称:"+ EmptyUtils.getString(proDetailsBean.getEtpName()));
+        videoProjectDetailName.setText("项目名称:"+ EmptyUtils.getString(proDetailsBean.getProjName()));
         videoProjectDetailType.setText("工程类别:"+EmptyUtils.getString(proDetailsBean.getProjProperty()));
         videoProjectDetailAddress.setText("工程地址:"+EmptyUtils.getString(proDetailsBean.getProjAddress()));
         videoProjectDetailQualitySupervision.setText("工程质量监督机构:"+EmptyUtils.getString(proDetailsBean.getProjSuperviseName()));
@@ -127,7 +127,7 @@ public class VideoProjectDetailsActivity extends BaseMvpActivity<VideoProjectDet
         videoProjectDetailHumen.setText("项目负责人:"+EmptyUtils.getString(proDetailsBean.getProjChargePerson()));
         videoProjectDetailPhone.setText("联系电话:"+EmptyUtils.getString(proDetailsBean.getProjChargePersonPhone()));
         videoProjectDetailAffiliatedArea.setText("所属地区:"+proDetailsBean.getProjRegionCode());
-        LoadImgUtils.loadImg(getActivity(),proDetailsBean.getProj_CAD_Pics(),videoProjectDetailImage);
+        LoadImgUtils.loadImg(getActivity(),"http://szbk.jsqqy.com/Camera/ProjMaps/"+proDetailsBean.getProjMapFile(),videoProjectDetailImage);
 
 
     }

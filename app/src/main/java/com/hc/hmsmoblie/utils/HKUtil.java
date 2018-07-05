@@ -1,5 +1,6 @@
 package com.hc.hmsmoblie.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceView;
 
 import com.hc.hmsmoblie.App;
+import com.hc.hmsmoblie.widget.CommonDialog;
 import com.hikvision.sdk.VMSNetSDK;
 import com.hikvision.sdk.consts.HttpConstants;
 import com.hikvision.sdk.net.business.OnVMSNetSDKBusiness;
@@ -38,7 +40,7 @@ public class HKUtil {
         VMSNetSDK.getInstance().Login(loginAddress, userName, password, macAddress, business);
     }
 
-    public static void start(final String mSysCode, final SurfaceView mSurfaceView, final int mStreamType) {
+    public static void start(final String mSysCode, final SurfaceView mSurfaceView, final int mStreamType, final Activity context) {
         new Thread() {
             @Override
             public void run() {
@@ -47,6 +49,12 @@ public class HKUtil {
                     @Override
                     public void onFailure() {
                         Log.e("8700", "播放失败");
+                        CommonDialog.newInstance(context)
+                                .setTitle("播放提示")
+                                .setMsg("播放失败")
+                                .setSingleBtnText("确定")
+                                .setSingleClick(v -> context.finish())
+                                .show();
 //                            mHandler.sendEmptyMessage(GET_CAMERA_INFO_FAILURE);
                     }
 

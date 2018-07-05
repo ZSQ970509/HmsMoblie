@@ -46,6 +46,8 @@ import butterknife.OnClick;
  */
 
 public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
+    @BindView(R.id.ivHuXinBack)
+    ImageView ivHuXinBack;
     @BindView(R.id.control_Main)
     ImageView imageView_main;
     @BindView(R.id.control_Speed)
@@ -94,7 +96,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
         videoBean = (VideoBean) getIntent().getSerializableExtra(Video_Bean);
         splay = new SurfingScenePlayer(this);
-        splay.changetofullScreen();
+
         glvHuXinVideo = (GLSurfaceView) this.findViewById(R.id.glv_HuXin_Video);
         showLoading("正在加载中...");
        // initVideoSDK();
@@ -110,6 +112,9 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                         public void setOnPlaysuccess() {
                             prossTV.setText("视频缓冲进度：100%");
                             layoutPross.setVisibility(View.GONE);
+                            if(splay != null) {
+                                splay.changetofullScreen();
+                            }
                         }
 
                         @Override
@@ -120,6 +125,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                                     .setTitle("提示")
                                     .setMsg("播放失败："+error)
                                     .setSingleBtnText("确定")
+                                    .setSingleClick(v -> finish())
                                     .show();
                             //showErrorDialog(HuXinVideoActivity.this,"播放失败："+error);
                             //上传错误信息
@@ -143,11 +149,13 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                             .setTitle("播放提示")
                             .setMsg("播放失败："+arg0.getMsg())
                             .setSingleBtnText("确定")
+                            .setSingleClick(v -> finish())
                             .show();
 
                 }
             }
         });
+
     }
     private void initVideo() {
 
@@ -213,6 +221,7 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                                         @Override
                                         public void onClick(DialogInterface dialog,
                                                             int which) {
+                                            finish();
                                         }
                                     })
                                     .setCancelable(false).create().show();
@@ -240,9 +249,12 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
     }
 
-    @OnClick({R.id.control_Main,R.id.control_Speed,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
+    @OnClick({R.id.ivHuXinBack,R.id.control_Main,R.id.control_Speed,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ivHuXinBack:
+                finish();
+                break;
             case R.id.control_Main:
                 switch (type){
                     case 0:

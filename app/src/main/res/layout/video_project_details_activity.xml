@@ -220,6 +220,7 @@
                     android:id="@+id/video_Project_Detail_End_Time"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y60"
+                    android:background="@drawable/border_line_under"
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="@dimen/x24"
                     android:layout_marginRight="@dimen/x24"
