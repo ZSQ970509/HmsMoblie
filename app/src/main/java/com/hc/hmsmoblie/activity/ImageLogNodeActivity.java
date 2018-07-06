@@ -100,35 +100,35 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         double midRowIndex = centerData.getRowNum();
         double midColIndex = centerData.getColNum();
         //找中心点位置
-        if (midRowIndex >= json.getRowSum30()) {
-            midRowIndex = json.getRowSum30() - 1;
+        if (midRowIndex >= json.getRowSumAll()) {
+            midRowIndex = json.getRowSumAll() - 1;
         } else if (midRowIndex <= 0) {
             midRowIndex = 1;
         }
-        if (midColIndex >= json.getColSum30()) {
-            midColIndex = json.getColSum30() - 1;
+        if (midColIndex >= json.getColSumAll()) {
+            midColIndex = json.getColSumAll() - 1;
         } else if (midColIndex <= 0) {
             midColIndex = 1;
         }
-        for (int i = 0; i < json.getData30().size(); i++) {
-            ImageLogNodeJson.Data30Bean data = json.getData30().get(i);
-            if (midRowIndex - 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+        for (int i = 0; i < json.getDataAll().size(); i++) { 
+            ImageLogNodeJson.DataAllBean data = json.getDataAll().get(i);
+            if (midRowIndex - 1 == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode11);
-            } else if (midRowIndex - 1 == data.getRownum() && midColIndex == data.getColnum()) {
+            } else if (midRowIndex - 1 == data.getRowNum() && midColIndex == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode12);
-            } else if (midRowIndex - 1 == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+            } else if (midRowIndex - 1 == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode13);
-            } else if (midRowIndex == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+            } else if (midRowIndex == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode21);
-            } else if (midRowIndex == data.getRownum() && midColIndex == data.getColnum()) {
+            } else if (midRowIndex == data.getRowNum() && midColIndex == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode22);
-            } else if (midRowIndex == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+            } else if (midRowIndex == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode23);
-            } else if (midRowIndex + 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode31);
-            } else if (midRowIndex + 1 == data.getRownum() && midColIndex == data.getColnum()) {
+            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode32);
-            } else if (midRowIndex + 1 == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
                 LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode33);
             }
         }

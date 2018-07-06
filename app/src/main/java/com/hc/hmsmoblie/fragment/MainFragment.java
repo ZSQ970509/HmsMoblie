@@ -36,18 +36,17 @@ import butterknife.OnClick;
  *
  */
 
-public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
+public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V {
     @BindView(R.id.rvMainFragment)
     RecyclerView mRecyclerView;
     @BindView(R.id.iv_List_Main)
     ImageView ivListMain;
     CommonRecyclerAdapter<MainJson> commonAdapter;
-    int [] icon = {R.drawable.main_video,R.drawable.main_super_video,R.drawable.main_reinforced,R.drawable.main_imaging_log
-            ,R.drawable.main_environment,R.drawable.main_moble_attendance,R.drawable.mian_ladder_control,R.drawable.main_outages_network_power,};
-    List<MainItemBean> tempData = new ArrayList<MainItemBean>();
+    int[] icon = {R.drawable.main_video, R.drawable.main_super_video, R.drawable.main_reinforced, R.drawable.main_imaging_log
+            , R.drawable.main_environment, R.drawable.main_moble_attendance, R.drawable.mian_ladder_control, R.drawable.main_outages_network_power,};
+
     public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
-        return fragment;
+        return new MainFragment();
     }
 
 
@@ -55,6 +54,7 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
     protected MainP loadPresenter() {
         return new MainP();
     }
+
     @Override
     public int getLayoutResId() {
         return R.layout.main_fragment;
@@ -62,7 +62,7 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
 
     @Override
     public void initView() {
-        mPresenter.GetModulesList(UserInfoPref.getUserAccount(),UserInfoPref.getUserId());
+        mPresenter.GetModulesList(UserInfoPref.getUserAccount(), UserInfoPref.getUserId());
     }
 
     @OnClick({R.id.iv_List_Main})
@@ -79,72 +79,71 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V  {
 
     @Override
     public void onGetModulesListSuccess(ArrayList<MainJson> mainJson) {
-        if(mainJson.size() == 0 ){
+        if (mainJson.size() == 0) {
             showToast("暂无数据！");
-        }else{
+        } else {
             commonAdapter = new CommonRecyclerAdapter<MainJson>(getActivity(), R.layout.main_item) {
                 @Override
                 public void onUpdate(BaseAdapterHelper helper, MainJson item, int position) {
 
                     helper.setText(R.id.tvMainItem, item.getMdName());
-                    switch (item.getMdID()){
+                    switch (item.getMdID()) {
                         case 1381:
-                            helper.setImageResource(R.id.ivMainItem,icon[0]);
+                            helper.setImageResource(R.id.ivMainItem, icon[0]);
                             break;
                         case 1382:
-                            helper.setImageResource(R.id.ivMainItem,icon[1]);
+                            helper.setImageResource(R.id.ivMainItem, icon[1]);
                             break;
                         case 1383:
-                            helper.setImageResource(R.id.ivMainItem,icon[2]);
+                            helper.setImageResource(R.id.ivMainItem, icon[2]);
                             break;
                         case 1384:
-                            helper.setImageResource(R.id.ivMainItem,icon[3]);
+                            helper.setImageResource(R.id.ivMainItem, icon[3]);
                             break;
                         case 1385:
-                            helper.setImageResource(R.id.ivMainItem,icon[4]);
+                            helper.setImageResource(R.id.ivMainItem, icon[4]);
                             break;
                         case 1386:
-                            helper.setImageResource(R.id.ivMainItem,icon[5]);
+                            helper.setImageResource(R.id.ivMainItem, icon[5]);
                             break;
                         case 1387:
-                            helper.setImageResource(R.id.ivMainItem,icon[6]);
+                            helper.setImageResource(R.id.ivMainItem, icon[6]);
                             break;
                         case 1388:
-                            helper.setImageResource(R.id.ivMainItem,icon[7]);
+                            helper.setImageResource(R.id.ivMainItem, icon[7]);
                             break;
                     }
                 }
             };
             commonAdapter.addAll(mainJson);
             commonAdapter.setOnItemClickListener((RecyclerView.ViewHolder viewHolder, View view, int position) -> {
-                switch (mainJson.get(position).getMdID()){
+                switch (mainJson.get(position).getMdID()) {
                     case 1381:
-                        VideoSelectProjectActivity.newInstance(getActivity(),"11");
+                        VideoSelectProjectActivity.newInstance(getActivity(), "11");
                         break;
-
-
-
-
                     case 1382:
-                        VideoSelectProjectActivity.newInstance(getActivity(),"26");
+                        VideoSelectProjectActivity.newInstance(getActivity(), "26");
                         break;
                     case 1383:
-
+                        showToast("开发中");
                         break;
                     case 1384:
                         ImageLogProjectListActivity.newInstance(getActivity());
-
                         break;
                     case 1385:
                         EnvironmentSelectProjectActivity.newInstance(getActivity());
                         break;
                     case 1386:
-
+                        showToast("开发中");
                         break;
                     case 1387:
                         LadderControlProjectListActivity.newInstance(getActivity());
                         break;
                     case 1388:
+                        showToast("开发中");
+                        break;
+                    default:
+                        showToast("开发中");
                         break;
                 }
                 // LadderControlProjectListActivity.newInstance(getActivity());
