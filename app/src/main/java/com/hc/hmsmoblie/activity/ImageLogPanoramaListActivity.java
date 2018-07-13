@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 全局图列表(影响日志)
+ * 全局图列表(影像日志)
  */
 
 public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanoramaListP> implements ImageLogPanoramaListC.V {
@@ -42,9 +42,9 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
     @BindView(R.id.srlImageLogPanorama)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private int mPageIndex = 1;
+    private int mPageIndex = 0;
     private final int mPageSize = 10;
-    private int mPageTotal = 1;
+    private int mPageTotal = 0;
     private BaseItemDraggableAdapter<ImageLogPanoramaListJson.ListBean, BaseViewHolder> mAdapter;
     private String mCamId;
     private static final String CAM_ID = "cam_id";
@@ -122,8 +122,8 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
 
     private void initRefreshAndLoadMore() {
         mSwipeRefreshLayout.setRefreshing(true);
-        mPageIndex = 1;
-        mPageTotal = 1;
+        mPageIndex = 0;
+        mPageTotal = 0;
         mAdapter.setNewData(null);//重新开启下拉加载更多
     }
 

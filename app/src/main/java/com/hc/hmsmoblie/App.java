@@ -8,6 +8,8 @@ import com.hik.mcrsdk.rtsp.RtspClient;
 import com.hikvision.sdk.VMSNetSDK;
 import com.yc.yclibrary.EasyCode;
 
+import org.xutils.x;
+
 /**
  *
  */
@@ -31,5 +33,6 @@ public class App extends Application {
         MCRSDK.setPrint(1, null);
         // SDK初始化
         VMSNetSDK.init(this);
+        x.Ext.init(this);//Xutils初始化
     }
 }
