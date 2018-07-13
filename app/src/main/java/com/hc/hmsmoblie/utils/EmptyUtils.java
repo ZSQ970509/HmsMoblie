@@ -4,6 +4,9 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.text.TextUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 空处理
  */
@@ -16,6 +19,20 @@ public class EmptyUtils {
     public static String getString(String original, String empty) {
         return TextUtils.isEmpty(original) ? empty : original;
     }
+    //时间戳处理
+    public static String getDateString(String dateStr) {
+        if(!TextUtils.isEmpty(dateStr)){
+            dateStr=dateStr.replace("/Date(","").replace(")/","");
+            String time = dateStr.substring(0,dateStr.length()-5);
+            Date date = new Date(Long.parseLong(time));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            return format.format(date);
+        }else{
+            return "";
+        }
+
+    }
+
     public static String isState(String original,String s1,String s2,String s3) {
         if(TextUtils.isEmpty(original)){
             return s1;

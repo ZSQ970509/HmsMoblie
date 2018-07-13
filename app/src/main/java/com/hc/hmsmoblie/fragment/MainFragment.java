@@ -105,6 +105,8 @@ public class MainFragment extends YcMvpLazyFragment<MainP> implements MainC.V {
                             break;
                         case 1386:
                             helper.setImageResource(R.id.ivMainItem, icon[5]);
+
+
                             break;
                         case 1387:
                             helper.setImageResource(R.id.ivMainItem, icon[6]);

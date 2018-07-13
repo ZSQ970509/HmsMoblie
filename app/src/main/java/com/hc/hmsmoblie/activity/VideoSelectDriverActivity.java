@@ -91,6 +91,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
                             HKVideoActivity.newInstance(getActivity(),videoBean);
                         } else {
+                            showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
 
                         }
