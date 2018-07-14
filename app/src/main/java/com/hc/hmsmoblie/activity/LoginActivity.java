@@ -1,7 +1,10 @@
 package com.hc.hmsmoblie.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
@@ -17,6 +20,8 @@ import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.hc.hmsmoblie.utils.PhoneSystemUtils;
 import com.hc.hmsmoblie.widget.CommonDialog;
 import com.yc.yclibrary.utils.ActivityUtils;
+
+import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -78,13 +83,46 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
             if (updateVersionJson.getUpdateForceUpdate().equals("1")) {
                 updatedVersion(updateVersionJson.getUpdateDownLoadUrl());
             } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                // 设置提示框的标题
+
+                BigDecimal bg = new BigDecimal(Double.parseDouble(updateVersionJson.getUpdateFileSize())/1024/1024);
+                double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                String appSize = f1+"";
+                builder.setTitle("发现新版本").
+                        // 设置提示框的图标
+                                setIcon(R.drawable.login_icon).
+                        // 设置要显示的信息
+                                setMessage("最新版本：V"+updateVersionJson.getUpdateVersionName()+"\n"+"新版本大小："+appSize+"M\n\n"+"更新内容：\n"+updateVersionJson.getUpdateLogMsg()).
+                        // 设置确定按钮
+                                setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                updatedVersion(updateVersionJson.getUpdateDownLoadUrl());
+                            }
+                        }).
+                        // 设置取消按钮,null是什么都不做，并关闭对话框
+                                setNegativeButton("取消", null);
+                // 生产对话框
+                AlertDialog alertDialog = builder.create();
+                alertDialog.setCanceledOnTouchOutside(false);
+                // 显示对话框
+                alertDialog.show();
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.rgb(88,190,252));
+            /*    // 生产对话框
+                AlertDialog alertDialog = builder.create();
+                alertDialog.setCanceledOnTouchOutside(false);
+                // 显示对话框
+                alertDialog.show();
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.rgb(88,190,252));
                 CommonDialog commonDialog = new CommonDialog(getActivity());
                 commonDialog.setMsg(updateVersionJson.getUpdateLogMsg())
                         .setTitle("是否更新版本")
                         .setRightBtnText("更新")
                         .setLeftBtnText("取消")
                         .setRightClick(v -> updatedVersion(updateVersionJson.getUpdateDownLoadUrl()))
-                        .show();
+                        .show();*/
             }
         }
     }
