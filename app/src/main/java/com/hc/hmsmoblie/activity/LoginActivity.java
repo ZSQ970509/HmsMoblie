@@ -8,17 +8,20 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
+import com.hc.hmsmoblie.bean.type.UserTypeId;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.hc.hmsmoblie.utils.PhoneSystemUtils;
 import com.hc.hmsmoblie.widget.CommonDialog;
+import com.hc.hmsmoblie.widget.LogonServerDialog;
 import com.yc.yclibrary.utils.ActivityUtils;
 
 import java.math.BigDecimal;
@@ -86,14 +89,14 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 // 设置提示框的标题
 
-                BigDecimal bg = new BigDecimal(Double.parseDouble(updateVersionJson.getUpdateFileSize())/1024/1024);
+                BigDecimal bg = new BigDecimal(Double.parseDouble(updateVersionJson.getUpdateFileSize()) / 1024 / 1024);
                 double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                String appSize = f1+"";
+                String appSize = f1 + "";
                 builder.setTitle("发现新版本").
                         // 设置提示框的图标
                                 setIcon(R.drawable.login_icon).
                         // 设置要显示的信息
-                                setMessage("最新版本：V"+updateVersionJson.getUpdateVersionName()+"\n"+"新版本大小："+appSize+"M\n\n"+"更新内容：\n"+updateVersionJson.getUpdateLogMsg()).
+                                setMessage("最新版本：V" + updateVersionJson.getUpdateVersionName() + "\n" + "新版本大小：" + appSize + "M\n\n" + "更新内容：\n" + updateVersionJson.getUpdateLogMsg()).
                         // 设置确定按钮
                                 setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
@@ -109,7 +112,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                 alertDialog.setCanceledOnTouchOutside(false);
                 // 显示对话框
                 alertDialog.show();
-                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.rgb(88,190,252));
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.rgb(88, 190, 252));
             /*    // 生产对话框
                 AlertDialog alertDialog = builder.create();
                 alertDialog.setCanceledOnTouchOutside(false);
@@ -136,7 +139,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
         PhoneSystemUtils.downloadFile(getActivity(), apkUrl);
     }
 
-    @OnClick({R.id.btnLogin, R.id.login_save_password_tv})
+    @OnClick({R.id.btnLogin, R.id.login_save_password_tv, R.id.ivLoginSetting})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
@@ -144,6 +147,18 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                 break;
             case R.id.login_save_password_tv:
                 mIsSavePasswordCb.setChecked(!mIsSavePasswordCb.isChecked());
+                break;
+            case R.id.ivLoginSetting:
+                LogonServerDialog.newInstance(getActivity())
+                        .setLeftOnClick((url, port, userTypeId) -> {
+                            UserInfoPref.setUrl(url);
+                            UserInfoPref.setPort(port);
+                            UserInfoPref.setUserTypeId(userTypeId.getIndex());
+                        })
+                        .setUrl(UserInfoPref.getUrl())
+                        .setPort(UserInfoPref.getPort())
+                        .setUserType(UserTypeId.getUserTypeId(UserInfoPref.getUserTypeId()))
+                        .show();
                 break;
         }
     }

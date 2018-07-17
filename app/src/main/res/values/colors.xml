@@ -7,7 +7,9 @@
     <color name="colorTrance2">#20000000</color>
     <color name="colorWhite">#FAFAFA</color>
     <color name="colorBlack">#FF000000</color>
+    <color name="colorBlack3">#333333</color>
     <color name="colorGray">#262626</color>
+    <color name="colorGray6">#666666</color>
     <color name="colorRed500">#F44336</color>
     <color name="itemTitleColor">#233238</color>
     <color name="itemContentColor">#37474F</color>

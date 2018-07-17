@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray">
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,7 +15,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="matrix" />
-    </FrameLayout>
+
+        <ImageView
+            android:id="@+id/ivImageLogPanoramaDetailsBefore"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_left" />
+
+        <ImageView
+            android:id="@+id/ivImageLogPanoramaDetailsNext"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_right" />
+    </RelativeLayout>
 
     <include layout="@layout/actionbar_layout" />
-</FrameLayout>
+</RelativeLayout>

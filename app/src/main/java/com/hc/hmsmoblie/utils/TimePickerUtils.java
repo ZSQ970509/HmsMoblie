@@ -7,8 +7,11 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static com.hc.hmsmoblie.utils.FormatUtils.FORMAT_TIME;
 
 /**
  * Created by Administrator on 2018/6/19.
@@ -25,7 +28,7 @@ public class TimePickerUtils {
         return pvTime;
     }
 
-    public static void showPickerView(Context context, String title, TextView textView , boolean month, boolean day, TimePickerView.OnTimeSelectListener onTimeSelectListener) {
+    public static void showPickerView(Context context, String title, TextView textView, boolean month, boolean day, TimePickerView.OnTimeSelectListener onTimeSelectListener) {
         //时间选择器
         //.Builder(context, (Date date, View view) -> textView.setText(FormatUtils.dateToString(date,month,day)))
         TimePickerView timePickerView = new TimePickerView
@@ -39,7 +42,8 @@ public class TimePickerUtils {
         timePickerView.setDate(Calendar.getInstance());
         timePickerView.show();
     }
-    public static void showPickerView(Context context, String title, TextView textView, String  defaultCalendar, String rangStartTime, String rangEndTime) {
+
+    public static void showPickerView(Context context, String title, TextView textView, String defaultCalendar, String rangStartTime, String rangEndTime) {
         //时间选择器
         TimePickerView timePickerView = new TimePickerView
                 .Builder(context, (Date date, View view) -> textView.setText(FormatUtils.dateToString(date)))
@@ -63,5 +67,24 @@ public class TimePickerUtils {
             timePickerView.dismiss();
     }
 
+    public static String getMonthFirstDay() {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(FormatUtils.FORMAT_TIME);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.getTime();
+        return dateFormater.format(cal.getTime()) + "";
+    }
 
+    public static String getMonthToday() {
+        return FormatUtils.calendarToString(Calendar.getInstance());
+    }
+
+    public static String getMonthEndDay() {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(FormatUtils.FORMAT_TIME);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.getTime();
+        cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return dateFormater.format(cal.getTime()) + "";
+    }
 }

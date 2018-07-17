@@ -46,11 +46,20 @@
         app:layout_constraintStart_toEndOf="@+id/verticalLeft"
         app:layout_constraintTop_toTopOf="@+id/horizontalTop">
 
+        <ImageView
+            android:id="@+id/ivLoginSetting"
+            android:layout_width="@dimen/x48"
+            android:layout_height="@dimen/x48"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/x24"
+            android:layout_marginTop="@dimen/y24"
+            app:srcCompat="@drawable/setting" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
+            android:orientation="vertical"
             android:padding="16dp">
 
             <ImageView
@@ -80,16 +89,16 @@
                     android:id="@+id/tvLoginUserPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
+                    android:hint="密码"
 
-                    android:hint="密码" />
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y32"
                 android:layout_gravity="right"
+                android:layout_marginTop="@dimen/y32"
                 android:gravity="center">
 
                 <CheckBox
@@ -105,8 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:text="记住密码"
-                    android:textSize="@dimen/y32"
-                    android:textColor="#666666" />
+                    android:textColor="#666666"
+                    android:textSize="@dimen/y32" />
             </LinearLayout>
 
             <Button
@@ -115,8 +124,7 @@
                 android:layout_height="@dimen/y72"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y32"
-                android:background="@drawable/loginlogin"
-                />
+                android:background="@drawable/loginlogin" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

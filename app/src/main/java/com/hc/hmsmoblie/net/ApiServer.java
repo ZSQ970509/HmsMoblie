@@ -44,8 +44,9 @@ import retrofit2.http.Query;
  */
 
 public interface ApiServer {
-    @GET(UrlHelper.BASE_API + "hmsLogin")
-    Observable<HttpResponse<LoginJson>> login(@Query("userName") String userName, @Query("userPassWord") String passWord);
+    @FormUrlEncoded
+    @POST(UrlHelper.BASE_API + "hmsLogin")
+    Observable<HttpResponse<LoginJson>> login(@Field("userName") String userName, @Field("userPassWord") String passWord, @Field("typeid") String userType);
 
     @Headers(EasyCode.OTHER_BASE_URL+":"+UrlHelper.BASE_URL_UPDATE)
     @GET(UrlHelper.API_UPDATE + "update")

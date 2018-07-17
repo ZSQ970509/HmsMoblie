@@ -19,34 +19,44 @@ public class EmptyUtils {
     public static String getString(String original, String empty) {
         return TextUtils.isEmpty(original) ? empty : original;
     }
+
+    public static String getString(String original, String empty, String suffix) {
+        return TextUtils.isEmpty(original) ? empty : original + suffix;
+    }
+
+    public static String getStringNum(String original, String empty, String suffix) {
+        return TextUtils.isEmpty(original) ? empty : Double.parseDouble(original) + suffix;
+    }
+
     //时间戳处理
     public static String getDateString(String dateStr) {
-        if(!TextUtils.isEmpty(dateStr)){
-            dateStr=dateStr.replace("/Date(","").replace(")/","");
-            String time = dateStr.substring(0,dateStr.length()-5);
+        if (!TextUtils.isEmpty(dateStr)) {
+            dateStr = dateStr.replace("/Date(", "").replace(")/", "");
+            String time = dateStr.substring(0, dateStr.length() - 5);
             Date date = new Date(Long.parseLong(time));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             return format.format(date);
-        }else{
+        } else {
             return "";
         }
 
     }
 
-    public static String isState(String original,String s1,String s2,String s3) {
-        if(TextUtils.isEmpty(original)){
+    public static String isState(String original, String s1, String s2, String s3) {
+        if (TextUtils.isEmpty(original)) {
             return s1;
-        }else if(original.equals("0")){
+        } else if (original.equals("0")) {
             return s2;
-        }else
+        } else
             return s3;
     }
+
     public static int isState(String original, @DrawableRes int s1, @DrawableRes int s2, @DrawableRes int s3) {
-        if(TextUtils.isEmpty(original)){
+        if (TextUtils.isEmpty(original)) {
             return s1;
-        }else if(original.equals("0")){
+        } else if (original.equals("0")) {
             return s2;
-        }else
+        } else
             return s3;
     }
 }

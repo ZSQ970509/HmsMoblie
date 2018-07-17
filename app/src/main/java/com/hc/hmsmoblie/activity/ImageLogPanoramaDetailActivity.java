@@ -7,7 +7,16 @@ import android.view.View;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseActivity;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
+import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
+import com.hc.hmsmoblie.mvp.contact.ImageLogPanoramaListC;
+import com.hc.hmsmoblie.mvp.presenter.ImageLogPanoramaListP;
 import com.hc.hmsmoblie.widget.MatrixImageView;
+import com.yc.yclibrary.base.YcMvpAppCompatActivity;
+import com.yc.yclibrary.exception.ApiException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,22 +25,43 @@ import butterknife.OnClick;
  * 全局图详情页面(影响日志)
  */
 
-public class ImageLogPanoramaDetailActivity extends BaseActivity {
+public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPanoramaListP> implements ImageLogPanoramaListC.V {
     @BindView(R.id.ivImageLogPanoramaDetails)
     MatrixImageView mIvPanorama;
-    private String mImgUrl;
-    private String mPuzzleId;//全景图ID
-    private String mImageTimes;//轮数
-    private static final String IMG_URL = "img_url";
-    private static final String PUZZLE_ID = "puzzle_id";
-    private static final String IMAGE_TIMES = "image_times";
+    //    private String mImgUrl;
+//    private String mPuzzleId;//全景图ID
+//    private String mImageTimes;//轮数
+    private static final String DATA = "data";
+    private static final String PAGE_INDEX = "page_index";
+    private static final String PAGE_TOTAL = "page_total";
+    private static final String CAM_ID = "cam_id";
+    private static final String START_TIME = "start_time";
+    private static final String END_TIME = "end_time";
+    private static final String SELECT_POSITION = "select_position";
+    private int mPageIndex = 0;
+    private final int mPageSize = 10;
+    private int mPageTotal = 0;
+    private int mSelectPosition = 0;
+    private String mCamId;
+    private String mStartTime;
+    private String mEndTime;
+    private ArrayList<ImageLogPanoramaListJson.ListBean> mData;
 
-    public static void newInstance(Activity activity, String imgUrl, String puzzleId, String imageTimes) {
+    public static void newInstance(Activity activity, ArrayList<ImageLogPanoramaListJson.ListBean> data, int pageIndex, int pageTotal, String camId, String startTime, String endTime, int position) {
         Intent intent = new Intent(activity, ImageLogPanoramaDetailActivity.class);
-        intent.putExtra(IMG_URL, imgUrl);
-        intent.putExtra(PUZZLE_ID, puzzleId);
-        intent.putExtra(IMAGE_TIMES, imageTimes);
+        intent.putExtra(DATA, data);
+        intent.putExtra(PAGE_INDEX, pageIndex);
+        intent.putExtra(PAGE_TOTAL, pageTotal);
+        intent.putExtra(CAM_ID, camId);
+        intent.putExtra(START_TIME, startTime);
+        intent.putExtra(END_TIME, endTime);
+        intent.putExtra(SELECT_POSITION, position);
         activity.startActivity(intent);
+    }
+
+    @Override
+    protected ImageLogPanoramaListP loadPresenter() {
+        return new ImageLogPanoramaListP();
     }
 
     @Override
@@ -43,11 +73,14 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
     protected void initView(Bundle bundle) {
         setToolBar("");
         mActionBarRl.setBackgroundResource(R.color.colorTrance);
-        mImgUrl = getIntent().getStringExtra(IMG_URL);
-        mPuzzleId = getIntent().getStringExtra(PUZZLE_ID);
-        mImageTimes = getIntent().getStringExtra(IMAGE_TIMES);
+        mData = (ArrayList<ImageLogPanoramaListJson.ListBean>) getIntent().getSerializableExtra(DATA);
+        mPageIndex = getIntent().getIntExtra(PAGE_INDEX, 0);
+        mPageTotal = getIntent().getIntExtra(PAGE_TOTAL, 0);
+        mCamId = getIntent().getStringExtra(CAM_ID);
+        mStartTime = getIntent().getStringExtra(START_TIME);
+        mEndTime = getIntent().getStringExtra(END_TIME);
+        mSelectPosition = getIntent().getIntExtra(SELECT_POSITION, 0);
 //        mImgUrl = "http://hms.jsqqy.com:7878/Handler/PanoramaHandler.ashx?action=GetPicByPuzzleAuto&path=http://ftp.jsqqy.com:8123/upfile/Puzzle/ptimg/thumbnailsAuto/155655669_001/330807_201806241320062845.jpg&recordId=330807";
-        mIvPanorama.loadNetImage(mImgUrl);
         mIvPanorama.setOnDoubleClick(new MatrixImageView.OnDoubleClick() {
             @Override
             public void onClick(float pointInViewX, float pointInViewY, double scale, float originalImageHeight, float originalImageWidth) {
@@ -59,8 +92,66 @@ public class ImageLogPanoramaDetailActivity extends BaseActivity {
                     showToast("请点击图片的位置（非空白处）");
                     return;
                 }
-                ImageLogWideAngleActivity.newInstance(getActivity(), mPuzzleId, mImageTimes, x + "", y + "");
+                ImageLogWideAngleActivity.newInstance(getActivity(), mData.get(mSelectPosition).getRecordId() + "", mData.get(mSelectPosition).getImageTimes() + "", x + "", y + "");
             }
         });
+    }
+
+    boolean isLoaded = false;
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        //防止加载图片时，mIvPanorama的高宽还未获取到
+        if (!isLoaded) {
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+            isLoaded = true;
+        }
+    }
+    //上一张
+    private void before() {
+        if (mSelectPosition > 0) {
+            mSelectPosition--;
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+        } else {
+            showToast("已经是第一张！");
+        }
+    }
+    //下一张
+    private void next() {
+        if (mSelectPosition < mData.size() - 1) {
+            mSelectPosition++;
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+        } else {
+            if (mPageIndex >= mPageTotal) {
+                showToast("已经是最后一张！");
+            } else {
+                mPresenter.getPanoramaList(mCamId, mStartTime, mEndTime, mPageIndex, mPageSize);
+            }
+        }
+
+    }
+
+    @OnClick({R.id.ivImageLogPanoramaDetailsNext, R.id.ivImageLogPanoramaDetailsBefore})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivImageLogPanoramaDetailsBefore:
+                before();
+                break;
+            case R.id.ivImageLogPanoramaDetailsNext:
+                next();
+                break;
+        }
+    }
+
+    @Override
+    public void onPanoramaListSuccess(ImageLogPanoramaListJson json) {
+        mData.addAll(json.getList());
+        next();
+    }
+
+    @Override
+    public void onPanoramaListFail(ApiException apiException) {
+        showToast(apiException.getMessage());
     }
 }

@@ -61,8 +61,18 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
     }
 
     public void setImgInViewPoint(float x, float y) {
+        reset();
         mImgInViewPoint.set(x, y);
         Log.e("asda", "开始时位置;" + mImgInViewPoint.x + "  " + mImgInViewPoint.y);
+    }
+
+    public void reset() {
+        midPoint = null;
+        mClickFirstTime = 0;
+        mClickDownTime = 0;
+        mImageScale = 1;
+        mImageScaleOne = 1;
+        mImgInViewPoint = new PointF(0, 0);
     }
 
     @Override

@@ -193,10 +193,9 @@ public class MatrixImageView extends AppCompatImageView {
         float midY = (event.getY(1) + event.getY(0)) / 2;
         return new PointF(midX, midY);
     }
-
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
         mImageViewWidth = getMeasuredWidth();
         mImageViewHeight = getMeasuredHeight();
         Log.i("aa", "----------onSizeChanged-------------");
@@ -204,7 +203,6 @@ public class MatrixImageView extends AppCompatImageView {
         Log.i("aa", "getHeight:" + getHeight() + " getWidth" + getWidth());
         Log.i("aa", "----------onSizeChanged-------------");
     }
-
     public interface OnDoubleClick {
         /**
          * 双击回调

@@ -1,6 +1,8 @@
 package com.hc.hmsmoblie.db;
 
 
+import com.hc.hmsmoblie.bean.type.UserTypeId;
+
 import io.reactivex.annotations.NonNull;
 
 /**
@@ -14,11 +16,38 @@ public class UserInfoPref {
     private static final String mUserPassword = "mUserPassword";//用户密码
     private static final String mSavePassWord = "mSavePassWord";//是否记住密码 true  false
 
+    private static final String mUserTypeId = "mUserTypeId";//用户类型id
+    private static final String mUrl = "mUrl";//地址
+    private static final String mPort = "mPort";//端口
 
     private static PrefHelper mPrefHelper = PrefHelper.Instance;
 
+    public static int getUserTypeId() {
+        return mPrefHelper.getPref(mUserTypeId, 0);
+    }
+
+    public static void setUserTypeId(@NonNull int userTypeId) {
+        mPrefHelper.setPref(mUserTypeId, userTypeId);
+    }
+
+    public static String getUrl() {
+        return mPrefHelper.getPref(mUrl, "");
+    }
+
+    public static void setUrl(@NonNull String url) {
+        mPrefHelper.setPref(mUrl, url);
+    }
+
+    public static String getPort() {
+        return mPrefHelper.getPref(mPort, "");
+    }
+
+    public static void setPort(@NonNull String port) {
+        mPrefHelper.setPref(mPort, port);
+    }
+
     public static String getUserName() {
-        return mPrefHelper.getPref(mUserName, mUserName);
+        return mPrefHelper.getPref(mUserName, "");
     }
 
     public static void setUserName(@NonNull String userName) {

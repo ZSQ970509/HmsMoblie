@@ -76,7 +76,7 @@ public class LadderControlDeviceListJson {
         private String projName;
         private String AreaName;
         private String LastTime;
-        private double Distance;
+        private String Distance;
         private String BattleVolta;
         private String Tamper;
         private String Charging;
@@ -225,11 +225,11 @@ public class LadderControlDeviceListJson {
             this.LastTime = LastTime;
         }
 
-        public double getDistance() {
+        public String getDistance() {
             return Distance;
         }
 
-        public void setDistance(double Distance) {
+        public void setDistance(String Distance) {
             this.Distance = Distance;
         }
 

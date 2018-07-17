@@ -20,6 +20,7 @@ import com.hc.hmsmoblie.base.BaseActivity;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.fragment.MainFragment;
+import com.hc.hmsmoblie.utils.EmptyUtils;
 import com.hc.hmsmoblie.utils.PhoneSystemUtils;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 import com.yc.yclibrary.utils.ActivityUtils;
@@ -42,9 +43,11 @@ public class MainActivity extends BaseActivity {
     RelativeLayout mainRelativeLayoutAbout;
     @BindView(R.id.main_RelativeLayout_Exit)
     RelativeLayout mainRelativeLayoutExit;
+
     public static void newInstance(Activity activity) {
         activity.startActivity(new Intent(activity, MainActivity.class));
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.main_activity;
@@ -83,10 +86,11 @@ public class MainActivity extends BaseActivity {
         View headerView = mNavigationView.getHeaderView(0);
         CircleImageView mUserAvatarView = (CircleImageView) headerView.findViewById(R.id.nav_header_pic);
         TextView mUserName = (TextView) headerView.findViewById(R.id.nav_header_name);
-        mUserName.setText(UserInfoPref.getUserName());
+        mUserName.setText(EmptyUtils.getString(UserInfoPref.getUserName(), UserInfoPref.getUserAccount()));
         mNavigationView.setItemIconTintList(null);
     }
-    @OnClick({R.id.main_RelativeLayout_UpadtePass,R.id.main_RelativeLayout_Setting,R.id.main_RelativeLayout_About,R.id.main_RelativeLayout_Exit})
+
+    @OnClick({R.id.main_RelativeLayout_UpadtePass, R.id.main_RelativeLayout_Setting, R.id.main_RelativeLayout_About, R.id.main_RelativeLayout_Exit})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.main_RelativeLayout_UpadtePass://修改密码
@@ -127,5 +131,6 @@ public class MainActivity extends BaseActivity {
      */
     @SuppressLint("MissingSuperCall")
     @Override
-    protected void onSaveInstanceState(Bundle outState) {}
+    protected void onSaveInstanceState(Bundle outState) {
+    }
 }

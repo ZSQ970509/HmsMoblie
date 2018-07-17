@@ -52,7 +52,7 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
     RecyclerView rvOnlineTime;
     OnlineTimeAdapter onlineTimeAdapter;
     ArrayList<OnlineTimeJson.ListBean> dataList = new ArrayList<OnlineTimeJson.ListBean>();
-    View headerView ;
+    View headerView;
     /**
      * 用户选中的开始时间
      */
@@ -62,11 +62,12 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
      */
     private String mSelectTimeEnd = "";
 
-    public static void newInstance(Activity activity , String proId) {
+    public static void newInstance(Activity activity, String proId) {
         Intent intent = new Intent(activity, OnlineTimeActivity.class);
         intent.putExtra(PRO_ID, proId);
         activity.startActivity(intent);
     }
+
     @Override
     protected OnlineTimeP loadPresenter() {
         return new OnlineTimeP();
@@ -80,20 +81,21 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("在线时间");
-       mProID = getIntent().getStringExtra(PRO_ID);
-        RecyclerView.LayoutManager layoutManager =
-             new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        mProID = getIntent().getStringExtra(PRO_ID);
+        tvStartDateOnlineTime.setText(TimePickerUtils.getMonthFirstDay());
+        tvEndDateOnlineTime.setText(TimePickerUtils.getMonthToday());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
         rvOnlineTime.setLayoutManager(layoutManager);
         onlineTimeAdapter = new OnlineTimeAdapter(R.layout.item_online_time, dataList);
         rvOnlineTime.setAdapter(onlineTimeAdapter);
+        mPresenter.GetOnlineRate(mProID, tvStartDateOnlineTime.getText().toString(), tvEndDateOnlineTime.getText().toString());
     }
 
 
-    @OnClick({R.id.btn_Search_OnlineTime,R.id.tv_StartDate_OnlineTime,R.id.tv_EndDate_OnlineTime})
+    @OnClick({R.id.btn_Search_OnlineTime, R.id.tv_StartDate_OnlineTime, R.id.tv_EndDate_OnlineTime})
     void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_StartDate_OnlineTime:
-
                 TimePickerUtils.showPickerView(getActivity(), "开始时间", tvStartDateOnlineTime, mSelectTimeStart, "1234-10-11", tvEndDateOnlineTime.getText().toString());
                 break;
             case R.id.tv_EndDate_OnlineTime:
@@ -102,8 +104,7 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
             case R.id.btn_Search_OnlineTime:
                 mSelectTimeStart = tvStartDateOnlineTime.getText().toString();
                 mSelectTimeEnd = tvEndDateOnlineTime.getText().toString();
-
-                mPresenter.GetOnlineRate(mProID,mSelectTimeStart,mSelectTimeEnd);
+                mPresenter.GetOnlineRate(mProID, mSelectTimeStart, mSelectTimeEnd);
                 break;
         }
     }
@@ -112,18 +113,19 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
     public void onGetOnlineRateSuccess(ArrayList<OnlineTimeJson> onlineTimeJson) {
         dataList.clear();
         double sumPercent = 0;//算取平均百分率
-        for (int i = 0 ; i< onlineTimeJson.get(0).getList().size() ; i++){
+        for (int i = 0; i < onlineTimeJson.get(0).getList().size(); i++) {
             sumPercent += onlineTimeJson.get(0).getList().get(i).getCamOnlineRate();
         }
 
-        if(headerView != null) {//先把旧的头部view移除
+        if (headerView != null) {//先把旧的头部view移除
             onlineTimeAdapter.removeHeaderView(headerView);
         }
-        headerView = getHeaderView((int) (sumPercent/onlineTimeJson.get(0).getList().size()*100));
+        headerView = getHeaderView((int) (sumPercent / onlineTimeJson.get(0).getList().size() * 100));
         onlineTimeAdapter.addHeaderView(headerView);
         dataList.addAll(onlineTimeJson.get(0).getList());
         onlineTimeAdapter.notifyDataSetChanged();
     }
+
     private View getHeaderView(int sumPercent) {
         View view = getLayoutInflater().inflate(R.layout.item_average_online_time, (ViewGroup) rvOnlineTime.getParent(), false);
         PercentageRing prAverage = (PercentageRing) view.findViewById(R.id.pr_Rate_OnlineTime_Item);
@@ -131,6 +133,7 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
 
         return view;
     }
+
     private View.OnClickListener getRemoveHeaderListener() {
         return new View.OnClickListener() {
             @Override
@@ -139,6 +142,7 @@ public class OnlineTimeActivity extends BaseMvpActivity<OnlineTimeP> implements 
             }
         };
     }
+
     @Override
     public void onGetOnlineRateFail(String msg) {
 

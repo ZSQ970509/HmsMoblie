@@ -25,6 +25,8 @@ import com.hc.hmsmoblie.utils.LoadImgUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
 import com.yc.yclibrary.exception.ApiException;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -69,6 +71,8 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
     protected void initView(Bundle bundle) {
         setToolBar("全景图列表");
         mCamId = getIntent().getStringExtra(CAM_ID);
+        mTvStartTime.setText(TimePickerUtils.getMonthFirstDay());
+        mTvEndTime.setText(TimePickerUtils.getMonthToday());
 //        mCamId = "1032879";
         mAdapter = new BaseItemDraggableAdapter<ImageLogPanoramaListJson.ListBean, BaseViewHolder>(R.layout.image_log_panorama_item, null) {
             @Override
@@ -96,8 +100,8 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             searchPro();
         });
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
-                    ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
-                    ImageLogPanoramaDetailActivity.newInstance(getActivity(), itemData.getPuzzleImg(), itemData.getRecordId() + "", itemData.getImageTimes() + "");
+//                    ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
+                    ImageLogPanoramaDetailActivity.newInstance(getActivity(), (ArrayList<ImageLogPanoramaListJson.ListBean>) adapter.getData(), mPageIndex, mPageTotal, mCamId, mTvStartTime.getText().toString(), mTvEndTime.getText().toString(), position);
                 }
         );
         searchPro();

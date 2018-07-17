@@ -5,13 +5,11 @@ import android.graphics.Color;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.hc.hmsmoblie.R;
@@ -149,20 +147,24 @@ public class ChartUtils {
      * @param name           图表下方标示的名称
      * @return
      */
-    public static LineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name) {
+    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < dataList.size(); i++) {
+//            if (dataList.get(i) != -1)
             yVals.add(new Entry(i, Float.parseFloat(dataList.get(i) + "")));
+//            else
+//                yVals.add(null);
         }
-        LineDataSet set;
+        EmptyLineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
-            set = (LineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
+            set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
             set.setLabel(name);
             set.setValues(yVals);
         } else {
-            set = new LineDataSet(yVals, name);
+            set = new EmptyLineDataSet(yVals, name);
+            set.setColors(new int[]{color, Color.parseColor("#00000000")});
             set.setAxisDependency(YAxis.AxisDependency.LEFT);
-            set.setColor(color);//设置线的颜色
+//            set.setColor(color);//设置线的颜色
             set.setLineWidth(2.5f);//设置线的宽度
 
             //顶点圆
@@ -180,5 +182,24 @@ public class ChartUtils {
             set.setHighLightColor(Color.GRAY); //指引线的颜色。
         }
         return set;
+    }
+
+    /**
+     * 折线图多种颜色（实现折线图间断）
+     */
+    public static class EmptyLineDataSet extends LineDataSet {
+        public EmptyLineDataSet(List<Entry> yVals, String label) {
+            super(yVals, label);
+        }
+
+        @Override
+        public int getColor(int index) {
+            if (mValues.get(index).getY() == -1 || (mValues.size() > index && mValues.get(index + 1).getY() == -1)) {
+                return mColors.get(1);
+            } else {
+                return mColors.get(0);
+            }
+//            return super.getColor(index);
+        }
     }
 }

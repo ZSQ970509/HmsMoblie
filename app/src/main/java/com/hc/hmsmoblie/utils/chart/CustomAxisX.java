@@ -18,7 +18,7 @@ public class CustomAxisX implements IAxisValueFormatter {
 
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
-        if (value >= mValues.size()) {
+        if (value >= mValues.size() || value < 0) {
             return "";
         } else {
             return mValues.get((int) value);

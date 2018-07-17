@@ -71,13 +71,12 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
             @Override
             protected void convert(BaseViewHolder helper, LadderControlDeviceListJson.ListBean item) {
                 helper.setText(R.id.tvLadderControlDeviceName, "设备名称：" + EmptyUtils.getString(item.getDeviceName()))
-                        .setText(R.id.tvLadderControlDeviceHeight, "高度行程：" + item.getDistance())
-                        .setText(R.id.tvLadderControlDeviceRemoveState, "防拆状态：" + EmptyUtils.getString((item.getTamper())))
+                        .setText(R.id.tvLadderControlDeviceHeight, "高度行程：" + EmptyUtils.getStringNum(item.getDistance(), "-", "m"))
+                        .setText(R.id.tvLadderControlDeviceRemoveState, "防拆状态：" + EmptyUtils.getString(item.getTamper(), "-"))
                         .setText(R.id.tvLadderControlDeviceState, item.getState() == 0 ? "状态：打开" : "状态：关闭")
-                        .setText(R.id.tvLadderControlDeviceBattle, "电池电量：" + EmptyUtils.getString(item.getBattleVolta()))
-                        .setText(R.id.tvLadderControlDeviceBattleState, "充电状态：" + EmptyUtils.getString(item.getCharging()))
+                        .setText(R.id.tvLadderControlDeviceBattle, "电池电量：" + EmptyUtils.getString(item.getBattleVolta(), "-"))
+                        .setText(R.id.tvLadderControlDeviceBattleState, "充电状态：" + EmptyUtils.getString(item.getCharging(), "-"))
                         .setText(R.id.tvLadderControlDeviceTime, "最后一次操作：" + EmptyUtils.getString(item.getLastTime(), "暂时没有任何操作"));
-
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {
@@ -98,7 +97,8 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
                 LadderControlDetailsActivity.newInstance(getActivity(), mProID, ((LadderControlDeviceListJson.ListBean) adapter.getItem(position)).getId())
         );
-
+        initRefreshAndLoadMore();
+        searchDeviceList();
     }
 
     private void searchDeviceList() {

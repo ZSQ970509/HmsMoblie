@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
@@ -28,7 +25,6 @@ import com.hc.hmsmoblie.utils.chart.ChartUtils;
 import com.orhanobut.logger.Logger;
 import com.yc.yclibrary.exception.ApiException;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,7 +71,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
     LineChart mLineChart;
     @BindView(R.id.lcDetails2)
     LineChart mLineChart2;
-    private EnvironmentTimeTypeEnum mTimeTypeEnum = EnvironmentTimeTypeEnum.Month;
+    private EnvironmentTimeTypeEnum mTimeTypeEnum = EnvironmentTimeTypeEnum.Day;
     //    private EnvironmentParaTypeEnum mParaTypeEnum = EnvironmentParaTypeEnum.PM2点5;
     private String mCamId = "";
     private String mSeqId = "";
@@ -110,10 +106,6 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         mCamId = getIntent().getStringExtra(CAM_ID);
         mSeqId = getIntent().getStringExtra(SEQ_ID);
         mProId = getIntent().getStringExtra(PRO_ID);
-//        mProId = "33193";
-//        mCamId = "";
-//        mSeqId = "1440-0028-sclw-3093";
-//        mTime = "2018-06-01";
         ChartUtils.initLineChart(mLineChart, getActivity());
         ChartUtils.initLineChart(mLineChart2, getActivity());
         mTvTime.setText(FormatUtils.dateToString(mSelectTimed));
@@ -151,9 +143,9 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
             return;
         }
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
-        LineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值");
-        LineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值");
-        LineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值");
+        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值");
+        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值");
+        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值");
         lineChart.setData(new LineData(setData1, setData2, setData3));
         ChartMarkerDataBean markerData = new ChartMarkerDataBean();
         markerData.setDataName1("均值");

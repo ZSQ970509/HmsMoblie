@@ -26,7 +26,7 @@ public class FormatUtils {
         return String.format("%.3f", value);
     }
 
-    private final static String FORMAT_TIME = "yyyy-MM-dd";
+    public final static String FORMAT_TIME = "yyyy-MM-dd";
     private final static String FORMAT_TIME_MONTH = "yyyy-MM";
     private final static String FORMAT_TIME_YEAR = "yyyy";
 

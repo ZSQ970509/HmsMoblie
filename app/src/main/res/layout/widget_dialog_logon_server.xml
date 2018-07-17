@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTrance">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_white_round"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/y24"
+            android:text="登录服务器"
+            android:textColor="@color/colorBlack3"
+            android:textSize="@dimen/item_title_size" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/y30"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/ItemContentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址："
+                    android:textColor="@color/colorGray6" />
+
+                <TextView
+                    android:id="@+id/edDialogUrl"
+                    style="@style/ItemContentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_no_edit"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:text="hms.jsqqy.com"
+                    android:textColor="@color/colorBlack3" />
+
+                <TextView
+                    style="@style/ItemContentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:text="端口：" />
+
+                <EditText
+                    android:id="@+id/edDialogPort"
+                    style="@style/ItemContentTv"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dialog_edit"
+                    android:padding="4dp"
+                    android:singleLine="true"
+                    android:text="5066"
+                    android:textColor="@color/colorBlack3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y16"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/ItemContentTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户类型："
+                    android:textColor="@color/colorGray6" />
+
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/spDialogUserType"
+                    android:layout_width="@dimen/x220"
+                    android:layout_height="@dimen/y64"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:textColor="@color/colorBlack3"
+                    app:arrowTint="@color/colorBlack"
+                    app:textTint="@color/colorBlack3" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y24"
+            android:layout_marginTop="@dimen/y58"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvDialogLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x56"
+                android:background="@drawable/dialog_confirm" />
+
+            <TextView
+                android:id="@+id/tvDialogRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dialog_cancel" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
