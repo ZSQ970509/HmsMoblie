@@ -143,7 +143,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                mPresenter.login(mUserAccountTv.getText().toString(), mUserPasswordTv.getText().toString());
+                mPresenter.login(mUserAccountTv.getText().toString(), mUserPasswordTv.getText().toString(), UserTypeId.getUserTypeId(UserInfoPref.getUserTypeId()).getTypeId());
                 break;
             case R.id.login_save_password_tv:
                 mIsSavePasswordCb.setChecked(!mIsSavePasswordCb.isChecked());

@@ -22,10 +22,10 @@ import java.util.List;
 
 public class LoginP extends BasePresenter<LoginC.V> implements LoginC.P {
     @Override
-    public void login(String userAccount, String userPassword) {
+    public void login(String userAccount, String userPassword,String userType) {
         getIView().showLoading("正在登陆中...");
         new LoginM()
-                .login(userAccount, userPassword)
+                .login(userAccount, userPassword,userType)
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<LoginJson>>() {
                     @Override

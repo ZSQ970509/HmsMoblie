@@ -9,7 +9,7 @@ import com.yc.yclibrary.mvp.IView;
  */
 
 public class LoginC {
-    public interface V extends IView{
+    public interface V extends IView {
         void onLoginSuccess(LoginJson loginJs);
 
         void onLoginFail(String msg);
@@ -18,8 +18,10 @@ public class LoginC {
 
         void onUpdatedVersionFail(String msg);
     }
+
     public interface P {
-        void login(String userName,String userPassword);
+        void login(String userName, String userPassword, String userType);
+
         void updatedVersion();
     }
 }
