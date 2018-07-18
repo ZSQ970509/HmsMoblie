@@ -66,8 +66,6 @@ public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngle
 
     @Override
     protected void initView(Bundle bundle) {
-        setToolBar("");
-        mActionBarRl.setBackgroundResource(R.color.colorTrance);
         mPanoramaId = getIntent().getStringExtra(PANORAMA_ID);
         mImageTimes = getIntent().getStringExtra(IMAGE_TIMES);
         mPointX = getIntent().getStringExtra(POINT_X);
@@ -104,12 +102,12 @@ public class ImageLogWideAngleActivity extends BaseMvpActivity<ImageLogWideAngle
         showToast(apiException.getMessage());
     }
 
-//    @OnClick({R.id.ivImageLogWideAngle})
-//    void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.ivImageLogWideAngle:
-//                ImageLogNodeActivity.newInstance(getActivity(), "", "", "", "", "", "");
-//                break;
-//        }
-//    }
+    @OnClick({R.id.ivImageLogWideAngleBack})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivImageLogWideAngleBack:
+                finish();
+                break;
+        }
+    }
 }

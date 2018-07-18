@@ -83,11 +83,11 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {
+            mPageIndex++;
             if (mPageIndex >= mPageTotal) {
                 showToast("已经是最后一页了！");
                 mAdapter.loadMoreEnd();
             } else {
-                mPageIndex++;
                 searchPro();
             }
         }, mRecyclerView);
@@ -100,7 +100,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             searchPro();
         });
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) -> {
-//                    ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
+                    ImageLogPanoramaListJson.ListBean itemData = (ImageLogPanoramaListJson.ListBean) adapter.getItem(position);
                     ImageLogPanoramaDetailActivity.newInstance(getActivity(), (ArrayList<ImageLogPanoramaListJson.ListBean>) adapter.getData(), mPageIndex, mPageTotal, mCamId, mTvStartTime.getText().toString(), mTvEndTime.getText().toString(), position);
                 }
         );

@@ -3,7 +3,9 @@ package com.hc.hmsmoblie.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.hc.hmsmoblie.R;
@@ -14,7 +16,10 @@ import com.hc.hmsmoblie.mvp.presenter.ImageLogNodeP;
 import com.hc.hmsmoblie.utils.LoadImgUtils;
 import com.yc.yclibrary.exception.ApiException;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 节点图页面(影响日志)
@@ -78,8 +83,6 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
 
     @Override
     protected void initView(Bundle bundle) {
-        setToolBar("");
-        mActionBarRl.setBackgroundResource(R.color.colorTrance);
         mPanoramaId = getIntent().getStringExtra(PANORAMA_ID);
         mImageTimes = getIntent().getStringExtra(IMAGE_TIMES);
         mPointX = getIntent().getStringExtra(POINT_X);
@@ -87,6 +90,15 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         mAha = getIntent().getStringExtra(AHA);
         mAva = getIntent().getStringExtra(AVA);
         mCamSn = getIntent().getStringExtra(CAM_SN);
+        mShowImageView[0][0] = mIvNode11;
+        mShowImageView[0][1] = mIvNode12;
+        mShowImageView[0][2] = mIvNode13;
+        mShowImageView[1][0] = mIvNode21;
+        mShowImageView[1][1] = mIvNode22;
+        mShowImageView[1][2] = mIvNode23;
+        mShowImageView[2][0] = mIvNode31;
+        mShowImageView[2][1] = mIvNode32;
+        mShowImageView[2][2] = mIvNode33;
         searchPro();
     }
 
@@ -94,55 +106,78 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         mPresenter.getNode(mCamSn, mPanoramaId, mImageTimes, mPointX, mPointY, mAha, mAva);
     }
 
+    private ImageLogNodeJson.Data30Bean[][] mShowData;
+    private ImageView[][] mShowImageView = new ImageView[3][3];
+
     @Override
     public void onNodeSuccess(ImageLogNodeJson json) {
         ImageLogNodeJson.DataCenterBean centerData = json.getDataCenter().get(0);//中心图片的数据
-        double midRowIndex = centerData.getRowNum();
-        double midColIndex = centerData.getColNum();
+        int midRowIndex = centerData.getRowNum();
+        int midColIndex = centerData.getColNum();
+        int minRow = json.getData30().get(0).getRownum();
+        int maxRow = minRow + json.getRowSum30();
+        int minCol = json.getData30().get(0).getColnum();
+        int maxCol = minCol + json.getColSum30();
+        mShowData = new ImageLogNodeJson.Data30Bean[json.getRowSum30()][json.getColSum30()];
+        List<ImageLogNodeJson.Data30Bean> data30 = json.getData30();
+        for (int i = 0; i < data30.size(); i++) {
+            ImageLogNodeJson.Data30Bean temp = data30.get(i);
+            mShowData[temp.getRownum() - minRow][temp.getColnum() - minCol] = temp;
+        }
         //找中心点位置
-        if (midRowIndex >= json.getRowSumAll()) {
-            midRowIndex = json.getRowSumAll() - 1;
-        } else if (midRowIndex <= 0) {
-            midRowIndex = 1;
+        if (midRowIndex >= maxRow) {
+            midRowIndex--;
+        } else if (midRowIndex <= minRow) {
+            midRowIndex++;
         }
-        if (midColIndex >= json.getColSumAll()) {
-            midColIndex = json.getColSumAll() - 1;
-        } else if (midColIndex <= 0) {
-            midColIndex = 1;
+        if (midColIndex >= maxCol) {
+            midColIndex--;
+        } else if (midColIndex <= minCol) {
+            midColIndex++;
         }
-        for (int i = 0; i < json.getDataAll().size(); i++) { 
-            ImageLogNodeJson.DataAllBean data = json.getDataAll().get(i);
-            if (midRowIndex - 1 == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode11);
-            } else if (midRowIndex - 1 == data.getRowNum() && midColIndex == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode12);
-            } else if (midRowIndex - 1 == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode13);
-            } else if (midRowIndex == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode21);
-            } else if (midRowIndex == data.getRowNum() && midColIndex == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode22);
-            } else if (midRowIndex == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode23);
-            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex - 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode31);
-            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode32);
-            } else if (midRowIndex + 1 == data.getRowNum() && midColIndex + 1 == data.getColNum()) {
-                LoadImgUtils.loadImg(getActivity(), centerData.getPath(), mIvNode33);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                ImageLogNodeJson.Data30Bean temp = mShowData[midRowIndex - minRow + i][midColIndex - minCol + j];
+                if (temp == null)
+                    mShowImageView[i][j].setImageResource(R.drawable.image);
+                else
+                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j]);
             }
         }
+//        for (int i = 0; i < json.getData30().size(); i++) {
+//            ImageLogNodeJson.Data30Bean data = json.getData30().get(i);
+//            if (midRowIndex - 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode11);
+//            } else if (midRowIndex - 1 == data.getRownum() && midColIndex == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode12);
+//            } else if (midRowIndex - 1 == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode13);
+//            } else if (midRowIndex == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode21);
+//            } else if (midRowIndex == data.getRownum() && midColIndex == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode22);
+//            } else if (midRowIndex == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode23);
+//            } else if (midRowIndex + 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode31);
+//            } else if (midRowIndex + 1 == data.getRownum() && midColIndex == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode32);
+//            } else if (midRowIndex + 1 == data.getRownum() && midColIndex + 1 == data.getColnum()) {
+//                LoadImgUtils.loadImg(getActivity(), data.getImgpath(), mIvNode33);
+//            }
+//        }
     }
 
     @Override
     public void onNodeFail(ApiException apiException) {
         showToast(apiException.getMessage());
     }
-//    @OnClick({R.id.tvImageLogPanoramaSearch})
-//    void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.tvImageLogPanoramaSearch:
-//                break;
-//        }
-//    }
+    @OnClick({R.id.ivImageLogNodeBack})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ivImageLogNodeBack:
+                finish();
+                break;
+        }
+    }
 }

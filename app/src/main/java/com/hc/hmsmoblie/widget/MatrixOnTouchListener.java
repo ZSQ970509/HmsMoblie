@@ -47,7 +47,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
      * 两个手指的中间点
      */
     private PointF midPoint;
-    private ImageView imageView;
+    private ImageView mImageView;
     private long mClickFirstTime = 0;
     private long mClickDownTime = 0;
     private float mImageScale = 1;//与开始相比缩放的比例
@@ -56,7 +56,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
     private DoubleClick mDoubleClick;
 
     public MatrixOnTouchListener(ImageView imageView, DoubleClick doubleClick) {
-        this.imageView = imageView;
+        this.mImageView = imageView;
         mDoubleClick = doubleClick;
     }
 
@@ -77,6 +77,11 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+//        if ((v instanceof ImageView) && ((ImageView) v == mImageView)) {
+//
+//        }else {
+//            return false;
+//        }
         /** 通过与运算保留最后八位 MotionEvent.ACTION_MASK = 255 */
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             // 手指压下屏幕
@@ -84,7 +89,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
                 mode = MODE_DRAG;
                 mClickDownTime = System.currentTimeMillis();
                 // 记录ImageView当前的移动位置
-                currentMatrix.set(imageView.getImageMatrix());
+                currentMatrix.set(mImageView.getImageMatrix());
                 startPoint.set(event.getX(), event.getY());
                 break;
             // 手指在屏幕上移动，改事件会被不断触发
@@ -99,7 +104,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
 //                    mImgInViewPoint.x += dx;
 //                    mImgInViewPoint.y = dy;
                     matrix.postTranslate(dx, dy);
-                    imageView.setImageMatrix(matrix);
+                    mImageView.setImageMatrix(matrix);
                 }
                 // 放大缩小图片
                 else if (mode == MODE_ZOOM) {
@@ -110,7 +115,7 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
                         Log.e("asd", "比例" + " " + scale + " " + mImageScale);
                         mImageScaleOne = scale;
                         matrix.postScale(scale, scale, mImgInViewPoint.x, mImgInViewPoint.y);
-                        imageView.setImageMatrix(matrix);
+                        mImageView.setImageMatrix(matrix);
                     }
                 }
                 break;
@@ -150,11 +155,10 @@ public class MatrixOnTouchListener implements View.OnTouchListener {
                 if (startDis > 10f) { // 两个手指并拢在一起的时候像素大于10
                     midPoint = mid(event);
                     //记录当前ImageView的缩放倍数
-                    currentMatrix.set(imageView.getImageMatrix());
+                    currentMatrix.set(mImageView.getImageMatrix());
                 }
                 break;
         }
-
         return true;
     }
 

@@ -9,8 +9,8 @@ import java.util.List;
 public class ImageLogNodeJson {
     private double rowSumAll;
     private double colSumAll;
-    private double rowSum30;
-    private double colSum30;
+    private int rowSum30;
+    private int colSum30;
     private List<DataAllBean> dataAll;
     private List<DataCenterBean> dataCenter;
     private List<Data30Bean> data30;
@@ -31,19 +31,19 @@ public class ImageLogNodeJson {
         this.colSumAll = colSumAll;
     }
 
-    public double getRowSum30() {
+    public int getRowSum30() {
         return rowSum30;
     }
 
-    public void setRowSum30(double rowSum30) {
+    public void setRowSum30(int rowSum30) {
         this.rowSum30 = rowSum30;
     }
 
-    public double getColSum30() {
+    public int getColSum30() {
         return colSum30;
     }
 
-    public void setColSum30(double colSum30) {
+    public void setColSum30(int colSum30) {
         this.colSum30 = colSum30;
     }
 
@@ -240,8 +240,8 @@ public class ImageLogNodeJson {
         private String CamSn;
         private String FtpPath;
         private String ImageTimes;
-        private double ColNum;
-        private double RowNum;
+        private int ColNum;
+        private int RowNum;
         private double Obd;
         private String AddTime;
         private String adjust_across;
@@ -290,19 +290,19 @@ public class ImageLogNodeJson {
             this.ImageTimes = ImageTimes;
         }
 
-        public double getColNum() {
+        public int getColNum() {
             return ColNum;
         }
 
-        public void setColNum(double ColNum) {
+        public void setColNum(int ColNum) {
             this.ColNum = ColNum;
         }
 
-        public double getRowNum() {
+        public int getRowNum() {
             return RowNum;
         }
 
-        public void setRowNum(double RowNum) {
+        public void setRowNum(int RowNum) {
             this.RowNum = RowNum;
         }
 
@@ -388,8 +388,8 @@ public class ImageLogNodeJson {
         private String camsn;
         private double imagetimes;
         private String ftppath;
-        private double colnum;
-        private double rownum;
+        private int colnum;
+        private int rownum;
         private double Obd;
         private String AddTime;
         private String adjust_across;
@@ -446,19 +446,19 @@ public class ImageLogNodeJson {
             this.ftppath = ftppath;
         }
 
-        public double getColnum() {
+        public int getColnum() {
             return colnum;
         }
 
-        public void setColnum(double colnum) {
+        public void setColnum(int colnum) {
             this.colnum = colnum;
         }
 
-        public double getRownum() {
+        public int getRownum() {
             return rownum;
         }
 
-        public void setRownum(double rownum) {
+        public void setRownum(int rownum) {
             this.rownum = rownum;
         }
 

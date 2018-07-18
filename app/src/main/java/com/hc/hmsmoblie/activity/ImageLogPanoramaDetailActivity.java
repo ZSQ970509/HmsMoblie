@@ -71,8 +71,8 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
 
     @Override
     protected void initView(Bundle bundle) {
-        setToolBar("");
-        mActionBarRl.setBackgroundResource(R.color.colorTrance);
+//        setToolBar("");
+//        mActionBarRl.setBackgroundResource(R.color.colorTrance);
         mData = (ArrayList<ImageLogPanoramaListJson.ListBean>) getIntent().getSerializableExtra(DATA);
         mPageIndex = getIntent().getIntExtra(PAGE_INDEX, 0);
         mPageTotal = getIntent().getIntExtra(PAGE_TOTAL, 0);
@@ -108,6 +108,7 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
             isLoaded = true;
         }
     }
+
     //上一张
     private void before() {
         if (mSelectPosition > 0) {
@@ -117,12 +118,14 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
             showToast("已经是第一张！");
         }
     }
+
     //下一张
     private void next() {
         if (mSelectPosition < mData.size() - 1) {
             mSelectPosition++;
             mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
         } else {
+            mPageIndex++;
             if (mPageIndex >= mPageTotal) {
                 showToast("已经是最后一张！");
             } else {
@@ -132,7 +135,19 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
 
     }
 
-    @OnClick({R.id.ivImageLogPanoramaDetailsNext, R.id.ivImageLogPanoramaDetailsBefore})
+    @Override
+    public void onPanoramaListSuccess(ImageLogPanoramaListJson json) {
+        mData.addAll(json.getList());
+        mPageTotal = json.getTotal();
+        next();
+    }
+
+    @Override
+    public void onPanoramaListFail(ApiException apiException) {
+        showToast(apiException.getMessage());
+    }
+
+    @OnClick({R.id.ivImageLogPanoramaDetailsNext, R.id.ivImageLogPanoramaDetailsBefore, R.id.ivImageLogPanoramaDetailsBack})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.ivImageLogPanoramaDetailsBefore:
@@ -141,17 +156,9 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
             case R.id.ivImageLogPanoramaDetailsNext:
                 next();
                 break;
+            case R.id.ivImageLogPanoramaDetailsBack:
+                finish();
+                break;
         }
-    }
-
-    @Override
-    public void onPanoramaListSuccess(ImageLogPanoramaListJson json) {
-        mData.addAll(json.getList());
-        next();
-    }
-
-    @Override
-    public void onPanoramaListFail(ApiException apiException) {
-        showToast(apiException.getMessage());
     }
 }

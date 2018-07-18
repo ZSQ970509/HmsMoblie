@@ -53,10 +53,10 @@ public class EmptyUtils {
 
     public static int isState(String original, @DrawableRes int s1, @DrawableRes int s2, @DrawableRes int s3) {
         if (TextUtils.isEmpty(original)) {
-            return s1;
+            return s3;
         } else if (original.equals("0")) {
             return s2;
         } else
-            return s3;
+            return s1;
     }
 }

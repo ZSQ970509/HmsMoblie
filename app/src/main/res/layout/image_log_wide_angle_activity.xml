@@ -17,6 +17,13 @@
             android:layout_height="match_parent"
             android:scaleType="matrix" />
     </FrameLayout>
-
-    <include layout="@layout/actionbar_layout" />
+    <ImageView
+        android:id="@+id/ivImageLogWideAngleBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:padding="10dp"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_back" />
 </FrameLayout>
