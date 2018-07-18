@@ -61,7 +61,7 @@ public class ProjectJson implements Serializable{
         private int ProjRegionCode;
         private String ArpCheckStartDate;
         private String city;
-        private Object area;
+        private String area;
 
         public int getRow_number() {
             return row_number;
@@ -151,11 +151,11 @@ public class ProjectJson implements Serializable{
             this.city = city;
         }
 
-        public Object getArea() {
+        public String getArea() {
             return area;
         }
 
-        public void setArea(Object area) {
+        public void setArea(String area) {
             this.area = area;
         }
     }

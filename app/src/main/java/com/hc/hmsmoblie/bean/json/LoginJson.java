@@ -9,33 +9,33 @@ public class LoginJson {
     /**
      * $id : 1
      * UserID : 100039
-     * UserGUId : 898b4cc9-79bf-439f-aa6e-8fe335b3e405
-     * UserName : 管理员
-     * UserAccount : admin
-     * UserStaffNum : 94637689
-     * UserPwd : 6fcd70563aec2c8d8bb7667d88cbaec4
-     * UserType : 100
-     * UserEtpID : 1000100
-     * UserDeprt :
-     * UserDuty :
-     * UserTele :
-     * UserMobile : 1
-     * UserFax :
-     * UserEMail : 1
-     * UserQQ :
-     * UserIMEI : 864805029352835
-     * UserSysList : 11,12,16,17,18,21,22,24
-     * UserLastActive : /Date(1461901625080+0800)/
-     * UserIsDeleted : false
-     * UserIsEnable : true
+     * UserGUId : null
+     * UserName : null
+     * UserAccount : 林升
+     * UserStaffNum : null
+     * UserPwd : null
+     * UserType : null
+     * UserEtpID : null
+     * UserDeprt : null
+     * UserDuty : null
+     * UserTele : null
+     * UserMobile : null
+     * UserFax : null
+     * UserEMail : null
+     * UserQQ : null
+     * UserIMEI : null
+     * UserSysList : null
+     * UserLastActive : null
+     * UserIsDeleted : null
+     * UserIsEnable : null
      * UserYwAccount : null
      * UserYwPwd : null
      * UserYwType : null
-     * UserYwIsEnable : false
-     * UserRspIsEnable : false
-     * UserRspType : 0
-     * UserHeadSculpture : /picHeadSculpture/201705241438305214.jpg
-     * UserGrade : 1
+     * UserYwIsEnable : null
+     * UserRspIsEnable : null
+     * UserRspType : null
+     * UserHeadSculpture : BC12C988-2516-4144-BDF5-3ACDFD5DC734
+     * UserGrade : null
      * UserPosition : null
      * EntityKey : null
      */
@@ -59,13 +59,13 @@ public class LoginJson {
     private String UserIMEI;
     private String UserSysList;
     private String UserLastActive;
-    private boolean UserIsDeleted;
-    private boolean UserIsEnable;
+    private String UserIsDeleted;
+    private String UserIsEnable;
     private String UserYwAccount;
     private String UserYwPwd;
     private String UserYwType;
-    private boolean UserYwIsEnable;
-    private boolean UserRspIsEnable;
+    private String UserYwIsEnable;
+    private String UserRspIsEnable;
     private String UserRspType;
     private String UserHeadSculpture;
     private String UserGrade;
@@ -224,19 +224,19 @@ public class LoginJson {
         this.UserLastActive = UserLastActive;
     }
 
-    public boolean isUserIsDeleted() {
+    public String getUserIsDeleted() {
         return UserIsDeleted;
     }
 
-    public void setUserIsDeleted(boolean UserIsDeleted) {
+    public void setUserIsDeleted(String UserIsDeleted) {
         this.UserIsDeleted = UserIsDeleted;
     }
 
-    public boolean isUserIsEnable() {
+    public String getUserIsEnable() {
         return UserIsEnable;
     }
 
-    public void setUserIsEnable(boolean UserIsEnable) {
+    public void setUserIsEnable(String UserIsEnable) {
         this.UserIsEnable = UserIsEnable;
     }
 
@@ -264,19 +264,19 @@ public class LoginJson {
         this.UserYwType = UserYwType;
     }
 
-    public boolean isUserYwIsEnable() {
+    public String getUserYwIsEnable() {
         return UserYwIsEnable;
     }
 
-    public void setUserYwIsEnable(boolean UserYwIsEnable) {
+    public void setUserYwIsEnable(String UserYwIsEnable) {
         this.UserYwIsEnable = UserYwIsEnable;
     }
 
-    public boolean isUserRspIsEnable() {
+    public String getUserRspIsEnable() {
         return UserRspIsEnable;
     }
 
-    public void setUserRspIsEnable(boolean UserRspIsEnable) {
+    public void setUserRspIsEnable(String UserRspIsEnable) {
         this.UserRspIsEnable = UserRspIsEnable;
     }
 

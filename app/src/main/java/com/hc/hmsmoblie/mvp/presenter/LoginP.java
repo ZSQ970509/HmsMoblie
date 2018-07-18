@@ -31,9 +31,10 @@ public class LoginP extends BasePresenter<LoginC.V> implements LoginC.P {
                     @Override
                     public void onSuccess(HttpResponse<LoginJson> loginBean) {
                         UserInfoPref.setUserId(loginBean.getData().getUserID());
-                        UserInfoPref.setUserAccount(userAccount);
+                        UserInfoPref.setUserAccount(loginBean.getData().getUserAccount());
                         UserInfoPref.setUserName(loginBean.getData().getUserName());
                         UserInfoPref.setUserPassword(userPassword);
+                        UserInfoPref.setUserToken(loginBean.getData().getUserHeadSculpture());
                         getIView().hideLoading();
                         getIView().onLoginSuccess(loginBean.getData());
                     }
