@@ -38,13 +38,11 @@ public class WelcomeActivity extends BaseActivity {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(l -> toLoginActivity());
             }
-
             @Override
             public void onFail() {
                 showToast("权限被拒绝，无法启动！");
             }
         });
-
     }
     public void toLoginActivity(){
         startActivity(new Intent(getActivity(),LoginActivity.class));
