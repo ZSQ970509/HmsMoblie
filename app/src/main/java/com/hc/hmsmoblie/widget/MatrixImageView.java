@@ -1,20 +1,24 @@
 package com.hc.hmsmoblie.widget;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
-import com.hc.hmsmoblie.utils.PhoneSystemUtils;
+import com.hc.hmsmoblie.R;
 
 /**
  *
@@ -32,11 +36,12 @@ public class MatrixImageView extends AppCompatImageView {
     private PointF mCurrentInView = new PointF(0, 0);//当前图的左上角 相对于 控件的左上角 的位置（图在控件下x为正，上x为负，右y为正，左y为负）
     private OnTouchListener mOnTouchListener;
     private MotionEventModeEnum mMotionEventTypeEnum = MotionEventModeEnum.DEFAULT;//触摸的模式
-    private ImageView imageView;
+    private ImageView mImageView;
     private PointF mImgInViewPoint = new PointF(0, 0);//图片相对于控件左上角的位置
     private MatrixOnTouchListener mMatrixOnTouchListener;
     private OnDoubleClick mDoubleClick;
     private int mStatusBarHeight = 0;
+    private ProgressDialog mProgressDialog = null;
 
     private enum MotionEventModeEnum {
         //拖动图片，放大缩小图片
@@ -59,9 +64,9 @@ public class MatrixImageView extends AppCompatImageView {
     }
 
     private void init(Context context) {
-        imageView = this;
+        mImageView = this;
         mContext = context;
-        mMatrixOnTouchListener = new MatrixOnTouchListener(imageView, new MatrixOnTouchListener.DoubleClick() {
+        mMatrixOnTouchListener = new MatrixOnTouchListener(mImageView, new MatrixOnTouchListener.DoubleClick() {
             @Override
             public void onClick(PointF imgInViewPoint, float clickX, float clickY, float imageScale) {
 //                mStatusBarHeight = PhoneSystemUtils.getStatusBarHeight(mContext);
@@ -86,56 +91,95 @@ public class MatrixImageView extends AppCompatImageView {
      * @param imgUrl
      */
     public void loadNetImage(String imgUrl) {
+        this.showLoading("加载图片中...");
         Glide.with(mContext)
                 .load(imgUrl)
                 .asBitmap()
                 .into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) {
                     @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
-                        //获取图片原始宽高
-                        mOriginalImageWidth = resource.getWidth();//原始图的宽度
-                        mOriginalImageHeight = resource.getHeight();//原始图的高度
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        hideLoading();
+                        Toast.makeText(mContext, "图片加载失败!", Toast.LENGTH_SHORT).show();
+                        mImageView.setScaleType(ScaleType.FIT_CENTER);
+                        mImageView.setImageResource(R.drawable.image);
+                        super.onLoadFailed(e, errorDrawable);
+                    }
 
-                        //获取图片显示（即拉伸后的图）后的宽高
-                        if (mOriginalImageWidth / mOriginalImageHeight - mImageViewWidth / mImageViewHeight > 0) {//图片的宽大于容器的宽
-                            double tmpHeight = mImageViewWidth * mOriginalImageHeight / mOriginalImageWidth;
-                            if (tmpHeight > mImageViewHeight) {
-                                mCurrentWidth = mImageViewWidth * mImageViewHeight / tmpHeight;
-                                mCurrentHeight = mImageViewHeight;
-                            } else {
-                                mCurrentWidth = mImageViewWidth;
-                                mCurrentHeight = tmpHeight;
-                            }
-                        } else {
-                            double tmpWidth = mImageViewHeight * mOriginalImageWidth / mOriginalImageHeight;
-                            if (tmpWidth > mImageViewWidth) {
-                                mCurrentWidth = mImageViewWidth;
-                                mCurrentHeight = mImageViewHeight * mImageViewWidth / tmpWidth;
-                            } else {
-                                mCurrentWidth = tmpWidth;
-                                mCurrentHeight = mImageViewHeight;
-                            }
-                        }
-                        Log.i("aa", "当前：" + mCurrentHeight + " " + mCurrentWidth + " " + " 原始：" + mOriginalImageHeight + " " + mOriginalImageWidth + " 控件：" + mImageViewHeight + " " + mImageViewWidth);
-                        //压缩图片
-                        Matrix matrix = new Matrix();
-                        mOriginalToCurrentScale = mCurrentWidth / mOriginalImageWidth;
-                        matrix.setScale((float) mOriginalToCurrentScale, (float) mOriginalToCurrentScale);
-                        resource = Bitmap.createBitmap(resource, 0, 0, mOriginalImageWidth, mOriginalImageHeight, matrix, true);
-                        setImageBitmap(resource);
-                        //图片位置相对于控件 居中
-//                        moveImage((float) ((mImageViewWidth - mCurrentWidth) / 2), (float) ((mImageViewHeight - mCurrentHeight) / 2), matrix);
-                        //图片位置相对于控件 居中
-                        Matrix ivMatrix = getMatrix();
-                        mImgInViewPoint.set((float) ((mImageViewWidth - mCurrentWidth) / 2), (float) ((mImageViewHeight - mCurrentHeight) / 2));
-                        ivMatrix.setTranslate(mImgInViewPoint.x, mImgInViewPoint.y);
-                        setImageMatrix(ivMatrix);
-                        Log.e("asda", "原始时位置;" + mImgInViewPoint.x + "  " + mImgInViewPoint.y);
-                        mMatrixOnTouchListener.setImgInViewPoint(mImgInViewPoint.x, mImgInViewPoint.y);
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+                        mImageView.setScaleType(ScaleType.MATRIX);
+                        loadImg(resource);
                     }
                 });
     }
 
+    private void loadImg(Bitmap resource) {
+        try {
+            //获取图片原始宽高
+            mOriginalImageWidth = resource.getWidth();//原始图的宽度
+            mOriginalImageHeight = resource.getHeight();//原始图的高度
+
+            //获取图片显示（即拉伸后的图）后的宽高
+            if (mOriginalImageWidth / mOriginalImageHeight - mImageViewWidth / mImageViewHeight > 0) {//图片的宽大于容器的宽
+                double tmpHeight = mImageViewWidth * mOriginalImageHeight / mOriginalImageWidth;
+                if (tmpHeight > mImageViewHeight) {
+                    mCurrentWidth = mImageViewWidth * mImageViewHeight / tmpHeight;
+                    mCurrentHeight = mImageViewHeight;
+                } else {
+                    mCurrentWidth = mImageViewWidth;
+                    mCurrentHeight = tmpHeight;
+                }
+            } else {
+                double tmpWidth = mImageViewHeight * mOriginalImageWidth / mOriginalImageHeight;
+                if (tmpWidth > mImageViewWidth) {
+                    mCurrentWidth = mImageViewWidth;
+                    mCurrentHeight = mImageViewHeight * mImageViewWidth / tmpWidth;
+                } else {
+                    mCurrentWidth = tmpWidth;
+                    mCurrentHeight = mImageViewHeight;
+                }
+            }
+            Log.i("aa", "当前：" + mCurrentHeight + " " + mCurrentWidth + " " + " 原始：" + mOriginalImageHeight + " " + mOriginalImageWidth + " 控件：" + mImageViewHeight + " " + mImageViewWidth);
+            //压缩图片
+            Matrix matrix = new Matrix();
+            mOriginalToCurrentScale = mCurrentWidth / mOriginalImageWidth;
+            matrix.setScale((float) mOriginalToCurrentScale, (float) mOriginalToCurrentScale);
+            resource = Bitmap.createBitmap(resource, 0, 0, mOriginalImageWidth, mOriginalImageHeight, matrix, true);
+            setImageBitmap(resource);
+            //图片位置相对于控件 居中
+//                        moveImage((float) ((mImageViewWidth - mCurrentWidth) / 2), (float) ((mImageViewHeight - mCurrentHeight) / 2), matrix);
+            //图片位置相对于控件 居中
+            Matrix ivMatrix = getMatrix();
+            mImgInViewPoint.set((float) ((mImageViewWidth - mCurrentWidth) / 2), (float) ((mImageViewHeight - mCurrentHeight) / 2));
+            ivMatrix.setTranslate(mImgInViewPoint.x, mImgInViewPoint.y);
+            setImageMatrix(ivMatrix);
+            Log.e("asda", "原始时位置;" + mImgInViewPoint.x + "  " + mImgInViewPoint.y);
+            mMatrixOnTouchListener.setImgInViewPoint(mImgInViewPoint.x, mImgInViewPoint.y);
+            hideLoading();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(mContext, "图片加载失败", Toast.LENGTH_SHORT).show();
+            hideLoading();
+        }
+    }
+
+    public void showLoading(String msg) {
+        if (this.mProgressDialog == null) {
+            this.mProgressDialog = new ProgressDialog(mContext);
+            this.mProgressDialog.setCancelable(true);
+            this.mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        if (!this.mProgressDialog.isShowing()) {
+            this.mProgressDialog.setMessage(msg);
+            this.mProgressDialog.show();
+        }
+    }
+
+    public void hideLoading() {
+        if (this.mProgressDialog != null && this.mProgressDialog.isShowing()) {
+            this.mProgressDialog.dismiss();
+        }
+    }
     /**
      * 移动图片的位置（不是移动到（x,y）位置）
      *
@@ -193,6 +237,7 @@ public class MatrixImageView extends AppCompatImageView {
         float midY = (event.getY(1) + event.getY(0)) / 2;
         return new PointF(midX, midY);
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -203,6 +248,7 @@ public class MatrixImageView extends AppCompatImageView {
         Log.i("aa", "getHeight:" + getHeight() + " getWidth" + getWidth());
         Log.i("aa", "----------onSizeChanged-------------");
     }
+
     public interface OnDoubleClick {
         /**
          * 双击回调

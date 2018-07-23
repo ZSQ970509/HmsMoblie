@@ -96,9 +96,7 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
             }
         });
     }
-
     boolean isLoaded = false;
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -132,8 +130,8 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
                 mPresenter.getPanoramaList(mCamId, mStartTime, mEndTime, mPageIndex, mPageSize);
             }
         }
-
     }
+
 
     @Override
     public void onPanoramaListSuccess(ImageLogPanoramaListJson json) {

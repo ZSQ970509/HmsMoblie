@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
@@ -106,6 +108,9 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         mCamId = getIntent().getStringExtra(CAM_ID);
         mSeqId = getIntent().getStringExtra(SEQ_ID);
         mProId = getIntent().getStringExtra(PRO_ID);
+//        mCamId = "1024300";
+//        mSeqId = "1440-0028-sclw-3127";
+//        mProId = "23334";
         ChartUtils.initLineChart(mLineChart, getActivity());
         ChartUtils.initLineChart(mLineChart2, getActivity());
         mTvTime.setText(FormatUtils.dateToString(mSelectTimed));
@@ -143,10 +148,12 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
             return;
         }
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
+
         ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值");
         ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值");
         ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值");
         lineChart.setData(new LineData(setData1, setData2, setData3));
+
         ChartMarkerDataBean markerData = new ChartMarkerDataBean();
         markerData.setDataName1("均值");
         markerData.setDataName2("峰值");
@@ -195,7 +202,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         return data;
     }
 
-    private void showPickerView(boolean isShowMonth, boolean isShowDay, String name, TextView tvTime, TextView tvName, TextView tvTimeForDay, TextView tvTimeForMonth, TextView tvTimeForYear, int type,EnvironmentParaTypeEnum paraTypeEnum, EnvironmentTimeTypeEnum timeTypeEnum) {
+    private void showPickerView(boolean isShowMonth, boolean isShowDay, String name, TextView tvTime, TextView tvName, TextView tvTimeForDay, TextView tvTimeForMonth, TextView tvTimeForYear, int type, EnvironmentParaTypeEnum paraTypeEnum, EnvironmentTimeTypeEnum timeTypeEnum) {
         TimePickerUtils.showPickerView(getActivity(), "选择时间", tvTime, isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
@@ -203,7 +210,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
                 mTimeTypeEnum = timeTypeEnum;
                 tvTime.setText(FormatUtils.dateToString(date, isShowMonth, isShowDay));
                 tvName.setText(name);
-                switch (type){
+                switch (type) {
                     case 0:
                         tvTimeForDay.setBackgroundResource(R.drawable.day_on);
                         tvTimeForMonth.setBackgroundResource(R.drawable.month_off);

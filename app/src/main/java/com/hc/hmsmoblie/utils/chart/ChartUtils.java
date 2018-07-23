@@ -39,6 +39,7 @@ public class ChartUtils {
         });
         // 不使用描述文本相关信息
         lineChart.getDescription().setEnabled(false);
+        lineChart.getDescription().setText("描述");
         // 手势能否触摸图表
         lineChart.setTouchEnabled(true);
         //减速摩擦系数[0,1]之间，0立刻停止，1，自动转换为0.999f
@@ -155,6 +156,8 @@ public class ChartUtils {
 //            else
 //                yVals.add(null);
         }
+        if (!(lineChart.getRenderer() instanceof EmtypLineChartRenderer))
+            lineChart.setRenderer(new EmtypLineChartRenderer(lineChart));
         EmptyLineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
             set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
@@ -162,6 +165,8 @@ public class ChartUtils {
             set.setValues(yVals);
         } else {
             set = new EmptyLineDataSet(yVals, name);
+            // 设置平滑曲线
+            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             set.setColors(new int[]{color, Color.parseColor("#00000000")});
             set.setAxisDependency(YAxis.AxisDependency.LEFT);
 //            set.setColor(color);//设置线的颜色
