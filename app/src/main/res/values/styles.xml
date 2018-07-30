@@ -55,7 +55,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:scaleType">fitCenter</item>
-        <item name="android:src">@drawable/ic_loading</item>
+        <item name="android:src">@drawable/img_loading</item>
     </style>
 
     <style name="LineVerticalStyle">

@@ -94,7 +94,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                 String appSize = f1 + "";
                 builder.setTitle("发现新版本").
                         // 设置提示框的图标
-                                setIcon(R.drawable.login_icon).
+                                setIcon(R.drawable.logo2).
                         // 设置要显示的信息
                                 setMessage("最新版本：V" + updateVersionJson.getUpdateVersionName() + "\n" + "新版本大小：" + appSize + "M\n\n" + "更新内容：\n" + updateVersionJson.getUpdateLogMsg()).
                         // 设置确定按钮

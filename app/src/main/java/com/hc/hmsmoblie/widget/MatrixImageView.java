@@ -101,7 +101,7 @@ public class MatrixImageView extends AppCompatImageView {
                         hideLoading();
                         Toast.makeText(mContext, "图片加载失败!", Toast.LENGTH_SHORT).show();
                         mImageView.setScaleType(ScaleType.FIT_CENTER);
-                        mImageView.setImageResource(R.drawable.image);
+                        mImageView.setImageResource(R.drawable.img_fail);
                         super.onLoadFailed(e, errorDrawable);
                     }
 

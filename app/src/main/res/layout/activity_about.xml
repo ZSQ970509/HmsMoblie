@@ -13,8 +13,9 @@
         android:layout_height="@dimen/y178"
         android:layout_below="@+id/include"
         android:layout_centerHorizontal="true"
+        android:scaleType="fitCenter"
         android:layout_marginTop="30dp"
-        android:background="@drawable/login_icon" />
+        android:src="@drawable/logo2" />
 
     <TextView
         android:id="@+id/textview_1"

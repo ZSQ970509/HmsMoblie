@@ -1,7 +1,6 @@
 package com.hc.hmsmoblie.utils.chart;
 
 import android.graphics.Paint;
-import android.service.autofill.Dataset;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.LineChart;
@@ -12,20 +11,18 @@ import com.github.mikephil.charting.renderer.LineChartRenderer;
 import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
-import java.util.Set;
-
 /**
  *
  */
 
-public class EmtypLineChartRenderer extends LineChartRenderer {
+public class EmptyLineChartRenderer extends LineChartRenderer {
     private static final int MIN_NUM = -1;
 
-    public EmtypLineChartRenderer(LineChart lineChart) {
+    public EmptyLineChartRenderer(LineChart lineChart) {
         this(lineChart, lineChart.getAnimator(), lineChart.getViewPortHandler());
     }
 
-    public EmtypLineChartRenderer(LineDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
+    public EmptyLineChartRenderer(LineDataProvider chart, ChartAnimator animator, ViewPortHandler viewPortHandler) {
         super(chart, animator, viewPortHandler);
     }
 

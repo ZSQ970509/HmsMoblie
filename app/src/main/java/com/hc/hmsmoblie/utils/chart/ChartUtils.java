@@ -156,8 +156,8 @@ public class ChartUtils {
 //            else
 //                yVals.add(null);
         }
-        if (!(lineChart.getRenderer() instanceof EmtypLineChartRenderer))
-            lineChart.setRenderer(new EmtypLineChartRenderer(lineChart));
+        if (!(lineChart.getRenderer() instanceof EmptyLineChartRenderer))
+            lineChart.setRenderer(new EmptyLineChartRenderer(lineChart));
         EmptyLineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
             set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);

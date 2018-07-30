@@ -126,14 +126,17 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
     @Override
     public void onGetParaSuccess(EnvironmentDetailsJson detailsJson, EnvironmentParaTypeEnum paraTypeEnum) {
         LineChart lineChart;
+        TextView tvComplianceRate;
         if (paraTypeEnum.equals(EnvironmentParaTypeEnum.PM2点5)) {
             mTvComplianceRate.setText("达标率：" + detailsJson.getRate() + "%");
             lineChart = mLineChart;
+            tvComplianceRate = mTvComplianceRate;
         } else {
             lineChart = mLineChart2;
+            tvComplianceRate = mTvComplianceRate2;
             mTvComplianceRate2.setText("达标率：" + detailsJson.getRate() + "%");
         }
-        setChartData(detailsJson, lineChart);
+        setChartData(detailsJson, lineChart, tvComplianceRate);
     }
 
     @Override
@@ -141,12 +144,32 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         showToast(apiException.getMessage());
     }
 
-    private void setChartData(EnvironmentDetailsJson chartData, LineChart lineChart) {
-        if (chartData == null) {
+    private boolean isEmpty(EnvironmentDetailsJson chartData) {
+        if (chartData == null)
+            return true;
+        for (Double d : chartData.getAvg()) {
+            if (d != -1)
+                return false;
+        }
+        for (Double d : chartData.getMax()) {
+            if (d != -1)
+                return false;
+        }
+        for (Double d : chartData.getMin()) {
+            if (d != -1)
+                return false;
+        }
+        return true;
+    }
+
+    private void setChartData(EnvironmentDetailsJson chartData, LineChart lineChart, TextView tvComplianceRate) {
+        if (isEmpty(chartData)) {
             Logger.e("折线图的数据为空");
             lineChart.clear();
+            tvComplianceRate.setText("达标率：" + "-");
             return;
         }
+        tvComplianceRate.setText("达标率：" + chartData.getRate() + "%");
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
 
         ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值");
