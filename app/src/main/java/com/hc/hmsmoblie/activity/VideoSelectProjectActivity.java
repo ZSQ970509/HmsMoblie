@@ -62,6 +62,8 @@ public class VideoSelectProjectActivity extends BaseMvpActivity<VideoSelectProje
     protected void initView(Bundle bundle) {
         setToolBar("选择项目");
         sysId = getIntent().getStringExtra(SYS_ID);
+        showLoading("正在搜索中...");
+        mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, sysId,  UserInfoPref.getUserId());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectProject.setLayoutManager(linearLayoutManager);
         selectProjectVideoAdapter = new SelectProjectVideoAdapter(R.layout.item_select_project, dataList);

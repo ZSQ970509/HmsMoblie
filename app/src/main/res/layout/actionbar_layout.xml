@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="48dp"
+    android:background="@color/colorAccent">
 
-    <RelativeLayout
-        android:id="@+id/rlActionbar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorAccent">
-
-        <LinearLayout
-            android:id="@+id/LlActionbarLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:minWidth="48dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/activity_margin">
 
             <ImageView
                 android:id="@+id/ivActionbarLeft"
-                android:layout_width="@dimen/activity_margin"
-                android:layout_height="@dimen/activity_margin"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/activity_margin_small"
+                android:layout_width="@dimen/activity_margin_big"
+                android:layout_height="@dimen/activity_margin_big"
                 android:background="@android:color/transparent"
                 android:clickable="true"
                 android:scaleType="fitCenter"
@@ -39,7 +28,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:visibility="gone" />
-        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tvActionbarMid"
@@ -81,5 +70,5 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-    </RelativeLayout>
-</FrameLayout>
+
+</RelativeLayout>

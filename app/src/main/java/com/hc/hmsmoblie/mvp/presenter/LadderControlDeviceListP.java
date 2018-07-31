@@ -17,9 +17,9 @@ import com.yc.yclibrary.mvp.BasePresenter;
 public class LadderControlDeviceListP extends BasePresenter<LadderControlDeviceListC.V> implements LadderControlDeviceListC.P {
 
     @Override
-    public void getDeviceList(String keyword, int pageIndex, int pageSize,String proId) {
+    public void getDeviceList(String keyword, int pageIndex, int pageSize,String proId, String camId) {
         new LadderControlDeviceListM()
-                .getTowerCraneDevList(keyword, pageIndex, pageSize,proId)
+                .getTowerCraneDevList(keyword, pageIndex, pageSize,proId,camId)
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<LadderControlDeviceListJson>>() {
                     @Override

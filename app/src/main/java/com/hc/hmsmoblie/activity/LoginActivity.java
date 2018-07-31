@@ -73,6 +73,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     public void onLoginSuccess(LoginJson loginJs) {
         UserInfoPref.setSavePassWord(mIsSavePasswordCb.isChecked());
         MainActivity.newInstance(getActivity());
+//        VideoSelectProjectActivity.newInstance(getActivity(),"11");
     }
 
     @Override

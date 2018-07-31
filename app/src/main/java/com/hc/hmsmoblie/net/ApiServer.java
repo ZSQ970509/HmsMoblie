@@ -80,7 +80,7 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetTowerCraneDevList")
     Observable<HttpResponse<LadderControlDeviceListJson>> getTowerCraneDevList(@Field("keyword") String keyword, @Field("pageindex") int pageindex
-            , @Field("pagesize") int pagesize, @Field("projId") String proId);
+            , @Field("pagesize") int pagesize, @Field("projId") String proId, @Field("camId") String camId);
 
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetErrlog")

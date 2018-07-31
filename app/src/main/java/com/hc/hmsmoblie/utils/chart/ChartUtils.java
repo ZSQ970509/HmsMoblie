@@ -197,14 +197,14 @@ public class ChartUtils {
             super(yVals, label);
         }
 
-        @Override
-        public int getColor(int index) {
-            if (mValues.get(index).getY() == -1 || (mValues.size() > index && mValues.get(index + 1).getY() == -1)) {
-                return mColors.get(1);
-            } else {
-                return mColors.get(0);
-            }
+//        @Override
+//        public int getColor(int index) {
+//            if (mValues.get(index).getY() == -1 || (mValues.size() > index && mValues.get(index + 1).getY() == -1)) {
+//                return mColors.get(1);
+//            } else {
+//                return mColors.get(0);
+//            }
 //            return super.getColor(index);
-        }
+//        }
     }
 }

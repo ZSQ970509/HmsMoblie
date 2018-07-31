@@ -19,19 +19,18 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends YcMvpAppC
     protected TextView mLeftTv;
     protected ImageView mRightBtn;
     protected TextView mRightTv;
-    protected RelativeLayout mActionBarRl;
     /**
      * 设置标题栏
      */
     protected void setToolBar(String title) {
         mTitle = (TextView) findViewById(R.id.tvActionbarMid);
-        mActionBarRl = (RelativeLayout) findViewById(R.id.rlActionbar);
         mTitle.setText(title);
         mLeftBtn = (ImageView) findViewById(R.id.ivActionbarLeft);
         mLeftTv = (TextView) findViewById(R.id.tvActionbarLeft);
         mRightBtn = (ImageView) findViewById(R.id.ivActionbarRight);
         mRightTv = (TextView) findViewById(R.id.tvActionbarRight);
-        findViewById(R.id.LlActionbarLeft).setOnClickListener(v -> onLeftClick(v));
+        findViewById(R.id.ivActionbarLeft).setOnClickListener(v -> onLeftClick(v));
+        findViewById(R.id.tvActionbarLeft).setOnClickListener(v -> onLeftClick(v));
         findViewById(R.id.LlActionbarRight).setOnClickListener(v -> onRightClick(v));
     }
 

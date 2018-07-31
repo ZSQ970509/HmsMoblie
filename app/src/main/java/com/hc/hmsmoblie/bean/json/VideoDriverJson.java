@@ -5,6 +5,186 @@ package com.hc.hmsmoblie.bean.json;
  */
 
 public class VideoDriverJson {
+    /**
+     * CamId : 1014461
+     * SysID : 30
+     * CamName : 智能测距_海康
+     * CamFlowState : 15
+     * Cam_IsTest : false
+     * Cam_DX_VideoId : undefined
+     * Cam_WideAngle_IP : null
+     * CamTypeId : 118
+     * CamItemId : null
+     * Cam_Config : 1539.108.99.1268055adminHik12345undefinedundefined1011301014461智能测距_海康0113b45298bd3cb48fab34e2f3a3ccfa2cf0112654321654321jybysyundefinedundefined96628f2e96704344b33298fb0f3521f30be83d40695011e7981e0f190ed6d2e7903de339885c43cdbe2488f635ae23cd415f0692admin1off60947441455694561_0010027.155.100.20928888
+     * CamInstalPlace :
+     * DevTypePic : /lib/images/dev/zhinengceju.png
+     * CamSeqId : 60947441455694561_001
+     * CamProjId : 239
+     * VideoId : 86591
+     * Status : 0
+     */
+
+    private String CamId;
+    private String SysID;
+    private String CamName;
+    private int CamFlowState;
+    private boolean Cam_IsTest;
+    private String Cam_DX_VideoId;
+    private String Cam_WideAngle_IP;
+    private String CamTypeId;
+    private String CamItemId;
+    private String Cam_Config;
+    private String CamInstalPlace;
+    private String DevTypePic;
+    private String CamSeqId;
+    private String CamProjId;
+    private String VideoId;
+    private String Status;
+    private String DevStatus;
+    private String DevNetStatus;
+
+    public String getCamId() {
+        return CamId;
+    }
+
+    public void setCamId(String CamId) {
+        this.CamId = CamId;
+    }
+
+    public String getSysID() {
+        return SysID;
+    }
+
+    public void setSysID(String SysID) {
+        this.SysID = SysID;
+    }
+
+    public String getCamName() {
+        return CamName;
+    }
+
+    public void setCamName(String CamName) {
+        this.CamName = CamName;
+    }
+
+    public int getCamFlowState() {
+        return CamFlowState;
+    }
+
+    public void setCamFlowState(int CamFlowState) {
+        this.CamFlowState = CamFlowState;
+    }
+
+    public boolean isCam_IsTest() {
+        return Cam_IsTest;
+    }
+
+    public void setCam_IsTest(boolean Cam_IsTest) {
+        this.Cam_IsTest = Cam_IsTest;
+    }
+
+    public String getCam_DX_VideoId() {
+        return Cam_DX_VideoId;
+    }
+
+    public void setCam_DX_VideoId(String Cam_DX_VideoId) {
+        this.Cam_DX_VideoId = Cam_DX_VideoId;
+    }
+
+    public String getCam_WideAngle_IP() {
+        return Cam_WideAngle_IP;
+    }
+
+    public void setCam_WideAngle_IP(String Cam_WideAngle_IP) {
+        this.Cam_WideAngle_IP = Cam_WideAngle_IP;
+    }
+
+    public String getCamTypeId() {
+        return CamTypeId;
+    }
+
+    public void setCamTypeId(String CamTypeId) {
+        this.CamTypeId = CamTypeId;
+    }
+
+    public String getCamItemId() {
+        return CamItemId;
+    }
+
+    public void setCamItemId(String CamItemId) {
+        this.CamItemId = CamItemId;
+    }
+
+    public String getCam_Config() {
+        return Cam_Config;
+    }
+
+    public void setCam_Config(String Cam_Config) {
+        this.Cam_Config = Cam_Config;
+    }
+
+    public String getCamInstalPlace() {
+        return CamInstalPlace;
+    }
+
+    public void setCamInstalPlace(String CamInstalPlace) {
+        this.CamInstalPlace = CamInstalPlace;
+    }
+
+    public String getDevTypePic() {
+        return DevTypePic;
+    }
+
+    public void setDevTypePic(String DevTypePic) {
+        this.DevTypePic = DevTypePic;
+    }
+
+    public String getCamSeqId() {
+        return CamSeqId;
+    }
+
+    public void setCamSeqId(String CamSeqId) {
+        this.CamSeqId = CamSeqId;
+    }
+
+    public String getCamProjId() {
+        return CamProjId;
+    }
+
+    public void setCamProjId(String CamProjId) {
+        this.CamProjId = CamProjId;
+    }
+
+    public String getVideoId() {
+        return VideoId;
+    }
+
+    public void setVideoId(String VideoId) {
+        this.VideoId = VideoId;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+    public String getDevStatus() {
+        return DevStatus;
+    }
+
+    public void setDevStatus(String DevStatus) {
+        this.DevStatus = DevStatus;
+    }
+
+    public String getDevNetStatus() {
+        return DevNetStatus;
+    }
+
+    public void setDevNetStatus(String DevNetStatus) {
+        this.DevNetStatus = DevNetStatus;
+    }
 
 
     /**
@@ -31,7 +211,7 @@ public class VideoDriverJson {
      * DevStatus : 1
      * DevNetStatus : 2
      * VideoId : 086591-2004646346
-     */
+     *//*
 
     private String totalTime;
     private String monthTime;
@@ -41,12 +221,12 @@ public class VideoDriverJson {
     private String CamId;
     private String SysID;
     private String CamName;
-    private int CamFlowState;
+    private String CamFlowState;
     private boolean Cam_IsTest;
     private String Cam_DX_VideoId;
-    private Object Cam_WideAngle_IP;
+    private String Cam_WideAngle_IP;
     private String CamTypeId;
-    private Object CamItemId;
+    private String CamItemId;
     private String Cam_Config;
     private String CamInstalPlace;
     private String DevTypeName;
@@ -121,11 +301,11 @@ public class VideoDriverJson {
         this.CamName = CamName;
     }
 
-    public int getCamFlowState() {
+    public String getCamFlowState() {
         return CamFlowState;
     }
 
-    public void setCamFlowState(int CamFlowState) {
+    public void setCamFlowState(String CamFlowState) {
         this.CamFlowState = CamFlowState;
     }
 
@@ -145,11 +325,11 @@ public class VideoDriverJson {
         this.Cam_DX_VideoId = Cam_DX_VideoId;
     }
 
-    public Object getCam_WideAngle_IP() {
+    public String getCam_WideAngle_IP() {
         return Cam_WideAngle_IP;
     }
 
-    public void setCam_WideAngle_IP(Object Cam_WideAngle_IP) {
+    public void setCam_WideAngle_IP(String Cam_WideAngle_IP) {
         this.Cam_WideAngle_IP = Cam_WideAngle_IP;
     }
 
@@ -161,11 +341,11 @@ public class VideoDriverJson {
         this.CamTypeId = CamTypeId;
     }
 
-    public Object getCamItemId() {
+    public String getCamItemId() {
         return CamItemId;
     }
 
-    public void setCamItemId(Object CamItemId) {
+    public void setCamItemId(String CamItemId) {
         this.CamItemId = CamItemId;
     }
 
@@ -239,5 +419,6 @@ public class VideoDriverJson {
 
     public void setVideoId(String VideoId) {
         this.VideoId = VideoId;
-    }
+    }*/
+
 }

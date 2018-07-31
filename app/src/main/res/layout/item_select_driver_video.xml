@@ -47,6 +47,7 @@
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_marginTop="@dimen/y12"
                 android:layout_toEndOf="@+id/tv_Driver_Name_Select_Driver"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/cb_select" />
 
             <ImageView
@@ -56,6 +57,7 @@
                 android:layout_marginTop="@dimen/y16"
                 android:layout_alignStart="@+id/iv_Power_Select_Driver"
                 android:layout_below="@+id/iv_Power_Select_Driver"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/cb_select" />
             <ImageView
                 android:id="@+id/imageView2"

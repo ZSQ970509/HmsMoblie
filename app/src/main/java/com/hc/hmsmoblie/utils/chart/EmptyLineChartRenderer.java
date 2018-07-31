@@ -47,10 +47,10 @@ public class EmptyLineChartRenderer extends LineChartRenderer {
      *
      * @param index   下标
      * @param dataSet
-     * @return
+     * @return true符合   false不符合
      */
     private boolean isEmptyEntry(int index, ILineDataSet dataSet) {
-        return dataSet != null && index < dataSet.getEntryCount() && dataSet.getEntryForIndex(index).getY() > MIN_NUM;
+        return dataSet != null && index >= 0 && index < dataSet.getEntryCount() && dataSet.getEntryForIndex(index).getY() > MIN_NUM;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class EmptyLineChartRenderer extends LineChartRenderer {
                     if (isEmptyEntry(j, dataSet) && isEmptyEntry(j + 1, dataSet)) {
                         prevIndex = j;
                         curIndex = j + 1;
-                        nextIndex = isEmptyEntry(j + 1, dataSet) ? j + 2 : j + 1;
+                        nextIndex = isEmptyEntry(j + 2, dataSet) ? j + 2 : j + 1;
                         prev = dataSet.getEntryForIndex(prevIndex);
                         prevPrev = prev;
                         cur = dataSet.getEntryForIndex(curIndex);

@@ -80,9 +80,9 @@ public class LadderControlProjectListActivity extends BaseMvpActivity<LadderCont
             initRefreshAndLoadMore();
             searchPro();
         });
-        mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
+      /*  mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
                 LadderControlDeviceListActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID())
-        );
+        );*/
     }
 
     private void searchPro() {

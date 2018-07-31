@@ -43,11 +43,13 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
     private int mPageTotal = 1;
     private BaseItemDraggableAdapter<LadderControlDeviceListJson.ListBean, BaseViewHolder> mAdapter;
     private String mProID;
+    private String mCamID;
     private static final String PRO_ID = "pro_id";
-
-    public static void newInstance(Activity activity, String proId) {
+    private static final String CAM_ID = "cam_id";
+    public static void newInstance(Activity activity, String proId, String camId) {
         Intent intent = new Intent(activity, LadderControlDeviceListActivity.class);
         intent.putExtra(PRO_ID, proId);
+        intent.putExtra(CAM_ID, camId);
         activity.startActivity(intent);
     }
 
@@ -67,6 +69,7 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
         setToolBar("选择设备");
         mEdtKey.setHint("请输入设备名称");
         mProID = getIntent().getStringExtra(PRO_ID);
+        mCamID = getIntent().getStringExtra(CAM_ID);
         mAdapter = new BaseItemDraggableAdapter<LadderControlDeviceListJson.ListBean, BaseViewHolder>(R.layout.ladder_control_device_item, null) {
             @Override
             protected void convert(BaseViewHolder helper, LadderControlDeviceListJson.ListBean item) {
@@ -102,7 +105,7 @@ public class LadderControlDeviceListActivity extends BaseMvpActivity<LadderContr
     }
 
     private void searchDeviceList() {
-        mPresenter.getDeviceList(mEdtKey.getText().toString(), mPageIndex, mPageSize, mProID);
+        mPresenter.getDeviceList(mEdtKey.getText().toString(), mPageIndex, mPageSize, mProID,mCamID);
     }
 
     @Override

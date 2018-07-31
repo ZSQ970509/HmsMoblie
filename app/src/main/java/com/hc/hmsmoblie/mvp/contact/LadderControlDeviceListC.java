@@ -17,6 +17,6 @@ public class LadderControlDeviceListC {
     }
 
     public interface P {
-        void getDeviceList(String keyword, int pageIndex, int pageSize,String proId);
+        void getDeviceList(String keyword, int pageIndex, int pageSize,String proId,String camId);
     }
 }

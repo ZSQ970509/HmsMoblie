@@ -12,10 +12,10 @@ import io.reactivex.Observable;
  */
 
 public class LadderControlDeviceListM implements IModel{
-    public Observable getTowerCraneDevList(String keyword, int pageIndex, int pageSize, String proId) {
+    public Observable getTowerCraneDevList(String keyword, int pageIndex, int pageSize, String proId, String camId) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getTowerCraneDevList(keyword, pageIndex,pageSize,proId)
+                .getTowerCraneDevList(keyword, pageIndex,pageSize,proId,camId)
                 .compose(NetTransformer.compose());
     }
 }
