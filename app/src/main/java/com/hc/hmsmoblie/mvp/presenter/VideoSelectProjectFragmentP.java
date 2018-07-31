@@ -2,6 +2,8 @@ package com.hc.hmsmoblie.mvp.presenter;
 
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.mvp.contact.VideoSelectProjectC;
+import com.hc.hmsmoblie.mvp.contact.VideoSelectProjectFragmentC;
+import com.hc.hmsmoblie.mvp.model.VideoSelectProjectFragmentM;
 import com.hc.hmsmoblie.mvp.model.VideoSelectProjectM;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
@@ -12,11 +14,11 @@ import com.yc.yclibrary.mvp.BasePresenter;
  *
  */
 
-public class VideoSelectProjectP extends BasePresenter<VideoSelectProjectC.V> implements VideoSelectProjectC.P{
-    /*@Override
+public class VideoSelectProjectFragmentP extends BasePresenter<VideoSelectProjectFragmentC.V> implements VideoSelectProjectFragmentC.P{
+    @Override
     public void getVideoProject(String keyword, int pageindex, int pagesize, String sysId, String userid) {
 
-        new VideoSelectProjectM()
+        new VideoSelectProjectFragmentM()
                 .getCameraList(keyword,pageindex,pagesize,sysId,userid)
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<ProjectJson>>() {
@@ -32,5 +34,5 @@ public class VideoSelectProjectP extends BasePresenter<VideoSelectProjectC.V> im
                         getIView().onGetVideoProjectFail(msg.getMessage());
                     }
                 });
-    }*/
+    }
 }

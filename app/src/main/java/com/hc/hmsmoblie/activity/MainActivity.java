@@ -72,8 +72,8 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * DrawerLayout侧滑菜单开关
-     */
+         * DrawerLayout侧滑菜单开关
+         */
     public void toggleDrawer() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);

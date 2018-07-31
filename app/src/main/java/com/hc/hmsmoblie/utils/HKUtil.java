@@ -7,12 +7,16 @@ import android.net.wifi.WifiManager;
 import android.os.Looper;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.hc.hmsmoblie.App;
+import com.hc.hmsmoblie.base.BaseActivity;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.widget.CommonDialog;
 import com.hikvision.sdk.VMSNetSDK;
 import com.hikvision.sdk.consts.HttpConstants;
 import com.hikvision.sdk.net.business.OnVMSNetSDKBusiness;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 /**
  * Created by Administrator on 2018/6/21.
@@ -40,7 +44,7 @@ public class HKUtil {
         VMSNetSDK.getInstance().Login(loginAddress, userName, password, macAddress, business);
     }
 
-    public static void start(final String mSysCode, final SurfaceView mSurfaceView, final int mStreamType, final Activity context) {
+    public static void start(final String mSysCode, final SurfaceView mSurfaceView, final int mStreamType, final BaseMvpActivity context) {
         new Thread() {
             @Override
             public void run() {
@@ -49,7 +53,9 @@ public class HKUtil {
                     @Override
                     public void onFailure() {
                         Log.e("8700", "播放失败");
-                        CommonDialog.newInstance(context)
+                        if(context!= ActivityUtils.INSTANCE.getCurrentActivity())
+                            return ;
+                        CommonDialog.newInstanceSingle(context)
                                 .setTitle("播放提示")
                                 .setMsg("播放失败")
                                 .setSingleBtnText("确定")
@@ -60,6 +66,7 @@ public class HKUtil {
 
                     @Override
                     public void onSuccess(Object obj) {
+
                         Log.e("8700", "播放成功");
 //                            mHandler.sendEmptyMessage(GET_CAMERA_INFO_SUCCESS);
                     }

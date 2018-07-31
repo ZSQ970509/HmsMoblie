@@ -24,18 +24,30 @@ public class SelectDriverVideoAdapter extends BaseItemDraggableAdapter<VideoDriv
     @Override
     protected void convert(BaseViewHolder helper, VideoDriverJson item) {
         helper.setText(R.id.tv_Driver_Name_Select_Driver, item.getCamName());
+        helper.addOnClickListener(R.id.iv_Driver_Panorama);
         //1:通电" 0:断电 null:未开通断电设备
 
         if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
             //塔吊
-            helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.zhinengceju_fail);
+            helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.shebei);
+            helper.getView(R.id.iv_Net_Select_Driver).setVisibility(View.INVISIBLE);
+            helper.getView(R.id.iv_Power_Select_Driver).setVisibility(View.INVISIBLE);
+            helper.getView(R.id.iv_Driver_Panorama).setVisibility(View.INVISIBLE);
 
         } else if (item.getCamTypeId().equals("210") || item.getCamTypeId().equals("230")) {
             //环境
-            helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.zhinengceju_fail);
+            helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.huanjing);
+            helper.getView(R.id.iv_Net_Select_Driver).setVisibility(View.INVISIBLE);
+            helper.getView(R.id.iv_Power_Select_Driver).setVisibility(View.INVISIBLE);
+            helper.getView(R.id.iv_Driver_Panorama).setVisibility(View.INVISIBLE);
         } else if (item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128") || item.getCamTypeId().equals("116") || item.getCamTypeId().equals("136")
                 || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || item.getCamTypeId().equals("115") || item.getCamTypeId().equals("135")
                 || Integer.parseInt(item.getCamTypeId())<=110) {
+            if(item.getCamTypeId().equals("103") || item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128")){
+                helper.getView(R.id.iv_Driver_Panorama).setVisibility(View.VISIBLE);
+            }else{
+                helper.getView(R.id.iv_Driver_Panorama).setVisibility(View.INVISIBLE);
+            }
             helper.getView(R.id.iv_Net_Select_Driver).setVisibility(View.VISIBLE);
             helper.getView(R.id.iv_Power_Select_Driver).setVisibility(View.VISIBLE);
             helper.setImageResource(R.id.iv_Power_Select_Driver, EmptyUtils.isState(item.getDevStatus(), R.drawable.dian1, R.drawable.dian2, R.drawable.weikaitong));

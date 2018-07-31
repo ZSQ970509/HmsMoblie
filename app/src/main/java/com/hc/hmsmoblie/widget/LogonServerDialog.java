@@ -33,7 +33,7 @@ public class LogonServerDialog extends Dialog {
     private TextView mTvRight;//右侧
     private OnClick mClickLeft;
 
-    private final List<String> mData = Arrays.asList(UserTypeId.HSM.getTypeName(), UserTypeId.MCC.getTypeName(), UserTypeId.PECN.getTypeName());
+//    private final List<String> mData = Arrays.asList(UserTypeId.HSM.getTypeName(), UserTypeId.PECN.getTypeName(), UserTypeId.MCC.getTypeName());
 
     public static LogonServerDialog newInstance(@NonNull Context context) {
         return new LogonServerDialog(context);
@@ -57,7 +57,7 @@ public class LogonServerDialog extends Dialog {
         mSpUserType.setTextColor(Color.parseColor("#333333"));
         mTvRight = (TextView) findViewById(R.id.tvDialogRight);
         mTvLeft = (TextView) findViewById(R.id.tvDialogLeft);
-        mSpUserType.attachDataSource(mData);
+        mSpUserType.attachDataSource(Arrays.asList(UserTypeId.mName));
         mSpUserType.setPadding(0, 0, 0, 0);
         mSpUserType.setGravity(Gravity.CENTER);
         mTvRight.setOnClickListener(v -> dismiss());

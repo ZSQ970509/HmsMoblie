@@ -34,6 +34,7 @@ import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.hc.hmsmoblie.utils.AnimationUtil;
 import com.hc.hmsmoblie.utils.HuXinUtil;
 import com.hc.hmsmoblie.widget.CommonDialog;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -103,13 +104,16 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
        HuXinUtil.initVideoSDK(this,videoBean.getmUserName(), videoBean.getmPassword(),new HttpCallBack<BaseResponse>() {
             @Override
             public void callBack(BaseResponse arg0, String arg1) {
-
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
                 if ("1".equals(arg0.getReturnCode())) {
                     hideLoading();
                     HuXinUtil.initVideo(splay,glvHuXinVideo,videoBean.getVideoId(),videoBean.getmUserName(),new  onPlayListener() {
 
                         @Override
                         public void setOnPlaysuccess() {
+                            if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                                return ;
                             prossTV.setText("视频缓冲进度：100%");
                             layoutPross.setVisibility(View.GONE);
                             if(splay != null) {
@@ -119,9 +123,11 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
                         @Override
                         public void onPlayFail(int arg0, final String error) {
+                            if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                                return ;
                             layoutPross.setVisibility(View.GONE);
                              //DialogUtil.showDialog(PuIdPlayerActivity.this, error);
-                            CommonDialog.newInstance(getActivity())
+                            CommonDialog.newInstanceSingle(getActivity())
                                     .setTitle("提示")
                                     .setMsg("播放失败："+error)
                                     .setSingleBtnText("确定")
@@ -134,7 +140,8 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                         }
                         @Override
                         public void onBufferProssgress(int bufferValue) {
-
+                            if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                                return ;
                             if (bufferValue >= 99) {
                                 prossTV.setText("视频缓冲进度：100%");
                                 layoutPross.setVisibility(View.GONE);
@@ -144,8 +151,10 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                         }
                     });
                 } else {
+                    if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                        return ;
                     hideLoading();
-                    CommonDialog.newInstance(getActivity())
+                    CommonDialog.newInstanceSingle(getActivity())
                             .setTitle("播放提示")
                             .setMsg("播放失败："+arg0.getMsg())
                             .setSingleBtnText("确定")
@@ -171,12 +180,16 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
             @Override
             public void setOnPlaysuccess() {
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
                 prossTV.setText("视频缓冲进度：100%");
                 layoutPross.setVisibility(View.GONE);
             }
 
             @Override
             public void onPlayFail(int arg0, final String error) {
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
                 layoutPross.setVisibility(View.GONE);
                 // DialogUtil.showDialog(PuIdPlayerActivity.this, error);
 
@@ -189,7 +202,8 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
             @Override
             public void onBufferProssgress(int bufferValue) {
-
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
                 if (bufferValue >= 99) {
                     prossTV.setText("视频缓冲进度：100%");
                     layoutPross.setVisibility(View.GONE);
@@ -209,11 +223,13 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
                 350100, new HttpCallBack<BaseResponse>() {
                     @Override
                     public void callBack(BaseResponse arg0, String arg1) {
-
+                        if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                            return ;
                         if ("1".equals(arg0.getReturnCode())) {
                             hideLoading();
                             initVideo();
                         } else {
+
                             hideLoading();
                             new AlertDialog.Builder(HuXinVideoActivity.this).setTitle("播放提示")
                                     .setMessage("播放失败："+arg0.getMsg()).setPositiveButton("确定",
@@ -389,5 +405,14 @@ public class HuXinVideoActivity extends BaseMvpActivity<LoginP> implements Login
 
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        splay.playEnd();
+        splay.unReceiver();
+
+        System.gc();
+        super.onDestroy();
     }
 }

@@ -7,7 +7,7 @@ package com.hc.hmsmoblie.bean.type;
 public enum UserTypeId {
     //汇川10,省工程建设网20,市建委30
     HSM(0), PECN(1), MCC(2);
-    private String[] mName = {"HMS平台", "省工程建设网", "市建委"};
+    public final static String[] mName = {"HMS平台", "省工程建设网", "市建委"};
     private String[] mId = {"10", "20", "30"};
     private int mIndex;
 

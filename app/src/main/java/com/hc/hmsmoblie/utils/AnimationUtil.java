@@ -20,7 +20,7 @@ public class AnimationUtil {
         ObjectAnimator showAnim = ObjectAnimator.ofFloat(showView, "alpha", 0f, 1f);
         AnimatorSet showAnimatorSet = new AnimatorSet();  //组合动画
         showAnimatorSet.playTogether(showAnim); //设置动画
-        showAnimatorSet.setDuration(1000);  //设置动画时间
+        showAnimatorSet.setDuration(500);  //设置动画时间
 
         //动画的监听
         showAnimatorSet.addListener(new Animator.AnimatorListener() {
@@ -50,7 +50,7 @@ public class AnimationUtil {
             ObjectAnimator anim = ObjectAnimator.ofFloat(dismissView, "alpha", 1f, 0f);
             AnimatorSet animatorSet = new AnimatorSet();  //组合动画
             animatorSet.playTogether(anim); //设置动画
-            animatorSet.setDuration(1000);  //设置动画时间
+            animatorSet.setDuration(500);  //设置动画时间
             animatorSet.start(); //启动
             dismissView.setClickable(false);
             //动画的监听
@@ -88,7 +88,7 @@ public class AnimationUtil {
         ObjectAnimator ra = ObjectAnimator.ofFloat(view,"rotation", 0f, 360f,360f ,0f);
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         animatorSet.playTogether(ra); //设置动画
-        animatorSet.setDuration(2000);  //设置动画时间
+        animatorSet.setDuration(1000);  //设置动画时间
         animatorSet.start(); //启动
         view.setClickable(false);
         //动画的监听
@@ -119,7 +119,7 @@ public class AnimationUtil {
         ObjectAnimator ra = ObjectAnimator.ofFloat(view,"rotation", 0f, 360f);
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         animatorSet.playTogether(ra); //设置动画
-        animatorSet.setDuration(1000);  //设置动画时间
+        animatorSet.setDuration(500);  //设置动画时间
         animatorSet.start(); //启动
         view.setClickable(false);
         //动画的监听
@@ -149,7 +149,7 @@ public class AnimationUtil {
         ObjectAnimator ra = ObjectAnimator.ofFloat(view,"rotation", 360f, 0f);
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         animatorSet.playTogether(ra); //设置动画
-        animatorSet.setDuration(1000);  //设置动画时间
+        animatorSet.setDuration(500);  //设置动画时间
         animatorSet.start(); //启动
         view.setClickable(false);
         //动画的监听
@@ -180,7 +180,7 @@ public class AnimationUtil {
         ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 0f, 1f);
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         animatorSet.playTogether(anim); //设置动画
-        animatorSet.setDuration(1000);  //设置动画时间
+        animatorSet.setDuration(500);  //设置动画时间
         animatorSet.start(); //启动
         view.setVisibility(View.VISIBLE);
         view.setClickable(false);
@@ -214,7 +214,7 @@ public class AnimationUtil {
         ObjectAnimator anim = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
         AnimatorSet animatorSet = new AnimatorSet();  //组合动画
         animatorSet.playTogether(anim); //设置动画
-        animatorSet.setDuration(1000);  //设置动画时间
+        animatorSet.setDuration(500);  //设置动画时间
         animatorSet.start(); //启动
         view.setClickable(false);
         //动画的监听

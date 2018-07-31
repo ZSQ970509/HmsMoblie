@@ -77,6 +77,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                 try {
                     VideoBean videoBean = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
                     VideoDriverJson item = dataList.get(position);
+
+
                     //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
                     videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
                     videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
@@ -88,7 +90,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                         //环境
                         EnvironmentDetailsActivity.newInstance(getActivity(),item.getCamId(),item.getCamSeqId(),item.getCamProjId());
                     } else if (item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128") || item.getCamTypeId().equals("116") || item.getCamTypeId().equals("136")
-                            || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || Integer.parseInt(item.getCamTypeId()) <= 110) {
+                            || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || item.getCamTypeId().equals("115") || item.getCamTypeId().equals("135")
+                            || Integer.parseInt(item.getCamTypeId())<=110)  {
 
 
                         if (videoBean.getCamFlowState().equals("15")) {
@@ -185,6 +188,18 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                             .setSingleBtnText("确定")
                             .show();
                 }*/
+            }
+        });
+        selectDriverVideoAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                VideoDriverJson item = dataList.get(position);
+                switch (view.getId()) {
+                    case R.id.iv_Driver_Panorama:
+                        //MonitorID1 Aha1 Ava1 Shift1 Path1a nextPath1a oldPath1a
+                        ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
+                        break;
+                }
             }
         });
         showLoading("正在搜索中...");

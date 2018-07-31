@@ -9,24 +9,30 @@
         android:id="@+id/csv_Hk_Video"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivHuXinBack"
-            android:layout_width="@dimen/x24"
-
-
-            android:layout_height="@dimen/y40"
+            android:layout_width="@dimen/x48"
+            android:layout_height="@dimen/y80"
             android:layout_gravity="center_vertical|left"
-            android:layout_marginTop="@dimen/y64"
-            android:layout_marginLeft="@dimen/x24"
+            android:padding="@dimen/x12"
+            android:layout_marginTop="@dimen/y40"
+            android:layout_marginLeft="@dimen/x30"
             android:scaleType="fitXY"
             android:src="@drawable/back" />
+    <LinearLayout
+        android:id="@+id/layout_pross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical" >
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+    </LinearLayout>
     <ImageView
         android:id="@+id/control_Main"
         android:layout_width="@dimen/y56"

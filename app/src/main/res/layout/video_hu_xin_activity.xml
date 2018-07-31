@@ -12,22 +12,20 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivHuXinBack"
-            android:layout_width="@dimen/x24"
-            android:layout_height="@dimen/y40"
+            android:layout_width="@dimen/x48"
+            android:layout_height="@dimen/y80"
             android:layout_gravity="center_vertical|left"
-            android:layout_marginTop="@dimen/y64"
-            android:layout_marginLeft="@dimen/x24"
+            android:padding="@dimen/x12"
+            android:layout_marginTop="@dimen/y40"
+            android:layout_marginLeft="@dimen/x30"
             android:scaleType="fitXY"
             android:src="@drawable/back" />
 
 
-    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/layout_pross"

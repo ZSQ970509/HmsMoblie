@@ -28,6 +28,7 @@ import com.hikvision.sdk.VMSNetSDK;
 import com.hikvision.sdk.consts.SDKConstant;
 import com.hikvision.sdk.net.bean.LoginData;
 import com.hikvision.sdk.net.business.OnVMSNetSDKBusiness;
+import com.yc.yclibrary.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -55,6 +56,8 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
     ImageView controlRight;
     @BindView(R.id.csv_Hk_Video)
     CustomSurfaceView csvHkVideo;
+    @BindView(R.id.layout_pross)
+    public View layoutPross;
     /**
      * 是否正在云台控制
      */
@@ -92,21 +95,28 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
             public void onFailure() {
 //                    mHandler.sendEmptyMessage(LOGIN_FAILED);
                 //showToast("登录失败");
+                layoutPross.setVisibility(View.GONE);
                 Log.e("8700", "登录失败");
-                CommonDialog.newInstance(getActivity())
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
+                CommonDialog.newInstanceSingle(getActivity())
                         .setTitle("播放提示")
                         .setMsg("登录失败")
                         .setSingleBtnText("确定")
                         .setSingleClick(v -> finish())
                         .show();
+
             }
 
             @Override
             public void onSuccess(Object obj) {
                 //Log.e("8700", "登录成功");
+                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
+                    return ;
+                layoutPross.setVisibility(View.GONE);
                 if (obj instanceof LoginData) {
                     int mStreamType = SDKConstant.LiveSDKConstant.MAIN_HIGH_STREAM; // 码流
-                    HKUtil.start(videoBean.getmSysCode(), csvHkVideo, mStreamType, getActivity());
+                    HKUtil.start(videoBean.getmSysCode(), csvHkVideo, mStreamType, (BaseMvpActivity) getActivity());
                 }
             }
         });

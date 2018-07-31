@@ -85,10 +85,10 @@ public class EnvironmentSelectProjectActivity extends BaseMvpActivity<VideoSelec
 
     private void getData() {
         //sysId:11视频监控、26超视野、31梯控、21环境
-        mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "21", UserInfoPref.getUserId());
+       // mPresenter.getVideoProject(editSearchSelectProject.getText().toString(), pageIndex, 10, "21", UserInfoPref.getUserId());
     }
 
-    @Override
+   /* @Override
     public void onGetVideoProjectSuccess(ProjectJson dataBean) {
         if (dataBean.getList().size() == 0) {
             showToast("暂无数据！");
@@ -121,6 +121,6 @@ public class EnvironmentSelectProjectActivity extends BaseMvpActivity<VideoSelec
                 getData();
                 break;
         }
-    }
+    }*/
 
 }

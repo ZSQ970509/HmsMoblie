@@ -9,11 +9,11 @@ import com.yc.yclibrary.mvp.IView;
 
 public class VideoSelectProjectC {
     public interface V extends IView{
-        void onGetVideoProjectSuccess(ProjectJson dataBean);
+      /*  void onGetVideoProjectSuccess(ProjectJson dataBean);
 
-        void onGetVideoProjectFail(String msg);
+        void onGetVideoProjectFail(String msg);*/
     }
     public interface P {
-        void getVideoProject(String keyword, int pageindex, int pagesize, String sysId, String userid);
+        //void getVideoProject(String keyword, int pageindex, int pagesize, String sysId, String userid);
     }
 }
