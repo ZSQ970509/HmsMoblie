@@ -6,7 +6,15 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.hc.hmsmoblie.R;
+
+import java.util.List;
+import java.util.Stack;
+
+import io.reactivex.Observable;
 
 /**
  *
@@ -39,7 +47,6 @@ public class LoadImgUtils {
                         .into(imageView);
             }
         },time);
-
     }
 //    public static void loadImgNew(Activity activity, String imgUrl, ImageView imageView) {
 //        Glide.with(activity)

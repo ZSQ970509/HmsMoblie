@@ -13,6 +13,7 @@ import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.mvp.contact.ImageLogNodeC;
 import com.hc.hmsmoblie.mvp.presenter.ImageLogNodeP;
+import com.hc.hmsmoblie.utils.GlideHelper;
 import com.hc.hmsmoblie.utils.LoadImgUtils;
 import com.yc.yclibrary.exception.ApiException;
 
@@ -152,7 +153,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         } else if (centerColIndex <= minCol) {
             centerColIndex++;
         }
-        int time = 100;
+        GlideHelper glideHelper = new GlideHelper(getActivity());
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int row = centerRowIndex - minRow - 1 + i;
@@ -165,11 +166,12 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
                 if (temp == null)
                     mShowImageView[i][j].setImageResource(R.drawable.img_fail);
                 else {
-                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j], time);
-                    time += 100;
+                    glideHelper.add(temp.getImgpath(), mShowImageView[i][j]);
+//                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j], time);
                 }
             }
         }
+        glideHelper.start();
 //        for (int i = 0; i < json.getData30().size(); i++) {
 //            ImageLogNodeJson.Data30Bean data = json.getData30().get(i);
 //            if (midRowIndex - 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
