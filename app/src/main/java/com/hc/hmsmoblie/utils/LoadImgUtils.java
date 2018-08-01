@@ -23,6 +23,22 @@ public class LoadImgUtils {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)//缓存
 //                .skipMemoryCache(true)
                 .into(imageView);
+    }
+    public static void loadImg( Activity activity, String imgUrl, ImageView imageView,int time) {
+        imageView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(activity)
+                        .load(imgUrl)//拿到头像本地存放路径
+//                .asBitmap()//避免图片变形
+                        .error(R.drawable.img_fail)//失败默认
+                        .placeholder(R.drawable.img_loading)
+                        .fitCenter()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)//缓存
+//                .skipMemoryCache(true)
+                        .into(imageView);
+            }
+        },time);
 
     }
 //    public static void loadImgNew(Activity activity, String imgUrl, ImageView imageView) {

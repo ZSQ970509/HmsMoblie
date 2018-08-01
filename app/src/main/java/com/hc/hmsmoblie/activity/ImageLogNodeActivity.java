@@ -139,7 +139,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
 
         for (int i = 0; i < data30.size(); i++) {
             ImageLogNodeJson.Data30Bean temp = data30.get(i);
-            mShowData[temp.getRownum() - minRow ][temp.getColnum() - minCol ] = temp;
+            mShowData[temp.getRownum() - minRow][temp.getColnum() - minCol] = temp;
         }
         //找中心点位置
         if (centerRowIndex >= maxRow) {
@@ -152,6 +152,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         } else if (centerColIndex <= minCol) {
             centerColIndex++;
         }
+        int time = 100;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int row = centerRowIndex - minRow - 1 + i;
@@ -164,13 +165,8 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
                 if (temp == null)
                     mShowImageView[i][j].setImageResource(R.drawable.img_fail);
                 else {
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j]);
-                    Log.e("asd","row"+row+" col"+col+" path"+temp.getImgpath());
+                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j], time);
+                    time += 100;
                 }
             }
         }
