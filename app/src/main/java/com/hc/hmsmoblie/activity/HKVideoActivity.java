@@ -37,7 +37,7 @@ import butterknife.OnClick;
  *
  */
 
-public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V ,SurfaceHolder.Callback{
+public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V, SurfaceHolder.Callback {
     @BindView(R.id.ivHuXinBack)
     ImageView ivHuXinBack;
     @BindView(R.id.control_Main)
@@ -70,12 +70,15 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
     int controlType = 0;
     String speedNum = "1";
     private static final String Video_Bean = "video_bean";
+    private CommonDialog mCommonDialog;
     VideoBean videoBean;
+
     public static void newInstance(Activity activity, VideoBean videoBean) {
         Intent intent = new Intent(activity, HKVideoActivity.class);
         intent.putExtra(Video_Bean, videoBean);
         activity.startActivity(intent);
     }
+
     @Override
     protected LoginP loadPresenter() {
         return new LoginP();
@@ -88,18 +91,19 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
 
     @Override
     protected void initView(Bundle bundle) {
+        mCommonDialog = CommonDialog.newInstanceSingle(getActivity());
         csvHkVideo.getHolder().addCallback(HKVideoActivity.this);
         videoBean = (VideoBean) getIntent().getSerializableExtra(Video_Bean);
-        HKUtil.login(videoBean.getmIp(),videoBean.getmPort(),videoBean.getmUserName(),videoBean.getmPassword(),new OnVMSNetSDKBusiness(){
+        HKUtil.login(videoBean.getmIp(), videoBean.getmPort(), videoBean.getmUserName(), videoBean.getmPassword(), new OnVMSNetSDKBusiness() {
             @Override
             public void onFailure() {
 //                    mHandler.sendEmptyMessage(LOGIN_FAILED);
                 //showToast("登录失败");
                 layoutPross.setVisibility(View.GONE);
                 Log.e("8700", "登录失败");
-                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
-                    return ;
-                CommonDialog.newInstanceSingle(getActivity())
+                if (mCommonDialog == null)
+                    return;
+                mCommonDialog
                         .setTitle("播放提示")
                         .setMsg("登录失败")
                         .setSingleBtnText("确定")
@@ -111,8 +115,8 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
             @Override
             public void onSuccess(Object obj) {
                 //Log.e("8700", "登录成功");
-                if(getActivity()!= ActivityUtils.INSTANCE.getCurrentActivity())
-                    return ;
+                if (getActivity() != ActivityUtils.INSTANCE.getCurrentActivity())
+                    return;
                 layoutPross.setVisibility(View.GONE);
                 if (obj instanceof LoginData) {
                     int mStreamType = SDKConstant.LiveSDKConstant.MAIN_HIGH_STREAM; // 码流
@@ -159,14 +163,24 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
             showToast("停止成功");
         }
     }
-    @OnClick({R.id.ivHuXinBack,R.id.control_Main,R.id.control_Setting,R.id.control_Direction,R.id.control_Up,R.id.control_Left,R.id.control_Down,R.id.control_Right})
+
+    @Override
+    protected void onDestroy() {
+        if (mCommonDialog != null) {
+            mCommonDialog.dismiss();
+            mCommonDialog = null;
+        }
+        super.onDestroy();
+    }
+
+    @OnClick({R.id.ivHuXinBack, R.id.control_Main, R.id.control_Setting, R.id.control_Direction, R.id.control_Up, R.id.control_Left, R.id.control_Down, R.id.control_Right})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.ivHuXinBack:
                 finish();
                 break;
             case R.id.control_Main:
-                switch (type){
+                switch (type) {
                     case 0:
                         AnimationUtil.LeftRotation(imageView_main);
                         AnimationUtil.getShowAlpha(controlSetting);
@@ -197,10 +211,10 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                 controlDown.setImageResource(R.drawable.small);
                 controlRight.setImageResource(R.drawable.dark);
                 AnimationUtil.rightAroundRotation(imageView_main);
-                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlUp);
-                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlLeft);
-                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlDown);
-                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlRight);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting, controlUp);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting, controlLeft);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection, controlDown);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection, controlRight);
 
                 controlType = 0;
                 break;
@@ -210,55 +224,55 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                 controlDown.setImageResource(R.drawable.down);
                 controlRight.setImageResource(R.drawable.right);
                 AnimationUtil.rightAroundRotation(imageView_main);
-                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlUp);
-                AnimationUtil.getDismissAndShowAlpha(controlSetting,controlLeft);
-                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlDown);
-                AnimationUtil.getDismissAndShowAlpha(controlDirection,controlRight);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting, controlUp);
+                AnimationUtil.getDismissAndShowAlpha(controlSetting, controlLeft);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection, controlDown);
+                AnimationUtil.getDismissAndShowAlpha(controlDirection, controlRight);
 
                 controlType = 1;
                 break;
             case R.id.control_Up:
-                if(controlType == 1){
+                if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_UP;
                     ptzBtnOnClick();
                     //splay.control(videoBean.getmUserName(), "1", speedNum);//1 向上
-                }else{
+                } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_ZOOM_IN;
                     ptzBtnOnClick();
-                   // splay.control(videoBean.getmUserName(), "7", speedNum);//7 放大
+                    // splay.control(videoBean.getmUserName(), "7", speedNum);//7 放大
                 }
                 break;
             case R.id.control_Left:
-                if(controlType == 1){
+                if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_LEFT;
                     ptzBtnOnClick();
-                   // splay.control(videoBean.getmUserName(), "3", speedNum);//2 向左
-                }else{
+                    // splay.control(videoBean.getmUserName(), "3", speedNum);//2 向左
+                } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_IRIS_UP;
                     ptzBtnOnClick();
                     //splay.control(videoBean.getmUserName(), "5", speedNum);//5 变亮
                 }
                 break;
             case R.id.control_Down:
-                if(controlType == 1){
+                if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_DOWN;
                     ptzBtnOnClick();
-                   // splay.control(videoBean.getmUserName(), "2", speedNum);//3 向下
-                }else{
+                    // splay.control(videoBean.getmUserName(), "2", speedNum);//3 向下
+                } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_ZOOM_OUT;
                     ptzBtnOnClick();
                     //splay.control(videoBean.getmUserName(), "8", speedNum);//8 缩小
                 }
                 break;
             case R.id.control_Right:
-                if(controlType == 1){
+                if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_RIGHT;
                     ptzBtnOnClick();
-                   // splay.control(videoBean.getmUserName(), "4", speedNum);//4 向右
-                }else{
+                    // splay.control(videoBean.getmUserName(), "4", speedNum);//4 向右
+                } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_IRIS_DOWN;
                     ptzBtnOnClick();
-                   // splay.control(videoBean.getmUserName(), "6", speedNum);//6 变暗
+                    // splay.control(videoBean.getmUserName(), "6", speedNum);//6 变暗
                 }
                 break;
         }
@@ -268,40 +282,40 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
      * 云台控制按钮点击
      */
     private void ptzBtnOnClick() {
-            if (mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_GOTO_PRESET
-                    && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_CLE_PRESET
-                    && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_SET_PRESET) {
-                //开始云台操作
-                VMSNetSDK.getInstance().sendPTZCtrlCommand(true, SDKConstant.PTZCommandConstant.ACTION_START, mPtzCommand, 256, new OnVMSNetSDKBusiness() {
-                    @Override
-                    public void onFailure() {
-                        Toast.makeText(getActivity(), "控制失败_1，请重试！", Toast.LENGTH_SHORT).show();
-                    }
+        if (mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_GOTO_PRESET
+                && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_CLE_PRESET
+                && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_SET_PRESET) {
+            //开始云台操作
+            VMSNetSDK.getInstance().sendPTZCtrlCommand(true, SDKConstant.PTZCommandConstant.ACTION_START, mPtzCommand, 256, new OnVMSNetSDKBusiness() {
+                @Override
+                public void onFailure() {
+                    Toast.makeText(getActivity(), "控制失败_1，请重试！", Toast.LENGTH_SHORT).show();
+                }
 
-                    @Override
-                    public void onSuccess(Object obj) {
-                        //停止云台操作
-                        VMSNetSDK.getInstance().sendPTZCtrlCommand(true, SDKConstant.PTZCommandConstant.ACTION_STOP, mPtzCommand, 256, new OnVMSNetSDKBusiness() {
-                            @Override
-                            public void onFailure() {
-                                Toast.makeText(getActivity(), "控制失败_2，请重试！", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onSuccess(Object obj) {
+                    //停止云台操作
+                    VMSNetSDK.getInstance().sendPTZCtrlCommand(true, SDKConstant.PTZCommandConstant.ACTION_STOP, mPtzCommand, 256, new OnVMSNetSDKBusiness() {
+                        @Override
+                        public void onFailure() {
+                            Toast.makeText(getActivity(), "控制失败_2，请重试！", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onSuccess(Object obj) {
+                            if (mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_GOTO_PRESET
+                                    && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_CLE_PRESET
+                                    && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_SET_PRESET) {
+                                Toast.makeText(getActivity(), "控制成功，请重试！", Toast.LENGTH_SHORT).show();
+
                             }
-
-                            @Override
-                            public void onSuccess(Object obj) {
-                                if (mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_GOTO_PRESET
-                                        && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_CLE_PRESET
-                                        && mPtzCommand != SDKConstant.PTZCommandConstant.CUSTOM_CMD_SET_PRESET) {
-                                    Toast.makeText(getActivity(), "控制成功，请重试！", Toast.LENGTH_SHORT).show();
-
-                                }
-                            }
-                        });
-                    }
-                });
+                        }
+                    });
+                }
+            });
 
 
-            }
         }
+    }
 
 }

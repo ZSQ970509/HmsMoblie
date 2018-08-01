@@ -3,8 +3,6 @@ package com.hc.hmsmoblie.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,7 +12,6 @@ import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.mvp.contact.ImageLogNodeC;
 import com.hc.hmsmoblie.mvp.presenter.ImageLogNodeP;
 import com.hc.hmsmoblie.utils.GlideHelper;
-import com.hc.hmsmoblie.utils.LoadImgUtils;
 import com.yc.yclibrary.exception.ApiException;
 
 import java.util.List;
@@ -59,6 +56,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
     private static final String POINT_Y = "point_y";//Y轴
     private static final String AHA = "aha";//水平角度
     private static final String AVA = "ava";//垂直角度
+    GlideHelper mGlideHelper;
 
     public static void newInstance(Activity activity, String panoramaId, String imageTimes, String pointX, String pointY, String aha, String ava, String camSn) {
         Intent intent = new Intent(activity, ImageLogNodeActivity.class);
@@ -91,6 +89,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         mAha = getIntent().getStringExtra(AHA);
         mAva = getIntent().getStringExtra(AVA);
         mCamSn = getIntent().getStringExtra(CAM_SN);
+        mGlideHelper = new GlideHelper(getActivity());
 //        mCamSn = "795652107";
 //        mPanoramaId = "402685";
 //        mImageTimes = "181";
@@ -153,7 +152,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         } else if (centerColIndex <= minCol) {
             centerColIndex++;
         }
-        GlideHelper glideHelper = new GlideHelper(getActivity());
+
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 int row = centerRowIndex - minRow - 1 + i;
@@ -166,12 +165,12 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
                 if (temp == null)
                     mShowImageView[i][j].setImageResource(R.drawable.img_fail);
                 else {
-                    glideHelper.add(temp.getImgpath(), mShowImageView[i][j]);
+                    mGlideHelper.add(temp.getImgpath(), mShowImageView[i][j]);
 //                    LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j], time);
                 }
             }
         }
-        glideHelper.start();
+        mGlideHelper.start();
 //        for (int i = 0; i < json.getData30().size(); i++) {
 //            ImageLogNodeJson.Data30Bean data = json.getData30().get(i);
 //            if (midRowIndex - 1 == data.getRownum() && midColIndex - 1 == data.getColnum()) {
@@ -199,6 +198,12 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
     @Override
     public void onNodeFail(ApiException apiException) {
         showToast(apiException.getMessage());
+    }
+
+    @Override
+    protected void onDestroy() {
+        mGlideHelper.onDestroy();
+        super.onDestroy();
     }
 
     @OnClick({R.id.ivImageLogNodeBack})

@@ -23,6 +23,7 @@ public class GlideHelper {
     private Queue<String> imgUrls = new LinkedList<String>();
     private Queue<ImageView> imageViews = new LinkedList<ImageView>();
     private WeakReference<Context> mContext;
+    private boolean mIsFinish = false;
 
     public GlideHelper(Context context) {
         mContext = new WeakReference<Context>(context);
@@ -38,8 +39,12 @@ public class GlideHelper {
         loadImg(imgUrls.poll(), imageViews.poll(), 0);
     }
 
+    public void onDestroy() {
+        mIsFinish = true;
+    }
+
     private void loadImg(String imgUrl, ImageView imageView, final int loadNum) {
-        if (TextUtils.isEmpty(imgUrl) || imageView == null)
+        if (mIsFinish || TextUtils.isEmpty(imgUrl) || imageView == null)
             return;
         Glide.with(mContext.get())
                 .load(imgUrl)//拿到头像本地存放路径
