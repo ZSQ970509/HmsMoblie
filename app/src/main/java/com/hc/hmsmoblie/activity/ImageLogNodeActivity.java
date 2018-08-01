@@ -90,6 +90,13 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
         mAha = getIntent().getStringExtra(AHA);
         mAva = getIntent().getStringExtra(AVA);
         mCamSn = getIntent().getStringExtra(CAM_SN);
+//        mCamSn = "795652107";
+//        mPanoramaId = "402685";
+//        mImageTimes = "181";
+//        mPointX = "814.12645358809";
+//        mPointY = "557.9368911223929";
+//        mAha = "0.0";
+//        mAva = "0.0";
         mShowImageView[0][0] = mIvNode11;
         mShowImageView[0][1] = mIvNode12;
         mShowImageView[0][2] = mIvNode13;
@@ -112,36 +119,59 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
     @Override
     public void onNodeSuccess(ImageLogNodeJson json) {
         ImageLogNodeJson.DataCenterBean centerData = json.getDataCenter().get(0);//中心图片的数据
-        int midRowIndex = centerData.getRowNum();
-        int midColIndex = centerData.getColNum();
+        int centerRowIndex = centerData.getRowNum();
+        int centerColIndex = centerData.getColNum();
         int minRow = json.getData30().get(0).getRownum();
-        int maxRow = minRow + json.getRowSum30();
         int minCol = json.getData30().get(0).getColnum();
-        int maxCol = minCol + json.getColSum30();
-        mShowData = new ImageLogNodeJson.Data30Bean[json.getRowSum30()][json.getColSum30()];
         List<ImageLogNodeJson.Data30Bean> data30 = json.getData30();
         for (int i = 0; i < data30.size(); i++) {
+            if (minRow > data30.get(i).getRownum()) {
+                minRow = data30.get(i).getRownum();
+            }
+            if (minCol > data30.get(i).getColnum()) {
+                minCol = data30.get(i).getColnum();
+            }
+        }
+
+        int maxRow = minRow + json.getRowSum30();
+        int maxCol = minCol + json.getColSum30();
+        mShowData = new ImageLogNodeJson.Data30Bean[json.getRowSum30()][json.getColSum30()];
+
+        for (int i = 0; i < data30.size(); i++) {
             ImageLogNodeJson.Data30Bean temp = data30.get(i);
-            mShowData[temp.getRownum() - minRow][temp.getColnum() - minCol] = temp;
+            mShowData[temp.getRownum() - minRow ][temp.getColnum() - minCol ] = temp;
         }
         //找中心点位置
-        if (midRowIndex >= maxRow) {
-            midRowIndex--;
-        } else if (midRowIndex <= minRow) {
-            midRowIndex++;
+        if (centerRowIndex >= maxRow) {
+            centerRowIndex--;
+        } else if (centerRowIndex <= minRow) {
+            centerRowIndex++;
         }
-        if (midColIndex >= maxCol) {
-            midColIndex--;
-        } else if (midColIndex <= minCol) {
-            midColIndex++;
+        if (centerColIndex >= maxCol) {
+            centerColIndex--;
+        } else if (centerColIndex <= minCol) {
+            centerColIndex++;
         }
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                ImageLogNodeJson.Data30Bean temp = mShowData[midRowIndex - minRow + i][midColIndex - minCol + j];
+                int row = centerRowIndex - minRow - 1 + i;
+                int col = centerColIndex - minCol - 1 + j;
+                if (row < 0 || row >= json.getRowSum30() || col < 0 || col >= json.getColSum30()) {
+                    mShowImageView[i][j].setImageResource(R.drawable.img_fail);
+                    continue;
+                }
+                ImageLogNodeJson.Data30Bean temp = mShowData[row][col];
                 if (temp == null)
-                    mShowImageView[i][j].setImageResource(R.drawable.image);
-                else
+                    mShowImageView[i][j].setImageResource(R.drawable.img_fail);
+                else {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     LoadImgUtils.loadImg(getActivity(), temp.getImgpath(), mShowImageView[i][j]);
+                    Log.e("asd","row"+row+" col"+col+" path"+temp.getImgpath());
+                }
             }
         }
 //        for (int i = 0; i < json.getData30().size(); i++) {
@@ -172,6 +202,7 @@ public class ImageLogNodeActivity extends BaseMvpActivity<ImageLogNodeP> impleme
     public void onNodeFail(ApiException apiException) {
         showToast(apiException.getMessage());
     }
+
     @OnClick({R.id.ivImageLogNodeBack})
     void onClick(View v) {
         switch (v.getId()) {
