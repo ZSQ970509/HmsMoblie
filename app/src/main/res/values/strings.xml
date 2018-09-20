@@ -3,4 +3,29 @@
     <string name="view_empty">没有数据~</string>
     <string name="transitionNameBottomImg">bottomImg</string>
     <string name="transitionNameVerificationImg">verificationImg</string>
+    <style name="view_empty">没有数据</style>
+
+    <string name="tiltSensorItem1">序号</string>
+    <string name="tiltSensorItem2">侦测点</string>
+    <string name="tiltSensorItem3">生成时间</string>
+    <string name="tiltSensorItem4">X轴角度</string>
+    <string name="tiltSensorItem5">Y轴角度</string>
+    <string name="tiltSensorItem6">X当次角度差</string>
+    <string name="tiltSensorItem7">Y当次角度差</string>
+    <string name="tiltSensorItem8">X轴倾角差</string>
+    <string name="tiltSensorItem9">Y轴倾角差</string>
+    <string name="tiltSensorItem10">X轴朝向夹角</string>
+    <string name="tiltSensorItem11">Y轴朝向夹角</string>
+    <string-array name="tiltSensorTitleName">
+        <item>侦测点</item>
+        <item>生成时间</item>
+        <item>X轴角度</item>
+        <item>Y轴角度</item>
+        <item>X当次角度差</item>
+        <item>Y当次角度差</item>
+        <item>X轴倾角差</item>
+        <item>Y轴倾角差</item>
+        <item>X轴朝向夹角</item>
+        <item>Y轴朝向夹角</item>
+    </string-array>
 </resources>

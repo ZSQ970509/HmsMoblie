@@ -6,7 +6,7 @@ import com.hc.hmsmoblie.net.UrlHelper;
 import com.hik.mcrsdk.MCRSDK;
 import com.hik.mcrsdk.rtsp.RtspClient;
 import com.hikvision.sdk.VMSNetSDK;
-import com.yc.yclibrary.EasyCode;
+import com.yc.yclibrary.YcInit;
 
 import org.xutils.x;
 
@@ -24,7 +24,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        EasyCode.init(this, UrlHelper.BASE_URL);
+        YcInit.init(this, UrlHelper.BASE_URL);
         mApp = this;
         //海康8700初始化
         MCRSDK.init();

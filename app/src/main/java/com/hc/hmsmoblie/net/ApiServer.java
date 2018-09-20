@@ -25,7 +25,7 @@ import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.bean.json.VideoDriverJson;
-        import com.yc.yclibrary.EasyCode;
+        import com.yc.yclibrary.YcInit;
 
         import java.lang.reflect.Array;
         import java.util.ArrayList;
@@ -48,7 +48,7 @@ public interface ApiServer {
     @POST(UrlHelper.BASE_API + "hmsLogin")
     Observable<HttpResponse<LoginJson>> login(@Field("userName") String userName, @Field("userPassWord") String passWord, @Field("typeid") String userType);
 
-    @Headers(EasyCode.OTHER_BASE_URL+":"+UrlHelper.BASE_URL_UPDATE)
+    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_URL_UPDATE)
     @GET(UrlHelper.API_UPDATE + "update")
     Observable<ArrayList<UpdateVersionJson>> updatedVersion(@Query("type") String packageName);
 

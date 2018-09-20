@@ -69,4 +69,15 @@
         <item name="android:layout_height">2dp</item>
         <item name="android:background">#317bf6</item>
     </style>
+
+    <style name="TiltSensorStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:padding">@dimen/activity_margin</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorTrance</item>
+        <item name="android:textColor">@color/selector_navigation_bottom_item</item>
+    </style>
 </resources>

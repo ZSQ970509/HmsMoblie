@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin_small"
+        android:layout_marginBottom="@dimen/activity_margin_small"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin">
+
+        <TextView
+            android:id="@+id/tiltSensorLeft1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:gravity="center"
+            android:text="开始日期："
+            android:textColor="#000000"
+            android:textSize="@dimen/tiltSensorTextSize" />
+
+        <TextView
+            android:id="@+id/tiltSensorTimeStartTv"
+            android:layout_width="@dimen/tiltSensorPickerWidth"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:layout_toRightOf="@id/tiltSensorLeft1"
+            android:background="@drawable/select_search"
+            android:gravity="center"
+            android:text="2018-09-12"
+            android:textSize="@dimen/tiltSensorTextSize" />
+
+        <TextView
+            android:id="@+id/tiltSensorLeft2"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:layout_below="@id/tiltSensorLeft1"
+            android:gravity="center"
+            android:text="结束日期："
+            android:textColor="#000000"
+            android:textSize="@dimen/tiltSensorTextSize" />
+
+        <TextView
+            android:id="@+id/tiltSensorTimeEndTv"
+            android:layout_width="@dimen/tiltSensorPickerWidth"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:layout_alignBottom="@id/tiltSensorLeft2"
+            android:layout_toRightOf="@id/tiltSensorLeft2"
+            android:background="@drawable/select_search"
+            android:gravity="center"
+            android:text="2018-09-12"
+            android:textSize="@dimen/tiltSensorTextSize" />
+
+        <Spinner
+            android:id="@+id/tiltSensorTypeSp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/niceSpinnerHeight"
+            android:layout_alignParentRight="true"
+            android:minWidth="@dimen/niceSpinnerMinWidth"
+            android:textColor="@color/colorBlack3" />
+
+        <TextView
+            android:id="@+id/tiltSensorTypeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/niceSpinnerHeight"
+            android:gravity="center"
+            android:layout_toLeftOf="@id/tiltSensorTypeSp"
+            android:text="倾角设备："
+            android:textColor="#000000"
+            android:textSize="@dimen/tiltSensorTextSize" />
+
+        <ImageView
+            android:id="@+id/btCruiseDataSearch"
+            android:layout_width="@dimen/searchBtnWidth"
+            android:layout_height="@dimen/searchBtnHeight"
+            android:layout_below="@id/tiltSensorTypeTv"
+            android:layout_alignLeft="@id/tiltSensorTypeTv"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:scaleType="fitCenter"
+            android:src="@drawable/select_search_btn" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray" />
+
+    <com.hc.hmsmoblie.widget.vh.VHLayout
+        android:id="@+id/VHLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

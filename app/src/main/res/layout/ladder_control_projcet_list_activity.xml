@@ -29,7 +29,7 @@
         android:layout_below="@+id/titleBar"
         android:layout_marginLeft="@dimen/x24"
         android:layout_marginTop="@dimen/y24"
-        android:background="@drawable/selectprojectsearch"
+        android:background="@drawable/select_search"
         android:ems="10"
         android:hint="请输入项目名称"
         android:inputType="textPersonName"

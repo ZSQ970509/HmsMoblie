@@ -28,7 +28,8 @@ public class LoadImgUtils {
     }
 
     public static void loadImg(final Activity activity, final String imgUrl, final ImageView imageView, final int loadNum) {
-        if (activity == null || activity != ActivityUtils.INSTANCE.getCurrentActivity() || TextUtils.isEmpty(imgUrl) || imageView == null) {
+        Activity curr = ActivityUtils.INSTANCE.getCurrentActivity();
+        if (activity == null|| TextUtils.isEmpty(imgUrl) || imageView == null) {
             return;
         }
         Glide.with(activity)
