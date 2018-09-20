@@ -28,4 +28,8 @@
         <item>X轴朝向夹角</item>
         <item>Y轴朝向夹角</item>
     </string-array>
+
+
+    <string name="LoadMoreFinal">已经加载全部！</string>
+    <string name="LoadingMore">正在加载更多中！</string>
 </resources>

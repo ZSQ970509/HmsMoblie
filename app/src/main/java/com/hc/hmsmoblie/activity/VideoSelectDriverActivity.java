@@ -24,6 +24,7 @@ import com.hc.hmsmoblie.mvp.presenter.VideoSelectProjectP;
 import com.hc.hmsmoblie.utils.EmptyUtils;
 import com.hc.hmsmoblie.utils.VideoBeanXmlUtil;
 import com.hc.hmsmoblie.widget.CommonDialog;
+import com.hc.hmsmoblie.widget.CommonListDialog;
 import com.hc.hmsmoblie.widget.CustomLoadMoreView;
 
 import java.util.ArrayList;
@@ -92,9 +93,55 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                     } else if (item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128") || item.getCamTypeId().equals("116") || item.getCamTypeId().equals("136")
                             || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || item.getCamTypeId().equals("115") || item.getCamTypeId().equals("135")
                             || Integer.parseInt(item.getCamTypeId())<=110)  {
+                        if(item.getCamTypeId().equals("103") || item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128")){
+                            CommonListDialog.newInstance(getActivity())
+                                    .setTextViewDipAngleClick(v -> {
 
+                                    })
+                                    .setTextViewImageLogClick(v -> {
+                                        ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
+                                    })
+                                    .setTextViewVideoClick(v -> {
+                                        if (videoBean.getCamFlowState().equals("15")) {
+                                            String type = videoBean.getmType();
+                                            //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
+                                            if (type.equals("2") || type.equals("5") || type.equals("8")) {
+                                                HuXinVideoActivity.newInstance(getActivity(), videoBean);
+//                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
+                                            } else if (type.equals("15")) {//海康8700
+//                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+                                                HKVideoActivity.newInstance(getActivity(), videoBean);
+                                            } else {
+                                                showToast("此视频暂不支持播放");
+//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
 
-                        if (videoBean.getCamFlowState().equals("15")) {
+                                            }
+                                        } else {
+                                            showToast("此视频维护或不在线");
+                                        }
+                                    })
+                                    .show();
+                        }else{
+                            if (videoBean.getCamFlowState().equals("15")) {
+                                String type = videoBean.getmType();
+                                //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
+                                if (type.equals("2") || type.equals("5") || type.equals("8")) {
+                                    HuXinVideoActivity.newInstance(getActivity(), videoBean);
+//                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
+                                } else if (type.equals("15")) {//海康8700
+//                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+                                    HKVideoActivity.newInstance(getActivity(), videoBean);
+                                } else {
+                                    showToast("此视频暂不支持播放");
+//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
+
+                                }
+                            } else {
+                                showToast("此视频维护或不在线");
+                            }
+                        }
+
+                       /* if (videoBean.getCamFlowState().equals("15")) {
                             String type = videoBean.getmType();
                             //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
                             if (type.equals("2") || type.equals("5") || type.equals("8")) {
@@ -110,7 +157,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                             }
                         } else {
                             showToast("此视频维护或不在线");
-                        }
+                        }*/
                     }
                     //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
 

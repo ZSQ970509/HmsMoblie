@@ -3,18 +3,15 @@ package com.hc.hmsmoblie.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.FrameLayout;
 
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.fragment.TiltSensorAbleFragment;
+import com.hc.hmsmoblie.fragment.TiltSensorAbleFragmentPri;
 import com.hc.hmsmoblie.fragment.TiltSensorChartFragment;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -40,7 +37,7 @@ public class TiltSensorActivity extends YcAppCompatActivity {
     }
 
     private void initFragment() {
-        TiltSensorAbleFragment ableFragment = TiltSensorAbleFragment.newInstance();
+        TiltSensorAbleFragmentPri ableFragment = TiltSensorAbleFragmentPri.newInstance();
         TiltSensorChartFragment chartFragment = TiltSensorChartFragment.newInstance();
         fragments = new Fragment[]{ableFragment,chartFragment};
         // 添加显示第一个fragment
