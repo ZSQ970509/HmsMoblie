@@ -99,6 +99,8 @@ public class VHLayout extends RelativeLayout {
         return headLayout;
     }
 
+    SwipeRefreshLayout mSwipeRefreshLayout;
+
     /**
      * 创建数据展示布局
      *
@@ -106,7 +108,7 @@ public class VHLayout extends RelativeLayout {
      */
     private View createMoveRecyclerView() {
 //        RelativeLayout linearLayout = new RelativeLayout(getContext());
-        SwipeRefreshLayout swipeRefreshLayout = new SwipeRefreshLayout(getContext());
+        mSwipeRefreshLayout = new SwipeRefreshLayout(getContext());
         mRecyclerView = new RecyclerView(getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -114,13 +116,49 @@ public class VHLayout extends RelativeLayout {
         if (null != mAdapter) {
             mRecyclerView.setAdapter(mAdapter);
         }
-        swipeRefreshLayout.addView(mRecyclerView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-//        linearLayout.addView(swipeRefreshLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        return swipeRefreshLayout;
+        mSwipeRefreshLayout.addView(mRecyclerView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            if (mOnRefresh != null)
+                mOnRefresh.onRefresh();
+        });
+//        linearLayout.addView(mSwipeRefreshLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        return mSwipeRefreshLayout;
     }
-    public RecyclerView getRecyclerView(){
+
+    /**
+     * 设置刷新监听
+     * @param onRefresh
+     */
+    public void setRefresh(OnRefresh onRefresh) {
+        mOnRefresh = onRefresh;
+    }
+
+    /**
+     * 开始刷新
+     */
+    public void startRefresh() {
+        if (mSwipeRefreshLayout != null && !mSwipeRefreshLayout.isRefreshing())
+            mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    /**
+     * 结束刷新
+     */
+    public void finishRefresh() {
+        if (mSwipeRefreshLayout != null && mSwipeRefreshLayout.isRefreshing())
+            mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    private OnRefresh mOnRefresh;
+
+    public interface OnRefresh {
+        void onRefresh();
+    }
+
+    public RecyclerView getRecyclerView() {
         return mRecyclerView;
     }
+
     /**
      * 设置adapter
      *
