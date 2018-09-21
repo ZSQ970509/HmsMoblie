@@ -9,7 +9,8 @@
     <dimen name="small_size">14sp</dimen>
 
     <dimen name="left_margin">@dimen/x10</dimen>
-    <dimen name="tiltSensorItemWidth">80dp</dimen>
+    <dimen name="tiltSensorItemWidth">100dp</dimen>
+    <dimen name="tiltSensorItemTimeWidth">120dp</dimen>
     <!--<dimen name="tiltSensorItemLeftTitleWidth">60dp</dimen>-->
     <dimen name="tiltSensorTitleHeight">32dp</dimen>
     <dimen name="tiltSensorPickerHeight">24dp</dimen>

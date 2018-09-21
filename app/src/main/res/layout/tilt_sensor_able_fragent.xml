@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="#fefefe"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="@dimen/activity_margin_small"
         android:layout_marginBottom="@dimen/activity_margin_small"
         android:layout_marginLeft="@dimen/activity_margin"
@@ -30,7 +31,7 @@
             android:layout_toRightOf="@id/tiltSensorLeft1"
             android:background="@drawable/select_search"
             android:gravity="center"
-            android:text="2018-09-12"
+            android:text=""
             android:textSize="@dimen/tiltSensorTextSize" />
 
         <TextView
@@ -52,7 +53,7 @@
             android:layout_toRightOf="@id/tiltSensorLeft2"
             android:background="@drawable/select_search"
             android:gravity="center"
-            android:text="2018-09-12"
+            android:text=""
             android:textSize="@dimen/tiltSensorTextSize" />
 
         <Spinner
@@ -87,7 +88,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorGray" />
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin"
+        android:background="#bfbfbf" />
 
     <com.hc.hmsmoblie.widget.vh.VHLayout
         android:id="@+id/VHLayout"

@@ -17,7 +17,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem1"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem3"
-                android:layout_width="@dimen/tiltSensorItemWidth"
+                android:layout_width="@dimen/tiltSensorItemTimeWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"

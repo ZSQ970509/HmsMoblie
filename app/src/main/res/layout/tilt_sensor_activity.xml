@@ -13,10 +13,10 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <View
+  <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorGray" />
+        android:background="@color/colorGray6" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,10 +29,10 @@
             android:checked="true"
             android:text="流水数据表格" />
 
-        <View
+        <!--<View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/colorGray" />
+            android:background="@color/colorGray" />-->
 
         <CheckBox
             android:id="@+id/tiltSensorChartCb"

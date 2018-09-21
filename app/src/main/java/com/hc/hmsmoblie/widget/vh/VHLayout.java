@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -181,6 +182,8 @@ public class VHLayout extends RelativeLayout {
         TextView textView = new TextView(getContext());
         textView.setText(headerName);
         textView.setGravity(Gravity.CENTER);
+        TextPaint tp = textView.getPaint();
+        tp.setFakeBoldText(true);
         leftLayout.addView(textView, width, dip2px(context, 50));
         return textView;
     }
@@ -258,7 +261,12 @@ public class VHLayout extends RelativeLayout {
         mRightTitleWidthList = new int[headerListData.length];
         for (int i = 0; i < headerListData.length; i++) {
 //            mRightTitleWidthList[i] = dip2px(context, mRightItemWidth);
-            mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth);
+            if(i == 1){
+                mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
+            }else{
+                mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth);
+            }
+
         }
         mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth)};
         mLeftTextList = new String[]{"序号"};

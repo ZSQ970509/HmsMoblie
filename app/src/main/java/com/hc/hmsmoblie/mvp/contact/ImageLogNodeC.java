@@ -11,7 +11,6 @@ import com.yc.yclibrary.mvp.IView;
 public class ImageLogNodeC {
     public interface V extends IView {
         void onNodeSuccess(ImageLogNodeJson json);
-
         void onNodeFail(ApiException apiException);
     }
 

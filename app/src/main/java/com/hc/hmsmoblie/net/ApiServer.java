@@ -10,7 +10,9 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
+        import com.hc.hmsmoblie.bean.json.SensorLogJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
+        import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
         import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
@@ -119,4 +121,14 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_SENSOR + "GetNewTiltSensorLog")
     Observable<HttpResponse<List<TiltSensorChartJson>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate);
 
+    @FormUrlEncoded
+    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:8023/")
+    @POST(UrlHelper.API_TILT_SENSOR + "GetTiltSensorLog")
+    Observable<HttpResponse<SensorLogJson>> getTiltSensorLog(@Field("CamID")String cmID, @Field("ParaID")String paraID, @Field("pageindex")int pageindex
+            , @Field("pagesize")int pagesize, @Field("startTime")String startTime, @Field("endTime")String endTime);
+
+    @FormUrlEncoded
+    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:8023/")
+    @POST(UrlHelper.API_TILT_SENSOR + "GetGetTiltSensorPara")
+    Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId")String cmID);
 }
