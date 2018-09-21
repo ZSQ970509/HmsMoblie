@@ -51,7 +51,7 @@ public class VHLayout extends RelativeLayout {
     //右边单个view的宽度
     private int mRightItemWidth = 60;
     //左边view的宽度
-    private int mLeftViewWidth = 80;
+    private int mLeftViewWidth = 60;
     //左边view的高度
     private int mLeftViewHeight = 40;
     //触发拦截手势的最小值

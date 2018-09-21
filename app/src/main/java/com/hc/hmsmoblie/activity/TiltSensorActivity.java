@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.fragment.TiltSensorAbleFragmentPri;
+import com.hc.hmsmoblie.fragment.TiltSensorAbleFragment;
 import com.hc.hmsmoblie.fragment.TiltSensorChartFragment;
 import com.yc.yclibrary.base.YcAppCompatActivity;
 
@@ -37,7 +37,7 @@ public class TiltSensorActivity extends YcAppCompatActivity {
     }
 
     private void initFragment() {
-        TiltSensorAbleFragmentPri ableFragment = TiltSensorAbleFragmentPri.newInstance();
+        TiltSensorAbleFragment ableFragment = TiltSensorAbleFragment.newInstance();
         TiltSensorChartFragment chartFragment = TiltSensorChartFragment.newInstance();
         fragments = new Fragment[]{ableFragment,chartFragment};
         // 添加显示第一个fragment

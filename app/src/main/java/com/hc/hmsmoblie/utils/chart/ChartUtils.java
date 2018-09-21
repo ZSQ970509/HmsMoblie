@@ -149,6 +149,10 @@ public class ChartUtils {
      * @return
      */
     public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name) {
+        return getLineDataSet(lineChart, dataList, chartDataIndex, color, name, LineDataSet.Mode.CUBIC_BEZIER);
+    }
+
+    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < dataList.size(); i++) {
 //            if (dataList.get(i) != -1)
@@ -156,8 +160,8 @@ public class ChartUtils {
 //            else
 //                yVals.add(null);
         }
-        if (!(lineChart.getRenderer() instanceof EmptyLineChartRenderer))
-            lineChart.setRenderer(new EmptyLineChartRenderer(lineChart));
+//        if (!(lineChart.getRenderer() instanceof EmptyLineChartRenderer))
+//            lineChart.setRenderer(new EmptyLineChartRenderer(lineChart));
         EmptyLineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
             set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
@@ -166,7 +170,7 @@ public class ChartUtils {
         } else {
             set = new EmptyLineDataSet(yVals, name);
             // 设置平滑曲线
-            set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            set.setMode(mode);
             set.setColors(new int[]{color, Color.parseColor("#00000000")});
             set.setAxisDependency(YAxis.AxisDependency.LEFT);
 //            set.setColor(color);//设置线的颜色
@@ -188,6 +192,7 @@ public class ChartUtils {
         }
         return set;
     }
+
 
     /**
      * 折线图多种颜色（实现折线图间断）

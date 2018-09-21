@@ -17,4 +17,6 @@ public class UrlHelper {
     //Api
     public static final String BASE_API = "ApiCamera.ashx?action=";
     public static final String API_UPDATE = "api.ashx?action=";//版本更新的api
+
+    public static final String API_TILT_SENSOR = "OpenInterface/TiltSensorHandler.ashx?action=";//倾角的api
 }

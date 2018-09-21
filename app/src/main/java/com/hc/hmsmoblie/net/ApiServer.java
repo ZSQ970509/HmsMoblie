@@ -10,6 +10,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
+        import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
         import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
@@ -112,5 +113,10 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "GetRangeNodeImgDetail")
     Observable<HttpResponse<ImageLogNodeJson>> getNode(@Field("CamSn") String camSn, @Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY, @Field("aha") String aha, @Field("ava") String ava);
+
+    @FormUrlEncoded
+    @Headers(YcInit.OTHER_BASE_URL+":"+"http://api.jsqqy.com/")
+    @POST(UrlHelper.API_TILT_SENSOR + "GetNewTiltSensorLog")
+    Observable<HttpResponse<List<TiltSensorChartJson>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate);
 
 }
