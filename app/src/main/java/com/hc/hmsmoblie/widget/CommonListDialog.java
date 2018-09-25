@@ -40,6 +40,8 @@ public class CommonListDialog extends Dialog {
             case 2:
                 dialog.linearLayoutDipAngle.setVisibility(View.GONE);
                 break;
+            case 3:
+                dialog.linearLayoutVideo.setVisibility(View.GONE);
         }
         return dialog;
     }

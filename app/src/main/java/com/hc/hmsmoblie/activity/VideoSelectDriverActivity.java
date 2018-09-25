@@ -76,70 +76,73 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 try {
-                    VideoBean videoBean = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
                     VideoDriverJson item = dataList.get(position);
+                    //判断设备是否有绑定，无绑定不可看视频
+                    if(dataList.get(position).getCam_Config()!= null) {
+                        VideoBean videoBean = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
 
 
-                    //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
-                    videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
-                    videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
-                    videoBean.setVideoId(dataList.get(position).getVideoId() + "");
-                    if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
-                        //塔吊
-                        LadderControlDeviceListActivity.newInstance(getActivity(),mProID,item.getCamId());
-                    } else if (item.getCamTypeId().equals("210") || item.getCamTypeId().equals("230")) {
-                        //环境
-                        EnvironmentDetailsActivity.newInstance(getActivity(),item.getCamId(),item.getCamSeqId(),item.getCamProjId());
-                    } else if (item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128") || item.getCamTypeId().equals("116") || item.getCamTypeId().equals("136")
-                            || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || item.getCamTypeId().equals("115") || item.getCamTypeId().equals("135")
-                            || Integer.parseInt(item.getCamTypeId())<=110)  {
-                        if(item.getCamTypeId().equals("103") || item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128")){
-                            CommonListDialog.newInstance(getActivity())
-                                    .setTextViewDipAngleClick(v -> {
 
-                                    })
-                                    .setTextViewImageLogClick(v -> {
-                                        ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
-                                    })
-                                    .setTextViewVideoClick(v -> {
-                                        if (videoBean.getCamFlowState().equals("15")) {
-                                            String type = videoBean.getmType();
-                                            //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
-                                            if (type.equals("2") || type.equals("5") || type.equals("8")) {
-                                                HuXinVideoActivity.newInstance(getActivity(), videoBean);
+                        //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
+                        videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
+                        videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
+                        videoBean.setVideoId(dataList.get(position).getVideoId() + "");
+                        if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
+                            //塔吊
+                            LadderControlDeviceListActivity.newInstance(getActivity(), mProID, item.getCamId());
+                        } else if (item.getCamTypeId().equals("210") || item.getCamTypeId().equals("230")) {
+                            //环境
+                            EnvironmentDetailsActivity.newInstance(getActivity(), item.getCamId(), item.getCamSeqId(), item.getCamProjId());
+                        } else if (item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128") || item.getCamTypeId().equals("116") || item.getCamTypeId().equals("136")
+                                || item.getCamTypeId().equals("117") || item.getCamTypeId().equals("137") || item.getCamTypeId().equals("115") || item.getCamTypeId().equals("135")
+                                || Integer.parseInt(item.getCamTypeId()) <= 110) {
+                            if (item.getCamTypeId().equals("103") || item.getCamTypeId().equals("118") || item.getCamTypeId().equals("128")) {
+                                CommonListDialog.newInstance(getActivity())
+                                        .setTextViewDipAngleClick(v -> {
+                                            TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
+                                        })
+                                        .setTextViewImageLogClick(v -> {
+                                            ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
+                                        })
+                                        .setTextViewVideoClick(v -> {
+                                            if (videoBean.getCamFlowState().equals("15")) {
+                                                String type = videoBean.getmType();
+                                                //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
+                                                if (type.equals("2") || type.equals("5") || type.equals("8")) {
+                                                    HuXinVideoActivity.newInstance(getActivity(), videoBean);
 //                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
-                                            } else if (type.equals("15")) {//海康8700
+                                                } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
-                                                HKVideoActivity.newInstance(getActivity(), videoBean);
+                                                    HKVideoActivity.newInstance(getActivity(), videoBean);
+                                                } else {
+                                                    showToast("此视频暂不支持播放");
+//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
+
+                                                }
                                             } else {
-                                                showToast("此视频暂不支持播放");
-//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
-
+                                                showToast("此视频维护或不在线");
                                             }
-                                        } else {
-                                            showToast("此视频维护或不在线");
-                                        }
-                                    })
-                                    .show();
-                        }else{
-                            if (videoBean.getCamFlowState().equals("15")) {
-                                String type = videoBean.getmType();
-                                //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
-                                if (type.equals("2") || type.equals("5") || type.equals("8")) {
-                                    HuXinVideoActivity.newInstance(getActivity(), videoBean);
+                                        })
+                                        .show();
+                            } else {
+                                if (videoBean.getCamFlowState().equals("15")) {
+                                    String type = videoBean.getmType();
+                                    //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
+                                    if (type.equals("2") || type.equals("5") || type.equals("8")) {
+                                        HuXinVideoActivity.newInstance(getActivity(), videoBean);
 //                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
-                                } else if (type.equals("15")) {//海康8700
+                                    } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
-                                    HKVideoActivity.newInstance(getActivity(), videoBean);
-                                } else {
-                                    showToast("此视频暂不支持播放");
+                                        HKVideoActivity.newInstance(getActivity(), videoBean);
+                                    } else {
+                                        showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
 
+                                    }
+                                } else {
+                                    showToast("此视频维护或不在线");
                                 }
-                            } else {
-                                showToast("此视频维护或不在线");
                             }
-                        }
 
                        /* if (videoBean.getCamFlowState().equals("15")) {
                             String type = videoBean.getmType();
@@ -158,9 +161,18 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                         } else {
                             showToast("此视频维护或不在线");
                         }*/
+                        }
+                        //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
+                    }else{
+                        CommonListDialog.newInstanceType(getActivity(),3)
+                                .setTextViewDipAngleClick(v -> {
+                                    TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
+                                })
+                                .setTextViewImageLogClick(v -> {
+                                    ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
+                                })
+                                .show();
                     }
-                    //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

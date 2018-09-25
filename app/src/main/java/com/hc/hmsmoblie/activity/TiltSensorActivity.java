@@ -1,5 +1,7 @@
 package com.hc.hmsmoblie.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,12 +21,20 @@ import butterknife.OnClick;
  */
 
 public class TiltSensorActivity extends YcAppCompatActivity {
+    private static final String CAM_ID = "cam_id";
+    private String camId;
     @BindView(R.id.tiltSensorTableCb)
     CheckBox tiltSensorTableCb;
     @BindView(R.id.tiltSensorChartCb)
     CheckBox tiltSensorChartCb;
     private Fragment[] fragments;
     private int currentTabIndex;
+
+    public static void newInstance(Activity activity, String camID) {
+        Intent intent = new Intent(activity, TiltSensorActivity.class);
+        intent.putExtra(CAM_ID, camID);
+        activity.startActivity(intent);
+    }
 
     @Override
     protected int getLayoutId() {
@@ -33,6 +43,7 @@ public class TiltSensorActivity extends YcAppCompatActivity {
 
     @Override
     protected void initView(Bundle bundle) {
+        camId =  getIntent().getStringExtra(CAM_ID);
         initFragment();
     }
 
@@ -80,5 +91,11 @@ public class TiltSensorActivity extends YcAppCompatActivity {
                 switchFragment(1);
                 break;
         }
+    }
+    public String getCamId(){
+        return camId;
+    }
+    public void acfinish(){
+        getActivity().finish();
     }
 }

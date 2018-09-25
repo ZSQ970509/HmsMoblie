@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.activity.TiltSensorActivity;
 import com.hc.hmsmoblie.adapter.SelectProjectVideoAdapter;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
@@ -23,6 +24,7 @@ import com.hc.hmsmoblie.mvp.contact.VideoSelectProjectFragmentC;
 import com.hc.hmsmoblie.mvp.presenter.TiltSensorAbleFragmentP;
 import com.hc.hmsmoblie.mvp.presenter.VideoSelectProjectFragmentP;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
+import com.hc.hmsmoblie.widget.CommonDialog;
 import com.hc.hmsmoblie.widget.CustomLoadMoreView;
 
 import com.hc.hmsmoblie.widget.vh.VHAdapter;
@@ -53,6 +55,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     TextView tiltSensorTimeStartTv;
     @BindView(R.id.btCruiseDataSearch)
     ImageView   btCruiseDataSearch;
+    private String camID;
     //流水数据
     ArrayList<SensorLogJson.ListBean> mDataModels = new ArrayList<SensorLogJson.ListBean>();
     //侦测点
@@ -101,12 +104,20 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     @Override
     public void onGetTiltSensorLogFail(String msg) {
-
+        CommonDialog
+                .newInstanceSingle(getActivity())
+                .setTitle("提示")
+                .setMsg("此设备暂无倾角数据！")
+                .setSingleBtnText("确定")
+                .setSingleClick(v -> {
+                    ((TiltSensorActivity)getActivity()).acfinish();
+                })
+                .show();
     }
 
     @Override
     public void onGetGetTiltSensorParauccess(TiltSensorParaJson dataBean) {
-        mPresenter.getTiltSensorLog("1053613",paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
+        mPresenter.getTiltSensorLog(camID,paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
         tiltSensorParas.addAll(dataBean.getList());
         ArrayList<String> dataList = new ArrayList<String>();
         dataList.add("全部");
@@ -121,7 +132,8 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     }
     public void initData(){
-        mPresenter.getGetTiltSensorPara("1053613");
+        camID = ((TiltSensorActivity)getActivity()).getCamId();
+        mPresenter.getGetTiltSensorPara(camID);
         VHLayout.setHeaderListData(getResources().getStringArray(R.array.tiltSensorTitleName));
         mAdapter = new VHAdapter(R.layout.tilt_sensor_item,mDataModels);
         VHLayout.setAdapter(mAdapter);
@@ -131,15 +143,14 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                 showToast("已经是最后一页了");
                 mAdapter.loadMoreEnd();
             } else {
-                //sysId:11视频监控、26超视野、31梯控、21环境
-                mPresenter.getTiltSensorLog("1053613",paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
+                mPresenter.getTiltSensorLog(camID,paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
             }
 
         }, 1000),VHLayout.getRecyclerView());
         VHLayout.setRefresh(()->{
             pageIndex = 1;
             mDataModels.clear();
-            mPresenter.getTiltSensorLog("1053613",paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
+            mPresenter.getTiltSensorLog(camID,paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
         });
     }
     public void initSpinner(){
@@ -175,7 +186,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
             case R.id.btCruiseDataSearch:
                 pageIndex = 1;
                 mDataModels.clear();
-                mPresenter.getTiltSensorLog("1053613",paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
+                mPresenter.getTiltSensorLog(camID,paraID,pageIndex,15,tiltSensorTimeStartTv.getText().toString(),tiltSensorTimeEndTv.getText().toString());
                 break;
         }
     }
