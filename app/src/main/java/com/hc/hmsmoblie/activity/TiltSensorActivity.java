@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.fragment.TiltSensorAbleFragment;
 import com.hc.hmsmoblie.fragment.TiltSensorChartFragment;
 import com.yc.yclibrary.base.YcAppCompatActivity;
+import com.yc.yclibrary.mvp.BasePresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -20,7 +22,7 @@ import butterknife.OnClick;
  *  倾角页面
  */
 
-public class TiltSensorActivity extends YcAppCompatActivity {
+public class TiltSensorActivity extends BaseMvpActivity {
     private static final String CAM_ID = "cam_id";
     private String camId;
     @BindView(R.id.tiltSensorTableCb)
@@ -43,6 +45,7 @@ public class TiltSensorActivity extends YcAppCompatActivity {
 
     @Override
     protected void initView(Bundle bundle) {
+        setToolBar("倾角数据");
         camId =  getIntent().getStringExtra(CAM_ID);
         initFragment();
     }
@@ -97,5 +100,10 @@ public class TiltSensorActivity extends YcAppCompatActivity {
     }
     public void acfinish(){
         getActivity().finish();
+    }
+
+    @Override
+    protected BasePresenter loadPresenter() {
+        return null;
     }
 }

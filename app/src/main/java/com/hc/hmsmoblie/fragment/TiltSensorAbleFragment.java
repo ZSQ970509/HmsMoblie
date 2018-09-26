@@ -79,6 +79,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     @Override
     public void initView() {
+
         initSpinner();
         initData();
 
@@ -88,6 +89,15 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     @Override
     public void onGetTiltSensorLogSuccess(SensorLogJson sensorLogJson) {
         if (sensorLogJson.getList().size() == 0) {
+         /*   CommonDialog
+                    .newInstanceSingle(getActivity())
+                    .setTitle("提示")
+                    .setMsg("此设备暂无倾角数据！")
+                    .setSingleBtnText("确定")
+                    .setSingleClick(v -> {
+                        ((TiltSensorActivity)getActivity()).acfinish();
+                    })
+                    .show();*/
             showToast("暂无数据！");
         } else {
             // showToast("数据加载成功！");
@@ -129,7 +139,15 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     @Override
     public void onGetGetTiltSensorParaFail(String msg) {
-
+        CommonDialog
+                .newInstanceSingle(getActivity())
+                .setTitle("提示")
+                .setMsg("此设备暂无倾角数据！")
+                .setSingleBtnText("确定")
+                .setSingleClick(v -> {
+                    ((TiltSensorActivity)getActivity()).acfinish();
+                })
+                .show();
     }
     public void initData(){
         camID = ((TiltSensorActivity)getActivity()).getCamId();
