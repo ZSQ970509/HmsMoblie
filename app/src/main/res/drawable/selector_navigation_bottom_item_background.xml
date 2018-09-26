@@ -3,6 +3,6 @@
     <item android:drawable="@color/colorAccent" android:state_checked="true" /> <!-- selected颜色 -->
     <item android:drawable="@color/colorAccent" android:state_pressed="true" /> <!-- pressed颜色 -->
     <item android:drawable="@color/colorAccent" android:state_focused="true" /> <!-- focused颜色 -->
-    <item android:drawable="@color/colorWhite" /> <!-- default颜色 -->
+    <item android:drawable="@color/colorWhiteGray" /> <!-- default颜色 -->
 
 </selector>

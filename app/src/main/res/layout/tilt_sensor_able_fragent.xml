@@ -9,11 +9,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="@dimen/activity_margin_small"
         android:layout_marginBottom="@dimen/activity_margin_small"
         android:layout_marginLeft="@dimen/activity_margin"
-        android:layout_marginRight="@dimen/activity_margin">
+        android:layout_marginRight="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/activity_margin_small">
 
         <TextView
             android:id="@+id/tiltSensorLeft1"
@@ -35,11 +34,11 @@
             android:textSize="@dimen/tiltSensorTextSize" />
 
         <TextView
-            android:id="@+id/tiltSensorLeft2"
-            android:layout_marginTop="@dimen/activity_margin_small"
+            android:id="@+id/tiltSensorChartTimeLeft2Tv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/tiltSensorPickerHeight"
             android:layout_below="@id/tiltSensorLeft1"
+            android:layout_marginTop="@dimen/activity_margin_small"
             android:gravity="center"
             android:text="结束日期："
             android:textColor="#000000"
@@ -49,8 +48,8 @@
             android:id="@+id/tiltSensorTimeEndTv"
             android:layout_width="@dimen/tiltSensorPickerWidth"
             android:layout_height="@dimen/tiltSensorPickerHeight"
-            android:layout_alignBottom="@id/tiltSensorLeft2"
-            android:layout_toRightOf="@id/tiltSensorLeft2"
+            android:layout_alignBottom="@id/tiltSensorChartTimeLeft2Tv"
+            android:layout_toRightOf="@id/tiltSensorChartTimeLeft2Tv"
             android:background="@drawable/select_search"
             android:gravity="center"
             android:text=""
@@ -68,21 +67,23 @@
             android:id="@+id/tiltSensorTypeTv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/niceSpinnerHeight"
-            android:gravity="center"
             android:layout_toLeftOf="@id/tiltSensorTypeSp"
+            android:gravity="center"
             android:text="倾角设备："
             android:textColor="#000000"
             android:textSize="@dimen/tiltSensorTextSize" />
 
-        <ImageView
+        <TextView
             android:id="@+id/btCruiseDataSearch"
             android:layout_width="@dimen/searchBtnWidth"
             android:layout_height="@dimen/searchBtnHeight"
-            android:layout_below="@id/tiltSensorTypeTv"
             android:layout_alignLeft="@id/tiltSensorTypeTv"
+            android:layout_below="@id/tiltSensorTypeTv"
             android:layout_marginTop="@dimen/activity_margin_small"
-            android:scaleType="fitCenter"
-            android:src="@drawable/select_search_btn" />
+            android:background="@drawable/shape_blue_btn"
+            android:gravity="center"
+            android:text="搜索"
+            android:textColor="@color/colorWhiteGray" />
     </RelativeLayout>
 
     <View

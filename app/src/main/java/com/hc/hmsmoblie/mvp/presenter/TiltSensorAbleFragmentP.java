@@ -39,24 +39,4 @@ public class TiltSensorAbleFragmentP extends BasePresenter<TiltSensorAbleFragmen
                     }
                 });
     }
-
-    @Override
-    public void getGetTiltSensorPara(String cmID) {
-        new TiltSensorAbleFragmentM()
-                .getGetTiltSensorPara(cmID)
-                .compose(getIView().bindLifecycle())
-                .subscribe(new NetObserver<HttpResponse<TiltSensorParaJson>>() {
-                    @Override
-                    public void onSuccess(HttpResponse<TiltSensorParaJson> tiltSensorParaJson) {
-                        getIView().hideLoading();
-                        getIView().onGetGetTiltSensorParauccess(tiltSensorParaJson.getData());
-                    }
-
-                    @Override
-                    public void onFail(ApiException msg) {
-                        getIView().hideLoading();
-                        getIView().onGetGetTiltSensorParaFail(msg.getMessage());
-                    }
-                });
-    }
 }

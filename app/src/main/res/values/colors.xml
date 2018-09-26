@@ -5,12 +5,21 @@
     <color name="colorAccent">#317bf6</color>
     <color name="colorTrance">#00000000</color>
     <color name="colorTrance2">#20000000</color>
-    <color name="colorWhite">#FAFAFA</color>
+    <color name="colorWhiteGray">#FAFAFA</color>
+    <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorBlack3">#333333</color>
     <color name="colorGray">#262626</color>
     <color name="colorGray6">#666666</color>
     <color name="colorRed500">#F44336</color>
+
+    <color name="colorBtn">#499DF2</color>
+
     <color name="itemTitleColor">#233238</color>
     <color name="itemContentColor">#37474F</color>
+
+    <color name="tiltSensorColorLineRed">#F44336</color>
+    <color name="tiltSensorColorLineYellow">#FFEB3B</color>
+    <color name="tiltSensorColorLineBlue">#03A9F4</color>
+    <color name="tiltSensorColorLineGreen">#4cAF50</color>
 </resources>

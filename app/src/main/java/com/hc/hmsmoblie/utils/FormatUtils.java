@@ -27,8 +27,8 @@ public class FormatUtils {
     }
 
     public final static String FORMAT_TIME = "yyyy-MM-dd";
-    private final static String FORMAT_TIME_MONTH = "yyyy-MM";
-    private final static String FORMAT_TIME_YEAR = "yyyy";
+    public final static String FORMAT_TIME_MONTH = "yyyy-MM";
+    public final static String FORMAT_TIME_YEAR = "yyyy";
 
     /**
      * 将Date类型格式化成String yyyy-MM-dd
@@ -64,6 +64,14 @@ public class FormatUtils {
         }
     }
 
+    public static String dateToString(Date date, String format) {
+        if (date == null) {
+            return "";
+        } else {
+            return new SimpleDateFormat(format).format(date);
+        }
+    }
+
     /**
      * 将Calendar类型格式化成String yyyy-MM-dd
      *
@@ -71,12 +79,17 @@ public class FormatUtils {
      * @return
      */
     public static String calendarToString(Calendar date) {
+        return calendarToString(date, FORMAT_TIME);
+    }
+
+    public static String calendarToString(Calendar date, String format) {
         if (date == null) {
             return "";
         } else {
-            return new SimpleDateFormat(FORMAT_TIME).format(date.getTime());
+            return new SimpleDateFormat(format).format(date.getTime());
         }
     }
+
     public static Date stringToDate(String time) {
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_TIME);
         Date timeDate = null;

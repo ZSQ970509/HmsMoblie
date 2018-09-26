@@ -10,21 +10,26 @@ import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
+import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
 import com.hc.hmsmoblie.fragment.TiltSensorAbleFragment;
 import com.hc.hmsmoblie.fragment.TiltSensorChartFragment;
-import com.yc.yclibrary.base.YcAppCompatActivity;
-import com.yc.yclibrary.mvp.BasePresenter;
+import com.hc.hmsmoblie.mvp.contact.TiltSensorActivityC;
+import com.hc.hmsmoblie.mvp.presenter.TiltSensorActivityP;
+import com.hc.hmsmoblie.widget.CommonDialog;
+import com.yc.yclibrary.exception.ApiException;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *  倾角页面
+ * 倾角页面
  */
 
-public class TiltSensorActivity extends BaseMvpActivity {
+public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> implements TiltSensorActivityC.V {
     private static final String CAM_ID = "cam_id";
-    private String camId;
+    private String mCamId;
     @BindView(R.id.tiltSensorTableCb)
     CheckBox tiltSensorTableCb;
     @BindView(R.id.tiltSensorChartCb)
@@ -39,6 +44,11 @@ public class TiltSensorActivity extends BaseMvpActivity {
     }
 
     @Override
+    protected TiltSensorActivityP loadPresenter() {
+        return new TiltSensorActivityP();
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.tilt_sensor_activity;
     }
@@ -46,14 +56,19 @@ public class TiltSensorActivity extends BaseMvpActivity {
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("倾角数据");
-        camId =  getIntent().getStringExtra(CAM_ID);
-        initFragment();
+        mCamId = getIntent().getStringExtra(CAM_ID);
+        getParaIds();
     }
 
-    private void initFragment() {
-        TiltSensorAbleFragment ableFragment = TiltSensorAbleFragment.newInstance();
-        TiltSensorChartFragment chartFragment = TiltSensorChartFragment.newInstance();
-        fragments = new Fragment[]{ableFragment,chartFragment};
+    private void getParaIds() {
+        mCamId = "1014603";
+        mPresenter.getGetTiltSensorPara(mCamId);
+    }
+
+    private void initFragment(List<TiltSensorParaJson.ListBean> paraIds) {
+        TiltSensorAbleFragment ableFragment = TiltSensorAbleFragment.newInstance(mCamId, paraIds);
+        TiltSensorChartFragment chartFragment = TiltSensorChartFragment.newInstance(mCamId, paraIds);
+        fragments = new Fragment[]{ableFragment, chartFragment};
         // 添加显示第一个fragment
         getSupportFragmentManager()
                 .beginTransaction()
@@ -88,22 +103,30 @@ public class TiltSensorActivity extends BaseMvpActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tiltSensorTableCb:
-                switchFragment( 0);
+                switchFragment(0);
                 break;
             case R.id.tiltSensorChartCb:
                 switchFragment(1);
                 break;
         }
     }
-    public String getCamId(){
-        return camId;
-    }
-    public void acfinish(){
-        getActivity().finish();
+
+
+    @Override
+    public void onGetGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
+        if (dataBean == null || dataBean.getList() == null || dataBean.getList().isEmpty())
+            onGetGetTiltSensorParaFail("");
+        else
+            initFragment(dataBean.getList());
     }
 
     @Override
-    protected BasePresenter loadPresenter() {
-        return null;
+    public void onGetGetTiltSensorParaFail(String msg) {
+        CommonDialog.newInstanceSingle(getActivity())
+                .setTitle("提示")
+                .setMsg("此设备暂无倾角数据！")
+                .setSingleBtnText("确定")
+                .setSingleClick(v -> finish())
+                .show();
     }
 }

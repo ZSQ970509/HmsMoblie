@@ -58,11 +58,12 @@ public class ChartUtils {
         lineChart.setPinchZoom(true);
 
         // 设置背景颜色
-        lineChart.setBackgroundResource(R.color.colorWhite);
+        lineChart.setBackgroundResource(R.color.colorWhiteGray);
         //使用指定的动画时间在x轴上动画显示图表。
         lineChart.animateX(1500);
         //右侧y轴设置为不使用
-        lineChart.getAxisRight().setEnabled(false);
+        lineChart.getAxisRight().setEnabled(true);
+        setRightYAxis(lineChart.getAxisRight());//右侧y轴设置为透明的
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();//刷新
     }
@@ -80,14 +81,18 @@ public class ChartUtils {
         //字体颜色
         l.setTextColor(Color.BLACK);
         //设置图例的垂直对齐
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         //设置图例的水平对齐
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         //设置图例的方向
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         //设置图例是否绘制在图表内部或外部
         l.setDrawInside(false);
-//        l.setYOffset(11f);
+//        l.setYOffset(10f);
+    }
+
+    public static void setXAxis(XAxis xAxis, List<String> list) {
+        setXAxis(xAxis, list, 0f);
     }
 
     /**
@@ -96,7 +101,7 @@ public class ChartUtils {
      * @param xAxis
      * @param list
      */
-    public static void setXAxis(XAxis xAxis, List<String> list) {
+    public static void setXAxis(XAxis xAxis, List<String> list, float angle) {
         if (list == null || list.isEmpty()) {
             Log.e(TAG, "setXAxis的数据为空");
             return;
@@ -109,10 +114,13 @@ public class ChartUtils {
         xAxis.setDrawGridLines(false);
         //x轴在下方
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);//设置x轴间距
 //        xAxis.setLabelCount(7);//设置
+        xAxis.setLabelRotationAngle(angle);//文字倾斜避免不够显示
         xAxis.setValueFormatter(formatter);
+
     }
 
     /**
@@ -127,8 +135,10 @@ public class ChartUtils {
 //        leftAxis.setAxisMaximum(maxNum);
         //通过调用此方法，先前设置的任何自定义最小值将被重置，并自动完成计算。
 //        leftAxis.setAxisMinimum(minNum);
+        leftAxis.setAxisLineColor(Color.BLACK);
         leftAxis.setDrawGridLines(true);    //将此设置为true，以便绘制该轴的网格线
         leftAxis.setGranularityEnabled(false);  //在轴值间隔上启用/禁用粒度控制。
+        leftAxis.setXOffset(AXIS_Y_LAYOUT_MARGIN);
         //y轴单位设置
 //        leftAxis.setValueFormatter(new IAxisValueFormatter() {
 //            @Override
@@ -136,6 +146,22 @@ public class ChartUtils {
 //                return value + "(m)";
 //            }
 //        });
+    }
+
+    private static final float AXIS_Y_LAYOUT_MARGIN = 13f;
+
+    /**
+     * 设置透明右侧y轴
+     *
+     * @param rightYAxis
+     */
+    public static void setRightYAxis(YAxis rightYAxis) {
+        rightYAxis.setTextColor(Color.TRANSPARENT);//y轴字的颜色
+        rightYAxis.setAxisLineColor(Color.TRANSPARENT);
+        rightYAxis.setSpaceTop(5f);//将顶部轴空间设置为整个范围的百分比。默认10f（即10%）
+        rightYAxis.setDrawGridLines(true);    //将此设置为true，以便绘制该轴的网格线
+        rightYAxis.setGranularityEnabled(false);  //在轴值间隔上启用/禁用粒度控制。
+        rightYAxis.setXOffset(AXIS_Y_LAYOUT_MARGIN);
     }
 
     /**
@@ -153,6 +179,10 @@ public class ChartUtils {
     }
 
     public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode) {
+        return getLineDataSet(lineChart, dataList, chartDataIndex, color, name, mode, false);
+    }
+
+    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode, boolean isDottedLine) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < dataList.size(); i++) {
 //            if (dataList.get(i) != -1)
@@ -169,9 +199,11 @@ public class ChartUtils {
             set.setValues(yVals);
         } else {
             set = new EmptyLineDataSet(yVals, name);
+            if (isDottedLine)
+                set.enableDashedLine(10f, 10f, 0f);
             // 设置平滑曲线
             set.setMode(mode);
-            set.setColors(new int[]{color, Color.parseColor("#00000000")});
+            set.setColors(color);
             set.setAxisDependency(YAxis.AxisDependency.LEFT);
 //            set.setColor(color);//设置线的颜色
             set.setLineWidth(2.5f);//设置线的宽度

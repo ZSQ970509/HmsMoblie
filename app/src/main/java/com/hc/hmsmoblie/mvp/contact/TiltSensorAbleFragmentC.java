@@ -15,15 +15,9 @@ import java.util.List;
 public class TiltSensorAbleFragmentC {
     public interface V extends IView{
         void onGetTiltSensorLogSuccess(SensorLogJson sensorLogJson);
-
         void onGetTiltSensorLogFail(String msg);
-
-        void onGetGetTiltSensorParauccess(TiltSensorParaJson dataBean);
-
-        void onGetGetTiltSensorParaFail(String msg);
     }
     public interface P {
         void getTiltSensorLog(String cmID, String paraID, int pageindex, int pagesize, String startTime, String endTime);
-        void getGetTiltSensorPara(String cmID);
     }
 }

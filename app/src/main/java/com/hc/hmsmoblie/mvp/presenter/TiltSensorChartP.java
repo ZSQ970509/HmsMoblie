@@ -22,7 +22,7 @@ public class TiltSensorChartP extends BasePresenter<TiltSensorChartC.V> implemen
 
     @Override
     public void getTiltSensorChart(String camID, String paraID, String timeType, String selDate) {
-        getIView().showLoading("正在检测版本中...");
+        getIView().showLoading("正在搜索中...");
         new TiltSensorChartM()
                 .getTiltSensorChart(camID,paraID,timeType,selDate)
                 .compose(getIView().bindLifecycle())

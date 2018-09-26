@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/x240"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhiteGray">
     <TextView
         android:id="@+id/tvDialogItem"
         android:layout_width="@dimen/x240"
