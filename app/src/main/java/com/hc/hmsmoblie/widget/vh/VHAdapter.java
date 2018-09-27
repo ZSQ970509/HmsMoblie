@@ -28,7 +28,6 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
         LinearLayout moveLayout = helper.getView(R.id.id_move_layout);
         mMoveViewList.add(moveLayout);
         moveLayout.scrollTo(getFixX(), 0);
-        Log.e("111",item.getRowNumber()+"");
         helper.setText(R.id.tiltSensorItem1, item.getRowNumber()+"")
                 .setText(R.id.tiltSensorItem2, item.getParaName()+"")
                 .setText(R.id.tiltSensorItem3, item.getCreateTime()+"")

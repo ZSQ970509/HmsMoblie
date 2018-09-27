@@ -61,7 +61,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     }
 
     private void getParaIds() {
-        mCamId = "1014603";
+//        mCamId = "1014603";
         mPresenter.getGetTiltSensorPara(mCamId);
     }
 
