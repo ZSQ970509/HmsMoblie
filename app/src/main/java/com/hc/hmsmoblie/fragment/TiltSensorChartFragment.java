@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
+import com.classic.adapter.CommonRecyclerAdapter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -132,7 +133,12 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         markerData.add(new ChartMarkerDataBeanNew(Name[3], dataBean.getYuOyZ()));
         markerData.add(new ChartMarkerDataBeanNew(Name[4], dataBean.getYuOxF()));
         markerData.add(new ChartMarkerDataBeanNew(Name[5], dataBean.getYuOyF()));
-        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData);
+        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData) {
+            @Override
+            public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
+                helper.setText(R.id.itemChartMarkerTv, item.getDataName() + "：" + item.getData().get(xIndex) + " (度)");
+            }
+        };
         chartMarkerViewNew.setChartView(lineChart);
         lineChart.setMarker(chartMarkerViewNew);
         lineChart.getLegend().setEnabled(false);

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.classic.adapter.BaseAdapterHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -21,7 +22,9 @@ import com.hc.hmsmoblie.mvp.presenter.EnvironmentDetailsP;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerDataBean;
+import com.hc.hmsmoblie.utils.chart.ChartMarkerDataBeanNew;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerView;
+import com.hc.hmsmoblie.utils.chart.ChartMarkerViewNew;
 import com.hc.hmsmoblie.utils.chart.ChartUtils;
 import com.hc.hmsmoblie.utils.chart.EmptyLineChartRendererNew;
 import com.orhanobut.logger.Logger;
@@ -108,9 +111,9 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         mCamId = getIntent().getStringExtra(CAM_ID);
         mSeqId = getIntent().getStringExtra(SEQ_ID);
         mProId = getIntent().getStringExtra(PRO_ID);
-//        mCamId = "1024300";
-//        mSeqId = "1440-0028-sclw-3127";
-//        mProId = "23334";
+//        mCamId = "1052399";
+//        mSeqId = "0995479591L723";
+//        mProId = "49885";
         ChartUtils.initLineChart(mLineChart, getActivity());
         ChartUtils.initLineChart(mLineChart2, getActivity());
         mTvTime.setText(FormatUtils.dateToString(mSelectTimed));
@@ -177,14 +180,18 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
         lineChart.setData(new LineData(setData1, setData2, setData3));
 
-        ChartMarkerDataBean markerData = new ChartMarkerDataBean();
-        markerData.setDataName1("均值");
-        markerData.setDataName2("峰值");
-        markerData.setDataName3("谷值");
-        markerData.setData1(chartData.getAvg());
-        markerData.setData2(chartData.getMax());
-        markerData.setData3(chartData.getMin());
-        lineChart.setMarker(new ChartMarkerView(getActivity(), markerData));
+        List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
+        markerData.add(new ChartMarkerDataBeanNew("均值", chartData.getAvg()));
+        markerData.add(new ChartMarkerDataBeanNew("峰值",chartData.getMax()));
+        markerData.add(new ChartMarkerDataBeanNew("谷值", chartData.getMin()));
+        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData) {
+            @Override
+            public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
+                helper.setText(R.id.itemChartMarkerTv, item.getDataName() + "：" + item.getData().get(xIndex));
+            }
+        };
+        chartMarkerViewNew.setChartView(lineChart);
+        lineChart.setMarker(chartMarkerViewNew);
         ChartUtils.setLegend(lineChart.getLegend());
         ChartUtils.setLeftYAxis(lineChart.getAxisLeft());
         ChartUtils.setXAxis(lineChart.getXAxis(), getXAxisData());
