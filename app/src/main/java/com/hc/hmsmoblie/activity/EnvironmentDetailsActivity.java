@@ -11,7 +11,6 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
@@ -24,6 +23,7 @@ import com.hc.hmsmoblie.utils.TimePickerUtils;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerDataBean;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerView;
 import com.hc.hmsmoblie.utils.chart.ChartUtils;
+import com.hc.hmsmoblie.utils.chart.EmptyLineChartRendererNew;
 import com.orhanobut.logger.Logger;
 import com.yc.yclibrary.exception.ApiException;
 
@@ -171,10 +171,10 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         }
         tvComplianceRate.setText("达标率：" + chartData.getRate() + "%");
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
-
-        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值");
-        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值");
-        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值");
+        lineChart.setRenderer(new EmptyLineChartRendererNew(lineChart));
+        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
+        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
+        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
         lineChart.setData(new LineData(setData1, setData2, setData3));
 
         ChartMarkerDataBean markerData = new ChartMarkerDataBean();

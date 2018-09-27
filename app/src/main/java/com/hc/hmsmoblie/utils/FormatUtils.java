@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2018/6/19.
@@ -86,7 +87,7 @@ public class FormatUtils {
         if (date == null) {
             return "";
         } else {
-            return new SimpleDateFormat(format).format(date.getTime());
+            return new SimpleDateFormat(format,Locale.getDefault()).format(date.getTime());
         }
     }
 

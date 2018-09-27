@@ -7,6 +7,9 @@ import com.hc.hmsmoblie.mvp.model.VideoSelectProjectFragmentM;
 import com.hc.hmsmoblie.mvp.model.VideoSelectProjectM;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.yc.yclibrary.exception.ApiException;
 import com.yc.yclibrary.mvp.BasePresenter;
 
@@ -20,7 +23,7 @@ public class VideoSelectProjectFragmentP extends BasePresenter<VideoSelectProjec
 
         new VideoSelectProjectFragmentM()
                 .getCameraList(keyword,pageindex,pagesize,sysId,userid)
-                .compose(getIView().bindLifecycle())
+                .compose(((RxFragment)getIView()).bindUntilEvent(FragmentEvent.DESTROY))
                 .subscribe(new NetObserver<HttpResponse<ProjectJson>>() {
                     @Override
                     public void onSuccess(HttpResponse<ProjectJson> loginBean) {

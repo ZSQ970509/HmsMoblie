@@ -79,9 +79,7 @@ public class ChartMarkerViewNew extends RelativeLayout implements IMarker {
 
     @Override
     public void draw(Canvas canvas, float posX, float posY) {
-
         MPPointF offset = getOffsetForDrawingAtPoint(posX, posY);
-
         int saveId = canvas.save();
         // translate to the correct position and draw
         canvas.translate(posX + offset.x, posY + offset.y);
