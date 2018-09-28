@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/shape_blu_border" android:state_checked="true" /> <!-- selected颜色 -->
+    <item android:drawable="@drawable/shape_blu_border" android:state_pressed="true" /> <!-- pressed颜色 -->
+    <item android:drawable="@drawable/shape_blu_border" android:state_focused="true" /> <!-- focused颜色 -->
+    <item android:drawable="@drawable/shape_gray_border" /> <!-- default颜色 -->
+
+</selector>

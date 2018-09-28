@@ -1,14 +1,28 @@
 package com.hc.hmsmoblie.fragment;
 
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.adapter.SelectItemAdapter;
+import com.hc.hmsmoblie.bean.json.SelecItemJson;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorAbleFragmentC;
@@ -40,7 +54,10 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     TextView tiltSensorTimeEndTv;
     @BindView(R.id.tiltSensorTimeStartTv)
     TextView tiltSensorTimeStartTv;
-
+    @BindView(R.id.btSelectItem)
+    TextView btSelectItem;
+    @BindView(R.id.tilt_Sensor_Able_Line)
+    View tiltSensorAbleLine;
     private String mCamId;
     //流水数据
     private ArrayList<SensorLogJson.ListBean> mDataModels = new ArrayList<SensorLogJson.ListBean>();
@@ -49,7 +66,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private int pageIndex = 1;
     private int sumPage;
     private String paraID;
-
+    private PopupWindow mPopWindow;
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;
@@ -146,7 +163,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     }
 
-    @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch})
+    @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch,R.id.btSelectItem})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tiltSensorTimeStartTv:
@@ -163,6 +180,63 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                 mDataModels.clear();
                 mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
                 break;
+            case R.id.btSelectItem:
+                showPopupWindow();
+                break;
         }
+    }
+    private void showPopupWindow() {
+        //backgroundAlpha(0.5f);
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.select_item_pop, null);
+        mPopWindow = new PopupWindow(contentView);
+        mPopWindow.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
+        mPopWindow.setHeight(ViewGroup.LayoutParams.FILL_PARENT);
+        mPopWindow.setOutsideTouchable(true);
+        mPopWindow.setFocusable(true);
+        mPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.select_Item_RecyclerView);
+        LinearLayout linearLayout = (LinearLayout)contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
+        linearLayout.setAlpha(0.5f);
+        SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop,getSelectItemData());
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        recyclerView.setAdapter(mAdapter);
+       /* RelativeLayout RelativeLayoutPopupWindow = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow);
+        RelativeLayout RelativeLayoutPopupWindowChangePassWord = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow_ChangePassWord);
+        RelativeLayout RelativeLayoutPopupWindowMore = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow_More);
+        RelativeLayoutPopupWindow.setOnClickListener(this);
+        RelativeLayoutPopupWindowChangePassWord.setOnClickListener(this);
+        RelativeLayoutPopupWindowMore.setOnClickListener(this);
+        contentView.findViewById(R.id.RelativeLayout_PopupWindow_Pay).setOnClickListener(this);*/
+        if (Build.VERSION.SDK_INT < 24) {
+            mPopWindow.showAsDropDown(tiltSensorAbleLine);
+        } else {
+            int[] location = new int[2];
+            btSelectItem.getLocationOnScreen(location);
+            int x = location[0];
+            int y = location[1];
+            if (Build.VERSION.SDK_INT == 25) {
+                WindowManager wm = (WindowManager) mPopWindow.getContentView().getContext().getSystemService(Context.WINDOW_SERVICE);
+                int screenHeight = wm.getDefaultDisplay().getHeight();
+                mPopWindow.setHeight(screenHeight - location[1] - tiltSensorAbleLine.getHeight());
+            }
+            mPopWindow.showAtLocation(tiltSensorAbleLine, Gravity.NO_GRAVITY, 0, y + tiltSensorAbleLine.getHeight());
+        }
+
+        mPopWindow.setOnDismissListener(() -> backgroundAlpha(1f));
+
+    }
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
+        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+    public ArrayList<SelecItemJson> getSelectItemData(){
+        ArrayList<SelecItemJson> selecItemJsons = new ArrayList<SelecItemJson>();
+        selecItemJsons.add(new SelecItemJson("设备原始数据"));
+        selecItemJsons.add(new SelecItemJson("角度差数据"));
+        selecItemJsons.add(new SelecItemJson("沉降位移数据"));
+        selecItemJsons.add(new SelecItemJson("平行度浮动"));
+        return  selecItemJsons;
     }
 }
