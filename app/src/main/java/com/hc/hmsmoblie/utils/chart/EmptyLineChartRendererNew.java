@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  该类暂时只能用于LineDataSet（处理间断的数据）
+ * 该类暂时只能用于LineDataSet（处理间断的数据）
  */
 
 public class EmptyLineChartRendererNew extends LineChartRenderer {
@@ -51,14 +51,12 @@ public class EmptyLineChartRendererNew extends LineChartRenderer {
             }
             if (isEmptyEntry(i, dataSet)) {
                 yVals.add(dataSet.getEntryForIndex(i));
-            } else {
-                if (iLineDataSet == null && !yVals.isEmpty()) {
-                    iLineDataSet = (LineDataSet) ((LineDataSet) dataSet).copy();
-                    iLineDataSet.clear();
-                    iLineDataSet.setValues(yVals);
-                    super.drawCubicBezier(iLineDataSet);
-                    yVals.clear();
-                }
+            } else if (!yVals.isEmpty()) {
+                iLineDataSet = (LineDataSet) ((LineDataSet) dataSet).copy();
+                iLineDataSet.clear();
+                iLineDataSet.setValues(yVals);
+                super.drawCubicBezier(iLineDataSet);
+                yVals.clear();
             }
         }
     }

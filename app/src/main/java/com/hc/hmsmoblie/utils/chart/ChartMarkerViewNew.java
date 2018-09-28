@@ -87,12 +87,6 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
         mIndex = index;
 //        recyclerVie.removeAllViews();//避免RecyclerView里item重叠问题
         mCommonAdapter.notifyDataSetChanged();
-
-//        mCommonAdapter.clear();
-//        for(ChartMarkerDataBeanNew dataBeanNew :mMarkerDataBean){
-//            mCommonAdapter.add();
-//        }
-//        .addAll(.);
     }
     @Override
     public void draw(Canvas canvas, float posX, float posY) {

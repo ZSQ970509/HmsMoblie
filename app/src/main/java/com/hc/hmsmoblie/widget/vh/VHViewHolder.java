@@ -14,9 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 
 public class VHViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
     private SparseArray<View> viewSparseArray;
-
     private onItemCommonClickListener commonClickListener;
-
     public VHViewHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);

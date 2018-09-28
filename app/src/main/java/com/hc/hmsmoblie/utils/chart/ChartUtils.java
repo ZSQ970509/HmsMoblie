@@ -185,13 +185,8 @@ public class ChartUtils {
     public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode, boolean isDottedLine) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < dataList.size(); i++) {
-//            if (dataList.get(i) != -1)
             yVals.add(new Entry(i, Float.parseFloat(dataList.get(i) + "")));
-//            else
-//                yVals.add(null);
         }
-//        if (!(lineChart.getRenderer() instanceof EmptyLineChartRenderer))
-//            lineChart.setRenderer(new EmptyLineChartRenderer(lineChart));
         EmptyLineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
             set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);

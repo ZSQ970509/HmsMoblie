@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,8 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private int sumPage;
     private String paraID;
     private PopupWindow mPopWindow;
+    private SparseArray<Boolean> mTitleVisibility = new SparseArray<>();
+
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;
@@ -163,17 +166,24 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     }
 
+    boolean a1 = false, a2 = false;
     @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch,R.id.btSelectItem})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tiltSensorTimeStartTv:
-                TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeStartTv, tiltSensorTimeStartTv.getText().toString(), "1234-10-11", tiltSensorTimeEndTv.getText().toString());
+                mTitleVisibility.put(1, a1);
+                a1 = !a1;
+                VHLayout.setTitleVisibility(mTitleVisibility);
+//                TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeStartTv, tiltSensorTimeStartTv.getText().toString(), "1234-10-11", tiltSensorTimeEndTv.getText().toString());
                 break;
             case R.id.tiltSensorTimeEndTv:
-                if (TextUtils.isEmpty(tiltSensorTimeStartTv.getText().toString()))
-                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), "1234-10-11", "");
-                else
-                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
+                mTitleVisibility.put(2, a2);
+                a2 = !a2;
+                VHLayout.setTitleVisibility(mTitleVisibility);
+//                if (TextUtils.isEmpty(tiltSensorTimeStartTv.getText().toString()))
+//                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), "1234-10-11", "");
+//                else
+//                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
                 break;
             case R.id.btCruiseDataSearch:
                 pageIndex = 1;

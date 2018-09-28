@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +18,9 @@ import android.widget.TextView;
 
 import com.hc.hmsmoblie.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.hc.hmsmoblie.utils.DensityUtils.dip2px;
 
 /**
@@ -23,7 +28,8 @@ import static com.hc.hmsmoblie.utils.DensityUtils.dip2px;
  */
 
 public class VHLayout extends RelativeLayout {
-
+    //右侧标题栏里的标题
+    private List<TextView> mTitleTvs = new ArrayList<>();
     //头部title布局
     private LinearLayout mRightTitleLayout;
     //手指按下时的位置
@@ -128,6 +134,7 @@ public class VHLayout extends RelativeLayout {
 
     /**
      * 设置刷新监听
+     *
      * @param onRefresh
      */
     public void setRefresh(OnRefresh onRefresh) {
@@ -185,6 +192,7 @@ public class VHLayout extends RelativeLayout {
         TextPaint tp = textView.getPaint();
         tp.setFakeBoldText(true);
         leftLayout.addView(textView, width, dip2px(context, 50));
+        mTitleTvs.add(textView);
         return textView;
     }
 
@@ -261,9 +269,9 @@ public class VHLayout extends RelativeLayout {
         mRightTitleWidthList = new int[headerListData.length];
         for (int i = 0; i < headerListData.length; i++) {
 //            mRightTitleWidthList[i] = dip2px(context, mRightItemWidth);
-            if(i == 1){
+            if (i == 1) {
                 mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
-            }else{
+            } else {
                 mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth);
             }
 
@@ -272,4 +280,14 @@ public class VHLayout extends RelativeLayout {
         mLeftTextList = new String[]{"序号"};
     }
 
+    public void setTitleVisibility(SparseArray<Boolean> titleVisibility) {
+        for (int i = 0; i < mTitleTvs.size(); i++) {
+            if (titleVisibility.get(i) == null || titleVisibility.get(i)) {
+                mTitleTvs.get(i).setVisibility(VISIBLE);
+            } else {
+                mTitleTvs.get(i).setVisibility(GONE);
+            }
+        }
+        mAdapter.setTitleVisibility(titleVisibility);
+    }
 }
