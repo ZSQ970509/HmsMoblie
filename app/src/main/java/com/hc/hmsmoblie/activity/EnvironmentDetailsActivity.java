@@ -111,9 +111,9 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         mCamId = getIntent().getStringExtra(CAM_ID);
         mSeqId = getIntent().getStringExtra(SEQ_ID);
         mProId = getIntent().getStringExtra(PRO_ID);
-        mCamId = "1052399";
-        mSeqId = "0995479591L723";
-        mProId = "49885";
+//        mCamId = "1052399";
+//        mSeqId = "0995479591L723";
+//        mProId = "49885";
         ChartUtils.initLineChart(mLineChart, getActivity());
         ChartUtils.initLineChart(mLineChart2, getActivity());
         mTvTime.setText(FormatUtils.dateToString(mSelectTimed));
@@ -175,50 +175,14 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         tvComplianceRate.setText("达标率：" + chartData.getRate() + "%");
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
         lineChart.setRenderer(new EmptyLineChartRendererNew(lineChart));
-        List<Double> testData = new ArrayList<>();
-        testData.add(1.0);
-        testData.add(-1.0);
-        testData.add(-1.0);
-        testData.add(2.0);
-        testData.add(4.0);
-        testData.add(5.0);
-        testData.add(6.0);
-
-        List<Double> testData2 = new ArrayList<>();
-        testData2.add(-1.0);
-        testData2.add(2.0);
-        testData2.add(3.0);
-        testData2.add(-1.0);
-        testData2.add(4.0);
-        testData2.add(-1.0);
-        testData2.add(6.0);
-
-        List<Double> testData3 = new ArrayList<>();
-        testData3.add(-1.0);
-        testData3.add(-1.0);
-        testData3.add(-1.0);
-        testData3.add(3.0);
-        testData3.add(-1.0);
-        testData3.add(7.0);
-        testData3.add(-1.0);
-        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, testData, 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
-        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, testData2, 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
-        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, testData3, 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
-//        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
-//        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
-//        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
-//
+        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
+        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
+        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
         lineChart.setData(new LineData(setData1, setData2, setData3));
-
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
-        markerData.add(new ChartMarkerDataBeanNew("均值", testData));
-        markerData.add(new ChartMarkerDataBeanNew("峰值",testData2));
-        markerData.add(new ChartMarkerDataBeanNew("谷值", testData3));
-
-//        List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
-//        markerData.add(new ChartMarkerDataBeanNew("均值", chartData.getAvg()));
-//        markerData.add(new ChartMarkerDataBeanNew("峰值",chartData.getMax()));
-//        markerData.add(new ChartMarkerDataBeanNew("谷值", chartData.getMin()));
+        markerData.add(new ChartMarkerDataBeanNew("均值", chartData.getAvg()));
+        markerData.add(new ChartMarkerDataBeanNew("峰值",chartData.getMax()));
+        markerData.add(new ChartMarkerDataBeanNew("谷值", chartData.getMin()));
         ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData) {
             @Override
             public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
