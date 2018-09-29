@@ -269,12 +269,38 @@ public class VHLayout extends RelativeLayout {
         mRightTitleWidthList = new int[headerListData.length];
         for (int i = 0; i < headerListData.length; i++) {
 //            mRightTitleWidthList[i] = dip2px(context, mRightItemWidth);
-            if (i == 1) {
-                mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
-            } else {
-                mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth);
+            switch (i){
+                case 1:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
+                    break;
+                case 2:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
+                    break;
+                case 3:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
+                    break;
+                case 4:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
+                    break;
+                case 6:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
+                    break;
+                case 8:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
+                    break;
+                case 10:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
+                    break;
+                case 11:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
+                    break;
+                case 12:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
+                    break;
+                default:
+                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth);
+                    break;
             }
-
         }
         mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth)};
         mLeftTextList = new String[]{"序号"};

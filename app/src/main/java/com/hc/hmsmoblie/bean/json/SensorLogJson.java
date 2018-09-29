@@ -8,9 +8,10 @@ import java.util.List;
 
 public class SensorLogJson {
 
+
     /**
-     * List : [{"RowNumber":1,"OxDiff":0.28,"OyDiff":1.008,"OxDir":0,"OyDir":270,"RecordID":161681,"CreateTime":"2018-09-14 14:40:13","Ox":1.103,"Oy":-1.691,"Oldx":-0.003,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":2,"OxDiff":0.277,"OyDiff":1.008,"OxDir":0,"OyDir":270,"RecordID":161680,"CreateTime":"2018-09-14 14:40:02","Ox":1.106,"Oy":-1.692,"Oldx":-0.001,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":3,"OxDiff":0.276,"OyDiff":1.009,"OxDir":0,"OyDir":270,"RecordID":161679,"CreateTime":"2018-09-14 14:39:51","Ox":1.107,"Oy":-1.693,"Oldx":0.003,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":4,"OxDiff":0.28,"OyDiff":1.007,"OxDir":0,"OyDir":270,"RecordID":161678,"CreateTime":"2018-09-14 14:39:40","Ox":1.104,"Oy":-1.691,"Oldx":0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":5,"OxDiff":0.28,"OyDiff":1.007,"OxDir":0,"OyDir":270,"RecordID":161677,"CreateTime":"2018-09-14 14:39:29","Ox":1.103,"Oy":-1.691,"Oldx":-0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":6,"OxDiff":0.279,"OyDiff":1.006,"OxDir":0,"OyDir":270,"RecordID":161676,"CreateTime":"2018-09-14 14:39:18","Ox":1.104,"Oy":-1.69,"Oldx":0.001,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":7,"OxDiff":0.28,"OyDiff":1.007,"OxDir":0,"OyDir":270,"RecordID":161675,"CreateTime":"2018-09-14 14:39:07","Ox":1.103,"Oy":-1.691,"Oldx":-0.001,"Oldy":0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":8,"OxDiff":0.279,"OyDiff":1.009,"OxDir":0,"OyDir":270,"RecordID":161674,"CreateTime":"2018-09-14 14:38:56","Ox":1.104,"Oy":-1.693,"Oldx":-0.002,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":9,"OxDiff":0.277,"OyDiff":1.01,"OxDir":0,"OyDir":270,"RecordID":161673,"CreateTime":"2018-09-14 14:38:45","Ox":1.106,"Oy":-1.694,"Oldx":0.003,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0},{"RowNumber":10,"OxDiff":0.28,"OyDiff":1.007,"OxDir":0,"OyDir":270,"RecordID":161672,"CreateTime":"2018-09-14 14:38:35","Ox":1.103,"Oy":-1.692,"Oldx":0,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0}]
-     * total : 9107
+     * List : [{"RowNumber":1,"OxDiff":5.21,"OyDiff":83.642,"OxDir":276,"OyDir":186,"RecordID":188244,"CreateTime":"2018-09-28 14:57:19","Ox":-2.186,"Oy":0.013,"Oldx":-0.002,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.574,"FirstOldx":5.372,"FirstOldy":85.574,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":2,"OxDiff":5.212,"OyDiff":83.641,"OxDir":276,"OyDir":186,"RecordID":188242,"CreateTime":"2018-09-28 14:57:08","Ox":-2.188,"Oy":0.014,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.573,"FirstOldx":5.374,"FirstOldy":85.573,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":3,"OxDiff":5.211,"OyDiff":83.643,"OxDir":276,"OyDir":186,"RecordID":188240,"CreateTime":"2018-09-28 14:56:57","Ox":-2.187,"Oy":0.012,"Oldx":0,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.575,"FirstOldx":5.373,"FirstOldy":85.575,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":4,"OxDiff":5.211,"OyDiff":83.644,"OxDir":276,"OyDir":186,"RecordID":188238,"CreateTime":"2018-09-28 14:56:46","Ox":-2.187,"Oy":0.011,"Oldx":0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.576,"FirstOldx":5.373,"FirstOldy":85.576,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":5,"OxDiff":5.21,"OyDiff":83.645,"OxDir":276,"OyDir":186,"RecordID":188236,"CreateTime":"2018-09-28 14:56:35","Ox":-2.186,"Oy":0.01,"Oldx":-0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.577,"FirstOldx":5.372,"FirstOldy":85.577,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":6,"OxDiff":5.211,"OyDiff":83.646,"OxDir":276,"OyDir":186,"RecordID":188234,"CreateTime":"2018-09-28 14:56:24","Ox":-2.187,"Oy":0.009,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.578,"FirstOldx":5.373,"FirstOldy":85.578,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":7,"OxDiff":5.209,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188232,"CreateTime":"2018-09-28 14:56:12","Ox":-2.186,"Oy":0.007,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.58,"FirstOldx":5.372,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":8,"OxDiff":5.211,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188230,"CreateTime":"2018-09-28 14:56:02","Ox":-2.187,"Oy":0.007,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.58,"FirstOldx":5.373,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":9,"OxDiff":5.212,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188228,"CreateTime":"2018-09-28 14:55:51","Ox":-2.188,"Oy":0.007,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.58,"FirstOldx":5.374,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":10,"OxDiff":5.21,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188226,"CreateTime":"2018-09-28 14:55:40","Ox":-2.187,"Oy":0.005,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.582,"FirstOldx":5.373,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":11,"OxDiff":5.212,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188224,"CreateTime":"2018-09-28 14:55:29","Ox":-2.188,"Oy":0.005,"Oldx":0,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.582,"FirstOldx":5.374,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":12,"OxDiff":5.212,"OyDiff":83.649,"OxDir":276,"OyDir":186,"RecordID":188222,"CreateTime":"2018-09-28 14:55:18","Ox":-2.188,"Oy":0.006,"Oldx":0.002,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.581,"FirstOldx":5.374,"FirstOldy":85.581,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":13,"OxDiff":5.211,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188220,"CreateTime":"2018-09-28 14:55:07","Ox":-2.186,"Oy":0.006,"Oldx":0,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.581,"FirstOldx":5.372,"FirstOldy":85.581,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":14,"OxDiff":5.21,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188218,"CreateTime":"2018-09-28 14:54:56","Ox":-2.186,"Oy":0.005,"Oldx":-0.004,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.582,"FirstOldx":5.372,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":15,"OxDiff":5.214,"OyDiff":83.652,"OxDir":276,"OyDir":186,"RecordID":188216,"CreateTime":"2018-09-28 14:54:46","Ox":-2.19,"Oy":0.003,"Oldx":0.002,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.376,"Stagey":85.584,"FirstOldx":5.376,"FirstOldy":85.584,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0}]
+     * total : 7336
      */
 
     private int total;
@@ -35,22 +36,38 @@ public class SensorLogJson {
     public static class ListBean {
         /**
          * RowNumber : 1
-         * OxDiff : 0.28
-         * OyDiff : 1.008
-         * OxDir : 0
-         * OyDir : 270
-         * RecordID : 161681
-         * CreateTime : 2018-09-14 14:40:13
-         * Ox : 1.103
-         * Oy : -1.691
-         * Oldx : -0.003
+         * OxDiff : 5.21
+         * OyDiff : 83.642
+         * OxDir : 276
+         * OyDir : 186
+         * RecordID : 188244
+         * CreateTime : 2018-09-28 14:57:19
+         * Ox : -2.186
+         * Oy : 0.013
+         * Oldx : -0.002
          * Oldy : 0.001
          * ObdOldx : 0.0
          * ObdOldy : 0.0
-         * CamID : 1053613
-         * ParaID : 86
-         * ParaName : FF05
+         * CamID : 1014603
+         * ParaID : 89
+         * ParaName : ff03
          * Obd : 0.0
+         * Stagex : 5.372
+         * Stagey : 85.574
+         * FirstOldx : 5.372
+         * FirstOldy : 85.574
+         * ObdOldz : 0.0
+         * ObdStagex : 1.0E-4
+         * ObdStagey : 0.0374
+         * ObdStagez : 0.0049
+         * ObdFirstOldx : 1.0E-4
+         * ObdFirstOldy : 0.0374
+         * ObdFirstOldz : 0.0049
+         * CdObd : 0.0
+         * CdObdDiff : 0.0356
+         * CdObdAdd : 0.0356
+         * FloatObdRight : 0.0
+         * FloatObdLeft : 0.0
          */
 
         private int RowNumber;
@@ -70,6 +87,22 @@ public class SensorLogJson {
         private int ParaID;
         private String ParaName;
         private double Obd;
+        private double Stagex;
+        private double Stagey;
+        private double FirstOldx;
+        private double FirstOldy;
+        private double ObdOldz;
+        private double ObdStagex;
+        private double ObdStagey;
+        private double ObdStagez;
+        private double ObdFirstOldx;
+        private double ObdFirstOldy;
+        private double ObdFirstOldz;
+        private double CdObd;
+        private double CdObdDiff;
+        private double CdObdAdd;
+        private double FloatObdRight;
+        private double FloatObdLeft;
 
         public int getRowNumber() {
             return RowNumber;
@@ -205,6 +238,134 @@ public class SensorLogJson {
 
         public void setObd(double Obd) {
             this.Obd = Obd;
+        }
+
+        public double getStagex() {
+            return Stagex;
+        }
+
+        public void setStagex(double Stagex) {
+            this.Stagex = Stagex;
+        }
+
+        public double getStagey() {
+            return Stagey;
+        }
+
+        public void setStagey(double Stagey) {
+            this.Stagey = Stagey;
+        }
+
+        public double getFirstOldx() {
+            return FirstOldx;
+        }
+
+        public void setFirstOldx(double FirstOldx) {
+            this.FirstOldx = FirstOldx;
+        }
+
+        public double getFirstOldy() {
+            return FirstOldy;
+        }
+
+        public void setFirstOldy(double FirstOldy) {
+            this.FirstOldy = FirstOldy;
+        }
+
+        public double getObdOldz() {
+            return ObdOldz;
+        }
+
+        public void setObdOldz(double ObdOldz) {
+            this.ObdOldz = ObdOldz;
+        }
+
+        public double getObdStagex() {
+            return ObdStagex;
+        }
+
+        public void setObdStagex(double ObdStagex) {
+            this.ObdStagex = ObdStagex;
+        }
+
+        public double getObdStagey() {
+            return ObdStagey;
+        }
+
+        public void setObdStagey(double ObdStagey) {
+            this.ObdStagey = ObdStagey;
+        }
+
+        public double getObdStagez() {
+            return ObdStagez;
+        }
+
+        public void setObdStagez(double ObdStagez) {
+            this.ObdStagez = ObdStagez;
+        }
+
+        public double getObdFirstOldx() {
+            return ObdFirstOldx;
+        }
+
+        public void setObdFirstOldx(double ObdFirstOldx) {
+            this.ObdFirstOldx = ObdFirstOldx;
+        }
+
+        public double getObdFirstOldy() {
+            return ObdFirstOldy;
+        }
+
+        public void setObdFirstOldy(double ObdFirstOldy) {
+            this.ObdFirstOldy = ObdFirstOldy;
+        }
+
+        public double getObdFirstOldz() {
+            return ObdFirstOldz;
+        }
+
+        public void setObdFirstOldz(double ObdFirstOldz) {
+            this.ObdFirstOldz = ObdFirstOldz;
+        }
+
+        public double getCdObd() {
+            return CdObd;
+        }
+
+        public void setCdObd(double CdObd) {
+            this.CdObd = CdObd;
+        }
+
+        public double getCdObdDiff() {
+            return CdObdDiff;
+        }
+
+        public void setCdObdDiff(double CdObdDiff) {
+            this.CdObdDiff = CdObdDiff;
+        }
+
+        public double getCdObdAdd() {
+            return CdObdAdd;
+        }
+
+        public void setCdObdAdd(double CdObdAdd) {
+            this.CdObdAdd = CdObdAdd;
+        }
+
+        public double getFloatObdRight() {
+            return FloatObdRight;
+        }
+
+        public void setFloatObdRight(double FloatObdRight) {
+            this.FloatObdRight = FloatObdRight;
+        }
+
+        public double getFloatObdLeft() {
+            return FloatObdLeft;
+        }
+
+        public void setFloatObdLeft(double FloatObdLeft) {
+            this.FloatObdLeft = FloatObdLeft;
         }
     }
 }

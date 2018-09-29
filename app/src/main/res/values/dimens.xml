@@ -11,6 +11,8 @@
     <dimen name="left_margin">@dimen/x10</dimen>
     <dimen name="tiltSensorItemWidth">100dp</dimen>
     <dimen name="tiltSensorItemTimeWidth">120dp</dimen>
+    <dimen name="tiltSensorItemBigWidth">140dp</dimen>
+    <dimen name="tiltSensorItemSamllWidth">80dp</dimen>
     <!--<dimen name="tiltSensorItemLeftTitleWidth">60dp</dimen>-->
     <dimen name="tiltSensorTitleHeight">32dp</dimen>
     <dimen name="tiltSensorPickerHeight">24dp</dimen>

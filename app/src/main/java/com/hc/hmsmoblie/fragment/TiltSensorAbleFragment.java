@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -21,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.classic.adapter.BaseAdapterHelper;
+import com.classic.adapter.CommonAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.adapter.SelectItemAdapter;
 import com.hc.hmsmoblie.bean.json.SelecItemJson;
@@ -68,8 +73,14 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private int sumPage;
     private String paraID;
     private PopupWindow mPopWindow;
+    private CommonAdapter<String> mSpAdapter;
     private SparseArray<Boolean> mTitleVisibility = new SparseArray<>();
-
+    private ArrayList<SelecItemJson> SelecItemJsonList = new ArrayList<SelecItemJson>();
+    private ArrayList<Boolean> isCheckedList = new ArrayList<Boolean>();
+    private final SparseArray<Boolean> mTitleVisibility1 = new SparseArray<Boolean>(){};
+    private SparseArray<Boolean> getTitleVisibility(int type){
+        return null;
+    }
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;
@@ -122,6 +133,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     }
 
     public void initData() {
+        iniChecks();
         VHLayout.setHeaderListData(getResources().getStringArray(R.array.tiltSensorTitleName));
         mAdapter = new VHAdapter(R.layout.tilt_sensor_item, mDataModels);
         VHLayout.setAdapter(mAdapter);
@@ -141,12 +153,20 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
             mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
         });
         mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
-        ArrayList<String> dataList = new ArrayList<String>();
+        List<String> dataList = new ArrayList<String>();
         dataList.add("全部");
         for (TiltSensorParaJson.ListBean jsonBean : mParaIds) {
             dataList.add(jsonBean.getParaName());
         }
-        tiltSensorTypeSp.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, dataList));
+        mSpAdapter = new CommonAdapter<String>(getActivity(), R.layout.item_common) {
+            @Override
+            public void onUpdate(BaseAdapterHelper helper, String item, int position) {
+                helper.setText(R.id.itemCommonTv, item);
+            }
+        };
+        mSpAdapter.addAll(dataList);
+        tiltSensorTypeSp.setAdapter(mSpAdapter);
+        tiltSensorTypeSp.setSelection(0);
     }
 
     public void initSpinner() {
@@ -166,28 +186,22 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
 
     }
 
-    boolean a1 = false, a2 = false;
     @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch,R.id.btSelectItem})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tiltSensorTimeStartTv:
-                mTitleVisibility.put(1, a1);
-                a1 = !a1;
-                VHLayout.setTitleVisibility(mTitleVisibility);
-//                TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeStartTv, tiltSensorTimeStartTv.getText().toString(), "1234-10-11", tiltSensorTimeEndTv.getText().toString());
+                TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeStartTv, tiltSensorTimeStartTv.getText().toString(), "1234-10-11", tiltSensorTimeEndTv.getText().toString());
                 break;
             case R.id.tiltSensorTimeEndTv:
-                mTitleVisibility.put(2, a2);
-                a2 = !a2;
-                VHLayout.setTitleVisibility(mTitleVisibility);
-//                if (TextUtils.isEmpty(tiltSensorTimeStartTv.getText().toString()))
-//                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), "1234-10-11", "");
-//                else
-//                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
+                if (TextUtils.isEmpty(tiltSensorTimeStartTv.getText().toString()))
+                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), "1234-10-11", "");
+                else
+                   TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
                 break;
             case R.id.btCruiseDataSearch:
                 pageIndex = 1;
                 mDataModels.clear();
+                getHideCol();
                 mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
                 break;
             case R.id.btSelectItem:
@@ -206,8 +220,17 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         mPopWindow.setBackgroundDrawable(new BitmapDrawable());
         RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.select_Item_RecyclerView);
         LinearLayout linearLayout = (LinearLayout)contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
+        Button select_Item_Btn = (Button) contentView.findViewById(R.id.select_Item_Btn);
+
         linearLayout.setAlpha(0.5f);
         SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop,getSelectItemData());
+        select_Item_Btn.setOnClickListener(v -> {
+            Log.e("111",mAdapter.getChecked().toString()+"");
+            isCheckedList.clear();
+            isCheckedList.addAll(mAdapter.getChecked());
+            mPopWindow.dismiss();
+            getHideCol();
+        });
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(mAdapter);
        /* RelativeLayout RelativeLayoutPopupWindow = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow);
@@ -241,12 +264,73 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         getActivity().getWindow().setAttributes(lp);
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
+    public void iniChecks(){
+        for(int i = 0; i<4;i++){
+            isCheckedList.add(true);
+        }
+    }
+    public void getHideCol(){
+        for(int i = 0 ; i<isCheckedList.size();i++){
+            switch (i){
+                case 0:
+                    if(isCheckedList.get(i)){
+                        //X角、Y角、激光距离,显示123
+                        mTitleVisibility.put(3, true);
+                        mTitleVisibility.put(4, true);
+                        mTitleVisibility.put(5, true);
+
+                    }else{
+                        mTitleVisibility.put(3, false);
+                        mTitleVisibility.put(4, false);
+                        mTitleVisibility.put(5, false);
+                    }
+                    break;
+                case 1:
+                    if(isCheckedList.get(i)){
+                        //当次角度差、阶段角度差、累计角度差,显示468
+                        mTitleVisibility.put(6, true);
+                        mTitleVisibility.put(8, true);
+                        mTitleVisibility.put(10, true);
+                    }else{
+                        mTitleVisibility.put(6, false);
+                        mTitleVisibility.put(8, false);
+                        mTitleVisibility.put(10, false);
+                    }
+                    break;
+                case 2:
+                    if(isCheckedList.get(i)){
+                        //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
+                        mTitleVisibility.put(7, true);
+                        mTitleVisibility.put(9, true);
+                        mTitleVisibility.put(11, true);
+                    }else{
+                        mTitleVisibility.put(7, false);
+                        mTitleVisibility.put(9, false);
+                        mTitleVisibility.put(11, false);
+                    }
+                    break;
+                case 3:
+                    if(isCheckedList.get(i)){
+                        //平行度浮动,显示10,11
+                        mTitleVisibility.put(12, true);
+                        mTitleVisibility.put(13, true);
+                    }else{
+                        mTitleVisibility.put(12, false);
+                        mTitleVisibility.put(13, false);
+                    }
+                    break;
+            }
+            VHLayout.setTitleVisibility(mTitleVisibility);
+        }
+
+    }
     public ArrayList<SelecItemJson> getSelectItemData(){
+        Log.e("111",isCheckedList.toString());
         ArrayList<SelecItemJson> selecItemJsons = new ArrayList<SelecItemJson>();
-        selecItemJsons.add(new SelecItemJson("设备原始数据"));
-        selecItemJsons.add(new SelecItemJson("角度差数据"));
-        selecItemJsons.add(new SelecItemJson("沉降位移数据"));
-        selecItemJsons.add(new SelecItemJson("平行度浮动"));
+        selecItemJsons.add(new SelecItemJson("设备原始数据",isCheckedList.get(0)));
+        selecItemJsons.add(new SelecItemJson("角度差数据",isCheckedList.get(1)));
+        selecItemJsons.add(new SelecItemJson("沉降位移数据",isCheckedList.get(2)));
+        selecItemJsons.add(new SelecItemJson("平行度浮动",isCheckedList.get(3)));
         return  selecItemJsons;
     }
 }

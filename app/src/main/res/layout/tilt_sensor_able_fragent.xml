@@ -59,6 +59,7 @@
             android:id="@+id/tiltSensorTypeSp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/niceSpinnerHeight"
+            android:background="@drawable/shape_spinner"
             android:layout_alignParentRight="true"
             android:minWidth="@dimen/niceSpinnerMinWidth"
             android:textColor="@color/colorBlack3" />

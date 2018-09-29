@@ -56,12 +56,12 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("倾角数据");
-        mCamId = getIntent().getStringExtra(CAM_ID);
+        //mCamId = getIntent().getStringExtra(CAM_ID);
         getParaIds();
     }
 
     private void getParaIds() {
-//        mCamId = "1014603";
+        mCamId = "1014603";
         mPresenter.getGetTiltSensorPara(mCamId);
     }
 
