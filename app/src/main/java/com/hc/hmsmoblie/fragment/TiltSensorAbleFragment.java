@@ -114,7 +114,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         if (sensorLogJson.getList().size() == 0) {
             showToast("暂无数据！");
         }
-//        mDataModels.addAll(sensorLogJson.getList());
+        mDataModels.addAll(sensorLogJson.getList());
         mAdapter.notifyDataSetChanged();
         sumPage = (sensorLogJson.getTotal() + 15 - 1) / 15;
         if (pageIndex <= sumPage) {
@@ -238,13 +238,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         });
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setAdapter(mAdapter);
-       /* RelativeLayout RelativeLayoutPopupWindow = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow);
-        RelativeLayout RelativeLayoutPopupWindowChangePassWord = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow_ChangePassWord);
-        RelativeLayout RelativeLayoutPopupWindowMore = (RelativeLayout) contentView.findViewById(R.id.RelativeLayout_PopupWindow_More);
-        RelativeLayoutPopupWindow.setOnClickListener(this);
-        RelativeLayoutPopupWindowChangePassWord.setOnClickListener(this);
-        RelativeLayoutPopupWindowMore.setOnClickListener(this);
-        contentView.findViewById(R.id.RelativeLayout_PopupWindow_Pay).setOnClickListener(this);*/
+
         if (Build.VERSION.SDK_INT < 24) {
             mPopWindow.showAsDropDown(tiltSensorAbleLine);
         } else {
@@ -282,26 +276,26 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
             switch (i) {
                 case 0:
                     //X角、Y角、激光距离,显示123
+                    mTitleVisibility.put(2, isCheckedList.get(i));
                     mTitleVisibility.put(3, isCheckedList.get(i));
                     mTitleVisibility.put(4, isCheckedList.get(i));
-                    mTitleVisibility.put(5, isCheckedList.get(i));
                     break;
                 case 1:
                     //当次角度差、阶段角度差、累计角度差,显示468
+                    mTitleVisibility.put(5, isCheckedList.get(i));
+                    mTitleVisibility.put(7, isCheckedList.get(i));
+                    mTitleVisibility.put(9, isCheckedList.get(i));
+                    break;
+                case 2:
+                    //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
                     mTitleVisibility.put(6, isCheckedList.get(i));
                     mTitleVisibility.put(8, isCheckedList.get(i));
                     mTitleVisibility.put(10, isCheckedList.get(i));
                     break;
-                case 2:
-                    //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
-                    mTitleVisibility.put(7, isCheckedList.get(i));
-                    mTitleVisibility.put(9, isCheckedList.get(i));
-                    mTitleVisibility.put(11, isCheckedList.get(i));
-                    break;
                 case 3:
                     //平行度浮动,显示10,11
+                    mTitleVisibility.put(11, isCheckedList.get(i));
                     mTitleVisibility.put(12, isCheckedList.get(i));
-                    mTitleVisibility.put(13, isCheckedList.get(i));
                     break;
             }
             VHLayout.setTitleVisibility(mTitleVisibility);

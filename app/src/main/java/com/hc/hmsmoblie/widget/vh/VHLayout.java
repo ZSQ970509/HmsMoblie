@@ -306,5 +306,7 @@ public class VHLayout extends RelativeLayout {
             }
         }
         mAdapter.setTitleVisibility(titleVisibility);
+        mRightTitleLayout.scrollTo(0, 0);
+        mAdapter.refreshLayoutMove(0);
     }
 }
