@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -29,7 +28,7 @@ import static com.hc.hmsmoblie.utils.DensityUtils.dip2px;
 
 public class VHLayout extends RelativeLayout {
     //右侧标题栏里的标题
-    private List<TextView> mTitleTvs = new ArrayList<>();
+    private List<TextView> mRightTitleTvs = new ArrayList<>();
     //头部title布局
     private LinearLayout mRightTitleLayout;
     //手指按下时的位置
@@ -63,6 +62,7 @@ public class VHLayout extends RelativeLayout {
     private int mLeftViewHeight = 40;
     //触发拦截手势的最小值
     private int mTriggerMoveDis = 30;
+    private boolean mIsChangeWidth = true;
 
     public VHLayout(Context context) {
         this(context, null);
@@ -100,7 +100,8 @@ public class VHLayout extends RelativeLayout {
 
         mRightTitleLayout = new LinearLayout(getContext());
         for (int i = 0; i < mRightTitleList.length; i++) {
-            addListHeaderTextView(mRightTitleList[i], mRightTitleWidthList[i], mRightTitleLayout);
+            TextView textView =addListHeaderTextView(mRightTitleList[i], mRightTitleWidthList[i], mRightTitleLayout);
+            mRightTitleTvs.add(textView);
         }
         headLayout.addView(mRightTitleLayout);
         return headLayout;
@@ -192,7 +193,6 @@ public class VHLayout extends RelativeLayout {
         TextPaint tp = textView.getPaint();
         tp.setFakeBoldText(true);
         leftLayout.addView(textView, width, dip2px(context, 50));
-        mTitleTvs.add(textView);
         return textView;
     }
 
@@ -219,10 +219,13 @@ public class VHLayout extends RelativeLayout {
      * @return
      */
     private int rightTitleTotalWidth() {
-        if (0 == mRightTotalWidth) {
+        if (mIsChangeWidth) {
+            mRightTotalWidth = 0;
             for (int i = 0; i < mRightTitleWidthList.length; i++) {
-                mRightTotalWidth = mRightTotalWidth + mRightTitleWidthList[i];
+                if (mRightTitleTvs.get(i).getVisibility() == VISIBLE)
+                    mRightTotalWidth = mRightTotalWidth + mRightTitleWidthList[i];
             }
+            mIsChangeWidth = false;
         }
         return mRightTotalWidth;
     }
@@ -267,33 +270,22 @@ public class VHLayout extends RelativeLayout {
     public void setHeaderListData(String[] headerListData) {
         mRightTitleList = headerListData;
         mRightTitleWidthList = new int[headerListData.length];
+        mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth)};
+        mLeftTextList = new String[]{"序号"};
         for (int i = 0; i < headerListData.length; i++) {
-//            mRightTitleWidthList[i] = dip2px(context, mRightItemWidth);
-            switch (i){
-                case 1:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
-                    break;
+            switch (i) {
                 case 2:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
-                    break;
                 case 3:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
-                    break;
                 case 4:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
                     break;
                 case 6:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
-                    break;
                 case 8:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
-                    break;
                 case 10:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
                     break;
                 case 11:
-                    mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
-                    break;
+                case 1:
                 case 12:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
                     break;
@@ -302,16 +294,15 @@ public class VHLayout extends RelativeLayout {
                     break;
             }
         }
-        mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth)};
-        mLeftTextList = new String[]{"序号"};
     }
 
     public void setTitleVisibility(SparseArray<Boolean> titleVisibility) {
-        for (int i = 0; i < mTitleTvs.size(); i++) {
+        mIsChangeWidth = true;
+        for (int i = 0; i < mRightTitleTvs.size(); i++) {
             if (titleVisibility.get(i) == null || titleVisibility.get(i)) {
-                mTitleTvs.get(i).setVisibility(VISIBLE);
+                mRightTitleTvs.get(i).setVisibility(VISIBLE);
             } else {
-                mTitleTvs.get(i).setVisibility(GONE);
+                mRightTitleTvs.get(i).setVisibility(GONE);
             }
         }
         mAdapter.setTitleVisibility(titleVisibility);

@@ -77,10 +77,13 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private SparseArray<Boolean> mTitleVisibility = new SparseArray<>();
     private ArrayList<SelecItemJson> SelecItemJsonList = new ArrayList<SelecItemJson>();
     private ArrayList<Boolean> isCheckedList = new ArrayList<Boolean>();
-    private final SparseArray<Boolean> mTitleVisibility1 = new SparseArray<Boolean>(){};
-    private SparseArray<Boolean> getTitleVisibility(int type){
+    private final SparseArray<Boolean> mTitleVisibility1 = new SparseArray<Boolean>() {
+    };
+
+    private SparseArray<Boolean> getTitleVisibility(int type) {
         return null;
     }
+
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;
@@ -105,12 +108,13 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         initSpinner();
         initData();
     }
+
     @Override
     public void onGetTiltSensorLogSuccess(SensorLogJson sensorLogJson) {
         if (sensorLogJson.getList().size() == 0) {
             showToast("暂无数据！");
         }
-        mDataModels.addAll(sensorLogJson.getList());
+//        mDataModels.addAll(sensorLogJson.getList());
         mAdapter.notifyDataSetChanged();
         sumPage = (sensorLogJson.getTotal() + 15 - 1) / 15;
         if (pageIndex <= sumPage) {
@@ -179,14 +183,14 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                     paraID = mParaIds.get(position - 1).getParaID() + "";
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
     }
-
-    @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch,R.id.btSelectItem})
+    @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch, R.id.btSelectItem})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tiltSensorTimeStartTv:
@@ -209,6 +213,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                 break;
         }
     }
+
     private void showPopupWindow() {
         //backgroundAlpha(0.5f);
         View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.select_item_pop, null);
@@ -219,13 +224,13 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         mPopWindow.setFocusable(true);
         mPopWindow.setBackgroundDrawable(new BitmapDrawable());
         RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.select_Item_RecyclerView);
-        LinearLayout linearLayout = (LinearLayout)contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
+        LinearLayout linearLayout = (LinearLayout) contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
         Button select_Item_Btn = (Button) contentView.findViewById(R.id.select_Item_Btn);
 
         linearLayout.setAlpha(0.5f);
-        SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop,getSelectItemData());
+        SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop, getSelectItemData());
         select_Item_Btn.setOnClickListener(v -> {
-            Log.e("111",mAdapter.getChecked().toString()+"");
+            Log.e("111", mAdapter.getChecked().toString() + "");
             isCheckedList.clear();
             isCheckedList.addAll(mAdapter.getChecked());
             mPopWindow.dismiss();
@@ -258,79 +263,59 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         mPopWindow.setOnDismissListener(() -> backgroundAlpha(1f));
 
     }
+
     public void backgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getActivity().getWindow().setAttributes(lp);
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
-    public void iniChecks(){
-        for(int i = 0; i<4;i++){
+
+    public void iniChecks() {
+        for (int i = 0; i < 4; i++) {
             isCheckedList.add(true);
         }
     }
-    public void getHideCol(){
-        for(int i = 0 ; i<isCheckedList.size();i++){
-            switch (i){
-                case 0:
-                    if(isCheckedList.get(i)){
-                        //X角、Y角、激光距离,显示123
-                        mTitleVisibility.put(3, true);
-                        mTitleVisibility.put(4, true);
-                        mTitleVisibility.put(5, true);
 
-                    }else{
-                        mTitleVisibility.put(3, false);
-                        mTitleVisibility.put(4, false);
-                        mTitleVisibility.put(5, false);
-                    }
+    public void getHideCol() {
+        for (int i = 0; i < isCheckedList.size(); i++) {
+            switch (i) {
+                case 0:
+                    //X角、Y角、激光距离,显示123
+                    mTitleVisibility.put(3, isCheckedList.get(i));
+                    mTitleVisibility.put(4, isCheckedList.get(i));
+                    mTitleVisibility.put(5, isCheckedList.get(i));
                     break;
                 case 1:
-                    if(isCheckedList.get(i)){
-                        //当次角度差、阶段角度差、累计角度差,显示468
-                        mTitleVisibility.put(6, true);
-                        mTitleVisibility.put(8, true);
-                        mTitleVisibility.put(10, true);
-                    }else{
-                        mTitleVisibility.put(6, false);
-                        mTitleVisibility.put(8, false);
-                        mTitleVisibility.put(10, false);
-                    }
+                    //当次角度差、阶段角度差、累计角度差,显示468
+                    mTitleVisibility.put(6, isCheckedList.get(i));
+                    mTitleVisibility.put(8, isCheckedList.get(i));
+                    mTitleVisibility.put(10, isCheckedList.get(i));
                     break;
                 case 2:
-                    if(isCheckedList.get(i)){
-                        //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
-                        mTitleVisibility.put(7, true);
-                        mTitleVisibility.put(9, true);
-                        mTitleVisibility.put(11, true);
-                    }else{
-                        mTitleVisibility.put(7, false);
-                        mTitleVisibility.put(9, false);
-                        mTitleVisibility.put(11, false);
-                    }
+                    //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
+                    mTitleVisibility.put(7, isCheckedList.get(i));
+                    mTitleVisibility.put(9, isCheckedList.get(i));
+                    mTitleVisibility.put(11, isCheckedList.get(i));
                     break;
                 case 3:
-                    if(isCheckedList.get(i)){
-                        //平行度浮动,显示10,11
-                        mTitleVisibility.put(12, true);
-                        mTitleVisibility.put(13, true);
-                    }else{
-                        mTitleVisibility.put(12, false);
-                        mTitleVisibility.put(13, false);
-                    }
+                    //平行度浮动,显示10,11
+                    mTitleVisibility.put(12, isCheckedList.get(i));
+                    mTitleVisibility.put(13, isCheckedList.get(i));
                     break;
             }
             VHLayout.setTitleVisibility(mTitleVisibility);
         }
 
     }
-    public ArrayList<SelecItemJson> getSelectItemData(){
-        Log.e("111",isCheckedList.toString());
+
+    public ArrayList<SelecItemJson> getSelectItemData() {
+        Log.e("111", isCheckedList.toString());
         ArrayList<SelecItemJson> selecItemJsons = new ArrayList<SelecItemJson>();
-        selecItemJsons.add(new SelecItemJson("设备原始数据",isCheckedList.get(0)));
-        selecItemJsons.add(new SelecItemJson("角度差数据",isCheckedList.get(1)));
-        selecItemJsons.add(new SelecItemJson("沉降位移数据",isCheckedList.get(2)));
-        selecItemJsons.add(new SelecItemJson("平行度浮动",isCheckedList.get(3)));
-        return  selecItemJsons;
+        selecItemJsons.add(new SelecItemJson("设备原始数据", isCheckedList.get(0)));
+        selecItemJsons.add(new SelecItemJson("角度差数据", isCheckedList.get(1)));
+        selecItemJsons.add(new SelecItemJson("沉降位移数据", isCheckedList.get(2)));
+        selecItemJsons.add(new SelecItemJson("平行度浮动", isCheckedList.get(3)));
+        return selecItemJsons;
     }
 }
