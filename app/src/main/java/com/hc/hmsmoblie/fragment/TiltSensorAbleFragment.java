@@ -156,7 +156,6 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
             mDataModels.clear();
             mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
         });
-        mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
         List<String> dataList = new ArrayList<String>();
         dataList.add("全部");
         for (TiltSensorParaJson.ListBean jsonBean : mParaIds) {
@@ -171,6 +170,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         mSpAdapter.addAll(dataList);
         tiltSensorTypeSp.setAdapter(mSpAdapter);
         tiltSensorTypeSp.setSelection(0);
+        mPresenter.getTiltSensorLog(mCamId, paraID, pageIndex, 15, tiltSensorTimeStartTv.getText().toString(), tiltSensorTimeEndTv.getText().toString());
     }
 
     public void initSpinner() {

@@ -92,15 +92,18 @@ public class VHLayout extends RelativeLayout {
      */
     private View createHeadLayout() {
         LinearLayout headLayout = new LinearLayout(getContext());
-        headLayout.setGravity(Gravity.CENTER);
+        headLayout.setOrientation(LinearLayout.HORIZONTAL);
+        headLayout.setGravity(Gravity.LEFT);
+
         LinearLayout leftLayout = new LinearLayout(getContext());
+        leftLayout.setOrientation(LinearLayout.HORIZONTAL);
+        leftLayout.setGravity(Gravity.LEFT);
         addListHeaderTextView(mLeftTextList[0], mLeftTextWidthList[0], leftLayout);
-        leftLayout.setGravity(Gravity.CENTER);
-        headLayout.addView(leftLayout, 0, new ViewGroup.LayoutParams(dip2px(context, mLeftViewWidth), dip2px(context, mLeftViewHeight)));
+        headLayout.addView(leftLayout,new LayoutParams(mLeftTextWidthList[0], ViewGroup.LayoutParams.WRAP_CONTENT));
 
         mRightTitleLayout = new LinearLayout(getContext());
         for (int i = 0; i < mRightTitleList.length; i++) {
-            TextView textView =addListHeaderTextView(mRightTitleList[i], mRightTitleWidthList[i], mRightTitleLayout);
+            TextView textView = addListHeaderTextView(mRightTitleList[i], mRightTitleWidthList[i], mRightTitleLayout);
             mRightTitleTvs.add(textView);
         }
         headLayout.addView(mRightTitleLayout);
@@ -270,7 +273,7 @@ public class VHLayout extends RelativeLayout {
     public void setHeaderListData(String[] headerListData) {
         mRightTitleList = headerListData;
         mRightTitleWidthList = new int[headerListData.length];
-        mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorItemWidth)};
+        mLeftTextWidthList = new int[]{getResources().getDimensionPixelSize(R.dimen.tiltSensorLeftTitleWidth)};
         mLeftTextList = new String[]{"序号"};
         for (int i = 0; i < headerListData.length; i++) {
             switch (i) {
@@ -308,5 +311,7 @@ public class VHLayout extends RelativeLayout {
         mAdapter.setTitleVisibility(titleVisibility);
         mRightTitleLayout.scrollTo(0, 0);
         mAdapter.refreshLayoutMove(0);
+        mFixX = 0;
+        mAdapter.setFixX(0);
     }
 }

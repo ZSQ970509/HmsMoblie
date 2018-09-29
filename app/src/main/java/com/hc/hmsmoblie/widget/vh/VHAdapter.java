@@ -46,29 +46,21 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
                 item.getOx() + "",
                 item.getOy() + "",
                 df.format(item.getObd()) + "",
-                item.getOldx() + ","+item.getOldy(),
-                df.format(item.getCdObd())+"("+df.format(item.getObdOldx())+","+df.format(item.getObdOldy())+","+df.format(item.getObdOldz())+")",
-                item.getStagex() + ","+item.getStagey(),
-                df.format(item.getCdObdDiff()*1000) + "("+df.format(item.getObdStagex()*1000)+","+df.format(item.getObdStagey()*1000)+","+df.format(item.getObdStagez()*1000)+")",
-                item.getFirstOldx() + ","+item.getFirstOldy(),
-                df.format(item.getCdObdAdd()*1000)+ "("+df.format(item.getObdFirstOldx()*1000)+","+df.format(item.getObdFirstOldy()*1000)+","+df.format(item.getObdFirstOldz()*1000)+")",
-                df.format(item.getFloatObdLeft())+"",
-                df.format(item.getFloatObdRight())+""};
-//        helper.setText(R.id.tiltSensorItem1, item.getRowNumber() + "")
-//                .setText(R.id.tiltSensorItem2, item.getParaName() + "")
-//                .setText(R.id.tiltSensorItem3, item.getCreateTime() + "")
-//                .setText(R.id.tiltSensorItem4, item.getOx() + "")
-//                .setText(R.id.tiltSensorItem5, item.getOy() + "")
-//                .setText(R.id.tiltSensorItem6, item.getOldx() + "")
-//                .setText(R.id.tiltSensorItem7, item.getOldy() + "")
-//                .setText(R.id.tiltSensorItem8, item.getOxDiff() + "")
-//                .setText(R.id.tiltSensorItem9, item.getOyDiff() + "")
-//                .setText(R.id.tiltSensorItem10, item.getOxDir() + "")
-//                .setText(R.id.tiltSensorItem11, item.getOyDir() + "");
-        for (int i = 0; i < itemId.length; i++) {
-            if (mTitleVisibility.get(i) == null || mTitleVisibility.get(i)) {
+                item.getOldx() + "," + item.getOldy(),
+                df.format(item.getCdObd()) + "(" + df.format(item.getObdOldx()) + "," + df.format(item.getObdOldy()) + "," + df.format(item.getObdOldz()) + ")",
+                item.getStagex() + "," + item.getStagey(),
+                df.format(item.getCdObdDiff() * 1000) + "(" + df.format(item.getObdStagex() * 1000) + "," + df.format(item.getObdStagey() * 1000) + "," + df.format(item.getObdStagez() * 1000) + ")",
+                item.getFirstOldx() + "," + item.getFirstOldy(),
+                df.format(item.getCdObdAdd() * 1000) + "(" + df.format(item.getObdFirstOldx() * 1000) + "," + df.format(item.getObdFirstOldy() * 1000) + "," + df.format(item.getObdFirstOldz() * 1000) + ")",
+                df.format(item.getFloatObdLeft()) + "",
+                df.format(item.getFloatObdRight()) + ""};
+        helper.setText(itemId[0], data[0]);
+//        String[] name = mContext.getResources().getStringArray(R.array.tiltSensorTitleName);
+        for (int i = 1; i < itemId.length; i++) {
+            if (mTitleVisibility.get(i - 1) == null || mTitleVisibility.get(i - 1)) {
                 helper.getView(itemId[i]).setVisibility(View.VISIBLE);
-                helper.setText(itemId[i], data[i]);
+                helper.setText(itemId[i] , data[i]);
+//                helper.setText(itemId[i], i + "-" + name[i-1]);
             } else {
                 helper.getView(itemId[i]).setVisibility(View.GONE);
             }
