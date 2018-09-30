@@ -105,7 +105,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
 
     @Override
     public void getTiltSensorChartSuccess(TiltSensorChartJson json) {
-        refreshLineData(json.getData());
+        refreshLineData(json.getData().get(0));
     }
 
 
