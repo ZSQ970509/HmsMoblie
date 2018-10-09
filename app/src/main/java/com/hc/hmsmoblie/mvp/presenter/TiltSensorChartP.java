@@ -29,14 +29,14 @@ public class TiltSensorChartP extends BasePresenter<TiltSensorChartC.V> implemen
                 .subscribe(new NetObserver<HttpResponse<List<TiltSensorChartJson>>>() {
                     @Override
                     public void onSuccess(HttpResponse<List<TiltSensorChartJson>> tiltSensorChartJson) {
-                        getIView().hideLoading();
                         getIView().getTiltSensorChartSuccess(tiltSensorChartJson.getData().get(0));
+                        getIView().hideLoading();
                     }
 
                     @Override
                     public void onFail(ApiException msg) {
-                        getIView().hideLoading();
                         getIView().getTiltSensorChartFail(msg.getMessage());
+                        getIView().hideLoading();
                     }
                 });
     }

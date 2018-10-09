@@ -1,5 +1,6 @@
 package com.hc.hmsmoblie.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -116,16 +117,17 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
             return;
         }
         mLegendLL.setVisibility(View.VISIBLE);
+        Log.e("单条数据量", "" + dataBean.getNewOy().size());
         ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOx(), 0, getResources().getColor(R.color.tiltSensorColorLineRed), Name[0], LineDataSet.Mode.LINEAR);
-        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOy(), 1, getResources().getColor(R.color.tiltSensorColorLineYellow), Name[1], LineDataSet.Mode.LINEAR);
-        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxZ(), 2, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[2], LineDataSet.Mode.LINEAR,true);
-        ChartUtils.EmptyLineDataSet setData4 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyZ(), 3, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[3], LineDataSet.Mode.LINEAR,true);
-        ChartUtils.EmptyLineDataSet setData5 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxF(), 4, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[4], LineDataSet.Mode.LINEAR,true);
-        ChartUtils.EmptyLineDataSet setData6 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyF(), 5, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[5], LineDataSet.Mode.LINEAR,true);
+//        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOy(), 1, getResources().getColor(R.color.tiltSensorColorLineYellow), Name[1], LineDataSet.Mode.LINEAR);
+//        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxZ(), 2, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[2], LineDataSet.Mode.LINEAR, true);
+//        ChartUtils.EmptyLineDataSet setData4 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyZ(), 3, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[3], LineDataSet.Mode.LINEAR, true);
+//        ChartUtils.EmptyLineDataSet setData5 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxF(), 4, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[4], LineDataSet.Mode.LINEAR, true);
+//        ChartUtils.EmptyLineDataSet setData6 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyF(), 5, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[5], LineDataSet.Mode.LINEAR, true);
 
 
-        lineChart.setData(new LineData(setData1, setData2, setData3, setData4, setData5, setData6));
-
+//        lineChart.setData(new LineData(setData1, setData2, setData3, setData4, setData5, setData6));
+        lineChart.setData(new LineData(setData1));
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
         markerData.add(new ChartMarkerDataBeanNew(Name[0], dataBean.getNewOx()));
         markerData.add(new ChartMarkerDataBeanNew(Name[1], dataBean.getNewOy()));
@@ -171,7 +173,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
                 isShowMonth = false;
                 break;
         }
-        TimePickerUtils.showPickerView(getActivity(), "选择时间", mTimeTv, isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
+        TimePickerUtils.showPickerView(getActivity(), "选择时间", mTimeTv.getText().toString().trim(), isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 String time = FormatUtils.dateToString(date, TIME_FORMAT[mTimeType]).trim();

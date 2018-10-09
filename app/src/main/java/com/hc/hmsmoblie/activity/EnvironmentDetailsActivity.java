@@ -232,7 +232,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
     }
 
     private void showPickerView(boolean isShowMonth, boolean isShowDay, String name, TextView tvTime, TextView tvName, TextView tvTimeForDay, TextView tvTimeForMonth, TextView tvTimeForYear, int type, EnvironmentParaTypeEnum paraTypeEnum, EnvironmentTimeTypeEnum timeTypeEnum) {
-        TimePickerUtils.showPickerView(getActivity(), "选择时间", tvTime, isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
+        TimePickerUtils.showPickerView(getActivity(), "选择时间", tvTime.getText().toString().trim(), isShowMonth, isShowDay, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 mSelectTimed = date;

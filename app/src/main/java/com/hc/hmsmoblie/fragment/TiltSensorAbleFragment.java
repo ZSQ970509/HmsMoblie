@@ -75,15 +75,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private PopupWindow mPopWindow;
     private CommonAdapter<String> mSpAdapter;
     private SparseArray<Boolean> mTitleVisibility = new SparseArray<>();
-    private ArrayList<SelecItemJson> SelecItemJsonList = new ArrayList<SelecItemJson>();
     private ArrayList<Boolean> isCheckedList = new ArrayList<Boolean>();
-    private final SparseArray<Boolean> mTitleVisibility1 = new SparseArray<Boolean>() {
-    };
-
-    private SparseArray<Boolean> getTitleVisibility(int type) {
-        return null;
-    }
-
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;

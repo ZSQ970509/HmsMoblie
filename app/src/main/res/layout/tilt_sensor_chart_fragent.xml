@@ -26,8 +26,8 @@
             android:id="@+id/tiltSensorChartTimeTv"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/tiltSensorPickerHeight"
-            android:layout_toRightOf="@id/tiltSensorChartTimeLeftTv"
             android:layout_alignRight="@+id/tiltSensorYearTv"
+            android:layout_toRightOf="@id/tiltSensorChartTimeLeftTv"
             android:background="@drawable/select_search"
             android:gravity="center"
             android:text="123"
@@ -77,8 +77,10 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/niceSpinnerHeight"
             android:layout_alignParentRight="true"
-            android:minWidth="@dimen/niceSpinnerMinWidth"
             android:background="@drawable/shape_spinner"
+            android:minWidth="@dimen/niceSpinnerMinWidth"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
             android:textColor="@color/colorBlack3" />
 
         <TextView
@@ -96,12 +98,12 @@
             android:id="@+id/tiltSensorSearchTv"
             android:layout_width="@dimen/searchBtnWidth"
             android:layout_height="@dimen/tiltSensorPickerHeight"
-            android:layout_alignLeft="@id/tiltSensorTypeTv"
             android:layout_alignBottom="@id/tiltSensorChartTimeLeft2Tv"
-            android:textColor="@color/colorWhiteGray"
-            android:text="搜索"
+            android:layout_alignLeft="@id/tiltSensorTypeTv"
+            android:background="@drawable/shape_blue_btn"
             android:gravity="center"
-            android:background="@drawable/shape_blue_btn"/>
+            android:text="搜索"
+            android:textColor="@color/colorWhiteGray" />
     </RelativeLayout>
 
     <LinearLayout

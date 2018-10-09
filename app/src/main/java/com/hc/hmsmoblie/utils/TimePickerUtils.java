@@ -28,7 +28,7 @@ public class TimePickerUtils {
         return pvTime;
     }
 
-    public static void showPickerView(Context context, String title, TextView textView, boolean month, boolean day, TimePickerView.OnTimeSelectListener onTimeSelectListener) {
+    public static void showPickerView(Context context, String title, String defaultCalendar, boolean month, boolean day, TimePickerView.OnTimeSelectListener onTimeSelectListener) {
         //时间选择器
         //.Builder(context, (Date date, View view) -> textView.setText(FormatUtils.dateToString(date,month,day)))
         TimePickerView timePickerView = new TimePickerView
@@ -39,7 +39,7 @@ public class TimePickerUtils {
                 .setRangDate(FormatUtils.stringToCalendar("1234-10-11"), Calendar.getInstance())//起始终止年月日设定
                 .isCyclic(false)//是否循环滚动
                 .build();
-        timePickerView.setDate(Calendar.getInstance());
+        timePickerView.setDate(FormatUtils.stringToCalendar(defaultCalendar));
         timePickerView.show();
     }
 
