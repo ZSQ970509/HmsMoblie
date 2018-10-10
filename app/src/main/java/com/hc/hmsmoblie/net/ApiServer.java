@@ -117,18 +117,15 @@ public interface ApiServer {
     Observable<HttpResponse<ImageLogNodeJson>> getNode(@Field("CamSn") String camSn, @Field("puzzleId") String panoramaId, @Field("ImageTimes") String imageTimes, @Field("pointx") String pointX, @Field("pointy") String pointY, @Field("aha") String aha, @Field("ava") String ava);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:8023/")
     @POST(UrlHelper.API_TILT_SENSOR + "GetNewTiltSensorLog")
     Observable<HttpResponse<List<TiltSensorChartJson>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:8023/")
     @POST(UrlHelper.API_TILT_SENSOR + "GetTiltSensorLog")
     Observable<HttpResponse<SensorLogJson>> getTiltSensorLog(@Field("CamID")String cmID, @Field("ParaID")String paraID, @Field("pageindex")int pageindex
             , @Field("pagesize")int pagesize, @Field("startTime")String startTime, @Field("endTime")String endTime);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:8023/")
     @POST(UrlHelper.API_TILT_SENSOR + "GetGetTiltSensorPara")
     Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId")String cmID);
 }
