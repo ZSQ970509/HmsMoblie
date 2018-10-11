@@ -114,8 +114,10 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         if (dataBean == null || isEmpty(dataBean.getNewOx()) || isEmpty(dataBean.getNewOy()) || isEmpty(dataBean.getYuOxZ()) || isEmpty(dataBean.getYuOyZ()) || isEmpty(dataBean.getYuOxF()) || isEmpty(dataBean.getYuOyF())) {
             lineChart.clear();
             mLegendLL.setVisibility(View.INVISIBLE);
+            lineChart.setNoDataText(this.getString(R.string.view_empty));
             return;
         }
+        lineChart.setNoDataText(this.getString(R.string.view_loading));
         mLegendLL.setVisibility(View.VISIBLE);
         //Log.e("单条数据量", "" + dataBean.getNewOy().size());
         ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOx(), 0, getResources().getColor(R.color.tiltSensorColorLineRed), Name[0], LineDataSet.Mode.LINEAR);
@@ -154,6 +156,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
 
     @Override
     public void getTiltSensorChartFail(String msg) {
+        lineChart.setNoDataText(this.getString(R.string.view_empty));
     }
 
 
