@@ -3,7 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <View
+        android:id="@+id/tilt_Sensor_Able_Line"
+        android:layout_marginTop="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:layout_marginRight="@dimen/activity_margin"
+        android:background="#bfbfbf" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

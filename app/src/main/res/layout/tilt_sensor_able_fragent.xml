@@ -78,11 +78,11 @@
 
         <TextView
             android:id="@+id/btCruiseDataSearch"
-            android:layout_width="@dimen/searchBtnWidth"
-            android:layout_height="@dimen/searchBtnHeight"
-            android:layout_alignLeft="@id/tiltSensorTypeTv"
-            android:layout_below="@id/tiltSensorTypeTv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y64"
+            android:layout_below="@+id/tiltSensorChartTimeLeft2Tv"
             android:layout_marginTop="@dimen/activity_margin_small"
+            android:layout_centerHorizontal="true"
             android:background="@drawable/shape_blue_btn"
             android:gravity="center"
             android:text="搜索"
@@ -90,13 +90,13 @@
 
         <TextView
             android:id="@+id/btSelectItem"
-            android:layout_width="@dimen/searchBtnWidth"
+            android:layout_width="@dimen/x200"
             android:layout_height="@dimen/tiltSensorPickerHeight"
-            android:layout_alignTop="@+id/btCruiseDataSearch"
-            android:layout_toEndOf="@+id/btCruiseDataSearch"
+            android:layout_above="@+id/btCruiseDataSearch"
+            android:layout_alignStart="@+id/tiltSensorTypeTv"
             android:background="@drawable/shape_blu_border"
+            android:textColor="@color/colorBtn"
             android:gravity="center"
-            android:layout_marginLeft="@dimen/x30"
             android:text="筛选" />
     </RelativeLayout>
 

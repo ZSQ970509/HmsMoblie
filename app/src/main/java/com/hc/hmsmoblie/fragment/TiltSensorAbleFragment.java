@@ -218,8 +218,10 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.select_Item_RecyclerView);
         LinearLayout linearLayout = (LinearLayout) contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
         Button select_Item_Btn = (Button) contentView.findViewById(R.id.select_Item_Btn);
-
         linearLayout.setAlpha(0.5f);
+        linearLayout.setOnClickListener(v ->{
+            mPopWindow.dismiss();
+        });
         SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop, getSelectItemData());
         select_Item_Btn.setOnClickListener(v -> {
             Log.e("111", mAdapter.getChecked().toString() + "");
@@ -232,7 +234,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         recyclerView.setAdapter(mAdapter);
 
         if (Build.VERSION.SDK_INT < 24) {
-            mPopWindow.showAsDropDown(tiltSensorAbleLine);
+            mPopWindow.showAsDropDown(btSelectItem);
         } else {
             int[] location = new int[2];
             btSelectItem.getLocationOnScreen(location);
@@ -241,9 +243,9 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
             if (Build.VERSION.SDK_INT == 25) {
                 WindowManager wm = (WindowManager) mPopWindow.getContentView().getContext().getSystemService(Context.WINDOW_SERVICE);
                 int screenHeight = wm.getDefaultDisplay().getHeight();
-                mPopWindow.setHeight(screenHeight - location[1] - tiltSensorAbleLine.getHeight());
+                mPopWindow.setHeight(screenHeight - location[1] - btSelectItem.getHeight());
             }
-            mPopWindow.showAtLocation(tiltSensorAbleLine, Gravity.NO_GRAVITY, 0, y + tiltSensorAbleLine.getHeight());
+            mPopWindow.showAtLocation(btSelectItem, Gravity.NO_GRAVITY, 0, y + btSelectItem.getHeight());
         }
 
         mPopWindow.setOnDismissListener(() -> backgroundAlpha(1f));
