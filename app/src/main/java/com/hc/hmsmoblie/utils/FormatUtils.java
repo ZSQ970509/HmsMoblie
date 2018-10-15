@@ -6,8 +6,10 @@ import android.util.Log;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -87,7 +89,7 @@ public class FormatUtils {
         if (date == null) {
             return "";
         } else {
-            return new SimpleDateFormat(format,Locale.getDefault()).format(date.getTime());
+            return new SimpleDateFormat(format, Locale.getDefault()).format(date.getTime());
         }
     }
 
@@ -130,5 +132,38 @@ public class FormatUtils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar;
+    }
+
+    /**
+     * 进行四舍五入
+     *
+     * @param values 要进行四舍五入的值
+     * @param scale  表示表示需要精确到小数点以后几位。
+     */
+    public static List<Double> roundOff(List<Double> values, int scale) {
+        int size = values.size();
+        List<Double> newValues = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            newValues.set(i, roundOff(values.get(i), scale));
+        }
+        return newValues;
+    }
+    public static List<Double> roundOff(List<Double> values, int scale,double multiplier) {
+        int size = values.size();
+        List<Double> newValues = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            newValues.set(i, roundOff(values.get(i), scale)*multiplier);
+        }
+        return newValues;
+    }
+    /**
+     * 进行四舍五入
+     *
+     * @param value 要进行四舍五入的值
+     * @param scale 表示表示需要精确到小数点以后几位。
+     */
+    public static double roundOff(double value, int scale) {
+        BigDecimal value1 = new BigDecimal(value + "");
+        return value1.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 }

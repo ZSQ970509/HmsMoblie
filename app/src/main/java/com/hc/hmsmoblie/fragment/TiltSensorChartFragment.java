@@ -109,6 +109,10 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         refreshLineData(json.getData().get(0));
     }
 
+    @Override
+    public void getTiltSensorChartFail(String msg) {
+        lineChart.setNoDataText(this.getString(R.string.view_empty));
+    }
 
     private void refreshLineData(TiltSensorChartJson.DataBean dataBean) {
         if (dataBean == null || isEmpty(dataBean.getNewOx()) || isEmpty(dataBean.getNewOy()) || isEmpty(dataBean.getYuOxZ()) || isEmpty(dataBean.getYuOyZ()) || isEmpty(dataBean.getYuOxF()) || isEmpty(dataBean.getYuOyF())) {
@@ -126,7 +130,6 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         ChartUtils.EmptyLineDataSet setData4 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyZ(), 3, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[3], LineDataSet.Mode.LINEAR, true);
         ChartUtils.EmptyLineDataSet setData5 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxF(), 4, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[4], LineDataSet.Mode.LINEAR, true);
         ChartUtils.EmptyLineDataSet setData6 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyF(), 5, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[5], LineDataSet.Mode.LINEAR, true);
-
 
         lineChart.setData(new LineData(setData1, setData2, setData3, setData4, setData5, setData6));
         //lineChart.setData(new LineData(setData1));
@@ -154,10 +157,6 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.setVisibleXRangeMaximum(45);
     }
 
-    @Override
-    public void getTiltSensorChartFail(String msg) {
-        lineChart.setNoDataText(this.getString(R.string.view_empty));
-    }
 
 
     private void showPickerView() {

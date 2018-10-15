@@ -19,24 +19,23 @@ import java.util.List;
  */
 
 public class TiltSensorChartP extends BasePresenter<TiltSensorChartC.V> implements TiltSensorChartC.P {
-
+    @SuppressWarnings("unchecked")
     @Override
     public void getTiltSensorChart(String camID, String paraID, String timeType, String selDate) {
-        getIView().showLoading("正在搜索中...");
         new TiltSensorChartM()
-                .getTiltSensorChart(camID,paraID,timeType,selDate)
+                .getTiltSensorChart(camID, paraID, timeType, selDate)
                 .compose(getIView().bindLifecycle())
+                .doOnSubscribe(d -> getIView().showLoading("正在搜索中..."))
+                .doFinally(() -> getIView().hideLoading())
                 .subscribe(new NetObserver<HttpResponse<List<TiltSensorChartJson>>>() {
                     @Override
                     public void onSuccess(HttpResponse<List<TiltSensorChartJson>> tiltSensorChartJson) {
                         getIView().getTiltSensorChartSuccess(tiltSensorChartJson.getData().get(0));
-                        getIView().hideLoading();
                     }
 
                     @Override
                     public void onFail(ApiException msg) {
                         getIView().getTiltSensorChartFail(msg.getMessage());
-                        getIView().hideLoading();
                     }
                 });
     }

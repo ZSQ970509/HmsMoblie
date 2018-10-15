@@ -22,4 +22,5 @@
     <color name="tiltSensorColorLineYellow">#FFEB3B</color>
     <color name="tiltSensorColorLineBlue">#03A9F4</color>
     <color name="tiltSensorColorLineGreen">#4cAF50</color>
+    <color name="tiltSensorColorLineBlue2">#303F9F</color>
 </resources>

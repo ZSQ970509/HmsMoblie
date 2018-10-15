@@ -139,7 +139,6 @@ public class TiltSensorChartJson {
         public List<Double> getOldx() {
             return Oldx;
         }
-
         public void setOldx(List<Double> Oldx) {
             this.Oldx = Oldx;
         }
