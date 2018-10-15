@@ -103,6 +103,7 @@ public class ChartUtils {
      */
     public static void setXAxis(XAxis xAxis, List<String> list, float angle) {
         if (list == null || list.isEmpty()) {
+
             Log.e(TAG, "setXAxis的数据为空");
             return;
         }

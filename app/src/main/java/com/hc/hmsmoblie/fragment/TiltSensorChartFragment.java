@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
-import com.classic.adapter.CommonRecyclerAdapter;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -32,6 +32,7 @@ import com.hc.hmsmoblie.utils.chart.ChartUtils;
 import com.yc.yclibrary.base.YcMvpLazyFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,14 +58,16 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     TextView tiltSensorYearTv;
     @BindView(R.id.tiltSensorSp)
     Spinner mSp;
+    @BindView(R.id.selectItemSp)
+    Spinner selectItemSp;
     @BindView(R.id.tiltSensorChartLegendRv)
     RecyclerView mChartLegendRv;
     private @TimeType
     int mTimeType = TimeType.DAY;
     private String[] preSelectTime = new String[3];
-    private final String[] Name = new String[]{"X轴角度", "Y轴角度", "X轴阈值", "X轴阈值", "Y轴阈值", "Y轴阈值"};
     private final String[] TIME_FORMAT = new String[]{FormatUtils.FORMAT_TIME_YEAR, FormatUtils.FORMAT_TIME_MONTH, FormatUtils.FORMAT_TIME};//传给服务端的时间格式
     private CommonAdapter<TiltSensorParaJson.ListBean> mSpAdapter;
+    private CommonAdapter<String> selectItemSpAdapter;
     private String mCamId = "";
     private List<TiltSensorParaJson.ListBean> mParaIds = new ArrayList<>();
     private ChartLegendAdapter mChartLegendAdapter;
@@ -92,6 +95,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         preSelectTime[1] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME_MONTH).trim();
         preSelectTime[2] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME).trim();
         mTimeTv.setText(FormatUtils.calendarToString(Calendar.getInstance()).trim());
+//        mLegendLL.setVisibility(View.INVISIBLE);
         mChartLegendRv.setVisibility(View.INVISIBLE);
         mSpAdapter = new CommonAdapter<TiltSensorParaJson.ListBean>(getActivity(), R.layout.item_common) {
             @Override
@@ -103,6 +107,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         mSp.setAdapter(mSpAdapter);
         mSp.setSelection(0);
         ChartUtils.initLineChart(lineChart, this.getContext());
+        initSelectItem();
         getTiltSensorChart();
     }
 
@@ -112,7 +117,8 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
 
     @Override
     public void getTiltSensorChartSuccess(TiltSensorChartJson json) {
-        refreshLineData(json.getData().get(0));
+        mAllDatas = json.getData().get(0);
+        refreshLineData();
     }
 
     @Override
@@ -120,8 +126,33 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.setNoDataText(this.getString(R.string.view_empty));
     }
 
-    private void refreshLineData(TiltSensorChartJson.DataBean dataBean) {
-        if (dataBean == null || isEmpty(dataBean.getNewOx()) || isEmpty(dataBean.getNewOy()) || isEmpty(dataBean.getYuOxZ()) || isEmpty(dataBean.getYuOyZ()) || isEmpty(dataBean.getYuOxF()) || isEmpty(dataBean.getYuOyF())) {
+    private void initSelectItem() {
+        selectItemSpAdapter = new CommonAdapter<String>(getActivity(), R.layout.item_common) {
+            @Override
+            public void onUpdate(BaseAdapterHelper helper, String item, int position) {
+                helper.setText(R.id.itemCommonTv, item);
+            }
+        };
+        selectItemSpAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.selectItemSpData)));
+        selectItemSp.setAdapter(selectItemSpAdapter);
+        selectItemSp.setSelection(0);
+        selectItemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                refreshLineData();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private TiltSensorChartJson.DataBean mAllDatas;
+
+    private void refreshLineData() {
+        if (mAllDatas == null || isEmpty(mAllDatas.getNewOx()) || isEmpty(mAllDatas.getNewOy()) || isEmpty(mAllDatas.getYuOxZ()) || isEmpty(mAllDatas.getYuOyZ()) || isEmpty(mAllDatas.getYuOxF()) || isEmpty(mAllDatas.getYuOyF())) {
             lineChart.clear();
             mChartLegendRv.setVisibility(View.INVISIBLE);
             lineChart.setNoDataText(this.getString(R.string.view_empty));
@@ -129,8 +160,8 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         }
         lineChart.setNoDataText(this.getString(R.string.view_loading));
         mChartLegendRv.setVisibility(View.VISIBLE);
-        @TiltSensorType int type = TiltSensorType.A_ANGLE_VALUE;
-        TiltSensorBean tiltSensorBean = new TiltSensorBean(dataBean);
+        @TiltSensorType int type = selectItemSp.getSelectedItemPosition();
+        TiltSensorBean tiltSensorBean = new TiltSensorBean(mAllDatas);
         List<TiltSensorBean.DataBean> tiltSensorDatas = tiltSensorBean.getData(type);
         LineData lineData = new LineData();
         ChartUtils.EmptyLineDataSet setData;
@@ -158,7 +189,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.setMarker(chartMarkerViewNew);
         lineChart.getLegend().setEnabled(false);
         ChartUtils.setLeftYAxis(lineChart.getAxisLeft());
-        ChartUtils.setXAxis(lineChart.getXAxis(), dataBean.getTimeName(), -60f);
+        ChartUtils.setXAxis(lineChart.getXAxis(), mAllDatas.getTimeName(), -60f);
         //刷新图表
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();

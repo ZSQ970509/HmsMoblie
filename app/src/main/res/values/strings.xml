@@ -35,6 +35,16 @@
         <item>右端平行度浮动</item>
     </string-array>
 
+    <string-array name="selectItemSpData">
+        <item>角度值</item>
+        <item>单次角度差</item>
+        <item>阶段角度差</item>
+        <item>累计角度差</item>
+        <item>单次沉降</item>
+        <item>阶段沉降</item>
+        <item>累计沉降</item>
+        <item>平行度</item>
+    </string-array>
 
     <string name="LoadMoreFinal">已经加载全部！</string>
     <string name="LoadingMore">正在加载更多中！</string>
