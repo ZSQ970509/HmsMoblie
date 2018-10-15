@@ -15,7 +15,7 @@ import java.util.List;
 public class TiltSensorBean {
     private TiltSensorChartJson.DataBean mAllData;
 
-    TiltSensorBean(TiltSensorChartJson.DataBean allData) {
+    public TiltSensorBean(TiltSensorChartJson.DataBean allData) {
         mAllData = allData;
     }
 
@@ -27,146 +27,161 @@ public class TiltSensorBean {
         this.mAllData = mAllData;
     }
 
-    public TiltSensorBean.DataBean getData(@TiltSensorType int type) {
-        TiltSensorBean.DataBean dataBean = new TiltSensorBean.DataBean();
+    public List<TiltSensorBean.DataBean> getData(@TiltSensorType int type) {
+        List<TiltSensorBean.DataBean> dataBeans = new ArrayList<>();
+        List<Integer> colors;
+        List<String> names;
+        List<Boolean> isDottedLines;
+        List<List<Double>> datas;
         switch (type) {
             default:
             case TiltSensorType.A_ANGLE_VALUE:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
-                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen));
-                dataBean.setmName(Arrays.asList("X轴角度", "Y轴角度"
+                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
+                names = Arrays.asList("X轴角度", "Y轴角度"
                         , "X轴阈值", "X轴阈值"
-                        , "Y轴阈值", "Y轴阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, true, true, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "Y轴阈值", "Y轴阈值");
+                isDottedLines = Arrays.asList(false, false, true, true, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
                 break;
             case TiltSensorType.B_SINGLE_ANGLE_DIFFERENCE:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
-                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen));
-                dataBean.setmName(Arrays.asList("X单次角度差", "Y单次角度差"
+                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
+                names = Arrays.asList("X单次角度差", "Y单次角度差"
                         , "X轴阈值", "X轴阈值"
-                        , "Y轴阈值", "Y轴阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, true, true, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "Y轴阈值", "Y轴阈值");
+                isDottedLines = Arrays.asList(false, false, true, true, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
                 break;
             case TiltSensorType.C_STAGE_ANGLE_DIFFERENCE:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
-                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen));
-                dataBean.setmName(Arrays.asList("X阶段角度差", "Y阶段角度差"
+                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
+                names = Arrays.asList("X阶段角度差", "Y阶段角度差"
                         , "X轴阈值", "X轴阈值"
-                        , "Y轴阈值", "Y轴阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, true, true, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "Y轴阈值", "Y轴阈值");
+                isDottedLines = Arrays.asList(false, false, true, true, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
+
                 break;
             case TiltSensorType.D_CUMULATIVE_ANGLE_DIFFERENCE:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
-                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen));
-                dataBean.setmName(Arrays.asList("X累计角度差", "Y累计角度差"
+                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
+                names = Arrays.asList("X累计角度差", "Y累计角度差"
                         , "X轴阈值", "X轴阈值"
-                        , "Y轴阈值", "Y轴阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, true, true, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "Y轴阈值", "Y轴阈值");
+                isDottedLines = Arrays.asList(false, false, true, true, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
                 break;
             case TiltSensorType.E_SINGLE_SETTLEMENT:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
-                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2));
-                dataBean.setmName(Arrays.asList("单次沉降", "X单次位移"
+                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
+                names = Arrays.asList("单次沉降", "X单次位移"
                         , "Y单次位移", "Z单次位移"
-                        , "位移阈值", "位移阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, false, false, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "位移阈值", "位移阈值");
+                isDottedLines = Arrays.asList(false, false, false, false, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
+
                 break;
             case TiltSensorType.F_STAGE_SETTLEMENT:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
-                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2));
-                dataBean.setmName(Arrays.asList("阶段沉降", "X阶段位移"
+                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
+                names = Arrays.asList("阶段沉降", "X阶段位移"
                         , "Y阶段位移", "Z阶段位移"
-                        , "位移阈值", "位移阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, false, false, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "位移阈值", "位移阈值");
+                isDottedLines = Arrays.asList(false, false, false, false, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
+
                 break;
             case TiltSensorType.G_ACCUMULATIVE_SETTLEMENT:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
-                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2));
-                dataBean.setmName(Arrays.asList("累计沉降", "X累计位移"
+                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
+                names = Arrays.asList("累计沉降", "X累计位移"
                         , "Y累计位移", "Z累计位移"
-                        , "Y轴阈值", "Y轴阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, false, false, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "Y轴阈值", "Y轴阈值");
+                isDottedLines = Arrays.asList(false, false, false, false, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
+
                 break;
             case TiltSensorType.H_PARALLELISM:
-                dataBean.setmColorReId(Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
+                colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
-                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen));
-                dataBean.setmName(Arrays.asList("左端浮动", "右端浮动"
+                        , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
+                names = Arrays.asList("左端浮动", "右端浮动"
                         , "位移阈值", "位移阈值"
-                        , "位移阈值", "位移阈值"));
-                dataBean.setmIsDottedLine(Arrays.asList(false, false, true, true, true, true));
-                dataBean.setmData(Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
+                        , "位移阈值", "位移阈值");
+                isDottedLines = Arrays.asList(false, false, true, true, true, true);
+                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF()));
+                        , mAllData.getYuOxF(), mAllData.getYuOyF());
                 break;
         }
-        return dataBean;
+        for (int i = 0; i < datas.size(); i++) {
+            TiltSensorBean.DataBean dataBean = new DataBean();
+            dataBean.setmColorReId(colors.get(i));
+            dataBean.setmName(names.get(i));
+            dataBean.setmIsDottedLine(isDottedLines.get(i));
+            dataBean.setmData(datas.get(i));
+            dataBeans.add(dataBean);
+        }
+        return dataBeans;
     }
 
-    private static class DataBean {
-        private List<String> mName;//名称
-        private List<Integer> mColorReId;//颜色
-        private List<List<Double>> mData = new ArrayList<>();//数据
-        private List<Boolean> mIsDottedLine;//是否为虚线
-        private List<String> mUnit;//单位
+    public static class DataBean {
+        private String mName;//名称
+        private Integer mColorReId;//颜色
+        private List<Double> mData = new ArrayList<>();//数据
+        private Boolean mIsDottedLine;//是否为虚线
 
-        public List<String> getmName() {
+        public String getmName() {
             return mName;
         }
 
-        public void setmName(List<String> mName) {
+        public void setmName(String mName) {
             this.mName = mName;
         }
 
-        public List<Integer> getmColorReId() {
+        public Integer getmColorReId() {
             return mColorReId;
         }
 
-        public void setmColorReId(List<Integer> mColorReId) {
+        public void setmColorReId(Integer mColorReId) {
             this.mColorReId = mColorReId;
         }
 
-        public List<List<Double>> getmData() {
+        public List<Double> getmData() {
             return mData;
         }
 
-        public void setmData(List<List<Double>> mData) {
+        public void setmData(List<Double> mData) {
             this.mData = mData;
         }
 
-        public List<Boolean> getmIsDottedLine() {
+        public Boolean getmIsDottedLine() {
             return mIsDottedLine;
         }
 
-        public void setmIsDottedLine(List<Boolean> mIsDottedLine) {
+        public void setmIsDottedLine(Boolean mIsDottedLine) {
             this.mIsDottedLine = mIsDottedLine;
         }
     }

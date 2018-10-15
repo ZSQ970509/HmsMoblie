@@ -1,5 +1,7 @@
 package com.hc.hmsmoblie.fragment;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,13 +16,16 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.hc.hmsmoblie.R;
+import com.hc.hmsmoblie.bean.domain.TiltSensorBean;
 import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.type.TiltSensorType;
 import com.hc.hmsmoblie.bean.type.TimeType;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorChartC;
 import com.hc.hmsmoblie.mvp.presenter.TiltSensorChartP;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
+import com.hc.hmsmoblie.utils.chart.ChartLegendAdapter;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerDataBeanNew;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerViewNew;
 import com.hc.hmsmoblie.utils.chart.ChartUtils;
@@ -52,8 +57,8 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     TextView tiltSensorYearTv;
     @BindView(R.id.tiltSensorSp)
     Spinner mSp;
-    @BindView(R.id.tiltSensorLegend)
-    LinearLayout mLegendLL;
+    @BindView(R.id.tiltSensorChartLegendRv)
+    RecyclerView mChartLegendRv;
     private @TimeType
     int mTimeType = TimeType.DAY;
     private String[] preSelectTime = new String[3];
@@ -62,6 +67,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     private CommonAdapter<TiltSensorParaJson.ListBean> mSpAdapter;
     private String mCamId = "";
     private List<TiltSensorParaJson.ListBean> mParaIds = new ArrayList<>();
+    private ChartLegendAdapter mChartLegendAdapter;
 
     public static TiltSensorChartFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorChartFragment fragment = new TiltSensorChartFragment();
@@ -86,7 +92,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         preSelectTime[1] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME_MONTH).trim();
         preSelectTime[2] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME).trim();
         mTimeTv.setText(FormatUtils.calendarToString(Calendar.getInstance()).trim());
-        mLegendLL.setVisibility(View.INVISIBLE);
+        mChartLegendRv.setVisibility(View.INVISIBLE);
         mSpAdapter = new CommonAdapter<TiltSensorParaJson.ListBean>(getActivity(), R.layout.item_common) {
             @Override
             public void onUpdate(BaseAdapterHelper helper, TiltSensorParaJson.ListBean item, int position) {
@@ -117,29 +123,31 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     private void refreshLineData(TiltSensorChartJson.DataBean dataBean) {
         if (dataBean == null || isEmpty(dataBean.getNewOx()) || isEmpty(dataBean.getNewOy()) || isEmpty(dataBean.getYuOxZ()) || isEmpty(dataBean.getYuOyZ()) || isEmpty(dataBean.getYuOxF()) || isEmpty(dataBean.getYuOyF())) {
             lineChart.clear();
-            mLegendLL.setVisibility(View.INVISIBLE);
+            mChartLegendRv.setVisibility(View.INVISIBLE);
             lineChart.setNoDataText(this.getString(R.string.view_empty));
             return;
         }
         lineChart.setNoDataText(this.getString(R.string.view_loading));
-        mLegendLL.setVisibility(View.VISIBLE);
-        //Log.e("单条数据量", "" + dataBean.getNewOy().size());
-        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOx(), 0, getResources().getColor(R.color.tiltSensorColorLineRed), Name[0], LineDataSet.Mode.LINEAR);
-        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, dataBean.getNewOy(), 1, getResources().getColor(R.color.tiltSensorColorLineYellow), Name[1], LineDataSet.Mode.LINEAR);
-        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxZ(), 2, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[2], LineDataSet.Mode.LINEAR, true);
-        ChartUtils.EmptyLineDataSet setData4 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyZ(), 3, getResources().getColor(R.color.tiltSensorColorLineBlue), Name[3], LineDataSet.Mode.LINEAR, true);
-        ChartUtils.EmptyLineDataSet setData5 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOxF(), 4, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[4], LineDataSet.Mode.LINEAR, true);
-        ChartUtils.EmptyLineDataSet setData6 = ChartUtils.getLineDataSet(lineChart, dataBean.getYuOyF(), 5, getResources().getColor(R.color.tiltSensorColorLineGreen), Name[5], LineDataSet.Mode.LINEAR, true);
-
-        lineChart.setData(new LineData(setData1, setData2, setData3, setData4, setData5, setData6));
-        //lineChart.setData(new LineData(setData1));
+        mChartLegendRv.setVisibility(View.VISIBLE);
+        @TiltSensorType int type = TiltSensorType.A_ANGLE_VALUE;
+        TiltSensorBean tiltSensorBean = new TiltSensorBean(dataBean);
+        List<TiltSensorBean.DataBean> tiltSensorDatas = tiltSensorBean.getData(type);
+        LineData lineData = new LineData();
+        ChartUtils.EmptyLineDataSet setData;
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
-        markerData.add(new ChartMarkerDataBeanNew(Name[0], dataBean.getNewOx()));
-        markerData.add(new ChartMarkerDataBeanNew(Name[1], dataBean.getNewOy()));
-        markerData.add(new ChartMarkerDataBeanNew(Name[2], dataBean.getYuOxZ()));
-        markerData.add(new ChartMarkerDataBeanNew(Name[3], dataBean.getYuOyZ()));
-        markerData.add(new ChartMarkerDataBeanNew(Name[4], dataBean.getYuOxF()));
-        markerData.add(new ChartMarkerDataBeanNew(Name[5], dataBean.getYuOyF()));
+        mChartLegendAdapter = new ChartLegendAdapter(getActivity());
+        mChartLegendAdapter.setAllData(tiltSensorDatas);
+        mChartLegendRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mChartLegendRv.setAdapter(mChartLegendAdapter);
+        for (int i = 0; i < tiltSensorDatas.size(); i++) {
+            setData = ChartUtils.getLineDataSet(lineChart, tiltSensorDatas.get(i).getmData(),
+                    i, getResources().getColor(tiltSensorDatas.get(i).getmColorReId()),
+                    tiltSensorDatas.get(i).getmName(), LineDataSet.Mode.LINEAR, tiltSensorDatas.get(i).getmIsDottedLine());
+            lineData.addDataSet(setData);
+            markerData.add(new ChartMarkerDataBeanNew(tiltSensorDatas.get(i).getmName(), tiltSensorDatas.get(i).getmData()));
+        }
+        //Log.e("单条数据量", "" + dataBean.getNewOy().size());
+        lineChart.setData(lineData);
         ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData) {
             @Override
             public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
@@ -156,7 +164,6 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.invalidate();
         lineChart.setVisibleXRangeMaximum(45);
     }
-
 
 
     private void showPickerView() {

@@ -93,78 +93,26 @@
             android:text="倾角设备："
             android:textColor="#000000"
             android:textSize="@dimen/tiltSensorTextSize" />
+
         <TextView
             android:id="@+id/tiltSensorSearchTv"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y64"
             android:layout_below="@+id/tiltSensorChartTimeLeft2Tv"
-            android:layout_marginTop="@dimen/activity_margin_small"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/activity_margin_small"
             android:background="@drawable/shape_blue_btn"
             android:gravity="center"
             android:text="搜索"
-            android:textColor="@color/colorWhiteGray"/>
+            android:textColor="@color/colorWhiteGray" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/tiltSensorLegend"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:gravity="center"
-        android:orientation="horizontal">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tiltSensorChartLegendRv"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:layout_width="@dimen/chartLegendWidth"
-            android:layout_height="@dimen/chartLegendHeight"
-            android:background="@color/tiltSensorColorLineRed" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="X轴角度"
-            android:textSize="@dimen/chartLegendTextSize" />
-
-        <ImageView
-            android:layout_width="@dimen/chartLegendWidth"
-            android:layout_height="@dimen/chartLegendHeight"
-            android:layout_marginLeft="@dimen/activity_margin_small"
-            android:background="@color/tiltSensorColorLineYellow" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Y轴角度"
-            android:textSize="@dimen/chartLegendTextSize" />
-
-        <ImageView
-            android:layout_width="@dimen/chartLegendWidth"
-            android:layout_height="@dimen/chartLegendHeight"
-            android:layout_marginLeft="@dimen/activity_margin_small"
-            android:background="@color/tiltSensorColorLineBlue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="X轴阈值"
-            android:textSize="@dimen/chartLegendTextSize" />
-
-        <ImageView
-            android:layout_width="@dimen/chartLegendWidth"
-            android:layout_height="@dimen/chartLegendHeight"
-            android:layout_marginLeft="@dimen/activity_margin_small"
-            android:background="@color/tiltSensorColorLineGreen" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Y轴阈值"
-            android:textSize="@dimen/chartLegendTextSize" />
-    </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"

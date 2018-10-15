@@ -17,19 +17,20 @@ import com.yc.yclibrary.mvp.BasePresenter;
 public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> implements TiltSensorActivityC.P{
     @Override
     public void getGetTiltSensorPara(String cmID) {
+
         new TiltSensorActivityM()
                 .getGetTiltSensorPara(cmID)
                 .compose(getIView().bindLifecycle())
+                .doOnSubscribe(disposable -> getIView().showLoading("正在加载中~"))
+                .doFinally(()->getIView().hideLoading())
                 .subscribe(new NetObserver<HttpResponse<TiltSensorParaJson>>() {
                     @Override
                     public void onSuccess(HttpResponse<TiltSensorParaJson> tiltSensorParaJson) {
-                        getIView().hideLoading();
                         getIView().onGetGetTiltSensorParaSuccess(tiltSensorParaJson.getData());
                     }
 
                     @Override
                     public void onFail(ApiException msg) {
-                        getIView().hideLoading();
                         getIView().onGetGetTiltSensorParaFail(msg.getMessage());
                     }
                 });

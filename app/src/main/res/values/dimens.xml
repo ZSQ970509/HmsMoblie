@@ -24,7 +24,7 @@
     <dimen name="searchBtnHeight">24dp</dimen>
     <dimen name="searchBtnWidth">48dp</dimen>
 
-    <dimen name="chartLegendHeight">12dp</dimen>
-    <dimen name="chartLegendWidth">18dp</dimen>
+    <dimen name="chartLegendHeight">8dp</dimen>
+    <dimen name="chartLegendWidth">8dp</dimen>
     <dimen name="chartLegendTextSize">12sp</dimen>
 </resources>

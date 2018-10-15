@@ -122,11 +122,11 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
 
     @Override
     public void onGetGetTiltSensorParaFail(String msg) {
-        CommonDialog.newInstanceSingle(getActivity())
-                .setTitle("提示")
-                .setMsg("此设备暂无倾角数据！")
-                .setSingleBtnText("确定")
-                .setSingleClick(v -> finish())
-                .show();
+//        CommonDialog.newInstanceSingle(getActivity())
+//                .setTitle("提示")
+//                .setMsg("此设备暂无倾角数据！")
+//                .setSingleBtnText("确定")
+//                .setSingleClick(v -> finish())
+//                .show();
     }
 }
