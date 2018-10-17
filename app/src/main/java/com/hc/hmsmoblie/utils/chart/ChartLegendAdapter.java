@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonRecyclerAdapter;
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.bean.domain.TiltSensorBean;
+import com.hc.hmsmoblie.bean.domain.TiltSensorBeanNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ public class ChartLegendAdapter extends CommonRecyclerAdapter<ChartLegendAdapter
         super(context, R.layout.widget_chart_legend);
     }
 
-    public void setAllData(List<TiltSensorBean.DataBean> tiltSensorDatas) {
+    public void setAllData(List<TiltSensorBeanNew.DataBean> tiltSensorDatas) {
         if (tiltSensorDatas == null || tiltSensorDatas.size() == 0)
             return;
         this.clear();
         for (int i = 0; i < tiltSensorDatas.size(); i++) {
-            if (i - 1 < 0 || !tiltSensorDatas.get(i).getmName().equals(tiltSensorDatas.get(i - 1).getmName())) {
+            if (i - 2 < 0 || !(tiltSensorDatas.get(i).getmName().equals(tiltSensorDatas.get(i - 2).getmName()) || tiltSensorDatas.get(i).getmName().equals(tiltSensorDatas.get(i - 1).getmName()))) {
                 this.add(new DataBean(tiltSensorDatas.get(i).getmColorReId(), tiltSensorDatas.get(i).getmName()));
             }
         }

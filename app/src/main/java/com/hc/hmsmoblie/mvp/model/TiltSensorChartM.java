@@ -14,10 +14,10 @@ import retrofit2.http.Field;
 
 public class TiltSensorChartM implements IModel{
 
-    public Observable getTiltSensorChart(String camID, String paraID, String timeType, String selDate) {
+    public Observable getTiltSensorChart(String camID, String paraID, String timeType, String selDate,int type) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getTiltSensorChart(camID,paraID,timeType,selDate)
+                .getTiltSensorChart(camID,paraID,timeType,selDate,type)
                 .compose(NetTransformer.compose());
     }
 }

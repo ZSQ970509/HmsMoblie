@@ -2,6 +2,7 @@ package com.hc.hmsmoblie.bean.domain;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
 import com.hc.hmsmoblie.bean.type.TiltSensorDataProcessingType;
 import com.hc.hmsmoblie.bean.type.TiltSensorType;
 
@@ -13,28 +14,28 @@ import java.util.List;
  *
  */
 
-public class TiltSensorBean {
-    private TiltSensorChartJson.DataBean mAllData;
+public class TiltSensorBeanNew {
+    private TiltSensorChartJsonNew.DataBeanX mAllData;
 
-    public TiltSensorBean(TiltSensorChartJson.DataBean allData) {
+    public TiltSensorBeanNew(TiltSensorChartJsonNew.DataBeanX allData) {
         mAllData = allData;
     }
 
-    public TiltSensorChartJson.DataBean getmAllData() {
+    public TiltSensorChartJsonNew.DataBeanX getmAllData() {
         return mAllData;
     }
 
-    public void setmAllData(TiltSensorChartJson.DataBean mAllData) {
+    public void setmAllData(TiltSensorChartJsonNew.DataBeanX mAllData) {
         this.mAllData = mAllData;
     }
 
-    public List<TiltSensorBean.DataBean> getData(@TiltSensorType int type) {
-        List<TiltSensorBean.DataBean> dataBeans = new ArrayList<>();
+    public List<TiltSensorBeanNew.DataBean> getData(@TiltSensorType int type) {
+        List<TiltSensorBeanNew.DataBean> dataBeans = new ArrayList<>();
         List<Integer> colors;
-        List<String> names;
+        List<String> names = new ArrayList<>();
         List<Boolean> isDottedLines;
-        List<List<Double>> datas;
-        List<String> unit;//单位
+        List<List<Double>> datas = new ArrayList<>();
+        List<String> unit = new ArrayList<>();//单位
         List<Integer> processingType;//数据处理方式
         switch (type) {
             default:
@@ -42,14 +43,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
-                names = Arrays.asList("X轴角度", "Y轴角度"
-                        , "X轴阈值", "Y轴阈值"
-                        , "X轴阈值", "Y轴阈值");
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                datas = Arrays.asList(mAllData.getNewOx(), mAllData.getNewOy()
-                        , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("度", "度", "度", "度", "度", "度");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -58,14 +52,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
-                names = Arrays.asList("X单次角度差", "Y单次角度差"
-                        , "X轴阈值", "Y轴阈值"
-                        , "X轴阈值", "Y轴阈值");
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                datas = Arrays.asList(mAllData.getOldx(), mAllData.getOldy()
-                        , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("度", "度", "度", "度", "度", "度");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -74,14 +61,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
-                names = Arrays.asList("X阶段角度差", "Y阶段角度差"
-                        , "X轴阈值", "Y轴阈值"
-                        , "X轴阈值", "Y轴阈值");
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                datas = Arrays.asList(mAllData.getObdStagex(), mAllData.getObdStagey()
-                        , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("度", "度", "度", "度", "度", "度");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -90,14 +70,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
-                names = Arrays.asList("X累计角度差", "Y累计角度差"
-                        , "X轴阈值", "Y轴阈值"
-                        , "X轴阈值", "Y轴阈值");
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                datas = Arrays.asList(mAllData.getFirstOldx(), mAllData.getFirstOldy()
-                        , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("度", "度", "度", "度", "度", "度");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -106,14 +79,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                names = Arrays.asList("单次沉降", "X单次位移"
-                        , "Y单次位移", "Z单次位移"
-                        , "位移阈值", "位移阈值");
                 isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                datas = Arrays.asList(mAllData.getCdObd(), mAllData.getObdOldx()
-                        , mAllData.getObdOldy(), mAllData.getObdOldz()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("mm", "mm", "mm", "mm", "mm", "mm");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -122,14 +88,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                names = Arrays.asList("阶段沉降", "X阶段位移"
-                        , "Y阶段位移", "Z阶段位移"
-                        , "位移阈值", "位移阈值");
                 isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                datas = Arrays.asList(mAllData.getCdObdDiff(), mAllData.getObdStagex()
-                        , mAllData.getObdStagey(), mAllData.getObdStagez()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("mm", "mm", "mm", "mm", "mm", "mm");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -138,14 +97,7 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                names = Arrays.asList("累计沉降", "X累计位移"
-                        , "Y累计位移", "Z累计位移"
-                        , "位移阈值", "位移阈值");
                 isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                datas = Arrays.asList(mAllData.getCdObdAdd(), mAllData.getObdFirstOldx()
-                        , mAllData.getObdFirstOldy(), mAllData.getObdFirstOldz()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("mm", "mm", "mm", "mm", "mm", "mm");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
@@ -154,21 +106,21 @@ public class TiltSensorBean {
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
                         , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
-                names = Arrays.asList("左端浮动", "右端浮动"
-                        , "位移阈值", "位移阈值"
-                        , "位移阈值", "位移阈值");
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                datas = Arrays.asList(mAllData.getFloatObdLeft(), mAllData.getFloatObdRight()
-                        , mAllData.getYuOxZ(), mAllData.getYuOyZ()
-                        , mAllData.getYuOxF(), mAllData.getYuOyF());
-                unit = Arrays.asList("mm", "mm", "mm", "mm", "mm", "mm");
                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
         }
+        TiltSensorChartJsonNew.DataBeanX.DataBean tempItem;
+        for (int i = 0; i < mAllData.getData().size(); i++) {
+            tempItem = mAllData.getData().get(i);
+            datas.add(tempItem.getTiltSensorData());
+            unit.add(tempItem.getUnit());
+            names.add(tempItem.getName());
+        }
         for (int i = 0; i < datas.size(); i++) {
-            TiltSensorBean.DataBean dataBean = new DataBean();
+            TiltSensorBeanNew.DataBean dataBean = new DataBean();
             dataBean.setmColorReId(colors.get(i));
             dataBean.setmName(names.get(i));
             dataBean.setmIsDottedLine(isDottedLines.get(i));

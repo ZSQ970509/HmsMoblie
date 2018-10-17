@@ -12,6 +12,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.LoginJson;
         import com.hc.hmsmoblie.bean.json.SensorLogJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
+        import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
         import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
         import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
@@ -118,7 +119,7 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetNewTiltSensorLog")
-    Observable<HttpResponse<List<TiltSensorChartJson>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate);
+    Observable<HttpResponse<List<TiltSensorChartJsonNew>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate,@Field("type") int type);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetTiltSensorLog")

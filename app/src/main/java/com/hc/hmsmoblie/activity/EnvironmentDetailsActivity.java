@@ -181,9 +181,10 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         lineChart.setData(new LineData(setData1, setData2, setData3));
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
         markerData.add(new ChartMarkerDataBeanNew("均值", chartData.getAvg()));
-        markerData.add(new ChartMarkerDataBeanNew("峰值",chartData.getMax()));
+        markerData.add(new ChartMarkerDataBeanNew("峰值", chartData.getMax()));
         markerData.add(new ChartMarkerDataBeanNew("谷值", chartData.getMin()));
-        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData) {
+        List<String> xAxisData = getXAxisData();
+        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(getActivity(), markerData, xAxisData) {
             @Override
             public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
                 helper.setText(R.id.itemChartMarkerTv, item.getDataName() + "：" + item.getData().get(xIndex));
@@ -193,7 +194,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         lineChart.setMarker(chartMarkerViewNew);
         ChartUtils.setLegend(lineChart.getLegend());
         ChartUtils.setLeftYAxis(lineChart.getAxisLeft());
-        ChartUtils.setXAxis(lineChart.getXAxis(), getXAxisData());
+        ChartUtils.setXAxis(lineChart.getXAxis(), xAxisData);
         //刷新图表
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();

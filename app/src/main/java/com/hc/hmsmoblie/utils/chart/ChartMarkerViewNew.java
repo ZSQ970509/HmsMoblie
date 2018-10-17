@@ -34,12 +34,19 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
     private MPPointF mOffset = new MPPointF();
     private MPPointF mOffset2 = new MPPointF();
     private WeakReference<Chart> mWeakChart;
+    private List<String> mXAxis;
     private int mIndex = -1;
     private Context mContext;
 
-    public ChartMarkerViewNew(Context context, List<ChartMarkerDataBeanNew> markerDataBean) {
+//    public ChartMarkerViewNew(Context context, List<ChartMarkerDataBeanNew> markerDataBean) {
+//        super(context);
+//        initView(context, markerDataBean);
+//    }
+
+    public ChartMarkerViewNew(Context context, List<ChartMarkerDataBeanNew> markerDataBean, List<String> xAxis) {
         super(context);
         initView(context, markerDataBean);
+        mXAxis = xAxis;
     }
 
     private void initView(Context context, List<ChartMarkerDataBeanNew> markerDataBean) {
@@ -53,12 +60,17 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
 
             @Override
             public int getItemCount() {
-                return mMarkerDataBean.size();
+                return mMarkerDataBean.size() + 1;
             }
 
             @Override
             public void onUpdate(BaseAdapterHelper helper, String item, int position) {
-                onAdapterUpdate(helper, mMarkerDataBean.get(position), mIndex);
+                if (position == 0) {
+                    if (mXAxis != null && mIndex >= 0 && mXAxis.size() > mIndex)
+                        helper.setText(R.id.itemChartMarkerTv, mXAxis.get(mIndex));
+                } else {
+                    onAdapterUpdate(helper, mMarkerDataBean.get(position-1), mIndex);
+                }
             }
         };
         View inflated = LayoutInflater.from(getContext()).inflate(R.layout.widget_marker_view_new, this);
@@ -80,6 +92,7 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
         layout(0, 0, getMeasuredWidth(), getMeasuredHeight());
 
     }
+
     private void refreshAdapter(float entryX) {
         int index = (int) (entryX % mMarkerDataBean.get(0).getData().size());
         if (index == mIndex)//避免重复刷新RecyclerView里的数据
@@ -88,6 +101,7 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
 //        recyclerVie.removeAllViews();//避免RecyclerView里item重叠问题
         mCommonAdapter.notifyDataSetChanged();
     }
+
     @Override
     public void draw(Canvas canvas, float posX, float posY) {
         MPPointF offset = getOffsetForDrawingAtPoint(posX, posY);
@@ -97,7 +111,6 @@ public abstract class ChartMarkerViewNew extends RelativeLayout implements IMark
         draw(canvas);
         canvas.restoreToCount(saveId);
     }
-
 
 
     @Override
