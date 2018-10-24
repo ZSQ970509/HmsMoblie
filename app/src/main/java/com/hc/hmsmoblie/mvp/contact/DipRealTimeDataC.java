@@ -1,6 +1,8 @@
 package com.hc.hmsmoblie.mvp.contact;
 
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.net.HttpResponse;
+import com.hc.hmsmoblie.net.NetObserver;
 import com.yc.yclibrary.mvp.IView;
 
 /**
@@ -13,6 +15,6 @@ public class DipRealTimeDataC {
         void onGetGetTiltSensorParaFail(String msg);
     }
     public interface P {
-        void getGetTiltSensorPara(String cmID);
+        void getGetTiltSensorPara(String cmID, NetObserver<HttpResponse<TiltSensorParaJson>>responseNetObserver);
     }
 }

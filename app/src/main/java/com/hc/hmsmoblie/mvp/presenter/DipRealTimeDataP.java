@@ -15,23 +15,12 @@ import com.yc.yclibrary.mvp.BasePresenter;
 
 public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implements DipRealTimeDataC.P{
     @Override
-    public void getGetTiltSensorPara(String cmID) {
-
+    public void getGetTiltSensorPara(String cmID,NetObserver<HttpResponse<TiltSensorParaJson>> responseNetObserver) {
         new TiltSensorActivityM()
                 .getGetTiltSensorPara(cmID)
                 .compose(getIView().bindLifecycle())
                 .doOnSubscribe(disposable -> getIView().showLoading("正在加载中~"))
                 .doFinally(()->getIView().hideLoading())
-                .subscribe(new NetObserver<HttpResponse<TiltSensorParaJson>>() {
-                    @Override
-                    public void onSuccess(HttpResponse<TiltSensorParaJson> tiltSensorParaJson) {
-                        getIView().onGetGetTiltSensorParaSuccess(tiltSensorParaJson.getData());
-                    }
-
-                    @Override
-                    public void onFail(ApiException msg) {
-                        getIView().onGetGetTiltSensorParaFail(msg.getMessage());
-                    }
-                });
+                .subscribe(responseNetObserver);
     }
 }

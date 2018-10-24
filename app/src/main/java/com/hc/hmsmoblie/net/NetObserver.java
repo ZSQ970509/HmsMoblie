@@ -6,12 +6,25 @@ import com.yc.yclibrary.exception.ErrorType;
 import com.yc.yclibrary.net.BaseObserver;
 
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  *
  */
 
 public abstract class NetObserver<T extends HttpResponse> extends BaseObserver<T> {
+    private Disposable mDisposable;
+
+    @Override
+    public void onSubscribe(Disposable d) {
+        super.onSubscribe(d);
+        mDisposable = d;
+    }
+
+    public void cancel() {
+        if (mDisposable != null)
+            mDisposable.dispose();
+    }
     @Override
     public void onNext(@NonNull T response) {
         //防止闪退问题

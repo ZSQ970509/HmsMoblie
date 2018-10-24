@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -17,7 +18,10 @@ import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorActivityC;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
 import com.hc.hmsmoblie.mvp.presenter.TiltSensorActivityP;
+import com.hc.hmsmoblie.net.HttpResponse;
+import com.hc.hmsmoblie.net.NetObserver;
 import com.hc.hmsmoblie.widget.CommonDialog;
+import com.yc.yclibrary.exception.ApiException;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +41,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     private static final String CAM_ID = "cam_id";
     private String mCamId = "1014603";
     Disposable mDisposableAlarm;
-
+    NetObserver<HttpResponse<TiltSensorParaJson>> responseNetObserver;
     public static void newInstance(Activity activity, String camID) {
         Intent intent = new Intent(activity, DipRealTimeDataActivity.class);
         intent.putExtra(CAM_ID, camID);
@@ -69,10 +73,26 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         if (mDisposableAlarm != null)
             mDisposableAlarm.dispose();
         //initialDelay第一次执行间隔 period之后执行间隔
-        mDisposableAlarm = Observable.interval(0, 20, TimeUnit.SECONDS)
+        mDisposableAlarm = Observable.interval(0, 100, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong -> mPresenter.getGetTiltSensorPara(mCamId));
+                .subscribe(aLong ->{
+                    if(responseNetObserver!=null)
+                    responseNetObserver.cancel();
+                    responseNetObserver = new NetObserver<HttpResponse<TiltSensorParaJson>>() {
+                        @Override
+                        public void onSuccess(HttpResponse<TiltSensorParaJson> tiltSensorParaJson) {
+
+                            onGetGetTiltSensorParaSuccess(tiltSensorParaJson.getData());
+                        }
+
+                        @Override
+                        public void onFail(ApiException msg) {
+                            onGetGetTiltSensorParaFail(msg.getMessage());
+                        }
+                    };
+                    mPresenter.getGetTiltSensorPara(mCamId,responseNetObserver);
+                });
 
     }
 
@@ -96,11 +116,11 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void onGetGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
-
+        Log.e("1111","1111");
     }
 
     @Override
     public void onGetGetTiltSensorParaFail(String msg) {
-
+        Log.e("1111","22");
     }
 }
