@@ -89,4 +89,12 @@
         <item name="android:background">@drawable/selector_select_item_background</item>
         <item name="android:textColor">@color/selector_navigation_bottom_item</item>
     </style>
+
+    <style name="TextSecondTitleStyle">
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="TextContentStyle">
+        <item name="android:textColor">#666666</item>
+    </style>
 </resources>

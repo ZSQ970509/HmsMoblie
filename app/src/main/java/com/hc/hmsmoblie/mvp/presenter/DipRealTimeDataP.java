@@ -1,6 +1,7 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorActivityC;
 import com.hc.hmsmoblie.mvp.model.TiltSensorActivityM;
 import com.hc.hmsmoblie.net.HttpResponse;
@@ -12,7 +13,7 @@ import com.yc.yclibrary.mvp.BasePresenter;
  *
  */
 
-public class DipRealTimeDataP extends BasePresenter<TiltSensorActivityC.V> implements TiltSensorActivityC.P{
+public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implements DipRealTimeDataC.P{
     @Override
     public void getGetTiltSensorPara(String cmID) {
 
