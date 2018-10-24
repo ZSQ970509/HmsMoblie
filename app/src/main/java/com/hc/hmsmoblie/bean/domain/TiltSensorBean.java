@@ -98,7 +98,7 @@ public class TiltSensorBean {
                         , mAllData.getYuOxZ(), mAllData.getYuOyZ()
                         , mAllData.getYuOxF(), mAllData.getYuOyF());
                 unit = Arrays.asList("度", "度", "度", "度", "度", "度");
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+                 processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
                         , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;

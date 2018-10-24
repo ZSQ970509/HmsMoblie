@@ -138,24 +138,24 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         selectItemSpAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.selectItemSpData)));
         selectItemSp.setAdapter(selectItemSpAdapter);
         selectItemSp.setSelection(0);
-        selectItemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Observable.just(0)
-//                        .subscribeOn(Schedulers.newThread())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(t -> {
-//                            showLoading("加载中...");
-                refreshLineData();
-//                            hideLoading();
-//                        });
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        selectItemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+////                Observable.just(0)
+////                        .subscribeOn(Schedulers.newThread())
+////                        .observeOn(AndroidSchedulers.mainThread())
+////                        .subscribe(t -> {
+////                            showLoading("加载中...");
+//                refreshLineData();
+////                            hideLoading();
+////                        });
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//       });
     }
 
     private TiltSensorChartJsonNew.DataBeanX mAllData;
@@ -208,7 +208,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         //刷新图表
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();
-        lineChart.setVisibleXRangeMaximum(10);
+        lineChart.setVisibleXRangeMaximum(45);
     }
 
 
