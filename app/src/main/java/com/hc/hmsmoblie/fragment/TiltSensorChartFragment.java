@@ -114,7 +114,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     }
 
     public void getTiltSensorChart() {
-        mPresenter.getTiltSensorChart(mCamId, mSpAdapter.getItem(mSp.getSelectedItemPosition()).getParaID() + "", mTimeType + "", mTimeTv.getText().toString().trim(),selectItemSp.getSelectedItemPosition());
+        mPresenter.getTiltSensorChart(mCamId, mSpAdapter.getItem(mSp.getSelectedItemPosition()).getParaID() + "", mTimeType + "", mTimeTv.getText().toString().trim(), selectItemSp.getSelectedItemPosition());
     }
 
     @Override
@@ -162,9 +162,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
 
     private void refreshLineData() {
         if (isEmpty(mAllData)) {
-            lineChart.clear();
-            mChartLegendRv.setVisibility(View.INVISIBLE);
-            lineChart.setNoDataText(this.getString(R.string.view_empty));
+            showEmptyChart();
             return;
         }
         lineChart.setNoDataText(this.getString(R.string.view_loading));
@@ -183,12 +181,22 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         mChartLegendRv.setAdapter(mChartLegendAdapter);
         //初始化图表里的LineDataSet(线)数据
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
-        for (int i = 0; i < tiltSensorDatas.size(); i++) {
+        int lineNum = tiltSensorDatas.size();//图表里线的数量
+        int emptyLineNum = 0;//图表里线数据为空的数量
+        for (int i = 0; i < lineNum; i++) {
+            if (tiltSensorDatas.get(i).getmData() == null || tiltSensorDatas.get(i).getmData().size() <= 0) {
+                emptyLineNum++;
+                continue;
+            }
             setData = ChartUtils.getLineDataSet(lineChart, tiltSensorDatas.get(i).getmData(),
                     i, getResources().getColor(tiltSensorDatas.get(i).getmColorReId()),
                     tiltSensorDatas.get(i).getmName(), LineDataSet.Mode.LINEAR, tiltSensorDatas.get(i).getmIsDottedLine());
             lineData.addDataSet(setData);
             markerData.add(new ChartMarkerDataBeanNew(tiltSensorDatas.get(i).getmName(), tiltSensorDatas.get(i).getmData(), tiltSensorDatas.get(i).getUnit()));
+        }
+        if (emptyLineNum == lineNum) {//所有线的数据为空则将图表显示为没有数据
+            showEmptyChart();
+            return;
         }
 //        Log.e("单条数据量", "" + mAllData.getNewOy().size());
         lineChart.setData(lineData);
@@ -211,6 +219,14 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.setVisibleXRangeMaximum(45);
     }
 
+    /**
+     * 将图表设置成没有数据
+     */
+    private void showEmptyChart() {
+        lineChart.clear();
+        mChartLegendRv.setVisibility(View.INVISIBLE);
+        lineChart.setNoDataText(this.getString(R.string.view_empty));
+    }
 
     private void showPickerView() {
         boolean isShowMonth = false;
@@ -262,9 +278,9 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     }
 
     private boolean isEmpty(TiltSensorChartJsonNew.DataBeanX data) {
-        if(data ==null ||data.getData() ==null ||data.getData().size()<=0){
+        if (data == null || data.getData() == null || data.getData().size() <= 0 || data.getData().get(0).getTiltSensorData() == null) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
