@@ -43,6 +43,7 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
         String data[] = new String[]{item.getRowNumber() + "",
                 item.getParaName() + "",
                 item.getCreateTime() + "",
+
                 item.getOx() + "",
                 item.getOy() + "",
                 df.format(item.getObd()/1000) + "",
