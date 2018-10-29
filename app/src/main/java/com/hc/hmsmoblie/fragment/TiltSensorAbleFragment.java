@@ -76,6 +76,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     private CommonAdapter<String> mSpAdapter;
     private SparseArray<Boolean> mTitleVisibility = new SparseArray<>();
     private ArrayList<Boolean> isCheckedList = new ArrayList<Boolean>();
+
     public static TiltSensorAbleFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
         TiltSensorAbleFragment fragment = new TiltSensorAbleFragment();
         fragment.mCamId = camId;
@@ -166,8 +167,10 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
     }
 
     public void initSpinner() {
+        if (mParaIds != null && mParaIds.size() > 0)
+            paraID = mParaIds.get(0).getParaID() + "";
         tiltSensorTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
+            @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     paraID = "";
@@ -182,6 +185,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         });
 
     }
+
     @OnClick({R.id.tiltSensorTimeStartTv, R.id.tiltSensorTimeEndTv, R.id.btCruiseDataSearch, R.id.btSelectItem})
     void onClick(View v) {
         switch (v.getId()) {
@@ -192,7 +196,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                 if (TextUtils.isEmpty(tiltSensorTimeStartTv.getText().toString()))
                     TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), "1234-10-11", "");
                 else
-                   TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
+                    TimePickerUtils.showPickerView(getActivity(), "", tiltSensorTimeEndTv, tiltSensorTimeEndTv.getText().toString(), tiltSensorTimeStartTv.getText().toString(), "");
                 break;
             case R.id.btCruiseDataSearch:
                 pageIndex = 1;
@@ -219,7 +223,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         LinearLayout linearLayout = (LinearLayout) contentView.findViewById(R.id.select_Item_Pop_Linearlayout);
         Button select_Item_Btn = (Button) contentView.findViewById(R.id.select_Item_Btn);
         linearLayout.setAlpha(0.5f);
-        linearLayout.setOnClickListener(v ->{
+        linearLayout.setOnClickListener(v -> {
             mPopWindow.dismiss();
         });
         SelectItemAdapter mAdapter = new SelectItemAdapter(R.layout.select_item_samll_pop, getSelectItemData());
@@ -275,21 +279,22 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                     mTitleVisibility.put(4, isCheckedList.get(i));
                     break;
                 case 1:
-                    //当次角度差、阶段角度差、累计角度差,显示468
+                    //单次角度差、阶段角度差、累计角度差,显示468
                     mTitleVisibility.put(5, isCheckedList.get(i));
                     mTitleVisibility.put(7, isCheckedList.get(i));
                     mTitleVisibility.put(9, isCheckedList.get(i));
                     break;
                 case 2:
-                    //当次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
+                    //单次沉降+坐标位移、阶段沉降+坐标位移、累计沉降+坐标位移,显示579
                     mTitleVisibility.put(6, isCheckedList.get(i));
                     mTitleVisibility.put(8, isCheckedList.get(i));
                     mTitleVisibility.put(10, isCheckedList.get(i));
                     break;
                 case 3:
-                    //平行度浮动,显示10,11
+                    //水平度浮动,显示10,11
                     mTitleVisibility.put(11, isCheckedList.get(i));
                     mTitleVisibility.put(12, isCheckedList.get(i));
+                    mTitleVisibility.put(13, isCheckedList.get(i));
                     break;
             }
             VHLayout.setTitleVisibility(mTitleVisibility);
@@ -303,7 +308,7 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
         selecItemJsons.add(new SelecItemJson("设备原始数据", isCheckedList.get(0)));
         selecItemJsons.add(new SelecItemJson("角度差数据", isCheckedList.get(1)));
         selecItemJsons.add(new SelecItemJson("沉降位移数据", isCheckedList.get(2)));
-        selecItemJsons.add(new SelecItemJson("平行度浮动", isCheckedList.get(3)));
+        selecItemJsons.add(new SelecItemJson("水平度浮动", isCheckedList.get(3)));
         return selecItemJsons;
     }
 }

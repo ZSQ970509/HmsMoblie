@@ -35,7 +35,7 @@
     <style name="CommonDialogBtnStyle">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/colorWhiteGray</item>
@@ -99,5 +99,30 @@
     </style>
     <style name="TextFristTitleStyle">
         <item name="android:textColor">#000000</item>
+    </style>
+    <style name="DialogAlarmLinearLayoutStyle">
+        <item name="android:layout_marginTop">@dimen/activity_margin_small</item>
+        <item name="android:layout_marginRight">@dimen/activity_margin_small</item>
+        <item name="android:layout_marginLeft">@dimen/activity_margin_small</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="DialogAlarmTvStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#37474F</item>
+    </style>
+    <style name="DialogAlarmEdtStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:paddingLeft">1dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/dialog_edit</item>
+        <item name="android:maxLength">8</item>
+        <item name="android:textSize">@dimen/y30</item>
+        <item name="android:textColor">#37474F</item>
+        <item name="android:inputType">numberSigned|numberDecimal</item>
     </style>
 </resources>

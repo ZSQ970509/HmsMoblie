@@ -42,7 +42,7 @@ public @interface TiltSensorType {
      */
     int G_ACCUMULATIVE_SETTLEMENT = 6;
     /**
-     * 平行度
+     * 水平度
      */
     int H_PARALLELISM = 7;
 }

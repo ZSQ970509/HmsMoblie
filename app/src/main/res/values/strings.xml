@@ -11,28 +11,30 @@
     <string name="tiltSensorItem4">X轴角度</string>
     <string name="tiltSensorItem5">Y轴角度</string>
     <string name="tiltSensorItem6">激光距离</string>
-    <string name="tiltSensorItem7">当次角度差</string>
-    <string name="tiltSensorItem8">当次沉降+坐标位移</string>
+    <string name="tiltSensorItem7">单次角度差</string>
+    <string name="tiltSensorItem8">单次沉降+坐标位移</string>
     <string name="tiltSensorItem9">阶段角度差</string>
     <string name="tiltSensorItem10">阶段沉降+坐标位移</string>
     <string name="tiltSensorItem11">累计角度差</string>
     <string name="tiltSensorItem12">累计沉降+坐标位移</string>
-    <string name="tiltSensorItem13">左端平行度浮动</string>
-    <string name="tiltSensorItem14">右端平行度浮动</string>
+    <string name="tiltSensorItem13">单次水平度浮动</string>
+    <string name="tiltSensorItem14">阶段水平度浮动</string>
+    <string name="tiltSensorItem15">累计水平度浮动</string>
     <string-array name="tiltSensorTitleName">
         <item>侦测点</item>
         <item>生成时间</item>
         <item>X轴角度</item>
         <item>Y轴角度</item>
         <item>激光距离</item>
-        <item>当次角度差</item>
-        <item>当次沉降+坐标位移</item>
+        <item>单次角度差</item>
+        <item>单次沉降+坐标位移</item>
         <item>阶段角度差</item>
         <item>阶段沉降+坐标位移</item>
         <item>累计角度差</item>
         <item>累计沉降+坐标位移</item>
-        <item>左端平行度浮动</item>
-        <item>右端平行度浮动</item>
+        <item>单次水平度浮动</item>
+        <item>阶段水平度浮动</item>
+        <item>累计水平度浮动</item>
     </string-array>
 
     <string-array name="selectItemSpData">
@@ -43,9 +45,9 @@
         <item>单次沉降</item>
         <item>阶段沉降</item>
         <item>累计沉降</item>
-        <item>平行度</item>
+        <item>水平度</item>
     </string-array>
-
+    <string name="tempAlarm">手机端临时预警设置</string>
     <string name="LoadMoreFinal">已经加载全部！</string>
     <string name="LoadingMore">正在加载更多中！</string>
 </resources>

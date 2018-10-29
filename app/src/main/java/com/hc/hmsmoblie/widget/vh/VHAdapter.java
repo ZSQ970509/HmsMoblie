@@ -11,6 +11,7 @@ import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorDataJson;
+import com.hc.hmsmoblie.utils.FormatUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
     private int[] itemId = new int[]{
             R.id.tiltSensorItem1, R.id.tiltSensorItem2, R.id.tiltSensorItem3, R.id.tiltSensorItem4,
             R.id.tiltSensorItem5, R.id.tiltSensorItem6, R.id.tiltSensorItem7, R.id.tiltSensorItem8,
-            R.id.tiltSensorItem9, R.id.tiltSensorItem10, R.id.tiltSensorItem11, R.id.tiltSensorItem12, R.id.tiltSensorItem13, R.id.tiltSensorItem14};
+            R.id.tiltSensorItem9, R.id.tiltSensorItem10, R.id.tiltSensorItem11, R.id.tiltSensorItem12, R.id.tiltSensorItem13, R.id.tiltSensorItem14,R.id.tiltSensorItem15};
 
     @Override
     protected void convert(BaseViewHolder helper, SensorLogJson.ListBean item) {
@@ -53,8 +54,9 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
                 df.format(item.getCdObdDiff() * 1000) + "(" + df.format(item.getObdStagex() * 1000) + "," + df.format(item.getObdStagey() * 1000) + "," + df.format(item.getObdStagez() * 1000) + ")",
                 item.getFirstOldx() + "," + item.getFirstOldy(),
                 df.format(item.getCdObdAdd() * 1000) + "(" + df.format(item.getObdFirstOldx() * 1000) + "," + df.format(item.getObdFirstOldy() * 1000) + "," + df.format(item.getObdFirstOldz() * 1000) + ")",
-                df.format(item.getFloatObdLeft()) + "",
-                df.format(item.getFloatObdRight()) + ""};
+                df.format(FormatUtils.roundOff(item.getObdLeft() * 1000, 1)) + ","+FormatUtils.roundOff(item.getObdRight() * 1000, 1),
+                df.format(FormatUtils.roundOff(item.getStageObdLeft() * 1000, 1)) + ","+FormatUtils.roundOff(item.getStageObdRight() * 1000, 1),
+                df.format(FormatUtils.roundOff(item.getFloatObdLeft() * 1000, 1)) + ","+FormatUtils.roundOff(item.getFloatObdRight() * 1000, 1)};
         helper.setText(itemId[0], data[0]);
 //        String[] name = mContext.getResources().getStringArray(R.array.tiltSensorTitleName);
         for (int i = 1; i < itemId.length; i++) {

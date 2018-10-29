@@ -68,6 +68,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
         setToolBar("设备列表");
         sysId = getIntent().getStringExtra(SYS_ID);
         mProID = getIntent().getStringExtra(PRO_ID);
+//        mProID = "239";
+//        sysId = "58";
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerViewSelectDriver.setLayoutManager(linearLayoutManager);
         selectDriverVideoAdapter = new SelectDriverVideoAdapter(R.layout.item_select_driver_video, dataList);

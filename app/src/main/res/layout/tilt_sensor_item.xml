@@ -131,7 +131,13 @@
                 android:gravity="center"
                 android:textSize="12sp"
                 tools:text="@string/tiltSensorItem14" />
-
+            <TextView
+                android:id="@+id/tiltSensorItem15"
+                android:layout_width="@dimen/tiltSensorItemTimeWidth"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="12sp"
+                tools:text="@string/tiltSensorItem15" />
         </LinearLayout>
 
     </LinearLayout>

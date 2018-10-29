@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,13 +20,16 @@ import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
+import com.hc.hmsmoblie.bean.domain.TiltSensorAlarmBean;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
 import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
+import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
+import com.hc.hmsmoblie.widget.AlarmDialog;
 import com.hc.hmsmoblie.widget.CommonDialog;
 import com.yc.yclibrary.exception.ApiException;
 
@@ -66,25 +70,42 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     TextView tvSecondarySettlementDisplacement;
     @BindView(R.id.tvStageSettlementDisplacement)
     TextView tvStageSettlementDisplacement;
+    @BindView(R.id.tvSecondarySettlementDisplacementState)
+    TextView tvSecondarySettlementDisplacementState;
+    @BindView(R.id.tvStageSettlementDisplacementState)
+    TextView tvStageSettlementDisplacementState;
     @BindView(R.id.tvAccumulativeSettlementDisplacement)
     TextView tvAccumulativeSettlementDisplacement;
-    @BindView(R.id.tvLeftSideParallelismFloating)
-    TextView tvLeftSideParallelismFloating;
-    @BindView(R.id.tvRightSideParallelismFloating)
-    TextView tvRightSideParallelismFloating;
+    @BindView(R.id.tvAccumulativeSettlementDisplacementState)
+    TextView tvAccumulativeSettlementDisplacementState;
+    @BindView(R.id.tvSideParallelismFloating)
+    TextView tvSideParallelismFloating;
+    @BindView(R.id.tvSideParallelismFloatingState)
+    TextView tvSideParallelismFloatingState;
+    @BindView(R.id.tvStageSideParallelismFloating)
+    TextView tvStageSideParallelismFloating;
+    @BindView(R.id.tvStageSideParallelismFloatingState)
+    TextView tvStageSideParallelismFloatingState;
+    @BindView(R.id.tvCumulativeSideParallelismFloating)
+    TextView tvCumulativeSideParallelismFloating;
+    @BindView(R.id.tvCumulativeSideParallelismFloatingState)
+    TextView tvCumulativeSideParallelismFloatingState;
+
     @BindView(R.id.tvCreateTime)
     TextView tvCreateTime;
     @BindView(R.id.tvRefeshTime)
     TextView tvRefeshTime;
     String speedNum = "15";
     private static final String CAM_ID = "cam_id";
-    private String mCamId ;
+    private String mCamId;
     private String mParaID;
     private List<TiltSensorParaJson.ListBean> mParaIds = new ArrayList<TiltSensorParaJson.ListBean>();
     private CommonAdapter<String> mSpAdapter;
     Disposable mDisposableAlarm;
     NetObserver<HttpResponse<SensorLogJson>> responseNetObserver;
     private boolean mIsInit = false;
+    private TiltSensorAlarmBean mTiltSensorAlarmBean;
+
     public static void newInstance(Activity activity, String camID) {
         Intent intent = new Intent(activity, DipRealTimeDataActivity.class);
         intent.putExtra(CAM_ID, camID);
@@ -104,7 +125,9 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     @Override
     protected void initView(Bundle bundle) {
         setToolBar("倾角数据");
+        mTiltSensorAlarmBean = new TiltSensorAlarmBean();
         mCamId = getIntent().getStringExtra(CAM_ID);
+//        mCamId = "1014603";
         initSpinner();
         getParaIds();
     }
@@ -114,12 +137,14 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         super.onResume();
         getLoopRequest(Integer.parseInt(speedNum));
     }
+
     private void getParaIds() {
         mPresenter.getGetTiltSensorPara(mCamId);
     }
-    private void getLoopRequest(int period){
-        if(!mIsInit)return;
-        if(TextUtils.isEmpty(mParaID)){
+
+    private void getLoopRequest(int period) {
+        if (!mIsInit) return;
+        if (TextUtils.isEmpty(mParaID)) {
             showToast("paraID为空");
             return;
         }
@@ -129,32 +154,33 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         mDisposableAlarm = Observable.interval(0, period, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(aLong ->{
-                    if(responseNetObserver!=null)
+                .subscribe(aLong -> {
+                    if (responseNetObserver != null)
                         responseNetObserver.cancel();
                     responseNetObserver = new NetObserver<HttpResponse<SensorLogJson>>() {
                         @Override
                         public void onSuccess(HttpResponse<SensorLogJson> sensorLogJson) {
-                           hideLoading();
-                           onGetTiltSensorLogSuccess(sensorLogJson.getData());
+                            hideLoading();
+                            onGetTiltSensorLogSuccess(sensorLogJson.getData());
                         }
 
                         @Override
                         public void onFail(ApiException msg) {
-                           hideLoading();
-                           onGetTiltSensorLogFail(msg.getMessage());
+                            hideLoading();
+                            onGetTiltSensorLogFail(msg.getMessage());
                         }
                     };
-                    mPresenter.getTiltSensorLog(mCamId, mParaID, 1, 10, "", "",responseNetObserver);
+                    mPresenter.getTiltSensorLog(mCamId, mParaID, 1, 10, "", "", responseNetObserver);
                 });
 
     }
+
     public void initSpinner() {
         tiltSensorTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                    mParaID = mParaIds.get(position).getParaID() + "";
+                mParaID = mParaIds.get(position).getParaID() + "";
                 getLoopRequest(Integer.parseInt(speedNum));
                 Log.e("paraID1111", mParaID);
             }
@@ -165,17 +191,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         });
 
     }
-    @OnClick({R.id.tvCharDaetails,R.id.tvRefeshTime})
-    void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCharDaetails:
-                TiltSensorActivity.newInstance(getActivity(), mCamId);
-                break;
-            case R.id.tvRefeshTime:
-                speedDialogShow();
-                break;
-        }
-    }
+
     private void speedDialogShow() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -196,9 +212,9 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             @Override
             public void onClick(View v) {
 
-                speedNum = sbSpeedDialog.getProgress()+1+"";
-                getLoopRequest(Integer.parseInt(speedNum)+1);
-                tvRefeshTime.setText("当前刷新间隔(s):"+speedNum);
+                speedNum = sbSpeedDialog.getProgress() + 1 + "";
+                getLoopRequest(Integer.parseInt(speedNum) + 1);
+                tvRefeshTime.setText("当前刷新间隔(s):" + speedNum);
                 dialog.dismiss();
             }
         });
@@ -229,6 +245,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -249,11 +266,10 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void onGetGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
-        mIsInit= true;
+        mIsInit = true;
         if (dataBean == null || dataBean.getList() == null || dataBean.getList().isEmpty()) {
             onGetGetTiltSensorParaFail("");
-        }
-        else{
+        } else {
             mParaIds = dataBean.getList();
             List<String> dataList = new ArrayList<String>();
             for (TiltSensorParaJson.ListBean jsonBean : mParaIds) {
@@ -285,41 +301,173 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void onGetTiltSensorLogSuccess(SensorLogJson dataBean) {
+        if (dataBean.getList() == null || dataBean.getList().size() <= 0) {
+            tvXDistance.setText("-");
+            tvYDistance.setText("-");
+            tvLaserDistance.setText("-");
+            tvSecondaryAngleDifference.setText("-");
+            tvStageAngleDifference.setText("-");
+            tvCumulativeAngleDifference.setText("-");
+            tvSecondarySettlementDisplacement.setText("-");
+            tvStageSettlementDisplacement.setText("-");
+            tvAccumulativeSettlementDisplacement.setText("-");
+            tvSideParallelismFloating.setText("-");
+            tvStageSideParallelismFloating.setText("-");
+            tvCumulativeSideParallelismFloating.setText("-");
+            tvCreateTime.setText("-");
+            return;
+        }
         SensorLogJson.ListBean listBean = dataBean.getList().get(0);
         DecimalFormat df = new DecimalFormat("0.#");
+
         //x角度
-        tvXDistance.setText(listBean.getOx()+"°");
+        tvXDistance.setText(listBean.getOx() + "°");
+        setTvColor(listBean.getOx() >= mTiltSensorAlarmBean.getAxisX(), tvXDistance);
         //y角度
-        tvYDistance.setText(listBean.getOy()+"°");
+        tvYDistance.setText(listBean.getOy() + "°");
+        setTvColor(listBean.getOy() >= mTiltSensorAlarmBean.getAxisY(), tvYDistance);
         //激光距离
-        tvLaserDistance.setText(df.format(listBean.getObd()/1000) + "");
-        //当次角度差
-        tvSecondaryAngleDifference.setText(listBean.getOldx() + "°," + listBean.getOldy()+"°");
+        tvLaserDistance.setText(df.format(listBean.getObd() / 1000) + "");
+        //单次角度差
+        tvSecondaryAngleDifference.setText(listBean.getOldx() + "°," + listBean.getOldy() + "°");
         //阶段角度差
-        tvStageAngleDifference.setText(listBean.getStagex() + "°," + listBean.getStagey()+"°");
+        tvStageAngleDifference.setText(listBean.getStagex() + "°," + listBean.getStagey() + "°");
         //累计角度差
-        tvCumulativeAngleDifference.setText(listBean.getFirstOldx() + "°," + listBean.getFirstOldy()+"°");
-        //当次沉降+坐标位移
-        tvSecondarySettlementDisplacement.setText(df.format(listBean.getCdObd()*1000)
-                + "(" + df.format(listBean.getObdOldx()* 1000) + "," + df.format(listBean.getObdOldy()* 1000)+")");
+        tvCumulativeAngleDifference.setText(listBean.getFirstOldx() + "°," + listBean.getFirstOldy() + "°");
+        double cdObd = FormatUtils.roundOff(listBean.getCdObd(), 1);
+        double obdOldx = FormatUtils.roundOff(listBean.getObdOldx(), 1);
+        double obdOldy = FormatUtils.roundOff(listBean.getObdOldy(), 1);
+        double obdOldz = FormatUtils.roundOff(listBean.getObdOldz(), 1);
+        //单次沉降+坐标位移
+        tvSecondarySettlementDisplacement.setText(cdObd + "(" + obdOldx + "," + obdOldy + "," + obdOldz + ")");
+        tvSecondarySettlementDisplacementState.setText(getState(cdObd, obdOldx, obdOldx, obdOldy));
+        setTvColor(listBean.getCdObd() >= mTiltSensorAlarmBean.getSettlement(), tvSecondarySettlementDisplacement, tvSecondarySettlementDisplacementState);
         //阶段沉降+坐标位移
-        tvStageSettlementDisplacement.setText(df.format(listBean.getCdObdDiff() * 1000) + "("
-                + df.format(listBean.getObdStagex() * 1000) + "," + df.format(listBean.getObdStagey() * 1000) + ","
-                + df.format(listBean.getObdStagez() * 1000) + ")");
+        double cdObdDiff = FormatUtils.roundOff(listBean.getCdObdDiff(), 1);
+        double obdStagex = FormatUtils.roundOff(listBean.getObdStagex(), 1);
+        double obdStagey = FormatUtils.roundOff(listBean.getObdStagey(), 1);
+        double obdStagez = FormatUtils.roundOff(listBean.getObdStagez(), 1);
+        tvStageSettlementDisplacement.setText(cdObdDiff + "(" +obdStagex+ "," +obdStagey+ "," +obdStagez+ ")");
+        tvStageSettlementDisplacementState.setText(getState(cdObdDiff, obdStagex, obdStagey, obdStagez));
         //累计沉降+坐标位移
-        tvAccumulativeSettlementDisplacement.setText(df.format(listBean.getCdObdAdd() * 1000) + "("
-                + df.format(listBean.getObdFirstOldx() * 1000) + "," + df.format(listBean.getObdFirstOldy() * 1000) + ","
-                + df.format(listBean.getObdFirstOldz() * 1000) + ")");
-        //左端平行度浮动
-        tvLeftSideParallelismFloating.setText((listBean.getFloatObdLeft()) + "");
-        //右端平行度浮动
-        tvRightSideParallelismFloating.setText((listBean.getFloatObdRight()) + "");
+        double cdObdAdd = FormatUtils.roundOff(listBean.getCdObdAdd(), 1);
+        double obdFirstOldx = FormatUtils.roundOff(listBean.getObdFirstOldx(), 1);
+        double obdFirstOldey = FormatUtils.roundOff(listBean.getObdFirstOldy(), 1);
+        double obdFirstOldz = FormatUtils.roundOff(listBean.getObdFirstOldz(), 1);
+        tvAccumulativeSettlementDisplacement.setText(cdObdAdd+ "(" +obdFirstOldx + "," +obdFirstOldey+ "," +obdFirstOldz+ ")");
+        tvAccumulativeSettlementDisplacementState.setText(getState(cdObdAdd, obdFirstOldx, obdFirstOldey, obdFirstOldz));
+        //单次水平度浮动
+        double obdLeft = FormatUtils.roundOff(listBean.getObdLeft() * 1000, 1);
+        double obdRight = FormatUtils.roundOff(listBean.getObdRight() * 1000, 1);
+        tvSideParallelismFloating.setText(obdLeft + "," + obdRight);
+        tvSideParallelismFloatingState.setText(getStateF(obdLeft, obdRight));
+        setTvColor(obdLeft >= mTiltSensorAlarmBean.getHorizontalFloatingLeft() && obdRight >= mTiltSensorAlarmBean.getHorizontalFloatingRight()
+                , tvSecondarySettlementDisplacement, tvSideParallelismFloatingState);
+        //阶段水平度浮动
+        double stageObdLeft = FormatUtils.roundOff(listBean.getStageObdLeft() * 1000, 1);
+        double stageObdRight = FormatUtils.roundOff(listBean.getStageObdRight() * 1000, 1);
+        tvStageSideParallelismFloatingState.setText(getStateF(stageObdLeft, stageObdRight));
+        tvStageSideParallelismFloating.setText(stageObdLeft + "," + stageObdRight);
+        //累计水平度浮动
+        double floatObdLef = FormatUtils.roundOff(listBean.getFloatObdLeft() * 1000, 1);
+        double floatObdRight = FormatUtils.roundOff(listBean.getFloatObdRight() * 1000, 1);
+        tvCumulativeSideParallelismFloatingState.setText(getStateF(floatObdLef, floatObdRight));
+        tvCumulativeSideParallelismFloating.setText(floatObdLef + "," + floatObdRight);
         //生成时间
         tvCreateTime.setText(listBean.getCreateTime());
     }
 
+    private String getState(double s, double x, double y, double z) {
+        String temp = "";
+        if (s > 0) {
+            temp += "下";
+        } else if (s < 0) {
+            temp += "上";
+        } else {
+            temp += "-";
+        }
+        if (x > 0) {
+            temp += "(后,";
+        } else if (x < 0) {
+            temp += "(前,";
+        } else {
+            temp += "(-,";
+        }
+        if (y > 0) {
+            temp += "右,";
+        } else if (y < 0) {
+            temp += "左,";
+        } else {
+            temp += "-,";
+        }
+        if (z > 0) {
+            temp += "下)";
+        } else if (z < 0) {
+            temp += "上)";
+        } else {
+            temp += "-)";
+        }
+        return temp;
+    }
+
+    private String getStateF(double x, double y) {
+        String temp = "";
+        if (x > 0) {
+            temp += "上,";
+        } else if (x < 0) {
+            temp += "下,";
+        } else {
+            temp += "-,";
+        }
+        if (y > 0) {
+            temp += "上";
+        } else if (y < 0) {
+            temp += "下";
+        } else {
+            temp += "-";
+        }
+        return temp;
+    }
+
+    private void setTvColor(boolean isAlarm, TextView tv) {
+        if (mTiltSensorAlarmBean.isOpen() && isAlarm) {
+            tv.setTextColor(getResources().getColor(R.color.alarmColorBad));
+        } else {
+            tv.setTextColor(getResources().getColor(R.color.alarmColorGray));
+        }
+    }
+
+    private void setTvColor(boolean isAlarm, TextView tv1, TextView tv2) {
+        if (mTiltSensorAlarmBean.isOpen() && isAlarm) {
+            tv1.setTextColor(getResources().getColor(R.color.alarmColorBad));
+            tv2.setTextColor(getResources().getColor(R.color.alarmColorBad));
+        } else {
+            tv1.setTextColor(getResources().getColor(R.color.alarmColorGray));
+            tv2.setTextColor(getResources().getColor(R.color.alarmColorGray));
+        }
+    }
+
     @Override
     public void onGetTiltSensorLogFail(String msg) {
+    }
 
+    @OnClick({R.id.tvCharDaetails, R.id.tvRefeshTime, R.id.tvAlarm})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tvCharDaetails:
+                TiltSensorActivity.newInstance(getActivity(), mCamId);
+                break;
+            case R.id.tvRefeshTime:
+                speedDialogShow();
+                break;
+            case R.id.tvAlarm:
+                AlarmDialog.newInstance(getActivity(), mTiltSensorAlarmBean)
+                        .setLeftClick(tiltSensorAlarmBean -> {
+                            mTiltSensorAlarmBean = tiltSensorAlarmBean;
+                            getLoopRequest(Integer.parseInt(speedNum));
+                        })
+                        .show();
+                break;
+        }
     }
 }

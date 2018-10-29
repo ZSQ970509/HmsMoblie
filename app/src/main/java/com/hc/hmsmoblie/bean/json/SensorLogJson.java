@@ -10,8 +10,8 @@ public class SensorLogJson {
 
 
     /**
-     * List : [{"RowNumber":1,"OxDiff":5.21,"OyDiff":83.642,"OxDir":276,"OyDir":186,"RecordID":188244,"CreateTime":"2018-09-28 14:57:19","Ox":-2.186,"Oy":0.013,"Oldx":-0.002,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.574,"FirstOldx":5.372,"FirstOldy":85.574,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":2,"OxDiff":5.212,"OyDiff":83.641,"OxDir":276,"OyDir":186,"RecordID":188242,"CreateTime":"2018-09-28 14:57:08","Ox":-2.188,"Oy":0.014,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.573,"FirstOldx":5.374,"FirstOldy":85.573,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":3,"OxDiff":5.211,"OyDiff":83.643,"OxDir":276,"OyDir":186,"RecordID":188240,"CreateTime":"2018-09-28 14:56:57","Ox":-2.187,"Oy":0.012,"Oldx":0,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.575,"FirstOldx":5.373,"FirstOldy":85.575,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":4,"OxDiff":5.211,"OyDiff":83.644,"OxDir":276,"OyDir":186,"RecordID":188238,"CreateTime":"2018-09-28 14:56:46","Ox":-2.187,"Oy":0.011,"Oldx":0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.576,"FirstOldx":5.373,"FirstOldy":85.576,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":5,"OxDiff":5.21,"OyDiff":83.645,"OxDir":276,"OyDir":186,"RecordID":188236,"CreateTime":"2018-09-28 14:56:35","Ox":-2.186,"Oy":0.01,"Oldx":-0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.577,"FirstOldx":5.372,"FirstOldy":85.577,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":6,"OxDiff":5.211,"OyDiff":83.646,"OxDir":276,"OyDir":186,"RecordID":188234,"CreateTime":"2018-09-28 14:56:24","Ox":-2.187,"Oy":0.009,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.578,"FirstOldx":5.373,"FirstOldy":85.578,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":7,"OxDiff":5.209,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188232,"CreateTime":"2018-09-28 14:56:12","Ox":-2.186,"Oy":0.007,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.58,"FirstOldx":5.372,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":8,"OxDiff":5.211,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188230,"CreateTime":"2018-09-28 14:56:02","Ox":-2.187,"Oy":0.007,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.58,"FirstOldx":5.373,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":9,"OxDiff":5.212,"OyDiff":83.648,"OxDir":276,"OyDir":186,"RecordID":188228,"CreateTime":"2018-09-28 14:55:51","Ox":-2.188,"Oy":0.007,"Oldx":0.001,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.58,"FirstOldx":5.374,"FirstOldy":85.58,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":10,"OxDiff":5.21,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188226,"CreateTime":"2018-09-28 14:55:40","Ox":-2.187,"Oy":0.005,"Oldx":-0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.373,"Stagey":85.582,"FirstOldx":5.373,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":11,"OxDiff":5.212,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188224,"CreateTime":"2018-09-28 14:55:29","Ox":-2.188,"Oy":0.005,"Oldx":0,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.582,"FirstOldx":5.374,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":12,"OxDiff":5.212,"OyDiff":83.649,"OxDir":276,"OyDir":186,"RecordID":188222,"CreateTime":"2018-09-28 14:55:18","Ox":-2.188,"Oy":0.006,"Oldx":0.002,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.374,"Stagey":85.581,"FirstOldx":5.374,"FirstOldy":85.581,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":13,"OxDiff":5.211,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188220,"CreateTime":"2018-09-28 14:55:07","Ox":-2.186,"Oy":0.006,"Oldx":0,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.581,"FirstOldx":5.372,"FirstOldy":85.581,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":14,"OxDiff":5.21,"OyDiff":83.65,"OxDir":276,"OyDir":186,"RecordID":188218,"CreateTime":"2018-09-28 14:54:56","Ox":-2.186,"Oy":0.005,"Oldx":-0.004,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.372,"Stagey":85.582,"FirstOldx":5.372,"FirstOldy":85.582,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0},{"RowNumber":15,"OxDiff":5.214,"OyDiff":83.652,"OxDir":276,"OyDir":186,"RecordID":188216,"CreateTime":"2018-09-28 14:54:46","Ox":-2.19,"Oy":0.003,"Oldx":0.002,"Oldy":-0.002,"ObdOldx":0,"ObdOldy":0,"CamID":1014603,"ParaID":89,"ParaName":"ff03","Obd":0,"Stagex":5.376,"Stagey":85.584,"FirstOldx":5.376,"FirstOldy":85.584,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0.0374,"ObdStagez":0.0049,"ObdFirstOldx":1.0E-4,"ObdFirstOldy":0.0374,"ObdFirstOldz":0.0049,"CdObd":0,"CdObdDiff":0.0356,"CdObdAdd":0.0356,"FloatObdRight":0,"FloatObdLeft":0}]
-     * total : 7336
+     * List : [{"RowNumber":1,"OxDiff":2.142,"OyDiff":0.114,"OxDir":358,"OyDir":88,"RecordID":510939,"CreateTime":"2018-10-23 17:38:13","Ox":1.117,"Oy":0.832,"Oldx":0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.019,"Stagey":-0.006,"FirstOldx":0.319,"FirstOldy":-1.677,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":2,"OxDiff":2.141,"OyDiff":0.114,"OxDir":358,"OyDir":88,"RecordID":510935,"CreateTime":"2018-10-23 17:38:02","Ox":1.118,"Oy":0.832,"Oldx":0,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.018,"Stagey":-0.006,"FirstOldx":0.318,"FirstOldy":-1.677,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":3,"OxDiff":2.141,"OyDiff":0.114,"OxDir":358,"OyDir":88,"RecordID":510932,"CreateTime":"2018-10-23 17:37:51","Ox":1.118,"Oy":0.832,"Oldx":-0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.018,"Stagey":-0.006,"FirstOldx":0.318,"FirstOldy":-1.677,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":4,"OxDiff":2.142,"OyDiff":0.115,"OxDir":358,"OyDir":88,"RecordID":510929,"CreateTime":"2018-10-23 17:37:40","Ox":1.117,"Oy":0.831,"Oldx":0.001,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.019,"Stagey":-0.005,"FirstOldx":0.319,"FirstOldy":-1.676,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":5,"OxDiff":2.141,"OyDiff":0.115,"OxDir":358,"OyDir":88,"RecordID":510925,"CreateTime":"2018-10-23 17:37:29","Ox":1.118,"Oy":0.831,"Oldx":0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.018,"Stagey":-0.005,"FirstOldx":0.318,"FirstOldy":-1.676,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":6,"OxDiff":2.14,"OyDiff":0.116,"OxDir":358,"OyDir":88,"RecordID":510922,"CreateTime":"2018-10-23 17:37:18","Ox":1.119,"Oy":0.83,"Oldx":-0.001,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.017,"Stagey":-0.004,"FirstOldx":0.317,"FirstOldy":-1.675,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":7,"OxDiff":2.141,"OyDiff":0.115,"OxDir":358,"OyDir":88,"RecordID":510919,"CreateTime":"2018-10-23 17:37:07","Ox":1.118,"Oy":0.831,"Oldx":0,"Oldy":0,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.018,"Stagey":-0.005,"FirstOldx":0.318,"FirstOldy":-1.676,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":8,"OxDiff":2.14,"OyDiff":0.116,"OxDir":358,"OyDir":88,"RecordID":510915,"CreateTime":"2018-10-23 17:36:56","Ox":1.118,"Oy":0.831,"Oldx":-0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.018,"Stagey":-0.005,"FirstOldx":0.318,"FirstOldy":-1.676,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":9,"OxDiff":2.142,"OyDiff":0.116,"OxDir":358,"OyDir":88,"RecordID":510912,"CreateTime":"2018-10-23 17:36:45","Ox":1.117,"Oy":0.83,"Oldx":0,"Oldy":0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.019,"Stagey":-0.004,"FirstOldx":0.319,"FirstOldy":-1.675,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0},{"RowNumber":10,"OxDiff":2.142,"OyDiff":0.115,"OxDir":358,"OyDir":88,"RecordID":510909,"CreateTime":"2018-10-23 17:36:34","Ox":1.117,"Oy":0.831,"Oldx":0.001,"Oldy":-0.001,"ObdOldx":0,"ObdOldy":0,"CamID":1053613,"ParaID":86,"ParaName":"FF05","Obd":0,"Stagex":1.019,"Stagey":-0.005,"FirstOldx":0.319,"FirstOldy":-1.676,"ObdOldz":0,"ObdStagex":1.0E-4,"ObdStagey":0,"ObdStagez":9.0E-4,"ObdFirstOldx":0,"ObdFirstOldy":0,"ObdFirstOldz":3.0E-4,"CdObd":0,"CdObdDiff":9.0E-4,"CdObdAdd":3.0E-4,"FloatObdRight":0,"FloatObdLeft":0,"HightObd":0,"HightObdDiff":9.0E-4,"HightObdAdd":3.0E-4,"ObdRight":0,"ObdLeft":0,"StageObdRight":0,"StageObdLeft":0}]
+     * total : 109833
      */
 
     private int total;
@@ -36,38 +36,45 @@ public class SensorLogJson {
     public static class ListBean {
         /**
          * RowNumber : 1
-         * OxDiff : 5.21
-         * OyDiff : 83.642
-         * OxDir : 276
-         * OyDir : 186
-         * RecordID : 188244
-         * CreateTime : 2018-09-28 14:57:19
-         * Ox : -2.186
-         * Oy : 0.013
-         * Oldx : -0.002
-         * Oldy : 0.001
+         * OxDiff : 2.142
+         * OyDiff : 0.114
+         * OxDir : 358
+         * OyDir : 88
+         * RecordID : 510939
+         * CreateTime : 2018-10-23 17:38:13
+         * Ox : 1.117
+         * Oy : 0.832
+         * Oldx : 0.001
+         * Oldy : 0.0
          * ObdOldx : 0.0
          * ObdOldy : 0.0
-         * CamID : 1014603
-         * ParaID : 89
-         * ParaName : ff03
+         * CamID : 1053613
+         * ParaID : 86
+         * ParaName : FF05
          * Obd : 0.0
-         * Stagex : 5.372
-         * Stagey : 85.574
-         * FirstOldx : 5.372
-         * FirstOldy : 85.574
+         * Stagex : 1.019
+         * Stagey : -0.006
+         * FirstOldx : 0.319
+         * FirstOldy : -1.677
          * ObdOldz : 0.0
          * ObdStagex : 1.0E-4
-         * ObdStagey : 0.0374
-         * ObdStagez : 0.0049
-         * ObdFirstOldx : 1.0E-4
-         * ObdFirstOldy : 0.0374
-         * ObdFirstOldz : 0.0049
+         * ObdStagey : 0.0
+         * ObdStagez : 9.0E-4
+         * ObdFirstOldx : 0.0
+         * ObdFirstOldy : 0.0
+         * ObdFirstOldz : 3.0E-4
          * CdObd : 0.0
-         * CdObdDiff : 0.0356
-         * CdObdAdd : 0.0356
+         * CdObdDiff : 9.0E-4
+         * CdObdAdd : 3.0E-4
          * FloatObdRight : 0.0
          * FloatObdLeft : 0.0
+         * HightObd : 0.0
+         * HightObdDiff : 9.0E-4
+         * HightObdAdd : 3.0E-4
+         * ObdRight : 0.0
+         * ObdLeft : 0.0
+         * StageObdRight : 0.0
+         * StageObdLeft : 0.0
          */
 
         private int RowNumber;
@@ -103,6 +110,13 @@ public class SensorLogJson {
         private double CdObdAdd;
         private double FloatObdRight;
         private double FloatObdLeft;
+        private double HightObd;
+        private double HightObdDiff;
+        private double HightObdAdd;
+        private double ObdRight;
+        private double ObdLeft;
+        private double StageObdRight;
+        private double StageObdLeft;
 
         public int getRowNumber() {
             return RowNumber;
@@ -366,6 +380,62 @@ public class SensorLogJson {
 
         public void setFloatObdLeft(double FloatObdLeft) {
             this.FloatObdLeft = FloatObdLeft;
+        }
+
+        public double getHightObd() {
+            return HightObd;
+        }
+
+        public void setHightObd(double HightObd) {
+            this.HightObd = HightObd;
+        }
+
+        public double getHightObdDiff() {
+            return HightObdDiff;
+        }
+
+        public void setHightObdDiff(double HightObdDiff) {
+            this.HightObdDiff = HightObdDiff;
+        }
+
+        public double getHightObdAdd() {
+            return HightObdAdd;
+        }
+
+        public void setHightObdAdd(double HightObdAdd) {
+            this.HightObdAdd = HightObdAdd;
+        }
+
+        public double getObdRight() {
+            return ObdRight;
+        }
+
+        public void setObdRight(double ObdRight) {
+            this.ObdRight = ObdRight;
+        }
+
+        public double getObdLeft() {
+            return ObdLeft;
+        }
+
+        public void setObdLeft(double ObdLeft) {
+            this.ObdLeft = ObdLeft;
+        }
+
+        public double getStageObdRight() {
+            return StageObdRight;
+        }
+
+        public void setStageObdRight(double StageObdRight) {
+            this.StageObdRight = StageObdRight;
+        }
+
+        public double getStageObdLeft() {
+            return StageObdLeft;
+        }
+
+        public void setStageObdLeft(double StageObdLeft) {
+            this.StageObdLeft = StageObdLeft;
         }
     }
 }

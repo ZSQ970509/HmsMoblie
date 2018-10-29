@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/colorTrance"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white_round"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/activity_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tempAlarm"
+            android:textColor="#233238"
+            android:textSize="20sp" />
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="单次X轴角度阈值(度):" />
+
+            <EditText
+                android:id="@+id/alarmAxisXEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="1" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="单次Y轴角度阈值(度):" />
+
+            <EditText
+                android:id="@+id/alarmAxisYEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="1" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="单次沉降位移阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmSettlementEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="单次左端浮动阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmHFLeftEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="单次右端浮动阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmHFRightEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="是否开启：" />
+
+            <CheckBox
+                android:id="@+id/alarmIsOpenCb"
+                android:layout_width="@dimen/x32"
+                android:layout_height="@dimen/y32"
+                android:background="@drawable/checkboxblue"
+                android:button="@null"
+                android:layout_gravity="center"
+                android:checked="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/alarmLeftTv"
+                style="@style/CommonDialogBtnStyle"
+                android:background="@drawable/shape_white_blue_left"
+                android:gravity="center"
+                android:text="确定" />
+
+            <TextView
+                android:id="@+id/alarmRightTv"
+                style="@style/CommonDialogBtnStyle"
+                android:background="@drawable/shape_white_orange_right"
+                android:gravity="center"
+                android:text="取消" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
