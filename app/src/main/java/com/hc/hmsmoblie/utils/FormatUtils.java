@@ -148,14 +148,16 @@ public class FormatUtils {
         }
         return newValues;
     }
-    public static List<Double> roundOff(List<Double> values, int scale,double multiplier) {
+
+    public static List<Double> roundOff(List<Double> values, int scale, double multiplier) {
         int size = values.size();
         List<Double> newValues = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            newValues.set(i, roundOff(values.get(i), scale)*multiplier);
+            newValues.set(i, roundOff(values.get(i), scale) * multiplier);
         }
         return newValues;
     }
+
     /**
      * 进行四舍五入
      *
@@ -166,4 +168,13 @@ public class FormatUtils {
         BigDecimal value1 = new BigDecimal(value + "");
         return value1.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+
+    public static String stripTrailingZeros(double value) {
+        if (value == 0) {
+            return "0";
+        } else {
+            return BigDecimal.valueOf(value).stripTrailingZeros().toPlainString();
+        }
+    }
+
 }

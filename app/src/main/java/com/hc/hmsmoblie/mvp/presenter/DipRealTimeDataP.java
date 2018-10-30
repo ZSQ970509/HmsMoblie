@@ -15,14 +15,14 @@ import com.yc.yclibrary.mvp.BasePresenter;
  *
  */
 
-public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implements DipRealTimeDataC.P{
+public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implements DipRealTimeDataC.P {
     @Override
     public void getGetTiltSensorPara(String cmID) {
         new TiltSensorActivityM()
                 .getGetTiltSensorPara(cmID)
                 .compose(getIView().bindLifecycle())
                 .doOnSubscribe(disposable -> getIView().showLoading("正在加载中~"))
-                .doFinally(()->getIView().hideLoading())
+                .doFinally(() -> getIView().hideLoading())
                 .subscribe(new NetObserver<HttpResponse<TiltSensorParaJson>>() {
                     @Override
                     public void onSuccess(HttpResponse<TiltSensorParaJson> tiltSensorParaJson) {
@@ -37,14 +37,16 @@ public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implemen
     }
 
     @Override
-    public void getTiltSensorLog(String cmID, String paraID, int pageindex, int pagesize, String startTime, String endTime
-    ,NetObserver<HttpResponse<SensorLogJson>> responseNetObserver) {
+    public void getTiltSensorLog(boolean isShowLoad, String cmID, String paraID, int pageindex, int pagesize, String startTime, String endTime
+            , NetObserver<HttpResponse<SensorLogJson>> responseNetObserver) {
         new TiltSensorActivityM()
-                .getTiltSensorLog(cmID, paraID,  pageindex, pagesize, startTime, endTime)
+                .getTiltSensorLog(cmID, paraID, pageindex, pagesize, startTime, endTime)
                 .compose(getIView().bindLifecycle())
-                //.doOnSubscribe(disposable -> getIView().showLoading("正在加载中~"))
-
-                .doFinally(()->getIView().hideLoading())
+                .doOnSubscribe(disposable -> {
+                    if (isShowLoad)
+                        getIView().showLoading("正在加载中~");
+                })
+                .doFinally(() -> getIView().hideLoading())
                 .subscribe(responseNetObserver);
     }
 }

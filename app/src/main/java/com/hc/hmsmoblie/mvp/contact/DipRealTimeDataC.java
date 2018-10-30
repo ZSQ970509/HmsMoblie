@@ -19,7 +19,7 @@ public class DipRealTimeDataC {
     }
     public interface P {
         void getGetTiltSensorPara(String cmID);
-        void getTiltSensorLog(String cmID, String paraID, int pageindex, int pagesize, String startTime
+        void getTiltSensorLog(boolean isShowLoad,String cmID, String paraID, int pageindex, int pagesize, String startTime
                 , String endTime, NetObserver<HttpResponse<SensorLogJson>>responseNetObserver);
     }
 }

@@ -2,6 +2,7 @@ package com.hc.hmsmoblie.widget;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.v4.view.TintableBackgroundView;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.bean.domain.TiltSensorAlarmBean;
+import com.hc.hmsmoblie.utils.FormatUtils;
 
 import butterknife.BindView;
 
@@ -28,6 +30,8 @@ public class AlarmDialog extends Dialog {
     EditText alarmAxisYEdt;
     //    @BindView(R.id.alarmSettlementEdt)
     EditText alarmSettlementEdt;
+    //    @BindView(R.id.alarmSpaceEdt)
+    EditText alarmSpaceEdt;
     //    @BindView(R.id.alarmHFLeftEdt)
     EditText alarmHFLeftEdt;
     //    @BindView(R.id.alarmHFRightEdt)
@@ -42,39 +46,33 @@ public class AlarmDialog extends Dialog {
     private LeftClick mLeftClick;
     private TiltSensorAlarmBean mTiltSensorAlarmBean;
 
-    public static AlarmDialog newInstance(Context context, TiltSensorAlarmBean tiltSensorAlarmBean) {
-        return new AlarmDialog(context, tiltSensorAlarmBean);
+//    public static AlarmDialog newInstance(Context context, TiltSensorAlarmBean tiltSensorAlarmBean) {
+//        return new AlarmDialog(context, tiltSensorAlarmBean);
+//    }
+
+    public AlarmDialog(Context context) {
+        this(context, R.style.CommonDialogStyle);
     }
 
-    public AlarmDialog(Context context, TiltSensorAlarmBean tiltSensorAlarmBean) {
-        this(context, R.style.CommonDialogStyle, tiltSensorAlarmBean);
-    }
-
-    private AlarmDialog(Context context, int theme, TiltSensorAlarmBean tiltSensorAlarmBean) {
+    private AlarmDialog(Context context, int theme) {
         super(context, theme);
-        initViews(context, tiltSensorAlarmBean);
+        initViews(context);
     }
 
-    private void initViews(Context context, TiltSensorAlarmBean tiltSensorAlarmBean) {
-        mTiltSensorAlarmBean = tiltSensorAlarmBean;
+    private void initViews(Context context) {
         setContentView(R.layout.dip_real_time_data_pop);
         alarmAxisXEdt = findViewById(R.id.alarmAxisXEdt);
-        alarmAxisXEdt.setText(mTiltSensorAlarmBean.getAxisX() + "");
 
         alarmAxisYEdt = findViewById(R.id.alarmAxisYEdt);
-        alarmAxisYEdt.setText(mTiltSensorAlarmBean.getAxisY() + "");
 
         alarmSettlementEdt = findViewById(R.id.alarmSettlementEdt);
-        alarmSettlementEdt.setText(mTiltSensorAlarmBean.getSettlement() + "");
-
+        alarmSpaceEdt = findViewById(R.id.alarmSpaceEdt);
         alarmHFLeftEdt = findViewById(R.id.alarmHFLeftEdt);
-        alarmHFLeftEdt.setText(mTiltSensorAlarmBean.getHorizontalFloatingLeft() + "");
 
         alarmHFRightEdt = findViewById(R.id.alarmHFRightEdt);
-        alarmHFRightEdt.setText(mTiltSensorAlarmBean.getHorizontalFloatingRight() + "");
 
         alarmIsOpenCb = findViewById(R.id.alarmIsOpenCb);
-        alarmIsOpenCb.setChecked(mTiltSensorAlarmBean.isOpen());
+
 
         alarmLeftTv = findViewById(R.id.alarmLeftTv);
         alarmRightTv = findViewById(R.id.alarmRightTv);
@@ -95,8 +93,10 @@ public class AlarmDialog extends Dialog {
                     mTiltSensorAlarmBean.setAxisX(Double.parseDouble(alarmAxisXEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setAxisY(Double.parseDouble(alarmAxisYEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setSettlement(Double.parseDouble(alarmSettlementEdt.getText().toString().trim()));
+                    mTiltSensorAlarmBean.setSpace(Double.parseDouble(alarmSpaceEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setHorizontalFloatingLeft(Double.parseDouble(alarmHFLeftEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setHorizontalFloatingRight(Double.parseDouble(alarmHFRightEdt.getText().toString().trim()));
+                    mTiltSensorAlarmBean.setAlreadySet(true);
                     mLeftClick.onClick(mTiltSensorAlarmBean);
                 }
             }
@@ -116,6 +116,18 @@ public class AlarmDialog extends Dialog {
                 mTiltSensorAlarmBean.setOpen(isChecked);
             }
         });
+    }
+
+    public AlarmDialog setAlarmData(TiltSensorAlarmBean alarmData) {
+        mTiltSensorAlarmBean = new TiltSensorAlarmBean(alarmData);
+        alarmAxisXEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getAxisX()) + "");
+        alarmAxisYEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getAxisY()) + "");
+        alarmSettlementEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getSettlement()) + "");
+        alarmSpaceEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getSpace()) + "");
+        alarmHFLeftEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getHorizontalFloatingLeft()) + "");
+        alarmHFRightEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getHorizontalFloatingRight()) + "");
+        alarmIsOpenCb.setChecked(mTiltSensorAlarmBean.isOpen());
+        return this;
     }
 
     /**

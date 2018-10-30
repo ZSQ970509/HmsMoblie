@@ -59,7 +59,7 @@
             android:layout_marginLeft="@dimen/activity_margin"
             android:layout_marginTop="@dimen/y10"
             android:gravity="center"
-            android:text="生成时间：" />
+            android:text="生成时间：2018-11-12-15 09:11:11" />
 
         <TextView
             android:id="@+id/tvCreateTime"
@@ -72,7 +72,7 @@
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/tvRefeshTime"
+            android:id="@+id/tvRefreshTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView16"
@@ -86,8 +86,8 @@
             android:id="@+id/tvAlarm"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/y64"
-            android:layout_alignRight="@id/tvRefeshTime"
-            android:layout_below="@id/tvRefeshTime"
+            android:layout_alignRight="@id/tvRefreshTime"
+            android:layout_below="@id/tvRefreshTime"
             android:layout_marginBottom="@dimen/activity_margin_small"
             android:layout_marginTop="@dimen/activity_margin_small"
             android:gravity="center"

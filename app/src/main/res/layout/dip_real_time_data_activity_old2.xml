@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBtn"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/actionbar_layout" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite">
+            <TextView
+                android:id="@+id/tvCharDaetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/tiltSensorTypeSp"
+                android:layout_marginEnd="15dp"
+                android:drawablePadding="@dimen/x5"
+                android:drawableRight="@drawable/video_detail_right"
+                android:text="详情图表"
+                android:textColor="@color/colorBtn"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tiltSensorTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/niceSpinnerHeight"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="center"
+                android:text="倾角设备："
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+            <Spinner
+                android:id="@+id/tiltSensorTypeSp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/niceSpinnerHeight"
+                android:layout_alignTop="@+id/tiltSensorTypeTv"
+                android:layout_toEndOf="@+id/tiltSensorTypeTv"
+                android:background="@drawable/shape_spinner_blue"
+                android:minWidth="@dimen/niceSpinnerMinWidth"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:textColor="@color/colorBlack3" />
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/TextContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tiltSensorTypeTv"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="center"
+                android:text="生成时间：" />
+
+            <TextView
+                android:id="@+id/tvCreateTime"
+                style="@style/TextContentStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView16"
+                android:layout_alignBottom="@+id/textView16"
+                android:layout_toEndOf="@+id/textView16"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/tvRefreshTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView16"
+                android:layout_alignBottom="@+id/textView16"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:text="当前刷新间隔(s):15"
+                android:textColor="@color/colorBtn" />
+
+            <TextView
+                android:id="@+id/tvAlarm"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y64"
+                android:layout_alignRight="@id/tvRefreshTime"
+                android:layout_below="@id/tvRefreshTime"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:gravity="center"
+                android:text="@string/tempAlarm"
+                android:textColor="@color/colorBtn" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextFristTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y25"
+                android:text="设备原始数据(单位：mm)"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="X轴角度" />
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Y轴角度" />
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="激光距离" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvXDistance"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvYDistance"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvLaserDistance"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="#f6f6f6" />
+
+            <TextView
+                style="@style/TextFristTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y25"
+                android:text="角度差数据(X轴,Y轴)"
+                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="单次角度差" />
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="阶段角度差" />
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="累计角度差" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSecondaryAngleDifference"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvStageAngleDifference"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvCumulativeAngleDifference"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="#f6f6f6" />
+
+            <TextView
+                style="@style/TextFristTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y25"
+                android:text="沉降位移数据(单位：mm)"
+                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="单次沉降+坐标位移" />
+
+                <TextView
+
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="阶段沉降+坐标位移" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSecondarySettlementDisplacement"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvStageSettlementDisplacement"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSecondarySettlementDisplacementState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvStageSettlementDisplacementState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/TextSecondTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="累计沉降+坐标位移" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvAccumulativeSettlementDisplacement"
+                    style="@style/TextContentStyle"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvAccumulativeSettlementDisplacementState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="#f6f6f6" />
+
+            <TextView
+                style="@style/TextFristTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y25"
+                android:text="水平度浮动(单位：mm)(左端,右端)"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="单次水平度浮动" />
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="阶段水平度浮动" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSideParallelismFloating"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvStageSideParallelismFloating"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSideParallelismFloatingState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/tvStageSideParallelismFloatingState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/TextSecondTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    style="@style/TextSecondTitleStyle"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="累计水平度浮动" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvCumulativeSideParallelismFloating"
+                    style="@style/TextContentStyle"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvCumulativeSideParallelismFloatingState"
+                    style="@style/TextContentStyle"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="" />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="#f6f6f6" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

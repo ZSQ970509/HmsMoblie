@@ -5,12 +5,44 @@ package com.hc.hmsmoblie.bean.domain;
  */
 
 public class TiltSensorAlarmBean {
-    private double axisX = 1;//单次X轴阈值
-    private double axisY = 1;//单次Y轴阈值
-    private double settlement = 10;//单次沉降位移阈值
-    private double horizontalFloatingLeft = 10;//单次左端水平度浮动阈值
-    private double horizontalFloatingRight = 10;//单次右端水平度浮动阈值
-    private boolean isOpen = false;
+    private double axisX = 1;//累计X轴阈值
+    private double axisY = 1;//累计Y轴阈值
+    private double settlement = 10;//累计沉降位移阈值
+    private double space = 10;//累计空间位移阈值
+    private double horizontalFloatingLeft = 10;//累计左端水平度浮动阈值
+    private double horizontalFloatingRight = 10;//累计右端水平度浮动阈值
+    private boolean isOpen = false;//是否开启
+    private boolean isAlreadySet = false;//是否设置过
+
+    public TiltSensorAlarmBean() {
+    }
+
+    public TiltSensorAlarmBean(TiltSensorAlarmBean bean) {
+        this.axisX = bean.axisX;
+        this.axisY = bean.axisY;
+        this.settlement = bean.settlement;
+        this.space = bean.space;
+        this.horizontalFloatingLeft = bean.horizontalFloatingLeft;
+        this.horizontalFloatingRight = bean.horizontalFloatingRight;
+        this.isOpen = bean.isOpen;
+    }
+
+    public double getSpace() {
+        return space;
+    }
+
+    public void setSpace(double space) {
+        this.space = space;
+    }
+
+    public boolean isAlreadySet() {
+        return isAlreadySet;
+    }
+
+    public void setAlreadySet(boolean alreadySet) {
+        isAlreadySet = alreadySet;
+    }
+
     public double getAxisX() {
         return axisX;
     }

@@ -47,6 +47,41 @@
         <item>累计沉降</item>
         <item>水平度</item>
     </string-array>
+    <string-array name="dipRealData">
+        <item>X轴角度</item>
+        <item>Y轴角度</item>
+        <item>激光距离</item>
+        <item>X轴单次角度差</item>
+        <item>Y轴单次角度差</item>
+        <item>X轴累计角度差</item>
+        <item>Y轴累计角度差</item>
+        <item>单次沉降</item>
+        <item>累计沉降</item>
+        <item>当次空间位移</item>
+        <item>累计空间位移</item>
+        <item>左端单次水平度浮动</item>
+        <item>右端单次水平度浮动</item>
+        <item>左端累计水平度浮动</item>
+        <item>右端累计水平度浮动</item>
+    </string-array>
+    <string-array name="dipRealDataUnit">
+        <item>°</item>
+        <item>°</item>
+        <item>mm</item>
+        <item>°</item>
+        <item>°</item>
+        <item>°</item>
+        <item>°</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+        <item>mm</item>
+    </string-array>
+    <string name="refreshTime">刷新间隔：</string>
     <string name="tempAlarm">手机端临时预警设置</string>
     <string name="LoadMoreFinal">已经加载全部！</string>
     <string name="LoadingMore">正在加载更多中！</string>

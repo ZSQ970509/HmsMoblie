@@ -26,7 +26,7 @@
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="单次X轴角度阈值(度):" />
+                android:text="累计X轴角度阈值(°):" />
 
             <EditText
                 android:id="@+id/alarmAxisXEdt"
@@ -38,7 +38,7 @@
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="单次Y轴角度阈值(度):" />
+                android:text="累计Y轴角度阈值(°):" />
 
             <EditText
                 android:id="@+id/alarmAxisYEdt"
@@ -50,19 +50,29 @@
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="单次沉降位移阈值(mm):" />
+                android:text="累计沉降位移阈值(mm):" />
 
             <EditText
                 android:id="@+id/alarmSettlementEdt"
                 style="@style/DialogAlarmEdtStyle"
                 android:text="10" />
         </LinearLayout>
-
         <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="单次左端浮动阈值(mm):" />
+                android:text="累计空间位移阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmSpaceEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="累计左端浮动阈值(mm):" />
 
             <EditText
                 android:id="@+id/alarmHFLeftEdt"
@@ -74,7 +84,7 @@
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="单次右端浮动阈值(mm):" />
+                android:text="累计右端浮动阈值(mm):" />
 
             <EditText
                 android:id="@+id/alarmHFRightEdt"
