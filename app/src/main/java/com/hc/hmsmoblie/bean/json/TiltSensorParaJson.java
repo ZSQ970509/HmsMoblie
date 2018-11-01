@@ -81,7 +81,7 @@ public class TiltSensorParaJson {
         private Object OldAo;
         private double Photox;
         private double Photoy;
-        private int States;
+        private String States;
         private String ParaName;
         private double Hight;
         private double FirstOldx;
@@ -234,11 +234,11 @@ public class TiltSensorParaJson {
             this.Photoy = Photoy;
         }
 
-        public int getStates() {
+        public String getStates() {
             return States;
         }
 
-        public void setStates(int States) {
+        public void setStates(String States) {
             this.States = States;
         }
 

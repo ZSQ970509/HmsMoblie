@@ -18,10 +18,18 @@ public class TiltSensorActivityM implements IModel {
                 .getGetTiltSensorPara(cmID)
                 .compose(NetTransformer.compose());
     }
+
     public Observable getTiltSensorLog(String cmID, String paraID, int pageindex, int pagesize, String startTime, String endTime) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getTiltSensorLog(cmID, paraID,  pageindex, pagesize, startTime, endTime)
+                .getTiltSensorLog(cmID, paraID, pageindex, pagesize, startTime, endTime)
+                .compose(NetTransformer.compose());
+    }
+
+    public Observable setAllMessage(String paraID, String seq, String type) {
+        return RetrofitUtils.Instance
+                .getApiService(ApiServer.class)
+                .setAllMessage(paraID, seq, type)
                 .compose(NetTransformer.compose());
     }
 }

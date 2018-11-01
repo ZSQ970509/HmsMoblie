@@ -8,54 +8,124 @@
 
     <include layout="@layout/actionbar_layout" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
+        android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
         android:paddingTop="@dimen/activity_margin_small">
 
         <TextView
-            android:id="@+id/tiltSensorTypeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="倾角设备："
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tvCharDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:drawablePadding="@dimen/x10"
-            android:drawableRight="@drawable/video_detail_right"
-            android:text="详情图表"
-            android:textColor="@color/colorBtn"
-            android:textSize="15sp" />
-
+            android:text="监测点名称："
+            android:textSize="14sp" />
 
         <Spinner
             android:id="@+id/tiltSensorTypeSp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/niceSpinnerHeight"
-            android:layout_toRightOf="@+id/tiltSensorTypeTv"
             android:background="@drawable/shape_spinner_blue"
             android:minWidth="@dimen/niceSpinnerMinWidth"
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:textColor="@color/colorBlack3" />
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/tvCharDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/x10"
+            android:drawableRight="@drawable/video_detail_right"
+            android:text="详情图表"
+            android:textColor="@color/colorBtn"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin_small"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="监测点状态："
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tiltSensorStateTv"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_spinner_blue"
+            android:gravity="center"
+            android:paddingBottom="1dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="1dp"
+            android:text="开" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvRefreshTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/x10"
+            android:drawableRight="@drawable/video_detail_right"
+            android:text="@string/refreshTime"
+            android:textColor="@color/colorBtn"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/activity_margin"
+        android:layout_marginTop="@dimen/activity_margin_small"
+        android:drawablePadding="@dimen/x10"
+        android:drawableRight="@drawable/video_detail_right"
+        android:text="@string/tempAlarm"
+        android:textColor="@color/colorBtn"
+        android:textSize="14sp" />
+
+
+    <View
+        style="@style/LineHorizontalStyle"
+        android:layout_height="2dp"
+        android:layout_marginBottom="@dimen/activity_margin_small"
+        android:layout_marginTop="@dimen/activity_margin_small" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
             style="@style/TextContentStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tiltSensorTypeTv"
-            android:layout_marginTop="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
             android:gravity="center"
             android:text="生成时间："
+            android:textColor="@color/alarmColorGray"
             android:textSize="15sp" />
 
         <TextView
@@ -63,43 +133,11 @@
             style="@style/TextContentStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/textView16"
-            android:layout_toRightOf="@id/textView16"
             android:gravity="center"
+            android:text="2018-11-01"
+            android:textColor="@color/alarmColorGray"
             android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tvRefreshTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/textView16"
-            android:layout_alignRight="@id/tvCharDetails"
-            android:drawablePadding="@dimen/x10"
-            android:drawableRight="@drawable/video_detail_right"
-            android:text="@string/refreshTime"
-            android:textColor="@color/colorBtn"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tvAlarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@id/tvRefreshTime"
-            android:layout_below="@id/tvRefreshTime"
-            android:layout_marginTop="@dimen/activity_margin_small"
-            android:drawablePadding="@dimen/x10"
-            android:drawableRight="@drawable/video_detail_right"
-            android:gravity="center"
-            android:text="@string/tempAlarm"
-            android:textColor="@color/colorBtn"
-            android:textSize="15sp" />
-    </RelativeLayout>
-
-    <View
-        style="@style/LineHorizontalStyle"
-        android:layout_height="2dp"
-        android:layout_marginBottom="@dimen/activity_margin_small"
-        android:layout_marginTop="@dimen/activity_margin_small" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvData"

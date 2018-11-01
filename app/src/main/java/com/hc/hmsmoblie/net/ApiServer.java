@@ -11,6 +11,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
         import com.hc.hmsmoblie.bean.json.SensorLogJson;
+        import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
         import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
@@ -129,4 +130,7 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetGetTiltSensorPara")
     Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId")String cmID);
+    @FormUrlEncoded
+    @POST(UrlHelper.API_TILT_SENSOR + "SetAllMessage")
+    Observable<HttpResponse<String>> setAllMessage(@Field("paraID")String paraID, @Field("Seq")String seq, @Field("Type")String type);
 }

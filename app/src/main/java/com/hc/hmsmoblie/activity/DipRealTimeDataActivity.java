@@ -26,7 +26,9 @@ import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.DipRealBean;
 import com.hc.hmsmoblie.bean.domain.TiltSensorAlarmBean;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
+import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
 import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
 import com.hc.hmsmoblie.net.HttpResponse;
@@ -52,9 +54,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> implements DipRealTimeDataC.V {
-
-    String speedNum = "15";
-    private static final String CAM_ID = "cam_id";
     @BindView(R.id.ivActionbarLeft)
     ImageView ivActionbarLeft;
     @BindView(R.id.tvActionbarLeft)
@@ -67,8 +66,6 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     TextView tvActionbarRight;
     @BindView(R.id.LlActionbarRight)
     LinearLayout LlActionbarRight;
-    @BindView(R.id.tiltSensorTypeTv)
-    TextView tiltSensorTypeTv;
     @BindView(R.id.tiltSensorTypeSp)
     Spinner tiltSensorTypeSp;
     @BindView(R.id.tvCreateTime)
@@ -79,9 +76,12 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     TextView tvAlarm;
     @BindView(R.id.rvData)
     RecyclerView rvData;
+    @BindView(R.id.tiltSensorStateTv)
+    TextView tiltSensorStateTv;
     private String mCamId;
+    private String mSeq;
     private String mParaID;
-    private List<TiltSensorParaJson.ListBean> mParaIds = new ArrayList<>();
+    private List<TiltSensorParaJson.ListBean> mParaList = new ArrayList<>();
     private CommonAdapter<String> mSpAdapter;
     Disposable mDisposableAlarm;
     NetObserver<HttpResponse<SensorLogJson>> responseNetObserver;
@@ -91,6 +91,10 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     private String[] mDipReal;
     private String[] mDipRealUnit;
     private SensorLogJson.ListBean mSensorLogListBean;
+    private @TiltSensorParaState
+    String mParaState = "1";//监测点的状态
+    private String speedNum = "15";
+    private static final String CAM_ID = "cam_id";
 
     public static void newInstance(Activity activity, String camID) {
         Intent intent = new Intent(activity, DipRealTimeDataActivity.class);
@@ -139,11 +143,15 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     }
 
     public void initSpinner() {
+
         tiltSensorTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                mParaID = mParaIds.get(position).getParaID() + "";
+                mParaID = mParaList.get(position).getParaID() + "";
+                mSeq = mParaList.get(position).getSeq();
+                mParaState = mParaList.get(position).getStates();
+                refreshState();
                 getLoopRequest(Integer.parseInt(speedNum));
             }
 
@@ -151,6 +159,17 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    /**
+     * 刷新监测点状态
+     */
+    private void refreshState() {
+        if (mParaState.equals(TiltSensorParaState.OPEN)) {
+            tiltSensorStateTv.setText("开");
+        } else {
+            tiltSensorStateTv.setText("关");
+        }
     }
 
     @Override
@@ -277,11 +296,12 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     public void onGetGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
         mIsInit = true;
         if (dataBean == null || dataBean.getList() == null || dataBean.getList().isEmpty()) {
-            onGetGetTiltSensorParaFail("");
+            onGetGetTiltSensorParaFail("没有数据");
+            mSeq = "";
         } else {
-            mParaIds = dataBean.getList();
+            mParaList = dataBean.getList();
             List<String> dataList = new ArrayList<String>();
-            for (TiltSensorParaJson.ListBean jsonBean : mParaIds) {
+            for (TiltSensorParaJson.ListBean jsonBean : mParaList) {
                 dataList.add(jsonBean.getParaName());
             }
             mSpAdapter = new CommonAdapter<String>(getActivity(), R.layout.item_common) {
@@ -294,6 +314,8 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             tiltSensorTypeSp.setAdapter(mSpAdapter);
             tiltSensorTypeSp.setSelection(0);
             mParaID = dataList.get(0);
+            mSeq = mParaList.get(0).getSeq();
+            mParaState = mParaList.get(0).getStates();
             getLoopRequest(Integer.parseInt(speedNum));
         }
     }
@@ -396,9 +418,33 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void onGetTiltSensorLogFail(String msg) {
+        showMsg(msg);
     }
 
-    @OnClick({R.id.tvCharDetails, R.id.tvRefreshTime, R.id.tvAlarm})
+    @Override
+    public void onSetAllMessageSuccess(HttpResponse<String> dataBean) {
+        switch (dataBean.getData()) {
+            case TiltSensorParaState.CLOSE:
+                mParaState = TiltSensorParaState.CLOSE;
+                break;
+            case TiltSensorParaState.OPEN:
+                mParaState = TiltSensorParaState.OPEN;
+                break;
+            case TiltSensorParaState.RESET:
+                mParaState = TiltSensorParaState.RESET;
+                break;
+        }
+        mParaList.get(tiltSensorTypeSp.getSelectedItemPosition()).setStates(mParaState);//更新监测点列表里的数据
+        refreshState();
+        showMsg(dataBean.getMsg());
+    }
+
+    @Override
+    public void onSetAllMessageFail(String msg) {
+        showMsg(msg);
+    }
+
+    @OnClick({R.id.tvCharDetails, R.id.tvRefreshTime, R.id.tvAlarm, R.id.tiltSensorStateTv})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvCharDetails:
@@ -424,6 +470,13 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
                             getLoopRequest(Integer.parseInt(speedNum));
                         })
                         .show();
+                break;
+            case R.id.tiltSensorStateTv:
+                if (mParaState.equals(TiltSensorParaState.OPEN)) {
+                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.CLOSE + "");
+                } else {
+                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.OPEN + "");
+                }
                 break;
         }
     }

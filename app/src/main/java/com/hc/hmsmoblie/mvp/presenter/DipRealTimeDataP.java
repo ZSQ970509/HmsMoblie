@@ -1,6 +1,7 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
+import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
 import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorActivityC;
@@ -48,5 +49,26 @@ public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implemen
                 })
                 .doFinally(() -> getIView().hideLoading())
                 .subscribe(responseNetObserver);
+    }
+
+    @Override
+    public void setAllMessage(String paraID, String seq, String type) {
+        new TiltSensorActivityM()
+                .setAllMessage(paraID, seq, type)
+                .compose(getIView().bindLifecycle())
+                .doOnSubscribe(disposable -> getIView().showLoading("正在加载中~"))
+                .doFinally(() -> getIView().hideLoading())
+                .subscribe(new NetObserver<HttpResponse<String>>() {
+                    @Override
+                    public void onSuccess(HttpResponse<String> tiltSensorParaJson) {
+                        getIView().onSetAllMessageSuccess(tiltSensorParaJson);
+                    }
+
+                    @Override
+                    public void onFail(ApiException msg) {
+                        getIView().onSetAllMessageFail(msg.getMessage());
+                    }
+                });
+
     }
 }
