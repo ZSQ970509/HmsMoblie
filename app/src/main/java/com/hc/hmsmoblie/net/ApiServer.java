@@ -123,6 +123,7 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_SENSOR + "SetAllMessage")
     Observable<HttpResponse<String>> setAllMessage(@Field("paraID")String paraID, @Field("Seq")String seq, @Field("Type")String type);
 
+    @FormUrlEncoded
     @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
     @POST(UrlHelper.API_TITLE_SENSOR + "getIotDeviceInfo")
     Observable<TiltSensorStateJson> getTitleSensorState(@Field("deviceId")String deviceId);
