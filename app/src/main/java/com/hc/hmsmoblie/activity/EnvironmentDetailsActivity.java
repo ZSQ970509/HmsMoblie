@@ -122,6 +122,7 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         refreshData(EnvironmentParaTypeEnum.PM10);
     }
 
+
     private void refreshData(EnvironmentParaTypeEnum paraTypeEnum) {
         mPresenter.getPara(mCamId, mSeqId, FormatUtils.dateToString(mSelectTimed), mProId, paraTypeEnum, mTimeTypeEnum.getType());
     }

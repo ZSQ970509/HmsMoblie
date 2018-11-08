@@ -92,19 +92,54 @@
             android:textColor="@color/colorBtn"
             android:textSize="14sp" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvAlarm"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="@dimen/activity_margin"
         android:layout_marginTop="@dimen/activity_margin_small"
-        android:drawablePadding="@dimen/x10"
-        android:drawableRight="@drawable/video_detail_right"
-        android:text="@string/tempAlarm"
-        android:textColor="@color/colorBtn"
-        android:textSize="14sp" />
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设备状态："
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvTitleSensorCheck"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:background="@drawable/shape_blu_border"
+            android:textColor="@color/colorBtn"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:text="查看" />
+        <TextView
+            android:id="@+id/tvTitleSensorSetting"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:background="@drawable/shape_blu_border"
+            android:textColor="@color/colorBtn"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_marginLeft="@dimen/x10"
+            android:text="配置" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/x10"
+            android:drawableRight="@drawable/video_detail_right"
+            android:text="@string/tempAlarm"
+            android:textColor="@color/colorBtn"
+            android:textSize="14sp" />
+    </LinearLayout>
+
 
 
     <View

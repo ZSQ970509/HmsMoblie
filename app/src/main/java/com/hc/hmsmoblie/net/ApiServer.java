@@ -11,28 +11,16 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
         import com.hc.hmsmoblie.bean.json.SensorLogJson;
-        import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
-        import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
+        import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
         import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
         import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
         import com.hc.hmsmoblie.bean.json.VideoDriverJson;
-import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
-import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
-import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
+        import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
 import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
-import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
-import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
-import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
-import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
-import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
-import com.hc.hmsmoblie.bean.json.ProjectJson;
-import com.hc.hmsmoblie.bean.json.LoginJson;
-import com.hc.hmsmoblie.bean.json.VideoDriverJson;
         import com.yc.yclibrary.YcInit;
 
-        import java.lang.reflect.Array;
         import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +118,12 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetGetTiltSensorPara")
     Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId")String cmID);
+
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "SetAllMessage")
     Observable<HttpResponse<String>> setAllMessage(@Field("paraID")String paraID, @Field("Seq")String seq, @Field("Type")String type);
+
+    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
+    @POST(UrlHelper.API_TITLE_SENSOR + "getIotDeviceInfo")
+    Observable<TiltSensorStateJson> getTitleSensorState(@Field("deviceId")String deviceId);
 }

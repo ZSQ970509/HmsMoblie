@@ -38,7 +38,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal">
-
+            <Button
+                android:id="@+id/dialog_btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="#AAAAAA"
+                android:text="取消"
+                android:textSize="14sp" />
             <Button
                 android:id="@+id/dialog_btn_sure"
                 android:layout_width="0dp"
@@ -46,17 +54,10 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="确定"
-                android:textColor="#AAAAAA"
+
                 android:textSize="14sp" />
 
-            <Button
-                android:id="@+id/dialog_btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:text="取消"
-                android:textSize="14sp" />
+
         </LinearLayout>
 
         <TextView

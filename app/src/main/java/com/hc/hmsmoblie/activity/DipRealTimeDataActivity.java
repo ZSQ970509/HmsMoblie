@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,6 +29,7 @@ import com.hc.hmsmoblie.bean.domain.TiltSensorAlarmBean;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
 import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
@@ -74,6 +76,10 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     TextView tvRefreshTime;
     @BindView(R.id.tvAlarm)
     TextView tvAlarm;
+    @BindView(R.id.tvTitleSensorCheck)
+    TextView tvTitleSensorCheck;
+    @BindView(R.id.tvTitleSensorSetting)
+    TextView tvTitleSensorSetting;
     @BindView(R.id.rvData)
     RecyclerView rvData;
     @BindView(R.id.tiltSensorStateTv)
@@ -444,9 +450,33 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         showMsg(msg);
     }
 
-    @OnClick({R.id.tvCharDetails, R.id.tvRefreshTime, R.id.tvAlarm, R.id.tiltSensorStateTv})
+    @Override
+    public void getTiltSensorStateSuccess(TiltSensorStateJson tiltSensorStateJson) {
+        Log.e("huxin",tiltSensorStateJson.toString());
+        //电量
+        tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getBat();
+        //信号强度
+        tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getSignal();
+        //设备状态
+        Integer.toBinaryString(tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getState());
+        //告警状态
+        Integer.toBinaryString(tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getWarn());
+    }
+
+    @Override
+    public void getTiltSensorStateFail(String msg) {
+
+    }
+
+    @OnClick({R.id.tvCharDetails, R.id.tvRefreshTime, R.id.tvAlarm, R.id.tiltSensorStateTv, R.id.tvTitleSensorCheck, R.id.tvTitleSensorSetting})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tvTitleSensorCheck:
+               mPresenter.getTiltSensorState(mSeq);
+                break;
+            case R.id.tvTitleSensorSetting:
+               // TiltSensorActivity.newInstance(getActivity(), mCamId);
+                break;
             case R.id.tvCharDetails:
                 TiltSensorActivity.newInstance(getActivity(), mCamId);
                 break;
