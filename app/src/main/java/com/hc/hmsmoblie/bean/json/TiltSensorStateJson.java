@@ -437,6 +437,41 @@ public class TiltSensorStateJson implements Serializable{
                 private int Signal;
                 private int State;
                 private int Warn;
+                private int Slope_Thres_X;
+                private int Slope_Thres_Y;
+                private int RptPer;
+                private int RptPer_warn;
+                public int getSlope_Thres_X() {
+                    return Slope_Thres_X;
+                }
+
+                public void setSlope_Thres_X(int Slope_Thres_X) {
+                    this.Slope_Thres_X = Slope_Thres_X;
+                }
+
+                public int getSlope_Thres_Y() {
+                    return Slope_Thres_Y;
+                }
+
+                public void setSlope_Thres_Y(int slope_Thres_Y) {
+                    Slope_Thres_Y = slope_Thres_Y;
+                }
+
+                public int getRptPer() {
+                    return RptPer;
+                }
+
+                public void setRptPer(int rptPer) {
+                    RptPer = rptPer;
+                }
+
+                public int getRptPer_warn() {
+                    return RptPer_warn;
+                }
+
+                public void setRptPer_warn(int rptPer_warn) {
+                    RptPer_warn = rptPer_warn;
+                }
 
                 public int getBat() {
                     return Bat;

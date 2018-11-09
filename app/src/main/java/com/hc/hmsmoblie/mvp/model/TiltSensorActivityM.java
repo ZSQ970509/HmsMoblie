@@ -39,4 +39,12 @@ public class TiltSensorActivityM implements IModel {
                 .getTitleSensorState(deviceId)
                 .compose(NetTransformer.compose());
     }
+
+    public Observable setIotDeviceInfo(String deviceId, String serviceId, String method
+            , String jsonCommand, int expireTime) {
+        return RetrofitUtils.Instance
+                .getApiService(ApiServer.class)
+                .setIotDeviceInfo(deviceId, serviceId, method, jsonCommand, expireTime)
+                .compose(NetTransformer.compose());
+    }
 }

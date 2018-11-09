@@ -11,6 +11,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ProjectJson;
         import com.hc.hmsmoblie.bean.json.LoginJson;
         import com.hc.hmsmoblie.bean.json.SensorLogJson;
+        import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
         import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
         import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
@@ -19,6 +20,7 @@ package com.hc.hmsmoblie.net;
         import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
 import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
+        import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
         import com.yc.yclibrary.YcInit;
 
         import java.util.ArrayList;
@@ -125,6 +127,13 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
-    @POST(UrlHelper.API_TITLE_SENSOR + "getIotDeviceInfo")
+    @POST(UrlHelper.API_TITLE_SENSOR + "getIotDeviceInfo?")
     Observable<TiltSensorStateJson> getTitleSensorState(@Field("deviceId")String deviceId);
+
+    @FormUrlEncoded
+    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
+    @POST(UrlHelper.API_TITLE_SENSOR + "setIotDeviceInfo?")
+    Observable<TiltSensorSettingJson> setIotDeviceInfo(@Field("deviceId")String deviceId, @Field("serviceId")String serviceId, @Field("method")String method
+            , @Field("jsonCommand")String jsonCommand, @Field("expireTime")int expireTime);
+
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF" >
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="@dimen/y450"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/seekbar_dialog_bg">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:text="设备状态"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout3">
+            <Button
+                android:id="@+id/dialog_btn_sure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:text="确定"
+
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDriveBat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="设备电量：0" />
+
+        <TextView
+            android:id="@+id/tvDriveSignal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvDriveBat"
+            android:layout_below="@+id/tvDriveBat"
+            android:layout_marginTop="5dp"
+            android:text="信号强度：0" />
+
+        <TextView
+            android:id="@+id/tvAutoDrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDriveSignal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="自动开关传感器状态：开" />
+
+        <TextView
+            android:id="@+id/tvHeadDrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvAutoDrive"
+            android:layout_below="@+id/tvAutoDrive"
+            android:layout_marginTop="5dp"
+            android:text="手动开关传感器状态：关" />
+
+        <TextView
+            android:id="@+id/tvBatState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tvDriveSignal"
+            android:layout_below="@+id/tvHeadDrive"
+            android:layout_marginTop="5dp"
+            android:text="电池电量过低" />
+    </RelativeLayout>
+
+</RelativeLayout>

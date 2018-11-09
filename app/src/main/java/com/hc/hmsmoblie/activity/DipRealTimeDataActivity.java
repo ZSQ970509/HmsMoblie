@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.classic.adapter.BaseAdapterHelper;
 import com.classic.adapter.CommonAdapter;
@@ -26,6 +29,8 @@ import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.domain.DipRealBean;
 import com.hc.hmsmoblie.bean.domain.TiltSensorAlarmBean;
+import com.hc.hmsmoblie.bean.domain.TiltSensorSettingBean;
+import com.hc.hmsmoblie.bean.domain.TiltSensorSettingPostBean;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
@@ -38,7 +43,10 @@ import com.hc.hmsmoblie.net.NetObserver;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.widget.AlarmDialog;
 import com.hc.hmsmoblie.widget.CommonDialog;
+import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
 import com.yc.yclibrary.exception.ApiException;
+
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +102,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     CommonRecyclerAdapter<DipRealBean> adapter;
     private boolean mIsInit = false;
     private TiltSensorAlarmBean mTiltSensorAlarmBean;
+    private TiltSensorSettingBean mTiltSensorSettingBean;
     private String[] mDipReal;
     private String[] mDipRealUnit;
     private SensorLogJson.ListBean mSensorLogListBean;
@@ -122,6 +131,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
     protected void initView(Bundle bundle) {
         setToolBar("倾角数据");
         mTiltSensorAlarmBean = new TiltSensorAlarmBean();
+        mTiltSensorSettingBean = new TiltSensorSettingBean();
         mDipReal = getResources().getStringArray(R.array.dipRealData);
         mDipRealUnit = getResources().getStringArray(R.array.dipRealDataUnit);
         mCamId = getIntent().getStringExtra(CAM_ID);
@@ -278,7 +288,73 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             }
         });
     }
+    private void titleSensorCheckDialogShow(TiltSensorStateJson tiltSensorStateJson) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View v = inflater.inflate(R.layout.dip_title_sensor_see, null);
+        TextView btn_sure = (TextView) v.findViewById(R.id.dialog_btn_sure);
+        TextView tvDriveBat = (TextView) v.findViewById(R.id.tvDriveBat);
+        TextView tvDriveSignal = (TextView) v.findViewById(R.id.tvDriveSignal);
+        TextView tvAutoDrive = (TextView) v.findViewById(R.id.tvAutoDrive);
+        TextView tvHeadDrive = (TextView) v.findViewById(R.id.tvHeadDrive);
+        TextView tvBatState = (TextView) v.findViewById(R.id.tvBatState);
+        List<TiltSensorStateJson.DevicesBean.ServicesBean> servicesBean = tiltSensorStateJson.getDevices().get(0).getServices();
+        for (TiltSensorStateJson.DevicesBean.ServicesBean servicesBeans :servicesBean) {
+            if (servicesBeans.getServiceId().equals("CurVal")) {
+                //电量
+                tvDriveBat.setText("设备电量："+servicesBeans.getData().getBat()/10+"V");
+                //信号强度
+                tvDriveSignal.setText("信号强度：-"+servicesBeans.getData().getSignal()+"dBm");
+                //设备状态
+                if(servicesBeans.getData().getState() != 0){
+                    String boolAutoOpen =  Integer.toBinaryString(servicesBeans.getData().getState()).substring(1,2);
+                    if(boolAutoOpen.equals("0") ){
+                        tvAutoDrive.setText("自动开关传感器状态：开");
+                    }else if(boolAutoOpen.equals("1")){
+                        tvAutoDrive.setText("自动开关传感器状态：关");
+                    }
+                }else{
+                    tvAutoDrive.setText("自动开关传感器状态：开");
+                }
+                if(servicesBeans.getData().getState() != 0 && Integer.toBinaryString(servicesBeans.getData().getState()).length() >= 7){
+                    String boolHeadOpen = Integer.toBinaryString(servicesBeans.getData().getState()).substring(0,1);
+                    if(boolHeadOpen.equals("0") ){
+                        tvHeadDrive.setText("手动开关传感器状态：开");
+                    }else if(boolHeadOpen.equals("1") ){
+                        tvHeadDrive.setText("手动开关传感器状态：关");
+                    }
+                }else{
+                    tvHeadDrive.setText("手动开关传感器状态：开");
+                }
 
+                //告警状态
+                if(servicesBeans.getData().getWarn() != 0 && Integer.toBinaryString(servicesBeans.getData().getWarn()).length() >= 7){
+                    String boolBatState = Integer.toBinaryString(servicesBeans.getData().getWarn()).substring(011);
+                    if(boolBatState.equals("0") ){
+                        tvBatState.setText("电池状态:电池电量充足");
+                    }else if(boolBatState.equals("1")){
+                        tvBatState.setText("电池状态:电池电量过低");
+                    }
+                }else{
+                    tvBatState.setText("电池状态:电池电量充足");
+                }
+            }
+        }
+
+        final Dialog dialog = builder.create();
+        dialog.show();
+        dialog.getWindow().setContentView(v);//自定义布局应该在这里添加，要在dialog.show()的后面
+        //dialog.getWindow().setGravity(Gravity.CENTER);//可以设置显示的位置
+        btn_sure.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -452,30 +528,117 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void getTiltSensorStateSuccess(TiltSensorStateJson tiltSensorStateJson) {
-        Log.e("huxin",tiltSensorStateJson.toString());
-        //电量
-        tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getBat();
-        //信号强度
-        tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getSignal();
-        //设备状态
-        Integer.toBinaryString(tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getState());
-        //告警状态
-        Integer.toBinaryString(tiltSensorStateJson.getDevices().get(0).getServices().get(2).getData().getWarn());
+        if (tiltSensorStateJson.getTotalCount() != 0) {
+            titleSensorCheckDialogShow(tiltSensorStateJson);
+        }else{
+            showToast("暂无数据！");
+        }
+
     }
+
+    @Override
+    public void getTiltSensorStateSettingSuccess(TiltSensorStateJson tiltSensorStateJson) {
+        if (tiltSensorStateJson.getTotalCount() != 0) {
+            List<TiltSensorStateJson.DevicesBean.ServicesBean> servicesBean = tiltSensorStateJson.getDevices().get(0).getServices();
+            for (TiltSensorStateJson.DevicesBean.ServicesBean servicesBeans :servicesBean){
+                if( servicesBeans.getServiceId().equals("Setting")){
+                    mTiltSensorSettingBean.setAxisX(servicesBeans.getData().getSlope_Thres_X()/10000.0);
+                    mTiltSensorSettingBean.setAxisY(servicesBeans.getData().getSlope_Thres_Y()/10000.0);
+                    mTiltSensorSettingBean.setRptPer(servicesBeans.getData().getRptPer());
+                    mTiltSensorSettingBean.setRptPer_warn(servicesBeans.getData().getRptPer_warn());
+                    mTiltSensorSettingBean.setCacheTime(servicesBeans.getData().getRptPer()+100);
+                }
+                if( servicesBeans.getServiceId().equals("CurVal")){
+                    if(servicesBeans.getData().getState() != 0 && Integer.toBinaryString(servicesBeans.getData().getState()).length() >= 7){
+                        String boolHeadOpen = Integer.toBinaryString(servicesBeans.getData().getState()).substring(0,1);
+                        if(boolHeadOpen.equals("0") ){
+                            mTiltSensorSettingBean.setDevState(0);
+                        }else if(boolHeadOpen.equals("1") ){
+                            mTiltSensorSettingBean.setDevState(1);
+                        }
+                    }else{
+                        mTiltSensorSettingBean.setDevState(0);
+                    }
+                }
+            }
+            new TitleSenorSettingDialog(getActivity())
+                    .setAlarmData(mTiltSensorSettingBean)
+                    .setLeftClick(tiltSensorAlarmBean -> {
+                        if(tiltSensorAlarmBean != null) {
+                            //设置xy阈值
+                            JSONObject result_XY = new JSONObject();
+
+                            result_XY.put("Slope_Thres_x", tiltSensorAlarmBean.getAxisX());
+                            result_XY.put("Slope_Thres_y", tiltSensorAlarmBean.getAxisY());
+                            TiltSensorSettingPostBean settingPostBean_XY = new TiltSensorSettingPostBean(mSeq, "Setting"
+                                    , "SET_SLOPE_THRES", result_XY.toJSONString(), tiltSensorAlarmBean.getCacheTime());
+                            //设置上报时间
+                            JSONObject result_Report_Time = new JSONObject();
+                            result_Report_Time.put("RptPer", tiltSensorAlarmBean.getRptPer());
+                            result_Report_Time.put("RptPer_warn", tiltSensorAlarmBean.getRptPer_warn());
+                            TiltSensorSettingPostBean setting_ReportTime = new TiltSensorSettingPostBean(mSeq, "Setting"
+                                    , "SET_REPORT_PER", result_Report_Time.toJSONString(), tiltSensorAlarmBean.getCacheTime());
+
+                            //设置设备开关
+                            JSONObject result_InitVal = new JSONObject();
+                            switch (tiltSensorAlarmBean.getDevState()) {
+                                case 0:
+                                    result_InitVal.put("cmd", 0);
+                                    break;
+                                case 1:
+                                    result_InitVal.put("cmd", 128);
+                                    break;
+                                case 2:
+                                    result_InitVal.put("cmd", 1);
+                                    break;
+                            }
+                            TiltSensorSettingPostBean setting_Switch = new TiltSensorSettingPostBean(mSeq, "InitVal"
+                                    , "OPERAT_CMD", result_InitVal.toJSONString(), tiltSensorAlarmBean.getCacheTime());
+                            mPresenter.setIotDeviceInfo(settingPostBean_XY, setting_ReportTime, setting_Switch);
+                        }else{
+                            showToast("配置的数据不能为空！");
+                        }
+                    })
+                    .show();
+        }else{
+            showToast("暂无数据！");
+        }
+    }
+
 
     @Override
     public void getTiltSensorStateFail(String msg) {
 
     }
 
+    @Override
+    public void setIotDeviceInfoSuccess(boolean xy, boolean reportTime, boolean Switch) {
+        if(xy && reportTime && Switch){
+            showToast("配置已发送");
+        }else{
+            StringBuilder toastStr = new StringBuilder();
+            if(!xy){
+                toastStr.append("x,y轴的倾角差阈值配置失败，");
+            }
+            if(!reportTime){
+                toastStr.append("数据上报时长配置失败，");
+            }
+            if(!Switch){
+                toastStr.append("传感器状态更改失败，");
+            }
+            showToast(toastStr.append("请重试！").toString());
+
+        }
+    }
+
     @OnClick({R.id.tvCharDetails, R.id.tvRefreshTime, R.id.tvAlarm, R.id.tiltSensorStateTv, R.id.tvTitleSensorCheck, R.id.tvTitleSensorSetting})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvTitleSensorCheck:
-               mPresenter.getTiltSensorState(mSeq);
+                mPresenter.getTiltSensorState(mSeq,false);
                 break;
             case R.id.tvTitleSensorSetting:
-               // TiltSensorActivity.newInstance(getActivity(), mCamId);
+                mPresenter.getTiltSensorState(mSeq,true);
                 break;
             case R.id.tvCharDetails:
                 TiltSensorActivity.newInstance(getActivity(), mCamId);

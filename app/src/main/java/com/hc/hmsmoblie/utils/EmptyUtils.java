@@ -41,7 +41,12 @@ public class EmptyUtils {
         }
 
     }
-
+    public static String  isEmptyStr(String s){
+        if(s.equals("")){
+            return "0";
+        }
+        return  s;
+    }
     public static String isState(String original, String s1, String s2, String s3) {
         if (TextUtils.isEmpty(original)) {
             return s1;

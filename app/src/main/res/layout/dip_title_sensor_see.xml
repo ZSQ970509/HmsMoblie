@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/shape_white_round"
+    android:gravity="center"
+    android:paddingTop="@dimen/activity_margin"
+    android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="查看设备状态"
+            android:textColor="#233238"
+            android:textSize="20sp" />
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/tvDriveBat"
+                style="@style/DialogAlarmTvStyle"
+                android:text="设备电池电量:" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/tvDriveSignal"
+                style="@style/DialogAlarmTvStyle"
+                android:text="设备信号强度:" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/tvAutoDrive"
+                style="@style/DialogAlarmTvStyle"
+                android:text="自动开关传感器状态：" />
+
+
+        </LinearLayout>
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/tvHeadDrive"
+                style="@style/DialogAlarmTvStyle"
+                android:text="手动开关传感器状态:" />
+
+        </LinearLayout>
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                android:id="@+id/tvBatState"
+                style="@style/DialogAlarmTvStyle"
+                android:text="电池状态:" />
+
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dialog_btn_sure"
+                style="@style/CommonDialogBtnStyle"
+                android:background="@drawable/shape_blue_btn"
+                android:gravity="center"
+                android:text="确定" />
+
+    </LinearLayout>
+</LinearLayout>

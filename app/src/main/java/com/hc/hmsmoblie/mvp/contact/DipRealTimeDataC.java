@@ -23,13 +23,15 @@ public class DipRealTimeDataC {
         void onSetAllMessageSuccess(HttpResponse<String> dataBean);
         void onSetAllMessageFail(String msg);
         void getTiltSensorStateSuccess(TiltSensorStateJson tiltSensorStateJson);
+        void getTiltSensorStateSettingSuccess(TiltSensorStateJson tiltSensorStateJson);
         void getTiltSensorStateFail(String msg);
+        void setIotDeviceInfoSuccess(boolean xy,boolean reportTime,boolean Switch);
     }
     public interface P {
         void getGetTiltSensorPara(String cmID);
         void getTiltSensorLog(boolean isShowLoad,String cmID, String paraID, int pageindex, int pagesize, String startTime
                 , String endTime, NetObserver<HttpResponse<SensorLogJson>>responseNetObserver);
         void setAllMessage(String paraID,String seq, String type);
-        void getTiltSensorState(String deviceId);
+        void getTiltSensorState(String deviceId,boolean isSetting);
     }
 }
