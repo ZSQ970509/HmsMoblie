@@ -40,6 +40,7 @@ import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
+import com.hc.hmsmoblie.utils.BatAndSignalUtil;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.widget.AlarmDialog;
 import com.hc.hmsmoblie.widget.CommonDialog;
@@ -302,9 +303,9 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         for (TiltSensorStateJson.DevicesBean.ServicesBean servicesBeans :servicesBean) {
             if (servicesBeans.getServiceId().equals("CurVal")) {
                 //电量
-                tvDriveBat.setText("设备电量："+servicesBeans.getData().getBat()/10+"V");
+                tvDriveBat.setText("设备电量："+ BatAndSignalUtil.changeBatPercentage(servicesBeans.getData().getBat()/10.0));
                 //信号强度
-                tvDriveSignal.setText("信号强度：-"+servicesBeans.getData().getSignal()+"dBm");
+                tvDriveSignal.setText("信号强度："+BatAndSignalUtil.changeSignalPercentage(-servicesBeans.getData().getSignal()));
                 //设备状态
                 if(servicesBeans.getData().getState() != 0){
                     String boolAutoOpen =  Integer.toBinaryString(servicesBeans.getData().getState()).substring(1,2);
