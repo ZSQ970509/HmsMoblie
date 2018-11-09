@@ -2,6 +2,7 @@ package com.hc.hmsmoblie.mvp.presenter;
 
 import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
+import com.hc.hmsmoblie.bean.type.UserTypeId;
 import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.model.LoginM;
@@ -15,6 +16,8 @@ import com.yc.yclibrary.net.BaseObserver;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  *

@@ -48,13 +48,13 @@
         <item>水平度</item>
     </string-array>
     <string-array name="dipRealData">
-        <item>X轴角度</item>
-        <item>Y轴角度</item>
+        <item>前后轴角度°</item>
+        <item>左右轴角度°</item>
         <item>激光距离</item>
-        <item>X轴单次角度差</item>
-        <item>Y轴单次角度差</item>
-        <item>X轴累计角度差</item>
-        <item>Y轴累计角度差</item>
+        <item>前后轴单次角度差</item>
+        <item>左右轴单次角度差</item>
+        <item>前后轴累计角度差</item>
+        <item>左右轴累计角度差</item>
         <item>单次沉降</item>
         <item>累计沉降</item>
         <item>当次空间位移</item>

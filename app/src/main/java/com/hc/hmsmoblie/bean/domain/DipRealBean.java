@@ -8,7 +8,7 @@ public class DipRealBean {
     private Double data = 0.0;
     private boolean isEmpty = false;//是否为空的
     private boolean isAlarm = false;//是否预警
-    private String suffix = "";//后缀
+    private String suffix = "";//前缀
 
     public DipRealBean(boolean isEmpty) {
         this.isEmpty = isEmpty;
