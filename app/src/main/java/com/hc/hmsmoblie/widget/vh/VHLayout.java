@@ -277,8 +277,6 @@ public class VHLayout extends RelativeLayout {
         mLeftTextList = new String[]{"序号"};
         for (int i = 0; i < headerListData.length; i++) {
             switch (i) {
-                case 2:
-                case 3:
                 case 4:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemSamllWidth);
                     break;
@@ -287,9 +285,10 @@ public class VHLayout extends RelativeLayout {
                 case 10:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemBigWidth);
                     break;
-                case 11:
                 case 1:
-                case 12:
+                case 5:
+                case 7:
+                case 9:
                     mRightTitleWidthList[i] = getResources().getDimensionPixelSize(R.dimen.tiltSensorItemTimeWidth);
                     break;
                 default:

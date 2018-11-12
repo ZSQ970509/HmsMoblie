@@ -49,7 +49,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem4"
-                android:layout_width="@dimen/tiltSensorItemSamllWidth"
+                android:layout_width="@dimen/tiltSensorItemWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem5"
-                android:layout_width="@dimen/tiltSensorItemSamllWidth"
+                android:layout_width="@dimen/tiltSensorItemWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -73,7 +73,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem7"
-                android:layout_width="@dimen/tiltSensorItemWidth"
+                android:layout_width="@dimen/tiltSensorItemTimeWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -89,7 +89,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem9"
-                android:layout_width="@dimen/tiltSensorItemWidth"
+                android:layout_width="@dimen/tiltSensorItemTimeWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -105,7 +105,7 @@
 
             <TextView
                 android:id="@+id/tiltSensorItem11"
-                android:layout_width="@dimen/tiltSensorItemWidth"
+                android:layout_width="@dimen/tiltSensorItemTimeWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
@@ -119,21 +119,21 @@
                 tools:text="@string/tiltSensorItem12" />
             <TextView
                 android:id="@+id/tiltSensorItem13"
-                android:layout_width="@dimen/tiltSensorItemTimeWidth"
+                android:layout_width="@dimen/tiltSensorItemWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
                 tools:text="@string/tiltSensorItem13" />
             <TextView
                 android:id="@+id/tiltSensorItem14"
-                android:layout_width="@dimen/tiltSensorItemTimeWidth"
+                android:layout_width="@dimen/tiltSensorItemWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"
                 tools:text="@string/tiltSensorItem14" />
             <TextView
                 android:id="@+id/tiltSensorItem15"
-                android:layout_width="@dimen/tiltSensorItemTimeWidth"
+                android:layout_width="@dimen/tiltSensorItemWidth"
                 android:layout_height="40dp"
                 android:gravity="center"
                 android:textSize="12sp"

@@ -12,6 +12,7 @@ import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorDataJson;
 import com.hc.hmsmoblie.utils.FormatUtils;
+import com.hc.hmsmoblie.utils.TiltSensorStateUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -40,21 +41,32 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
         LinearLayout moveLayout = helper.getView(R.id.id_move_layout);
         mMoveViewList.add(moveLayout);
         moveLayout.scrollTo(getFixX(), 0);
-        DecimalFormat df = new DecimalFormat("0.#");
         String data[] = new String[]{item.getRowNumber() + "",
                 item.getParaName() + "",
                 item.getCreateTime() + "",
-                FormatUtils.stripTrailingZeros(item.getOx()) + "",
-                FormatUtils.stripTrailingZeros(item.getOy()) + "", FormatUtils.stripTrailingZeros(item.getObd()) + "",
-                FormatUtils.stripTrailingZeros(item.getOldx()) + "," + FormatUtils.stripTrailingZeros(item.getOldy()),
-                FormatUtils.stripTrailingZeros(item.getCdObd()) + "(" + FormatUtils.stripTrailingZeros(item.getObdOldx()) + "," + FormatUtils.stripTrailingZeros(item.getObdOldy()) + "," + FormatUtils.stripTrailingZeros(item.getObdOldz()) + ")",
-                FormatUtils.stripTrailingZeros(item.getStagex()) + "," + FormatUtils.stripTrailingZeros(item.getStagey()),
-                FormatUtils.stripTrailingZeros(item.getCdObdDiff()) + "(" + FormatUtils.stripTrailingZeros(item.getObdStagex()) + "," + FormatUtils.stripTrailingZeros(item.getObdStagey()) + "," + FormatUtils.stripTrailingZeros(item.getObdStagez()) + ")",
-                FormatUtils.stripTrailingZeros(item.getFirstOldx()) + "," + FormatUtils.stripTrailingZeros(item.getFirstOldy()),
-                FormatUtils.stripTrailingZeros(item.getCdObdAdd()) + "(" + FormatUtils.stripTrailingZeros(item.getObdFirstOldx()) + "," + FormatUtils.stripTrailingZeros(item.getObdFirstOldy()) + "," + FormatUtils.stripTrailingZeros(item.getObdFirstOldz()) + ")",
-                FormatUtils.stripTrailingZeros(item.getObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getObdRight()),
-                FormatUtils.stripTrailingZeros(item.getStageObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getStageObdRight()),
-                FormatUtils.stripTrailingZeros(item.getFloatObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getFloatObdRight())};
+                isZero(item.getOx(), TiltSensorStateUtils.formatX(item.getOx())),
+                //FormatUtils.stripTrailingZeros(item.getOx()) + "",
+                isZero(item.getOy(), TiltSensorStateUtils.formatY(item.getOy())),
+                //FormatUtils.stripTrailingZeros(item.getOy()) + "",
+                FormatUtils.stripTrailingZeros(item.getObd()) + "",
+                isZero(item.getOldx(), TiltSensorStateUtils.formatX(item.getOldx())) +","+ isZero(item.getOldy(), TiltSensorStateUtils.formatY(item.getOldy())),
+                //FormatUtils.stripTrailingZeros(item.getOldx()) + "," + FormatUtils.stripTrailingZeros(item.getOldy()),
+                isZeroNum4(item.getCdObd(),TiltSensorStateUtils.formatSettlement(item.getCdObd()))+"+" + (item.getHightObd() == 0 ? "\\" : item.getHightObd()),
+                //FormatUtils.stripTrailingZeros(item.getCdObd()) + "(" + FormatUtils.stripTrailingZeros(item.getObdOldx()) + "," + FormatUtils.stripTrailingZeros(item.getObdOldy()) + "," + FormatUtils.stripTrailingZeros(item.getObdOldz()) + ")",
+                isZero(item.getStagex(), TiltSensorStateUtils.formatX(item.getStagex()))  +","+ isZero(item.getStagey(), TiltSensorStateUtils.formatY(item.getStagey())),
+                //FormatUtils.stripTrailingZeros(item.getStagex()) + "," + FormatUtils.stripTrailingZeros(item.getStagey()),
+                isZeroNum4(item.getCdObdDiff(),TiltSensorStateUtils.formatSettlement(item.getCdObdDiff()))+"+"+(item.getHightObd() == 0 ? "\\" : item.getHightObdDiff()),
+                //FormatUtils.stripTrailingZeros(item.getCdObdDiff()) + "(" + FormatUtils.stripTrailingZeros(item.getObdStagex()) + "," + FormatUtils.stripTrailingZeros(item.getObdStagey()) + "," + FormatUtils.stripTrailingZeros(item.getObdStagez()) + ")",
+                isZero(item.getStagex(), TiltSensorStateUtils.formatX(item.getFirstOldx()))  +","+ isZero(item.getStagey(), TiltSensorStateUtils.formatY(item.getFirstOldy())),
+                //FormatUtils.stripTrailingZeros(item.getFirstOldx()) + "," + FormatUtils.stripTrailingZeros(item.getFirstOldy()),
+                isZeroNum4(item.getCdObdAdd(),TiltSensorStateUtils.formatSettlement(item.getCdObdDiff()))+"_"+(item.getHightObd() == 0 ? "\\" : item.getHightObdAdd()),
+                //FormatUtils.stripTrailingZeros(item.getCdObdAdd()) + "(" + FormatUtils.stripTrailingZeros(item.getObdFirstOldx()) + "," + FormatUtils.stripTrailingZeros(item.getObdFirstOldy()) + "," + FormatUtils.stripTrailingZeros(item.getObdFirstOldz()) + ")",
+                isZero(item.getObdLeft(),TiltSensorStateUtils.formatSettlement(item.getObdLeft())) +","+isZero(item.getObdRight(),TiltSensorStateUtils.formatSettlement(item.getObdRight())),
+                //FormatUtils.stripTrailingZeros(item.getObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getObdRight()),
+                isZero(item.getStageObdLeft(),TiltSensorStateUtils.formatSettlement(item.getStageObdLeft())) +","+isZero(item.getStageObdRight(),TiltSensorStateUtils.formatSettlement(item.getStageObdRight())),
+                //FormatUtils.stripTrailingZeros(item.getStageObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getStageObdRight()),
+                isZero(item.getFloatObdLeft(),TiltSensorStateUtils.formatSettlement(item.getFloatObdLeft())) +","+isZero(item.getFloatObdRight(),TiltSensorStateUtils.formatSettlement(item.getFloatObdRight()))};
+                //FormatUtils.stripTrailingZeros(item.getFloatObdLeft()) + "," + FormatUtils.stripTrailingZeros(item.getFloatObdRight())};
         helper.setText(itemId[0], data[0]);
 //        String[] name = mContext.getResources().getStringArray(R.array.tiltSensorTitleName);
         for (int i = 1; i < itemId.length; i++) {
@@ -68,6 +80,14 @@ public class VHAdapter extends BaseItemDraggableAdapter<SensorLogJson.ListBean, 
         }
     }
 
+    public String isZero(double x, String y) {
+        String data = x == 0 ? "\\" : y + Math.abs(x);
+        return data;
+    }
+    public String isZeroNum4(double x, String y) {
+        String data = x == 0 ? "\\" : y + (FormatUtils.stripTrailingZeros(Math.abs(x)));
+        return data;
+    }
     public void refreshLayoutMove(int moveOffsetX) {
         if (null != mMoveViewList) {
             for (int i = 0; i < mMoveViewList.size(); i++) {
