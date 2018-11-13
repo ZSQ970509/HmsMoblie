@@ -100,8 +100,8 @@ public class PhoneSystemUtils {
         Intent i = new Intent(Intent.ACTION_VIEW);
         if (Build.VERSION.SDK_INT >= 24) { //适配安卓7.0
             i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri apkFileUri = FileProvider.getUriForFile(context.getApplicationContext(),
-                    context.getPackageName(), file);
+            String packageName = getPackageName();
+            Uri apkFileUri = FileProvider.getUriForFile(context.getApplicationContext(), packageName, file);
             i.setDataAndType(apkFileUri, "application/vnd.android.package-archive");
         } else {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -133,7 +133,7 @@ public class PhoneSystemUtils {
 //        deleteFile(url);
 
         org.xutils.http.RequestParams requestParams = new org.xutils.http.RequestParams(url);  // 下载地址
-        String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "cache_download" + File.separator + "slope.apk";
+        String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "cache_download" + File.separator + "hms.apk";
         requestParams.setSaveFilePath(path); // 为RequestParams设置文件下载后的保存路径
 //        requestParams.setAutoRename(false); // 下载完成后自动为文件命名
         ProgressDialog mProgressDialog = new ProgressDialog(activity);

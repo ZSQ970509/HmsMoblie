@@ -21,7 +21,7 @@ public class PermissionsUtils {
      */
     public static final String[] PERMISSION_BLUETOOTH = {
             Manifest.permission.READ_PHONE_STATE,//读写 sd card 权限非常重要
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.BLUETOOTH_ADMIN,//read phone state用于获取 imei 设备信息
             Manifest.permission.WAKE_LOCK,
             Manifest.permission.ACCESS_WIFI_STATE,
@@ -32,7 +32,7 @@ public class PermissionsUtils {
             Manifest.permission.RECEIVE_BOOT_COMPLETED,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.VIBRATE,
-            Manifest.permission.GET_TASKS,
+            Manifest.permission.GET_TASKS
     };
     /**
      * 申请权限(多个申请结果会合并成一个，即PermissionCall只会被调用一次)
