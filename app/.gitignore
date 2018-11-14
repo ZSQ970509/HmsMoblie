@@ -1,2 +1,9 @@
 .idea
 app.iml
+.gradle/
+build/
+*.apk
+.idea/workspace.xml
+.idea/libraries
+.idea/gradle.xml
+.idea/misc.xml
