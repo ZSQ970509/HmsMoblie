@@ -23,18 +23,18 @@
     <string-array name="tiltSensorTitleName">
         <item>侦测点</item>
         <item>生成时间</item>
-        <item>X轴角度</item>
-        <item>Y轴角度</item>
-        <item>激光距离</item>
-        <item>单次角度差</item>
-        <item>单次沉降+坐标位移</item>
-        <item>阶段角度差</item>
-        <item>阶段沉降+坐标位移</item>
-        <item>累计角度差</item>
-        <item>累计沉降+坐标位移</item>
-        <item>单次水平度浮动</item>
-        <item>阶段水平度浮动</item>
-        <item>累计水平度浮动</item>
+        <item>前后轴角度°</item>
+        <item>左右轴角度°</item>
+        <item>激光距离mm</item>
+        <item>单次角度差°</item>
+        <item>单次沉降+坐标位移\nmm</item>
+        <item>阶段角度差°</item>
+        <item>阶段沉降+坐标位移\nmm</item>
+        <item>累计角度差°</item>
+        <item>累计沉降+坐标位移\nmm</item>
+        <item>水平度mm\n(左端,右端)</item>
+        <item>水平度mm\n(左端,右端)</item>
+        <item>水平度mm\n(左端,右端)</item>
     </string-array>
 
     <string-array name="selectItemSpData">

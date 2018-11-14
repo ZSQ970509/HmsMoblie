@@ -296,6 +296,8 @@ public class TiltSensorAbleFragment extends YcMvpLazyFragment<TiltSensorAbleFrag
                     mTitleVisibility.put(12, isCheckedList.get(i));
                     mTitleVisibility.put(13, isCheckedList.get(i));
                     break;
+
+
             }
             VHLayout.setTitleVisibility(mTitleVisibility);
         }

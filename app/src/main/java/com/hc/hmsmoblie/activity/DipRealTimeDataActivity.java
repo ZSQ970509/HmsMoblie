@@ -338,7 +338,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
                 //告警状态
                 if (servicesBeans.getData().getWarn() != 0 && Integer.toBinaryString(servicesBeans.getData().getWarn()).length() >= 7) {
-                    String boolBatState = Integer.toBinaryString(servicesBeans.getData().getWarn()).substring(011);
+                    String boolBatState = Integer.toBinaryString(servicesBeans.getData().getWarn()).substring(0,1);
                     if (boolBatState.equals("0")) {
                         tvBatState.setText("电池状态:电池电量充足");
                     } else if (boolBatState.equals("1")) {
@@ -494,6 +494,12 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
 
     @Override
     public void onGetTiltSensorLogFail(String msg) {
+        adapter.clear();
+        for (int i = 0; i < mDipReal.length; i++) {
+            adapter.add(new DipRealBean(true));
+        }
+        tvCreateTime.setText(EMPTY_DEFAULT);
+        mSensorLogListBean = null;
         showMsg(msg);
     }
 
@@ -540,7 +546,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
                     mTiltSensorSettingBean.setAxisY(servicesBeans.getData().getSlope_Thres_Y() / 10000.0);
                     mTiltSensorSettingBean.setRptPer(servicesBeans.getData().getRptPer());
                     mTiltSensorSettingBean.setRptPer_warn(servicesBeans.getData().getRptPer_warn());
-                    mTiltSensorSettingBean.setCacheTime(servicesBeans.getData().getRptPer() + 100);
+                    mTiltSensorSettingBean.setCacheTime(2880);
                 }
                 if (servicesBeans.getServiceId().equals("CurVal")) {
                     if (servicesBeans.getData().getState() != 0 && Integer.toBinaryString(servicesBeans.getData().getState()).length() >= 7) {
