@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
         android:paddingTop="@dimen/activity_margin_small">
@@ -33,6 +34,17 @@
             android:paddingLeft="2dp"
             android:paddingRight="2dp"
             android:textColor="@color/colorBlack3" />
+
+        <TextView
+            android:id="@+id/tvTitleSensorAll"
+            android:layout_width="@dimen/x150"
+            android:layout_height="@dimen/tiltSensorPickerHeight"
+            android:background="@drawable/shape_blu_border"
+            android:textColor="@color/colorBtn"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_marginLeft="@dimen/x10"
+            android:text="批量开关" />
 
         <View
             android:layout_width="wrap_content"

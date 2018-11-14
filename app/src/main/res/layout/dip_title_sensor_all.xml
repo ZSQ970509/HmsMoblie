@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/shape_white_round"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="查看设备状态"
+        android:textColor="#233238"
+        android:textSize="20sp" />
+
+    <!--<LinearLayout style="@style/DialogAlarmLinearLayoutStyle">-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/alarmRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/alarmOpenTv"
+            style="@style/CommonDialogBtnStyle"
+            android:background="@drawable/shape_white_blue_left"
+            android:gravity="center"
+            android:text="开启" />
+        <TextView
+            android:id="@+id/alarmCloseTv"
+            style="@style/CommonDialogBtnStyle"
+            android:background="#3b93fb"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/x1"
+            android:text="关闭" />
+        <TextView
+            android:id="@+id/alarmRightTv"
+            style="@style/CommonDialogBtnStyle"
+            android:background="@drawable/shape_white_orange_right"
+            android:gravity="center"
+            android:text="取消" />
+
+
+    </LinearLayout>
+</LinearLayout>
