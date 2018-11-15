@@ -132,4 +132,21 @@ public class DipRealTimeDataP extends BasePresenter<DipRealTimeDataC.V> implemen
             return "";
         }).subscribe();
     }
+
+    public void setAllIotDeviceInfo(TiltSensorSettingPostBean tiltSensorSettingPostBean_1, TiltSensorSettingPostBean tiltSensorSettingPostBean_2
+            , TiltSensorSettingPostBean tiltSensorSettingPostBean_3, String seq) {
+        Observable<TiltSensorSettingJson> setting_XY = new TiltSensorActivityM().setIotDeviceInfo(tiltSensorSettingPostBean_1.getDeviceId(),tiltSensorSettingPostBean_1.getServiceId(),
+                tiltSensorSettingPostBean_1.getMethod(),tiltSensorSettingPostBean_1.getJsonCommand(),tiltSensorSettingPostBean_1.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_ReportTime = new TiltSensorActivityM().setIotDeviceInfo(tiltSensorSettingPostBean_2.getDeviceId(),tiltSensorSettingPostBean_2.getServiceId(),
+                tiltSensorSettingPostBean_2.getMethod(),tiltSensorSettingPostBean_2.getJsonCommand(),tiltSensorSettingPostBean_2.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_Switch = new TiltSensorActivityM().setIotDeviceInfo(tiltSensorSettingPostBean_3.getDeviceId(),tiltSensorSettingPostBean_3.getServiceId(),
+                tiltSensorSettingPostBean_3.getMethod(),tiltSensorSettingPostBean_3.getJsonCommand(),tiltSensorSettingPostBean_3.getExpireTime());
+
+        Observable.zip(setting_XY, setting_ReportTime, setting_Switch, (tiltSensorSettingJson, tiltSensorSettingJson2, tiltSensorSettingJson3) -> {
+            //服务端返回的数据分别是 tiltSensorStateJson, tiltSensorStateJson2, tiltSensorStateJson3
+            getIView().setAllIotDeviceInfoSuccess(tiltSensorSettingJson,tiltSensorSettingJson2,tiltSensorSettingJson3,seq);
+            getIView().hideLoading();
+            return "";
+        }).subscribe();
+    }
 }

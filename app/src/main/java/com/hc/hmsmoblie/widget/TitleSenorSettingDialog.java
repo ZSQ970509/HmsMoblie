@@ -46,8 +46,11 @@ public class TitleSenorSettingDialog extends Dialog {
     TextView alarmLeftTv;
     //    @BindView(R.id.alarmRightTv)
     TextView alarmRightTv;
+
+    TextView alarmMiddleTv;
     private RightClick mRightClick;
     private LeftClick mLeftClick;
+    private MiddleClick mMiddleClick;
     private TiltSensorSettingBean mTiltSensorSettingBean;
     private CommonAdapter<String> mSpAdapter;
 //    public static AlarmDialog newInstance(Context context, TiltSensorAlarmBean tiltSensorAlarmBean) {
@@ -75,6 +78,7 @@ public class TitleSenorSettingDialog extends Dialog {
         alarmCacheTimeEdt = findViewById(R.id.alarmCacheTime);
         alarmLeftTv = findViewById(R.id.alarmLeftTv);
         alarmRightTv = findViewById(R.id.alarmRightTv);
+        alarmMiddleTv = findViewById(R.id.alarmMiddleTv);
         getSpinnerData(context);
         //设置对话框位置大小
         Window dialogWindow = getWindow();
@@ -111,6 +115,35 @@ public class TitleSenorSettingDialog extends Dialog {
 
                     }
                     mLeftClick.onClick(mTiltSensorSettingBean);
+                }
+            }
+        });
+        alarmMiddleTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mMiddleClick != null) {
+                    /*mTiltSensorSettingBean.setAxisX(Double.parseDouble(alarmAxisXEdt.getText().toString().trim()));
+                    mTiltSensorSettingBean.setAxisY(Double.parseDouble(alarmAxisYEdt.getText().toString().trim()));
+                    mTiltSensorSettingBean.setSettlement(Double.parseDouble(alarmSettlementEdt.getText().toString().trim()));
+                    mTiltSensorSettingBean.setSpace(Double.parseDouble(alarmSpaceEdt.getText().toString().trim()));
+                    mTiltSensorSettingBean.setAlreadySet(true);
+                   */
+                    if(alarmAxisXEdt.getText().toString().equals("") || alarmAxisYEdt.getText().toString().equals("")
+                            || alarmSettlementEdt.getText().toString().equals("") || alarmSpaceEdt.getText().toString().equals("")
+                            || alarmCacheTimeEdt.getText().toString().equals("")){
+                        mTiltSensorSettingBean = null;
+                    }else{
+                        mTiltSensorSettingBean = new TiltSensorSettingBean();
+                        mTiltSensorSettingBean.setAxisX(Double.parseDouble(alarmAxisXEdt.getText().toString())*10000);
+                        mTiltSensorSettingBean.setAxisY(Double.parseDouble(alarmAxisYEdt.getText().toString())*10000);
+                        mTiltSensorSettingBean.setRptPer(Integer.parseInt(alarmSettlementEdt.getText().toString()));
+                        mTiltSensorSettingBean.setRptPer_warn(Integer.parseInt(alarmSpaceEdt.getText().toString()));
+                        mTiltSensorSettingBean.setDevState(alarmSpinner.getSelectedItemPosition());
+                        mTiltSensorSettingBean.setCacheTime(Integer.parseInt(alarmCacheTimeEdt.getText().toString()));
+
+                    }
+                    mMiddleClick.onClick(mTiltSensorSettingBean);
                 }
             }
         });
@@ -172,6 +205,16 @@ public class TitleSenorSettingDialog extends Dialog {
             alarmRightTv.setText(text);
         return this;
     }
+    /**
+     * 设置中间按钮点击事件
+     *
+     * @param middleClick
+     * @return
+     */
+    public TitleSenorSettingDialog setMiddleClick(MiddleClick middleClick) {
+        mMiddleClick = middleClick;
+        return this;
+    }
 
     /**
      * 设置左侧按钮点击事件
@@ -203,5 +246,7 @@ public class TitleSenorSettingDialog extends Dialog {
         void onClick(TiltSensorSettingBean mTiltSensorSettingBean);
     }
 
-
+    public interface MiddleClick {
+        void onClick(TiltSensorSettingBean mTiltSensorSettingBean);
+    }
 }

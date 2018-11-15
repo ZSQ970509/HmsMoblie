@@ -3,6 +3,7 @@ package com.hc.hmsmoblie.mvp.contact;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.SetAllMessageJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
@@ -26,6 +27,8 @@ public class DipRealTimeDataC {
         void getTiltSensorStateSettingSuccess(TiltSensorStateJson tiltSensorStateJson);
         void getTiltSensorStateFail(String msg);
         void setIotDeviceInfoSuccess(boolean xy,boolean reportTime,boolean Switch);
+        void setAllIotDeviceInfoSuccess(TiltSensorSettingJson tiltSensorSettingJson1, TiltSensorSettingJson tiltSensorSettingJson2
+                , TiltSensorSettingJson tiltSensorSettingJson3, String seq);
     }
     public interface P {
         void getGetTiltSensorPara(String cmID);
