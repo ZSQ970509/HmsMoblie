@@ -80,6 +80,7 @@
         <item name="android:background">@drawable/selector_navigation_bottom_item_background</item>
         <item name="android:textColor">@color/selector_select_bottom_item</item>
     </style>
+
     <style name="SelectItemPopStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:padding">0dp</item>
@@ -97,9 +98,11 @@
     <style name="TextContentStyle">
         <item name="android:textColor">#666666</item>
     </style>
+
     <style name="TextFristTitleStyle">
         <item name="android:textColor">#000000</item>
     </style>
+
     <style name="DialogAlarmLinearLayoutStyle">
         <item name="android:layout_marginTop">@dimen/activity_margin_small</item>
         <item name="android:layout_marginRight">@dimen/activity_margin_small</item>
@@ -108,11 +111,13 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
     </style>
+
     <style name="DialogAlarmTvStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">#37474F</item>
     </style>
+
     <style name="DialogAlarmEdtStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -124,5 +129,13 @@
         <item name="android:textSize">@dimen/y30</item>
         <item name="android:textColor">#37474F</item>
         <item name="android:inputType">numberSigned|numberDecimal</item>
+    </style>
+
+    <style name="DialogDeviceStateTvStyle">
+        <item name="android:layout_marginTop">@dimen/activity_margin_small</item>
+        <item name="android:layout_marginLeft">@dimen/activity_margin_small</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#37474F</item>
     </style>
 </resources>

@@ -176,9 +176,9 @@ public class EnvironmentDetailsActivity extends BaseMvpActivity<EnvironmentDetai
         tvComplianceRate.setText("达标率：" + chartData.getRate() + "%");
         lineChart.getAxisLeft().setAxisMinimum(0f); //如果设置Y轴的最小值
         lineChart.setRenderer(new EmptyLineChartRendererNew(lineChart));
-        ChartUtils.EmptyLineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
-        ChartUtils.EmptyLineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
-        ChartUtils.EmptyLineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
+        LineDataSet setData1 = ChartUtils.getLineDataSet(lineChart, chartData.getAvg(), 0, Color.parseColor("#7bb6eb"), "均值", LineDataSet.Mode.CUBIC_BEZIER);
+        LineDataSet setData2 = ChartUtils.getLineDataSet(lineChart, chartData.getMax(), 1, Color.parseColor("#444349"), "峰值", LineDataSet.Mode.CUBIC_BEZIER);
+        LineDataSet setData3 = ChartUtils.getLineDataSet(lineChart, chartData.getMin(), 2, Color.parseColor("#90ed7d"), "谷值", LineDataSet.Mode.CUBIC_BEZIER);
         lineChart.setData(new LineData(setData1, setData2, setData3));
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
         markerData.add(new ChartMarkerDataBeanNew("均值", chartData.getAvg()));

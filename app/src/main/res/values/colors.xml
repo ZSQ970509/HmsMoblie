@@ -15,6 +15,9 @@
     <color name="colorGrayAl">#262626</color>
     <color name="colorBtn">#499DF2</color>
 
+    <color name="colorRed">#f24e4e</color>
+    <color name="colorBlue">#4da0f3</color>
+
     <color name="itemTitleColor">#233238</color>
     <color name="itemContentColor">#37474F</color>
 

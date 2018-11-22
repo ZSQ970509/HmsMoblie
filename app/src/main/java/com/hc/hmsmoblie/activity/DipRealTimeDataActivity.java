@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +36,6 @@ import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
 import com.hc.hmsmoblie.mvp.contact.DipRealTimeDataC;
-import com.hc.hmsmoblie.mvp.model.TiltSensorActivityM;
 import com.hc.hmsmoblie.mvp.presenter.DipRealTimeDataP;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
@@ -48,7 +46,6 @@ import com.hc.hmsmoblie.widget.AlarmDialog;
 import com.hc.hmsmoblie.widget.CommonDialog;
 import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
 import com.yc.yclibrary.exception.ApiException;
-import com.yc.yclibrary.net.BaseObserver;
 
 import org.json.simple.JSONObject;
 
@@ -240,7 +237,6 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
                         mPresenter.getTiltSensorLog(false, mCamId, mParaID, 1, 10, "", "", responseNetObserver);
                     }
                 });
-
     }
 
     private void getParaIds() {
@@ -280,7 +276,6 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             @Override
             public void onClick(View arg0) {
                 dialog.dismiss();
-
             }
         });
         sbSpeedDialog.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -410,7 +405,7 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
             mSpAdapter.addAll(dataList);
             tiltSensorTypeSp.setAdapter(mSpAdapter);
             tiltSensorTypeSp.setSelection(0);
-            mParaID = dataList.get(0);
+            mParaID = mParaList.get(0).getParaID()+"";
             mSeq = mParaList.get(0).getSeq();
             mParaState = mParaList.get(0).getStates();
             getLoopRequest(Integer.parseInt(speedNum));
@@ -447,8 +442,8 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         adapter.add(new DipRealBean(mSensorLogListBean.getOx(), TiltSensorStateUtils.formatX(mSensorLogListBean.getOx())));  //x角度
         adapter.add(new DipRealBean(mSensorLogListBean.getOy(), TiltSensorStateUtils.formatY(mSensorLogListBean.getOx())));  //y角度
         adapter.add(new DipRealBean(mSensorLogListBean.getObd()));  //激光距离
-        adapter.add(new DipRealBean(mSensorLogListBean.getOldx(), TiltSensorStateUtils.formatX(mSensorLogListBean.getOldx())));  //X轴单次角度差
         adapter.add(new DipRealBean(mSensorLogListBean.getOldy(), TiltSensorStateUtils.formatY(mSensorLogListBean.getOldy())));  //Y轴单次角度差
+        adapter.add(new DipRealBean(mSensorLogListBean.getOldx(), TiltSensorStateUtils.formatX(mSensorLogListBean.getOldx())));  //X轴单次角度差
         adapter.add(new DipRealBean(mSensorLogListBean.getFirstOldx(), isAlarm(mSensorLogListBean.getFirstOldx(), mTiltSensorAlarmBean.getAxisX()), TiltSensorStateUtils.formatX(mSensorLogListBean.getFirstOldx())));  //X轴累计角度差
         adapter.add(new DipRealBean(mSensorLogListBean.getFirstOldy(), isAlarm(mSensorLogListBean.getFirstOldy(), mTiltSensorAlarmBean.getAxisY()), TiltSensorStateUtils.formatY(mSensorLogListBean.getFirstOldy())));  //Y轴累计角度差
 
@@ -482,14 +477,14 @@ public class DipRealTimeDataActivity extends BaseMvpActivity<DipRealTimeDataP> i
         adapter.add(new DipRealBean(mSensorLogListBean.getHightObd()));//当次空间位移
         adapter.add(new DipRealBean(mSensorLogListBean.getHightObdAdd(), isAlarm(mSensorLogListBean.getHightObdAdd(), mTiltSensorAlarmBean.getSpace())));//累计空间位移
 
-        double obdLeft = mSensorLogListBean.getObdLeft();//单次沉降左
+        double obdLeft = mSensorLogListBean.getObdLeft();//单次浮动左
         adapter.add(new DipRealBean(obdLeft, TiltSensorStateUtils.formatSettlement(obdLeft)));
-        double obdRight = mSensorLogListBean.getObdRight();//单次沉降右
+        double obdRight = mSensorLogListBean.getObdRight();//单次浮动右
         adapter.add(new DipRealBean(obdRight, TiltSensorStateUtils.formatSettlement(obdRight)));
 
-        double floatObdLef = mSensorLogListBean.getFloatObdLeft();//累计沉降左
+        double floatObdLef = mSensorLogListBean.getFloatObdLeft();//累计浮动左
         adapter.add(new DipRealBean(floatObdLef, isAlarm(floatObdLef, mTiltSensorAlarmBean.getHorizontalFloatingLeft()), TiltSensorStateUtils.formatSettlement(floatObdLef)));
-        double floatObdRight = mSensorLogListBean.getFloatObdRight();//累计沉降右
+        double floatObdRight = mSensorLogListBean.getFloatObdRight();//累计浮动右
         adapter.add(new DipRealBean(floatObdRight, isAlarm(floatObdRight, mTiltSensorAlarmBean.getHorizontalFloatingRight()), TiltSensorStateUtils.formatSettlement(floatObdRight)));
     }
 

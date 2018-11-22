@@ -140,11 +140,15 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".activity.TiltSensorActivityOld"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.TiltSensorActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".activity.DipRealTimeDataActivity"
             android:launchMode="singleTop"

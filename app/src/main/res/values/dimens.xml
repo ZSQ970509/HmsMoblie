@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="activity_margin_more_small">4dp</dimen>
     <dimen name="activity_margin_small">8dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="activity_margin_big">32dp</dimen>
@@ -7,7 +8,7 @@
     <dimen name="item_title_size">20sp</dimen>
     <dimen name="item_content_size">16sp</dimen>
     <dimen name="small_size">14sp</dimen>
-
+    <dimen name="small_more_size">12sp</dimen>
     <dimen name="left_margin">@dimen/x10</dimen>
     <dimen name="tiltSensorLeftTitleWidth">60dp</dimen>
     <dimen name="tiltSensorItemWidth">100dp</dimen>
@@ -19,6 +20,8 @@
     <dimen name="tiltSensorPickerHeight">24dp</dimen>
     <dimen name="tiltSensorPickerWidth">80dp</dimen>
     <dimen name="tiltSensorTextSize">14sp</dimen>
+    <dimen name="tiltSensorMid">30dp</dimen>
+
     <dimen name="niceSpinnerHeight">24dp</dimen>
     <dimen name="niceSpinnerMinWidth">70dp</dimen>
     <dimen name="searchBtnHeight">24dp</dimen>
@@ -27,4 +30,9 @@
     <dimen name="chartLegendHeight">8dp</dimen>
     <dimen name="chartLegendWidth">8dp</dimen>
     <dimen name="chartLegendTextSize">12sp</dimen>
+
+    <dimen name="image_size">26dp</dimen>
+    <dimen name="image_size_small">18dp</dimen>
+
+    <dimen name="tiltSensorWidth">260dp</dimen>
 </resources>

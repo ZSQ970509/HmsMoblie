@@ -1,5 +1,9 @@
 package com.hc.hmsmoblie.utils;
 
+import android.support.annotation.DrawableRes;
+
+import com.hc.hmsmoblie.R;
+
 /**
  * 倾角状态
  */
@@ -114,6 +118,22 @@ public class TiltSensorStateUtils {
             return "↓";
         } else {
             return default_date;
+        }
+    }
+
+    /**
+     * 根据value返回显示趋势图标
+     * @param value
+     * @return
+     */
+    @DrawableRes
+    public static int getState(double value) {
+        if (value > 0) {
+            return R.drawable.ic_up;
+        } else if (value > 0) {
+            return R.drawable.ic_none;
+        } else {
+            return R.drawable.ic_down;
         }
     }
 }

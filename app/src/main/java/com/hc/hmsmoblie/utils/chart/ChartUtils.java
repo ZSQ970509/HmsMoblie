@@ -1,14 +1,17 @@
 package com.hc.hmsmoblie.utils.chart;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
 
+import com.classic.adapter.BaseAdapterHelper;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
@@ -175,26 +178,26 @@ public class ChartUtils {
      * @param name           图表下方标示的名称
      * @return
      */
-    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name) {
+    public static LineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name) {
         return getLineDataSet(lineChart, dataList, chartDataIndex, color, name, LineDataSet.Mode.CUBIC_BEZIER);
     }
 
-    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode) {
+    public static LineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode) {
         return getLineDataSet(lineChart, dataList, chartDataIndex, color, name, mode, false);
     }
 
-    public static EmptyLineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode, boolean isDottedLine) {
+    public static LineDataSet getLineDataSet(LineChart lineChart, List<Double> dataList, int chartDataIndex, int color, String name, LineDataSet.Mode mode, boolean isDottedLine) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < dataList.size(); i++) {
             yVals.add(new Entry(i, Float.parseFloat(dataList.get(i) + "")));
         }
-        EmptyLineDataSet set;
+        LineDataSet set;
         if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0 && lineChart.getData().getDataSetByIndex(chartDataIndex) != null) {
-            set = (EmptyLineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
+            set = (LineDataSet) lineChart.getData().getDataSetByIndex(chartDataIndex);
             set.setLabel(name);
             set.setValues(yVals);
         } else {
-            set = new EmptyLineDataSet(yVals, name);
+            set = new LineDataSet(yVals, name);
             if (isDottedLine)
                 set.enableDashedLine(10f, 10f, 0f);
             // 设置平滑曲线
@@ -221,23 +224,35 @@ public class ChartUtils {
         return set;
     }
 
-
-    /**
-     * 折线图多种颜色（实现折线图间断）
-     */
-    public static class EmptyLineDataSet extends LineDataSet {
-        public EmptyLineDataSet(List<Entry> yVals, String label) {
-            super(yVals, label);
+    public static void setData(Activity activity, ChartLineView lineChart, String[] names, int[] colors, List<String> dataMarkerX, List<String> dataX, List<List<Double>> dataY, List<String> unit) {
+        LineData lineData = new LineData();
+        LineDataSet setData;
+        //初始化图表里的LineDataSet(线)数据
+        List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
+        for (int i = 0; i < dataY.size(); i++) {
+            setData = ChartUtils.getLineDataSet(lineChart, dataY.get(i),
+                    i, colors[i], names[i], LineDataSet.Mode.LINEAR, false);
+            lineData.addDataSet(setData);
+            markerData.add(new ChartMarkerDataBeanNew(names[i], dataY.get(i), unit.get(i)));
         }
-
-//        @Override
-//        public int getColor(int index) {
-//            if (mValues.get(index).getY() == -1 || (mValues.size() > index && mValues.get(index + 1).getY() == -1)) {
-//                return mColors.get(1);
-//            } else {
-//                return mColors.get(0);
-//            }
-//            return super.getColor(index);
-//        }
+        lineChart.setData(lineData);
+        //单击图表后的显示的对话框
+        ChartMarkerViewNew chartMarkerViewNew = new ChartMarkerViewNew(activity, markerData, dataMarkerX) {
+            @Override
+            public void onAdapterUpdate(BaseAdapterHelper helper, ChartMarkerDataBeanNew item, int xIndex) {
+                helper.setText(R.id.itemChartMarkerTv, item.getDataName() + "：" + item.getData().get(xIndex) + " (" + item.getUnit() + ")");
+            }
+        };
+        chartMarkerViewNew.setChartView(lineChart);
+        lineChart.setMarker(chartMarkerViewNew);
+        ChartUtils.setLeftYAxis(lineChart.getAxisLeft());
+        ChartUtils.setXAxis(lineChart.getXAxis(), dataX, -60f);
+        lineChart.getLegend().setDrawInside(true);
+        lineChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        lineChart.getLegend().setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        //刷新图表
+        lineChart.notifyDataSetChanged();
+        lineChart.invalidate();
+        lineChart.setVisibleXRangeMaximum(45);
     }
 }

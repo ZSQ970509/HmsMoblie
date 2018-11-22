@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTrance">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_white_round"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/deviceStateDialogTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="查看设备状态"
+            android:textColor="@color/itemContentColor"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/deviceStateDialogBatTv"
+            style="@style/DialogDeviceStateTvStyle"
+            android:text="设备电池电量：" />
+
+        <TextView
+            android:id="@+id/deviceStateDialogSignalTv"
+            style="@style/DialogDeviceStateTvStyle"
+            android:text="设备信号强度：" />
+
+        <TextView
+            android:id="@+id/deviceStateDialogAutoSwitchTv"
+            style="@style/DialogDeviceStateTvStyle"
+            android:text="自动开关传感器状态：" />
+
+        <TextView
+            android:id="@+id/deviceStateDialogHandSwitchTv"
+            style="@style/DialogDeviceStateTvStyle"
+            android:text="手动开关传感器状态：" />
+
+        <TextView
+            android:id="@+id/deviceStateDialogBatStateTv"
+            style="@style/DialogDeviceStateTvStyle"
+            android:text="电池状态：" />
+
+        <Button
+            android:id="@+id/deviceStateDialogConfirmBtn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:background="@drawable/shape_blue_left_right"
+            android:text="确定"
+            android:textColor="@color/colorWhiteGray"
+            android:textSize="18dp" />
+    </LinearLayout>
+</RelativeLayout>

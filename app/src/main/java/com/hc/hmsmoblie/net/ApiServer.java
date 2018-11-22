@@ -1,37 +1,39 @@
 package com.hc.hmsmoblie.net;
 
-        import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
-        import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
-        import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
-        import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
-        import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
-        import com.hc.hmsmoblie.bean.json.MainJson;
-        import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
-        import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
-        import com.hc.hmsmoblie.bean.json.ProjectJson;
-        import com.hc.hmsmoblie.bean.json.LoginJson;
-        import com.hc.hmsmoblie.bean.json.SensorLogJson;
-        import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
-        import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
-        import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
-        import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
-        import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
-        import com.hc.hmsmoblie.bean.json.VideoDriverJson;
-        import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
+import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
+import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
+import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
+import com.hc.hmsmoblie.bean.json.MainJson;
+import com.hc.hmsmoblie.bean.json.OnlineTimeJson;
+import com.hc.hmsmoblie.bean.json.ProjectDetailsJson;
+import com.hc.hmsmoblie.bean.json.ProjectJson;
+import com.hc.hmsmoblie.bean.json.LoginJson;
+import com.hc.hmsmoblie.bean.json.SensorLogJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorAllJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
+import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.json.UpdateVersionJson;
+import com.hc.hmsmoblie.bean.json.VideoDriverJson;
+import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
 import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
-        import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
-        import com.yc.yclibrary.YcInit;
+import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
+import com.yc.yclibrary.YcInit;
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-        import retrofit2.http.Headers;
-        import retrofit2.http.POST;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -43,7 +45,7 @@ public interface ApiServer {
     @POST(UrlHelper.BASE_API + "hmsLogin")
     Observable<HttpResponse<LoginJson>> login(@Field("userName") String userName, @Field("userPassWord") String passWord, @Field("typeid") String userType);
 
-    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_URL_UPDATE)
+    @Headers(YcInit.OTHER_BASE_URL + ":" + UrlHelper.BASE_URL_UPDATE)
     @GET(UrlHelper.API_UPDATE + "update")
     Observable<ArrayList<UpdateVersionJson>> updatedVersion(@Query("type") String packageName);
 
@@ -110,30 +112,35 @@ public interface ApiServer {
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetNewTiltSensorLog")
-    Observable<HttpResponse<List<TiltSensorChartJsonNew>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate,@Field("type") int type);
+    Observable<HttpResponse<List<TiltSensorChartJsonNew>>> getTiltSensorChart(@Field("camID") String camID, @Field("paraID") String paraID, @Field("timeType") String timeType, @Field("selDate") String selDate, @Field("type") int type);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetTiltSensorLog")
-    Observable<HttpResponse<SensorLogJson>> getTiltSensorLog(@Field("CamID")String cmID, @Field("ParaID")String paraID, @Field("pageindex")int pageindex
-            , @Field("pagesize")int pagesize, @Field("startTime")String startTime, @Field("endTime")String endTime);
+    Observable<HttpResponse<SensorLogJson>> getTiltSensorLog(@Field("CamID") String cmID, @Field("ParaID") String paraID, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize, @Field("startTime") String startTime, @Field("endTime") String endTime);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "GetGetTiltSensorPara")
-    Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId")String cmID);
+    Observable<HttpResponse<TiltSensorParaJson>> getGetTiltSensorPara(@Field("camId") String cmID);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_SENSOR + "SetAllMessage")
-    Observable<HttpResponse<String>> setAllMessage(@Field("paraID")String paraID, @Field("Seq")String seq, @Field("Type")String type);
+    Observable<HttpResponse<String>> setAllMessage(@Field("paraID") String paraID, @Field("Seq") String seq, @Field("Type") String type);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
+    @Headers(YcInit.OTHER_BASE_URL + ":" + UrlHelper.BASE_TITLE_SENSOR)
     @POST(UrlHelper.API_TITLE_SENSOR + "getIotDeviceInfo?")
-    Observable<TiltSensorStateJson> getTitleSensorState(@Field("deviceId")String deviceId);
+    Observable<TiltSensorStateJson> getTitleSensorState(@Field("deviceId") String deviceId);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL+":"+UrlHelper.BASE_TITLE_SENSOR)
+    @Headers(YcInit.OTHER_BASE_URL + ":" + UrlHelper.BASE_TITLE_SENSOR)
     @POST(UrlHelper.API_TITLE_SENSOR + "setIotDeviceInfo?")
-    Observable<TiltSensorSettingJson> setIotDeviceInfo(@Field("deviceId")String deviceId, @Field("serviceId")String serviceId, @Field("method")String method
-            , @Field("jsonCommand")String jsonCommand, @Field("expireTime")int expireTime);
+    Observable<TiltSensorSettingJson> setIotDeviceInfo(@Field("deviceId") String deviceId, @Field("serviceId") String serviceId, @Field("method") String method
+            , @Field("jsonCommand") String jsonCommand, @Field("expireTime") int expireTime);
+
+    @FormUrlEncoded
+    @POST(UrlHelper.API_TILT_SENSOR_2 + "getTitAll")
+    Observable<HttpResponse<TiltSensorAllJson>> getTitAll(@Field("ParaID") String paraID);
+
 
 }

@@ -173,7 +173,7 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         TiltSensorBeanNew tiltSensorBean = new TiltSensorBeanNew(mAllData);
         List<TiltSensorBeanNew.DataBean> tiltSensorDatas = tiltSensorBean.getData(type);//获取要展示的数据
         LineData lineData = new LineData();
-        ChartUtils.EmptyLineDataSet setData;
+        LineDataSet setData;
 
         mChartLegendAdapter = new ChartLegendAdapter(getActivity());
         mChartLegendAdapter.setAllData(tiltSensorDatas);

@@ -267,10 +267,10 @@
 //    }
 //
 //    @Override
-//    public void onGetGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
+//    public void onGetTiltSensorParaSuccess(TiltSensorParaJson dataBean) {
 //        mIsInit = true;
 //        if (dataBean == null || dataBean.getList() == null || dataBean.getList().isEmpty()) {
-//            onGetGetTiltSensorParaFail("");
+//            onGetTiltSensorParaFail("");
 //        } else {
 //            mParaIds = dataBean.getList();
 //            List<String> dataList = new ArrayList<String>();
@@ -292,7 +292,7 @@
 //    }
 //
 //    @Override
-//    public void onGetGetTiltSensorParaFail(String msg) {
+//    public void onGetTiltSensorParaFail(String msg) {
 //        CommonDialog.newInstanceSingle(getActivity())
 //                .setTitle("提示")
 //                .setMsg("此设备暂无倾角数据！")
@@ -457,7 +457,7 @@
 //    void onClick(View v) {
 //        switch (v.getId()) {
 //            case R.id.tvCharDaetails:
-//                TiltSensorActivity.newInstance(getActivity(), mCamId);
+//                TiltSensorActivityOld.newInstance(getActivity(), mCamId);
 //                break;
 //            case R.id.tvRefreshTime:
 //                speedDialogShow();

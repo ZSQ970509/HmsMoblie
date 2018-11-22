@@ -2,42 +2,456 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhiteGray"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
     <include layout="@layout/actionbar_layout" />
 
-    <FrameLayout
-        android:id="@+id/tiltSensorFl"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:scrollbars="none">
 
-  <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorGray6" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/tiltSensorTableCb"
-            style="@style/TiltSensorStyle"
-            android:checked="true"
-            android:text="流水数据表格" />
-
-        <!--<View
-            android:layout_width="1dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorGray" />-->
+            android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/tiltSensorChartCb"
-            style="@style/TiltSensorStyle"
-            android:text="流水数据图表" />
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center_vertical">
 
+                <ImageView
+                    android:id="@+id/tiltSensorLeftIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_pre" />
+
+                <Spinner
+                    android:id="@+id/tiltSensorParamTitleSp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center" />
+
+                <ImageView
+                    android:id="@+id/tiltSensorRightIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:src="@drawable/ic_next" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/activity_margin_small">
+
+                <ImageView
+                    android:id="@+id/tiltSensorSettingIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:src="@drawable/ic_setting" />
+
+                <ImageView
+                    android:id="@+id/tiltSensorSatesIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_state" />
+
+                <ImageView
+                    android:id="@+id/tiltSensorSwitchIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_open" />
+
+                <ImageView
+                    android:id="@+id/tiltSensorElectricityIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_battery4" />
+
+                <ImageView
+                    android:id="@+id/tiltSensorSignalIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_signl4" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_margin_small"
+                android:paddingTop="@dimen/activity_margin_small">
+
+                <TextView
+                    android:id="@+id/tiltSensorTimeTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="时间：2018-11-10 22:11:22"
+                    android:textColor="@color/colorBlack3"
+                    android:textSize="@dimen/small_size" />
+
+                <View
+                    android:id="@+id/midV1"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tiltSensorTimeTv"
+                    android:layout_marginLeft="@dimen/activity_margin_big"
+                    android:layout_marginTop="@dimen/activity_margin_more_small">
+
+                    <TextView
+                        android:id="@+id/tiltSensorXTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_marginLeft="@dimen/image_size_small"
+                        android:gravity="center"
+                        android:text="x轴:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorXIv"
+                        android:layout_width="12dp"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_toRightOf="@id/tiltSensorXTv"
+                        android:src="@drawable/ic_up" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorHeightTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorXTv"
+                        android:layout_marginLeft="@dimen/image_size_small"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:gravity="center"
+                        android:text="高度:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorHeightIv"
+                        android:layout_width="12dp"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorXTv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:layout_toRightOf="@id/tiltSensorHeightTv"
+                        android:gravity="center"
+                        android:src="@drawable/ic_down" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tiltSensorTimeTv"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginTop="@dimen/activity_margin_more_small"
+                    android:layout_toRightOf="@id/midV1">
+
+                    <TextView
+                        android:id="@+id/tiltSensorYTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_marginLeft="@dimen/image_size_small"
+                        android:gravity="center"
+                        android:text="Y轴:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorYIv"
+                        android:layout_width="12dp"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_toRightOf="@id/tiltSensorYTv"
+                        android:src="@drawable/ic_none" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_margin_small"
+                android:paddingTop="@dimen/activity_margin_small">
+
+                <ImageView
+                    android:id="@+id/tiltSensorAlarmIv"
+                    android:layout_width="@dimen/image_size"
+                    android:layout_height="@dimen/image_size"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:src="@drawable/ic_alarm_setting" />
+
+                <TextView
+                    android:id="@+id/tiltSensorItemTitleTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="累积变化"
+                    android:textColor="@color/colorBlack3"
+                    android:textSize="@dimen/small_size" />
+
+                <View
+                    android:id="@+id/midV2"
+                    android:layout_width="1dp"
+                    android:layout_height="1dp"
+                    android:layout_centerInParent="true" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tiltSensorAlarmIv"
+                    android:layout_marginLeft="@dimen/activity_margin_big"
+                    android:layout_marginTop="@dimen/activity_margin_more_small">
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmXIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmXTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmXIv"
+                        android:gravity="center"
+                        android:text="X轴:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmHeightIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmXIv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmHeightTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmXTv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmHeightIv"
+                        android:gravity="center"
+                        android:text="高度:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmHFLeftIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmHeightIv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmHFLeftTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmHeightTv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmHFLeftIv"
+                        android:gravity="center"
+                        android:text="左端浮动:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tiltSensorAlarmIv"
+                    android:layout_marginLeft="@dimen/activity_margin_small"
+                    android:layout_marginTop="@dimen/activity_margin_more_small"
+                    android:layout_toRightOf="@id/midV2">
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmYIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmYTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmYIv"
+                        android:gravity="center"
+                        android:text="Y轴:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmSpaceIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmYIv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmSpaceTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmYTv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmSpaceIv"
+                        android:text="空间位移:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+
+                    <ImageView
+                        android:id="@+id/tiltSensorAlarmHFRightIv"
+                        android:layout_width="@dimen/image_size_small"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmSpaceIv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:src="@drawable/ic_alarm" />
+
+                    <TextView
+                        android:id="@+id/tiltSensorAlarmHFRightTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorAlarmSpaceTv"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:layout_toRightOf="@id/tiltSensorAlarmHFRightIv"
+                        android:gravity="center"
+                        android:text="右端浮动:"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="倾角"
+                    android:textColor="@color/colorBlack3"
+                    android:textSize="@dimen/small_size" />
+
+                <TextView
+                    android:id="@+id/tiltSensorMoreTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="查看更多"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/small_size" />
+            </RelativeLayout>
+
+            <com.hc.hmsmoblie.utils.chart.ChartLineView
+                android:id="@+id/tiltSensorLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_more_small"
+                android:paddingBottom="@dimen/activity_margin_small"
+                android:text="注:按10分钟一个点"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/small_more_size" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="高度"
+                    android:textColor="@color/colorBlack3"
+                    android:textSize="@dimen/small_size" />
+
+                <TextView
+                    android:id="@+id/tiltSensorHeightMoreTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="查看更多"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/small_size" />
+            </RelativeLayout>
+
+
+            <com.hc.hmsmoblie.utils.chart.ChartLineView
+                android:id="@+id/tiltSensorHeightLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_more_small"
+                android:paddingBottom="@dimen/activity_margin_small"
+                android:text="注:按10分钟一个点"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/small_more_size" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
