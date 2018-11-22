@@ -1,7 +1,9 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
+import com.hc.hmsmoblie.bean.domain.TiltSensorSettingPostBean;
 import com.hc.hmsmoblie.bean.json.TiltSensorAllJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorActivityC;
@@ -12,6 +14,8 @@ import com.hc.hmsmoblie.net.NetObserver;
 import com.yc.yclibrary.exception.ApiException;
 import com.yc.yclibrary.mvp.BasePresenter;
 import com.yc.yclibrary.net.BaseObserver;
+
+import io.reactivex.Observable;
 
 /**
  *
@@ -123,5 +127,41 @@ public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> im
                         getIView().showMsg(msg.getMessage());
                     }
                 });
+    }
+
+    public void setIotDeviceInfo(TiltSensorSettingPostBean tiltSensorSettingPostBean_1, TiltSensorSettingPostBean tiltSensorSettingPostBean_2
+            , TiltSensorSettingPostBean tiltSensorSettingPostBean_3) {
+        Observable<TiltSensorSettingJson> setting_XY = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_1.getDeviceId(),tiltSensorSettingPostBean_1.getServiceId(),
+                tiltSensorSettingPostBean_1.getMethod(),tiltSensorSettingPostBean_1.getJsonCommand(),tiltSensorSettingPostBean_1.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_ReportTime = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_2.getDeviceId(),tiltSensorSettingPostBean_2.getServiceId(),
+                tiltSensorSettingPostBean_2.getMethod(),tiltSensorSettingPostBean_2.getJsonCommand(),tiltSensorSettingPostBean_2.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_Switch = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_3.getDeviceId(),tiltSensorSettingPostBean_3.getServiceId(),
+                tiltSensorSettingPostBean_3.getMethod(),tiltSensorSettingPostBean_3.getJsonCommand(),tiltSensorSettingPostBean_3.getExpireTime());
+
+        Observable.zip(setting_XY, setting_ReportTime, setting_Switch, (tiltSensorSettingJson, tiltSensorSettingJson2, tiltSensorSettingJson3) -> {
+            //服务端返回的数据分别是 tiltSensorStateJson, tiltSensorStateJson2, tiltSensorStateJson3
+            boolean isXYSend = tiltSensorSettingJson.getStatus() != null && tiltSensorSettingJson.getStatus().equals("PENDING");
+            boolean isReportTimeSend = tiltSensorSettingJson2.getStatus() !=null &&tiltSensorSettingJson2.getStatus().equals("PENDING");
+            boolean isSwitchSend =  tiltSensorSettingJson3.getStatus() !=null && tiltSensorSettingJson3.getStatus().equals("PENDING");
+            getIView().setIotDeviceInfoSuccess(isXYSend,isReportTimeSend,isSwitchSend);
+            getIView().hideLoading();
+            return "";
+        }).subscribe();
+    }
+    public void setAllIotDeviceInfo(TiltSensorSettingPostBean tiltSensorSettingPostBean_1, TiltSensorSettingPostBean tiltSensorSettingPostBean_2
+            , TiltSensorSettingPostBean tiltSensorSettingPostBean_3, String seq) {
+        Observable<TiltSensorSettingJson> setting_XY = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_1.getDeviceId(),tiltSensorSettingPostBean_1.getServiceId(),
+                tiltSensorSettingPostBean_1.getMethod(),tiltSensorSettingPostBean_1.getJsonCommand(),tiltSensorSettingPostBean_1.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_ReportTime = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_2.getDeviceId(),tiltSensorSettingPostBean_2.getServiceId(),
+                tiltSensorSettingPostBean_2.getMethod(),tiltSensorSettingPostBean_2.getJsonCommand(),tiltSensorSettingPostBean_2.getExpireTime());
+        Observable<TiltSensorSettingJson> setting_Switch = new TiltSensorActivityMOld().setIotDeviceInfo(tiltSensorSettingPostBean_3.getDeviceId(),tiltSensorSettingPostBean_3.getServiceId(),
+                tiltSensorSettingPostBean_3.getMethod(),tiltSensorSettingPostBean_3.getJsonCommand(),tiltSensorSettingPostBean_3.getExpireTime());
+
+        Observable.zip(setting_XY, setting_ReportTime, setting_Switch, (tiltSensorSettingJson, tiltSensorSettingJson2, tiltSensorSettingJson3) -> {
+            //服务端返回的数据分别是 tiltSensorStateJson, tiltSensorStateJson2, tiltSensorStateJson3
+            getIView().setAllIotDeviceInfoSuccess(tiltSensorSettingJson,tiltSensorSettingJson2,tiltSensorSettingJson3,seq);
+            getIView().hideLoading();
+            return "";
+        }).subscribe();
     }
 }
