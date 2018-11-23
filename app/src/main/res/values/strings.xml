@@ -85,4 +85,5 @@
     <string name="tempAlarm">手机端临时预警设置</string>
     <string name="LoadMoreFinal">已经加载全部！</string>
     <string name="LoadingMore">正在加载更多中！</string>
+    <string name="empty_time">时间：-</string>
 </resources>

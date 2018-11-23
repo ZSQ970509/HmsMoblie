@@ -13,7 +13,9 @@ import io.reactivex.Single;
 
 public class BatAndSignalUtil {
     public static String changeBatPercentage(double bat) {
-        if (bat > 11.7) {
+        if (bat == 0) {
+            return "0%";
+        } else if (bat > 11.7) {
             return "100%";
         } else if (bat > 11.2) {
             return "75%";
@@ -108,7 +110,9 @@ public class BatAndSignalUtil {
     @DrawableRes
     public static int batLevel(double bat) {
 //        return R.drawable.logo2;
-        if (bat > 117) {
+        if (bat == 0) {
+            return R.drawable.ic_battery233;
+        } else if (bat > 117) {
             return R.drawable.ic_battery4;
         } else if (bat > 112) {
             return R.drawable.ic_battery3;
@@ -129,8 +133,11 @@ public class BatAndSignalUtil {
      */
     @DrawableRes
     public static int signalLevel(double signal) {
+        signal = -signal;
 //        return R.drawable.logo2;
-        if (signal >= -61) {
+        if (signal == 0) {
+            return R.drawable.ic_signl233;
+        } else if (signal >= -61) {
             return R.drawable.ic_signl4;
         } else if (signal >= -75) {
             return R.drawable.ic_signl3;

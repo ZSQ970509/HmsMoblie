@@ -84,9 +84,9 @@ public class TiltSensorStateUtils {
      */
     public static String formatSpaceZ(double spaceZ) {
         if (spaceZ > 0) {
-            return "↑";
+            return "上";
         } else if (spaceZ < 0) {
-            return "↓";
+            return "下";
         } else {
             return default_date;
         }
@@ -123,6 +123,7 @@ public class TiltSensorStateUtils {
 
     /**
      * 根据value返回显示趋势图标
+     *
      * @param value
      * @return
      */
@@ -130,10 +131,26 @@ public class TiltSensorStateUtils {
     public static int getState(double value) {
         if (value > 0) {
             return R.drawable.ic_up;
-        } else if (value > 0) {
+        } else if (value == 0) {
             return R.drawable.ic_none;
         } else {
             return R.drawable.ic_down;
+        }
+    }
+
+    public static String getFormData(double data, String unit) {
+        if (data == 0) {
+            return "-";
+        } else {
+            return FormatUtils.stripTrailingZeros(data) + unit;
+        }
+    }
+
+    public static String getFormAdsData(double data, String unit) {
+        if (data == 0) {
+            return "-";
+        } else {
+            return FormatUtils.stripTrailingZeros(Math.abs(data)) + unit;
         }
     }
 }

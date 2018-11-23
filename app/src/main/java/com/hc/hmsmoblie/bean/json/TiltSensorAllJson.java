@@ -1,5 +1,7 @@
 package com.hc.hmsmoblie.bean.json;
 
+import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2018/6/28.
  */
 
-public class TiltSensorAllJson implements Serializable{
+public class TiltSensorAllJson implements Serializable {
 
     private List<DatTiltSensorBean> dat_TiltSensor;
     private List<DatTiltSensorListBean> dat_TiltSensorList;
@@ -58,13 +60,13 @@ public class TiltSensorAllJson implements Serializable{
          * CdObd : 1
          */
 
-        private String States;
+        private String States = TiltSensorParaState.UNKNOWN;
         private double Ox;
         private double Oy;
         private double Vo;
         private double cam_singnal;
         private int cam_state;
-        private String CreateTime;
+        private String CreateTime = "-";
         private double Obd;
         private double FirstOldx;
         private double FirstOldy;
@@ -75,6 +77,9 @@ public class TiltSensorAllJson implements Serializable{
         private double Oldx;
         private double Oldy;
         private double CdObd;
+        private double ObdFirstOldx;
+        private double ObdFirstOldy;
+        private double ObdFirstOldz;
 
         public String getStates() {
             return States;
@@ -210,6 +215,30 @@ public class TiltSensorAllJson implements Serializable{
 
         public void setCdObd(double CdObd) {
             this.CdObd = CdObd;
+        }
+
+        public double getObdFirstOldx() {
+            return ObdFirstOldx;
+        }
+
+        public void setObdFirstOldx(double obdFirstOldx) {
+            ObdFirstOldx = obdFirstOldx;
+        }
+
+        public double getObdFirstOldy() {
+            return ObdFirstOldy;
+        }
+
+        public void setObdFirstOldy(double obdFirstOldy) {
+            ObdFirstOldy = obdFirstOldy;
+        }
+
+        public double getObdFirstOldz() {
+            return ObdFirstOldz;
+        }
+
+        public void setObdFirstOldz(double obdFirstOldz) {
+            ObdFirstOldz = obdFirstOldz;
         }
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hc.hmsmoblie">
+
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -11,7 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -29,7 +30,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.WelcomeActivity"
+        <activity
+            android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,12 +42,14 @@
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ChangePassWordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ChangePassWordActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.LadderControlProjectListActivity"
             android:launchMode="singleTop"
@@ -108,51 +112,47 @@
         <activity
             android:name=".activity.ImageLogProjectListActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ImageLogDeviceListActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
-       <activity
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ImageLogPanoramaListActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ImageLogPanoramaDetailActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.ImageLogWideAngleActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.ImageLogNodeActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activity.AboutActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TiltSensorActivityOld"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.TiltSensorActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TiltSensorChartActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DipRealTimeDataActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
 
         </activity>
 

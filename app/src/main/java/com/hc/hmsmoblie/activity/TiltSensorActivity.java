@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,7 +37,6 @@ import com.hc.hmsmoblie.mvp.presenter.TiltSensorActivityP;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.hc.hmsmoblie.net.NetObserver;
 import com.hc.hmsmoblie.utils.BatAndSignalUtil;
-import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.TiltSensorStateUtils;
 import com.hc.hmsmoblie.utils.chart.ChartLineView;
 import com.hc.hmsmoblie.utils.chart.ChartUtils;
@@ -99,6 +99,14 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     ImageView mAlarmHeightIv;
     @BindView(R.id.tiltSensorAlarmHeightTv)
     TextView mAlarmHeightTv;
+    @BindView(R.id.tiltSensorAlarmDistanceXIv)
+    ImageView mAlarmDistanceXIv;
+    @BindView(R.id.tiltSensorAlarmDistanceXTv)
+    TextView mAlarmDistanceXTv;
+    @BindView(R.id.tiltSensorAlarmDistanceYIv)
+    ImageView mAlarmDistanceYIv;
+    @BindView(R.id.tiltSensorAlarmDistanceYTv)
+    TextView mAlarmDistanceYTv;
     @BindView(R.id.tiltSensorAlarmSpaceIv)
     ImageView mAlarmSpaceIv;
     @BindView(R.id.tiltSensorAlarmSpaceTv)
@@ -116,22 +124,18 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     @BindView(R.id.tiltSensorSatesIv)
     ImageView mSatesIv;
     @BindView(R.id.tiltSensorSwitchIv)
-    ImageView mOnOffIv;
+    ImageView mSwitchIv;
     @BindView(R.id.tiltSensorLeftIv)
     ImageView mLeftIv;
     @BindView(R.id.tiltSensorRightIv)
     ImageView mRightIv;
     @BindView(R.id.tiltSensorLineChart)
     ChartLineView mLineChart;
-    @BindView(R.id.tiltSensorMoreTv)
-    TextView mMoreTv;
     @BindView(R.id.tiltSensorHeightLineChart)
     ChartLineView mHeightLineChart;
-    @BindView(R.id.tiltSensorHeightMoreTv)
-    TextView mHeightMoreTv;
     private String mCamId;
     @TiltSensorParaState
-    private String mParaState = TiltSensorParaState.OPEN;//监测点开启或者关闭状态
+    private String mParaState = TiltSensorParaState.UNKNOWN;//监测点开启或者关闭状态
     private String mParaID;
     private String mSeq;//
     private List<TiltSensorParaJson.ListBean> mParaList = new ArrayList<>();//点位列表数据
@@ -196,6 +200,9 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
         mParamTitleSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (mParaList.size() <= 0) {
+                    return;
+                }
                 mParaID = mParaList.get(position).getParaID() + "";
                 mSeq = mParaList.get(position).getSeq();
                 mParaState = mParaList.get(position).getStates();
@@ -240,17 +247,20 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
      * 刷新监测点开关状态
      */
     private void refreshState() {
+        mParaList.get(mParamTitleSp.getSelectedItemPosition()).setStates(mParaState);
         if (mParaState.equals(TiltSensorParaState.OPEN)) {
-            mOnOffIv.setImageResource(R.drawable.ic_open);
+            mSwitchIv.setImageResource(R.drawable.ic_open);
+        } else if (mParaState.equals(TiltSensorParaState.UNKNOWN)) {
+            mSwitchIv.setImageResource(R.drawable.ic_open233);
         } else {
-            mOnOffIv.setImageResource(R.drawable.ic_close);
+            mSwitchIv.setImageResource(R.drawable.ic_close);
         }
     }
 
     /**
      * 后台刷新数据
      */
-    private void loopRefreshData() {
+    private synchronized void loopRefreshData() {
         if (!mIsParaInit) return;
         if (TextUtils.isEmpty(mParaID)) {
             showToast("paraID为空");
@@ -345,7 +355,13 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
 
     private void refreshDataUI() {
         if (mData == null) {
-            mTimeTv.setText("时间：-");
+            mTimeTv.setText(getResources().getString(R.string.empty_time));
+            //电量
+            mElectricityIv.setImageResource(R.drawable.ic_battery233);
+            //信号强度
+            mSignalIv.setImageResource(R.drawable.ic_signl233);
+            mParaState = TiltSensorParaState.UNKNOWN;
+            refreshState();
             mXTv.setText("X轴：-");
             mXIv.setVisibility(View.INVISIBLE);
             mYTv.setText("Y轴：-");
@@ -356,8 +372,12 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
             mAlarmXIv.setVisibility(View.INVISIBLE);
             mAlarmYTv.setText("Y轴：-");
             mAlarmYIv.setVisibility(View.INVISIBLE);
-            mAlarmHeightTv.setText("高度：-");
+            mAlarmHeightTv.setText("沉降：-");
             mAlarmHeightIv.setVisibility(View.INVISIBLE);
+            mAlarmDistanceXTv.setText("X轴位移：-");
+            mAlarmDistanceXIv.setVisibility(View.INVISIBLE);
+            mAlarmDistanceYTv.setText("Y轴位移：-");
+            mAlarmDistanceYIv.setVisibility(View.INVISIBLE);
             mAlarmSpaceTv.setText("空间位移：-");
             mAlarmSpaceIv.setVisibility(View.INVISIBLE);
             mAlarmHFLeftTv.setText("左端浮动：-");
@@ -368,54 +388,89 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
         } else {
             mTimeTv.setText("时间：" + mData.getCreateTime());
             //设置监测点开关状态
-            if (mData.getStates().equals(TiltSensorParaState.OPEN)) {
+            if (mData.getStates().equals(TiltSensorParaState.UNKNOWN)) {
+                mParaState = TiltSensorParaState.UNKNOWN;
+            } else if (mData.getStates().equals(TiltSensorParaState.OPEN)) {
                 mParaState = TiltSensorParaState.OPEN;
             } else {
                 mParaState = TiltSensorParaState.CLOSE;
             }
-            mParaList.get(mParamTitleSp.getSelectedItemPosition()).setStates(mParaState);
             refreshState();
             //电量
             mElectricityIv.setImageResource(BatAndSignalUtil.batLevel(mData.getVo()));
             //信号强度
             mSignalIv.setImageResource(BatAndSignalUtil.signalLevel(mData.getCam_singnal()));
 
-            mXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getOx()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getOx())) + "°");
-            mXIv.setImageResource(TiltSensorStateUtils.getState(mData.getOldx()));
-            mXIv.setVisibility(View.VISIBLE);
+//            mXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getOx()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getOx())) + "°");
+            mXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getOx()) + TiltSensorStateUtils.getFormAdsData(mData.getOx(), "°"));
+            if (mData.getOx() == 0 && mData.getOldx() == 0) {
+                mXIv.setVisibility(View.INVISIBLE);
+            } else {
+                mXIv.setImageResource(TiltSensorStateUtils.getState(mData.getOldx()));
+                mXIv.setVisibility(View.VISIBLE);
+            }
 
-            mYTv.setText("Y轴：" + TiltSensorStateUtils.formatX(mData.getOy()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getOy())) + "°");
-            mYIv.setImageResource(TiltSensorStateUtils.getState(mData.getOldy()));
-            mYIv.setVisibility(View.VISIBLE);
 
-            mHeightTv.setText("高度：" + FormatUtils.stripTrailingZeros(mData.getObd()) + "mm");
-            mHeightIv.setImageResource(TiltSensorStateUtils.getState(mData.getCdObd()));
-            mHeightIv.setVisibility(View.VISIBLE);
+//            mYTv.setText("Y轴：" + TiltSensorStateUtils.formatY(mData.getOy()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getOy())) + "°");
+            mYTv.setText("Y轴：" + TiltSensorStateUtils.formatY(mData.getOy()) + TiltSensorStateUtils.getFormAdsData(mData.getOy(), "°"));
 
+            if (mData.getOy() == 0 && mData.getOldy() == 0) {
+                mYIv.setVisibility(View.INVISIBLE);
+            } else {
+                mYIv.setImageResource(TiltSensorStateUtils.getState(mData.getOldy()));
+                mYIv.setVisibility(View.VISIBLE);
+            }
+//            mHeightTv.setText("高度：" + FormatUtils.stripTrailingZeros(mData.getObd()) + "mm");
+            mHeightTv.setText("高度：" + TiltSensorStateUtils.getFormData(mData.getObd(), "mm"));
+
+            if (mData.getObd() == 0 && mData.getCdObd() == 0) {
+                mHeightIv.setVisibility(View.INVISIBLE);
+            } else {
+                mHeightIv.setImageResource(TiltSensorStateUtils.getState(mData.getCdObd()));
+                mHeightIv.setVisibility(View.VISIBLE);
+            }
+//            mAlarmXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFirstOldx(), mTiltSensorAlarmBean.getAxisX()));
             mAlarmXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFirstOldx(), mTiltSensorAlarmBean.getAxisX()));
-            mAlarmXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getFirstOldx()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFirstOldx())) + "°");
+//            mAlarmXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getFirstOldx()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFirstOldx())) + "°");
+            mAlarmXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getFirstOldx()) + TiltSensorStateUtils.getFormAdsData(mData.getFirstOldx(), "°"));
 
             mAlarmYIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFirstOldy(), mTiltSensorAlarmBean.getAxisY()));
-            mAlarmYTv.setText("Y轴：" + TiltSensorStateUtils.formatX(mData.getFirstOldy()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFirstOldy())) + "°");
+//            mAlarmYTv.setText("Y轴：" + TiltSensorStateUtils.formatY(mData.getFirstOldy()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFirstOldy())) + "°");
+            mAlarmYTv.setText("Y轴：" + TiltSensorStateUtils.formatY(mData.getFirstOldy()) + TiltSensorStateUtils.getFormAdsData(mData.getFirstOldy(), "°"));
 
-            //累计高度即累计沉降位移
-            mAlarmHeightIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getCdObdAdd(), mTiltSensorAlarmBean.getSettlement()));
-            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
+            //沉降
+            mAlarmHeightIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldz(), mTiltSensorAlarmBean.getSettlement()));
+//            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
+            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSpaceZ(mData.getObdFirstOldz()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldz(), "mm"));
+            //空间X轴位移
+            mAlarmDistanceXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldx(), mTiltSensorAlarmBean.getSettlement()));
+            mAlarmDistanceXTv.setText("X轴位移：" + TiltSensorStateUtils.formatSpaceX(mData.getObdFirstOldx()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldx(), "mm"));
+            //空间Y轴位移
+            mAlarmDistanceYIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldy(), mTiltSensorAlarmBean.getSettlement()));
+            mAlarmDistanceYTv.setText("Y轴位移：" + TiltSensorStateUtils.formatSpaceY(mData.getObdFirstOldy()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldy(), "mm"));
 
             mAlarmSpaceIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getHightObdAdd(), mTiltSensorAlarmBean.getSpace()));
-            mAlarmSpaceTv.setText("空间位移：" + FormatUtils.stripTrailingZeros(mData.getHightObdAdd()) + "mm");
+//            mAlarmSpaceTv.setText("空间位移：" + FormatUtils.stripTrailingZeros(mData.getHightObdAdd()) + "mm");
+            mAlarmSpaceTv.setText("空间位移：" + TiltSensorStateUtils.getFormData(mData.getHightObdAdd(), "mm"));
 
             mAlarmHFLeftIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFloatObdLeft(), mTiltSensorAlarmBean.getHorizontalFloatingLeft()));
-            mAlarmHFLeftTv.setText("左端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdLeft()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFloatObdLeft())) + "mm");
+//            mAlarmHFLeftTv.setText("左端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdLeft()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFloatObdLeft())) + "mm");
+            mAlarmHFLeftTv.setText("左端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdLeft()) + TiltSensorStateUtils.getFormAdsData(mData.getFloatObdLeft(), "mm"));
 
             mAlarmHFRightIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFloatObdRight(), mTiltSensorAlarmBean.getHorizontalFloatingRight()));
-            mAlarmHFRightTv.setText("右端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdRight()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFloatObdRight())) + "mm");
+//            mAlarmHFRightTv.setText("右端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdRight()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFloatObdRight())) + "mm");
+            mAlarmHFRightTv.setText("右端浮动：" + TiltSensorStateUtils.formatSettlement(mData.getFloatObdRight()) + TiltSensorStateUtils.getFormAdsData(mData.getFloatObdRight(), "mm"));
         }
     }
 
     @Override
     public void onGetTitAllFail(String tiltSensorJson) {
-
+        mData = null;
+        mDataChartAngle = null;
+        mDataChartHeight = null;
+        refreshDataUI();
+        refreshLineAngle();
+        refreshLineHeight();
     }
 
     @Override
@@ -673,7 +728,9 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                 mPresenter.getTiltSensorState(mSeq);
                 break;
             case R.id.tiltSensorSwitchIv:
-                if (mParaState.equals(TiltSensorParaState.OPEN)) {
+                if (mParaState.equals(TiltSensorParaState.UNKNOWN)) {
+                    showMsg("没有数据");
+                } else if (mParaState.equals(TiltSensorParaState.OPEN)) {
                     mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.CLOSE + "");
                 } else {
                     mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.OPEN + "");
@@ -714,10 +771,20 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                         .show();
                 break;
             case R.id.tiltSensorMoreTv:
-                TiltSensorActivityOld.newInstance(getActivity(), mCamId);
+                String time1 = mTimeTv.getText().toString();
+                if (TextUtils.isEmpty(time1) || time1.equals(getResources().getString(R.string.empty_time))) {
+                    TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), false, "");
+                } else {
+                    TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), false, time1.substring(3, 13));
+                }
                 break;
             case R.id.tiltSensorHeightMoreTv:
-                TiltSensorActivityOld.newInstance(getActivity(), mCamId);
+                String time2 = mTimeTv.getText().toString();
+                if (TextUtils.isEmpty(time2) || time2.equals(getResources().getString(R.string.empty_time))) {
+                    TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), true, "");
+                } else {
+                    TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), true, time2.substring(3, 13));
+                }
                 break;
         }
     }

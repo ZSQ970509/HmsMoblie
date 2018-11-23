@@ -103,7 +103,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                 if(item.getSysID().equals("58")){
                                 CommonListDialog.newInstance(getActivity())
                                         .setTextViewDipAngleClick(v -> {
-                                            DipRealTimeDataActivity.newInstance(getActivity(), item.getCamId() + "");
+                                            TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
+//                                            DipRealTimeDataActivity.newInstance(getActivity(), item.getCamId() + "");
                                         })
                                         .setTextViewImageLogClick(v -> {
                                             ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
@@ -195,7 +196,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                     }else{
                         CommonListDialog.newInstanceType(getActivity(),3)
                                 .setTextViewDipAngleClick(v -> {
-                                    DipRealTimeDataActivity.newInstance(getActivity(), item.getCamId() + "");
+                                    TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
+//                                    DipRealTimeDataActivity.newInstance(getActivity(), item.getCamId() + "");
                                 })
                                 .setTextViewImageLogClick(v -> {
                                     ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");

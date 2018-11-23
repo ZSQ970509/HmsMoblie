@@ -100,7 +100,7 @@ public class DeviceStateDialog extends Dialog {
                         if (boolBatState.equals("0")) {
                             batState = "电池电量充足";
                         } else if (boolBatState.equals("1")) {
-                            batState = "电池电量过";
+                            batState = "电池电量过量";
                         }
                     } else {
                         batState = "电池电量充足";

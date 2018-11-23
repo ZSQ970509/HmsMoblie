@@ -114,7 +114,25 @@ public class FormatUtils {
             SimpleDateFormat df = new SimpleDateFormat(FORMAT_TIME);
             date = df.parse(time);
         } catch (ParseException e) {
-            Log.e("FormatUtils", "String转Calender失败，String格式不是FORMAT_TIME");
+            Log.e("FormatUtils", "String转成Calender失败，" + time + "的格式不是" + FORMAT_TIME);
+            return Calendar.getInstance();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public static Calendar stringToCalendar(String time, String formatTime) {
+        if (TextUtils.isEmpty(time)) {
+            Log.e("FormatUtils", "String转成Calender失败，String为空");
+            return Calendar.getInstance();
+        }
+        Date date = null;
+        try {
+            SimpleDateFormat df = new SimpleDateFormat(formatTime);
+            date = df.parse(time);
+        } catch (ParseException e) {
+            Log.e("FormatUtils", "String转成Calender失败，" + time + "的格式不是" + formatTime);
             return Calendar.getInstance();
         }
         Calendar calendar = Calendar.getInstance();

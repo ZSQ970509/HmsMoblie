@@ -1,12 +1,13 @@
 package com.hc.hmsmoblie.bean.json;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/20.
  */
 
-public class TiltSensorParaJson {
+public class TiltSensorParaJson implements Serializable{
 
 
     /**
@@ -33,7 +34,7 @@ public class TiltSensorParaJson {
         this.List = List;
     }
 
-    public static class ListBean {
+    public static class ListBean implements Serializable{
         /**
          * ParaID : 86
          * Px : 1.0
@@ -66,7 +67,7 @@ public class TiltSensorParaJson {
         private int ParaID;
         private double Px;
         private double Py;
-        private Object PAo;
+        private String PAo;
         private int CamID;
         private String Seq;
         private String CreateTime;
@@ -74,11 +75,11 @@ public class TiltSensorParaJson {
         private double Oy;
         private int Av;
         private double Ao;
-        private Object UpdateTime;
+        private String UpdateTime;
         private double Oldx;
         private double Oldy;
-        private Object OldAv;
-        private Object OldAo;
+        private String OldAv;
+        private String OldAo;
         private double Photox;
         private double Photoy;
         private String States;
@@ -88,7 +89,7 @@ public class TiltSensorParaJson {
         private double FirstOldy;
         private double Obd;
         private double ObdDiff;
-        private Object ObdThreshold;
+        private String ObdThreshold;
 
         public int getParaID() {
             return ParaID;
@@ -114,11 +115,11 @@ public class TiltSensorParaJson {
             this.Py = Py;
         }
 
-        public Object getPAo() {
+        public String getPAo() {
             return PAo;
         }
 
-        public void setPAo(Object PAo) {
+        public void setPAo(String PAo) {
             this.PAo = PAo;
         }
 
@@ -178,11 +179,11 @@ public class TiltSensorParaJson {
             this.Ao = Ao;
         }
 
-        public Object getUpdateTime() {
+        public String getUpdateTime() {
             return UpdateTime;
         }
 
-        public void setUpdateTime(Object UpdateTime) {
+        public void setUpdateTime(String UpdateTime) {
             this.UpdateTime = UpdateTime;
         }
 
@@ -202,19 +203,19 @@ public class TiltSensorParaJson {
             this.Oldy = Oldy;
         }
 
-        public Object getOldAv() {
+        public String getOldAv() {
             return OldAv;
         }
 
-        public void setOldAv(Object OldAv) {
+        public void setOldAv(String OldAv) {
             this.OldAv = OldAv;
         }
 
-        public Object getOldAo() {
+        public String getOldAo() {
             return OldAo;
         }
 
-        public void setOldAo(Object OldAo) {
+        public void setOldAo(String OldAo) {
             this.OldAo = OldAo;
         }
 
@@ -290,11 +291,11 @@ public class TiltSensorParaJson {
             this.ObdDiff = ObdDiff;
         }
 
-        public Object getObdThreshold() {
+        public String getObdThreshold() {
             return ObdThreshold;
         }
 
-        public void setObdThreshold(Object ObdThreshold) {
+        public void setObdThreshold(String ObdThreshold) {
             this.ObdThreshold = ObdThreshold;
         }
     }

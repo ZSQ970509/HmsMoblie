@@ -1,10 +1,11 @@
-package com.hc.hmsmoblie.fragment;
+package com.hc.hmsmoblie.activity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,22 +16,21 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.bean.domain.TiltSensorBean;
 import com.hc.hmsmoblie.bean.domain.TiltSensorBeanNew;
-import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
+import com.hc.hmsmoblie.bean.type.TiltSensorParaState;
 import com.hc.hmsmoblie.bean.type.TiltSensorType;
 import com.hc.hmsmoblie.bean.type.TimeType;
 import com.hc.hmsmoblie.mvp.contact.TiltSensorChartC;
 import com.hc.hmsmoblie.mvp.presenter.TiltSensorChartP;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
-import com.hc.hmsmoblie.utils.YcDecoration;
 import com.hc.hmsmoblie.utils.chart.ChartLegendAdapter;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerDataBeanNew;
 import com.hc.hmsmoblie.utils.chart.ChartMarkerViewNew;
 import com.hc.hmsmoblie.utils.chart.ChartUtils;
+import com.yc.yclibrary.base.YcMvpAppCompatActivity;
 import com.yc.yclibrary.base.YcMvpLazyFragment;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import butterknife.OnClick;
  * 倾角流水数据图表
  */
 
-public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP> implements TiltSensorChartC.V {
+public class TiltSensorChartActivity extends YcMvpAppCompatActivity<TiltSensorChartP> implements TiltSensorChartC.V {
 
     @BindView(R.id.lineChart)
     LineChart lineChart;
@@ -70,33 +70,44 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
     private final String[] TIME_FORMAT = new String[]{FormatUtils.FORMAT_TIME_YEAR, FormatUtils.FORMAT_TIME_MONTH, FormatUtils.FORMAT_TIME};//传给服务端的时间格式
     private CommonAdapter<TiltSensorParaJson.ListBean> mSpAdapter;
     private CommonAdapter<String> selectItemSpAdapter;
+    private final static String CAM_ID = "cam_id";
+    private final static String SELECT_PARA = "SELECT_PARA";
+    private final static String IS_HEIGHT = "is_height";
+    private final static String PARA_IDS = "para_ids";
+    private final static String TIME = "time";
     private String mCamId = "";
+    private int mSelectPara;
+    private boolean mIsHeight;
     private List<TiltSensorParaJson.ListBean> mParaIds = new ArrayList<>();
     private ChartLegendAdapter mChartLegendAdapter;
 
-    public static TiltSensorChartFragment newInstance(String camId, List<TiltSensorParaJson.ListBean> paraIds) {
-        TiltSensorChartFragment fragment = new TiltSensorChartFragment();
-        fragment.mCamId = camId;
-        fragment.mParaIds = paraIds;
-        return fragment;
+    public static void newInstance(Activity activity, String camId, List<TiltSensorParaJson.ListBean> paraIds, int selectPara, boolean isHeight, String time) {
+        Intent intent = new Intent(activity, TiltSensorChartActivity.class);
+        intent.putExtra(CAM_ID, camId);
+        intent.putExtra(PARA_IDS, (ArrayList<TiltSensorParaJson.ListBean>) paraIds);
+        intent.putExtra(SELECT_PARA, selectPara);
+        intent.putExtra(IS_HEIGHT, isHeight);
+        intent.putExtra(TIME, time);
+        activity.startActivity(intent);
     }
 
     @Override
-    protected TiltSensorChartP loadPresenter() {
-        return new TiltSensorChartP();
-    }
-
-    @Override
-    public int getLayoutResId() {
+    protected int getLayoutId() {
         return R.layout.tilt_sensor_chart_fragent;
     }
 
     @Override
-    public void initView() {
-        preSelectTime[0] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME_YEAR).trim();
-        preSelectTime[1] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME_MONTH).trim();
-        preSelectTime[2] = FormatUtils.calendarToString(Calendar.getInstance(), FormatUtils.FORMAT_TIME).trim();
-        mTimeTv.setText(FormatUtils.calendarToString(Calendar.getInstance()).trim());
+    protected void initView(Bundle bundle) {
+        Intent intent = getIntent();
+        mCamId = intent.getStringExtra(CAM_ID);
+        mSelectPara = intent.getIntExtra(SELECT_PARA, 0);
+        mIsHeight = intent.getBooleanExtra(IS_HEIGHT, false);
+        Calendar time = FormatUtils.stringToCalendar(intent.getStringExtra(TIME));
+        mParaIds = (ArrayList<TiltSensorParaJson.ListBean>) intent.getSerializableExtra(PARA_IDS);
+        preSelectTime[0] = FormatUtils.calendarToString(time, FormatUtils.FORMAT_TIME_YEAR).trim();
+        preSelectTime[1] = FormatUtils.calendarToString(time, FormatUtils.FORMAT_TIME_MONTH).trim();
+        preSelectTime[2] = FormatUtils.calendarToString(time, FormatUtils.FORMAT_TIME).trim();
+        mTimeTv.setText(FormatUtils.calendarToString(time).trim());
 //        mLegendLL.setVisibility(View.INVISIBLE);
         mChartLegendRv.setVisibility(View.INVISIBLE);
         mSpAdapter = new CommonAdapter<TiltSensorParaJson.ListBean>(getActivity(), R.layout.item_common) {
@@ -107,11 +118,17 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         };
         mSpAdapter.addAll(mParaIds);
         mSp.setAdapter(mSpAdapter);
-        mSp.setSelection(0);
-        ChartUtils.initLineChart(lineChart, this.getContext());
+        mSp.setSelection(mSelectPara);
+        ChartUtils.initLineChart(lineChart, getActivity());
         initSelectItem();
         getTiltSensorChart();
     }
+
+    @Override
+    protected TiltSensorChartP loadPresenter() {
+        return new TiltSensorChartP();
+    }
+
 
     public void getTiltSensorChart() {
         mPresenter.getTiltSensorChart(mCamId, mSpAdapter.getItem(mSp.getSelectedItemPosition()).getParaID() + "", mTimeType + "", mTimeTv.getText().toString().trim(), selectItemSp.getSelectedItemPosition());
@@ -135,7 +152,12 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
                 helper.setText(R.id.itemCommonTv, item);
             }
         };
-        selectItemSpAdapter.addAll(Arrays.asList(getResources().getStringArray(R.array.selectItemSpData)));
+        List<String> data = Arrays.asList(getResources().getStringArray(R.array.selectItemSpData));
+        if (mIsHeight) {
+            selectItemSpAdapter.addAll(data.subList(4, data.size()));
+        } else {
+            selectItemSpAdapter.addAll(data.subList(0, 4));
+        }
         selectItemSp.setAdapter(selectItemSpAdapter);
         selectItemSp.setSelection(0);
     }
@@ -150,8 +172,12 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
         lineChart.setNoDataText(this.getString(R.string.view_loading));
         mChartLegendRv.setVisibility(View.VISIBLE);
         //选择的数据类型
-        @TiltSensorType
-        int type = selectItemSp.getSelectedItemPosition();
+        @TiltSensorType int type;
+        if (mIsHeight) {
+            type = selectItemSp.getSelectedItemPosition() + 3;
+        } else {
+            type = selectItemSp.getSelectedItemPosition();
+        }
         TiltSensorBeanNew tiltSensorBean = new TiltSensorBeanNew(mAllData);
         List<TiltSensorBeanNew.DataBean> tiltSensorDatas = tiltSensorBean.getData(type);//获取要展示的数据
         LineData lineData = new LineData();
@@ -287,4 +313,6 @@ public class TiltSensorChartFragment extends YcMvpLazyFragment<TiltSensorChartP>
                 break;
         }
     }
+
+
 }
