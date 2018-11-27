@@ -8,6 +8,8 @@ public class TiltSensorAlarmBean {
     private double axisX = 1;//累计X轴阈值
     private double axisY = 1;//累计Y轴阈值
     private double settlement = 10;//累计沉降位移阈值
+    private double distanceX = 10;//累计左端水平度浮动阈值
+    private double distanceY = 10;//累计右端水平度浮动阈值
     private double space = 10;//累计空间位移阈值
     private double horizontalFloatingLeft = 10;//累计左端水平度浮动阈值
     private double horizontalFloatingRight = 10;//累计右端水平度浮动阈值
@@ -21,10 +23,28 @@ public class TiltSensorAlarmBean {
         this.axisX = bean.axisX;
         this.axisY = bean.axisY;
         this.settlement = bean.settlement;
+        this.distanceX = bean.distanceX;
+        this.distanceY = bean.distanceY;
         this.space = bean.space;
         this.horizontalFloatingLeft = bean.horizontalFloatingLeft;
         this.horizontalFloatingRight = bean.horizontalFloatingRight;
         this.isOpen = bean.isOpen;
+    }
+
+    public double getDistanceX() {
+        return distanceX;
+    }
+
+    public void setDistanceX(double distanceX) {
+        this.distanceX = distanceX;
+    }
+
+    public double getDistanceY() {
+        return distanceY;
+    }
+
+    public void setDistanceY(double distanceY) {
+        this.distanceY = distanceY;
     }
 
     public double getSpace() {

@@ -50,10 +50,32 @@
 
             <TextView
                 style="@style/DialogAlarmTvStyle"
-                android:text="累计沉降位移阈值(mm):" />
+                android:text="累计沉降阈值(mm):" />
 
             <EditText
                 android:id="@+id/alarmSettlementEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="累计x轴位移阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmDistanceXEdt"
+                style="@style/DialogAlarmEdtStyle"
+                android:text="10" />
+        </LinearLayout>
+        <LinearLayout style="@style/DialogAlarmLinearLayoutStyle">
+
+            <TextView
+                style="@style/DialogAlarmTvStyle"
+                android:text="累计Y轴位移阈值(mm):" />
+
+            <EditText
+                android:id="@+id/alarmDistanceYEdt"
                 style="@style/DialogAlarmEdtStyle"
                 android:text="10" />
         </LinearLayout>

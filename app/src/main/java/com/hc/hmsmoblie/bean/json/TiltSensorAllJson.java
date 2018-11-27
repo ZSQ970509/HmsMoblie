@@ -14,6 +14,7 @@ public class TiltSensorAllJson implements Serializable {
     private List<DatTiltSensorBean> dat_TiltSensor;
     private List<DatTiltSensorListBean> dat_TiltSensorList;
     private List<DatTiltSensorListTimeBean> dat_TiltSensorList_time;
+    private List<DatTiltSensorListStageBean> dat_TiltSensorList_Stage;
 
     public List<DatTiltSensorBean> getDat_TiltSensor() {
         return dat_TiltSensor;
@@ -37,6 +38,14 @@ public class TiltSensorAllJson implements Serializable {
 
     public void setDat_TiltSensorList_time(List<DatTiltSensorListTimeBean> dat_TiltSensorList_time) {
         this.dat_TiltSensorList_time = dat_TiltSensorList_time;
+    }
+
+    public List<DatTiltSensorListStageBean> getDat_TiltSensorList_Stage() {
+        return dat_TiltSensorList_Stage;
+    }
+
+    public void setDat_TiltSensorList_Stage(List<DatTiltSensorListStageBean> dat_TiltSensorList_Stage) {
+        this.dat_TiltSensorList_Stage = dat_TiltSensorList_Stage;
     }
 
     public static class DatTiltSensorBean {
@@ -313,6 +322,53 @@ public class TiltSensorAllJson implements Serializable {
 
         public void setObd(double Obd) {
             this.Obd = Obd;
+        }
+
+        public String getCreateTime() {
+            return CreateTime;
+        }
+
+        public void setCreateTime(String CreateTime) {
+            this.CreateTime = CreateTime;
+        }
+    }
+
+
+    public static class DatTiltSensorListStageBean {
+        /**
+         * ObdFirstOldx : 125.4
+         * ObdFirstOldy : -307.9
+         * ObdFirstOldz : 7409.2
+         * CreateTime : 2018-11-06 06:40:24
+         */
+
+        private double ObdFirstOldx;
+        private double ObdFirstOldy;
+        private double ObdFirstOldz;
+        private String CreateTime = "-";
+
+        public double getObdFirstOldx() {
+            return ObdFirstOldx;
+        }
+
+        public void setObdFirstOldx(double ObdFirstOldx) {
+            this.ObdFirstOldx = ObdFirstOldx;
+        }
+
+        public double getObdFirstOldy() {
+            return ObdFirstOldy;
+        }
+
+        public void setObdFirstOldy(double ObdFirstOldy) {
+            this.ObdFirstOldy = ObdFirstOldy;
+        }
+
+        public double getObdFirstOldz() {
+            return ObdFirstOldz;
+        }
+
+        public void setObdFirstOldz(double ObdFirstOldz) {
+            this.ObdFirstOldz = ObdFirstOldz;
         }
 
         public String getCreateTime() {

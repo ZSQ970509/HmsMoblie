@@ -45,7 +45,7 @@ public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> im
     }
 
     public NetObserver<HttpResponse<TiltSensorAllJson>> getTitAll(String paraID, final boolean isShow) {
-        Log.e("TAG","getTitAll");
+//        Log.e("TAG","getTitAll");
         NetObserver<HttpResponse<TiltSensorAllJson>> netObserver = new NetObserver<HttpResponse<TiltSensorAllJson>>() {
             @Override
             public void onSuccess(HttpResponse<TiltSensorAllJson> tiltSensorParaJson) {

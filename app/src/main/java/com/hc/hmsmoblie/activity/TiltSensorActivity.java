@@ -133,6 +133,8 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     ChartLineView mLineChart;
     @BindView(R.id.tiltSensorHeightLineChart)
     ChartLineView mHeightLineChart;
+    @BindView(R.id.tiltSensorDistanceLineChart)
+    ChartLineView mDistanceLineChart;
     private String mCamId;
     @TiltSensorParaState
     private String mParaState = TiltSensorParaState.UNKNOWN;//监测点开启或者关闭状态
@@ -286,6 +288,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     private TiltSensorAllJson.DatTiltSensorBean mData;//状态数据
     private List<TiltSensorAllJson.DatTiltSensorListBean> mDataChartAngle;//倾角图表数据
     private List<TiltSensorAllJson.DatTiltSensorListTimeBean> mDataChartHeight;//高度图表数据
+    private List<TiltSensorAllJson.DatTiltSensorListStageBean> mDataChartDistance;//位移图表数据
     private int[] COLOR;
 
     @Override
@@ -293,6 +296,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
         mData = null;
         mDataChartAngle = null;
         mDataChartHeight = null;
+        mDataChartDistance = null;
         if (tiltSensorJson != null) {
             if (tiltSensorJson.getDat_TiltSensor() != null && tiltSensorJson.getDat_TiltSensor().size() > 0) {
                 mData = tiltSensorJson.getDat_TiltSensor().get(0);
@@ -303,10 +307,14 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
             if (tiltSensorJson.getDat_TiltSensorList_time() != null && tiltSensorJson.getDat_TiltSensorList_time().size() > 0) {
                 mDataChartHeight = tiltSensorJson.getDat_TiltSensorList_time();
             }
+            if (tiltSensorJson.getDat_TiltSensorList_Stage() != null && tiltSensorJson.getDat_TiltSensorList_Stage().size() > 0) {
+                mDataChartDistance = tiltSensorJson.getDat_TiltSensorList_Stage();
+            }
         }
         refreshDataUI();
         refreshLineAngle();
         refreshLineHeight();
+        refreshDistance();
     }
 
     private void refreshLineAngle() {
@@ -352,6 +360,28 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
         ChartUtils.setData(getActivity(), mHeightLineChart, new String[]{"高度"}, COLOR, dataMarkerX, dataX, Arrays.asList(dataY), Arrays.asList("mm"));
     }
 
+    private void refreshDistance() {
+        if (mDataChartDistance == null) {
+            mDistanceLineChart.setNoDataText(this.getString(R.string.view_empty));
+            mDistanceLineChart.clear();
+            return;
+        }
+        List<String> dataMarkerX = new ArrayList<>();//x轴上面的数据
+        List<String> dataX = new ArrayList<>();//x轴上面的数据
+        List<List<Double>> dataY = new ArrayList<>();//y轴上面的数据
+        dataY.add(new ArrayList<>());
+        dataY.add(new ArrayList<>());
+        dataY.add(new ArrayList<>());
+        for (int i = 0; i < mDataChartDistance.size(); i++) {
+            String x = mDataChartDistance.get(i).getCreateTime();
+            dataMarkerX.add(x);
+            dataX.add(x.substring(x.length() - 9));
+            dataY.get(0).add(mDataChartDistance.get(i).getObdFirstOldx());
+            dataY.get(1).add(mDataChartDistance.get(i).getObdFirstOldy());
+            dataY.get(2).add(mDataChartDistance.get(i).getObdFirstOldz());
+        }
+        ChartUtils.setData(getActivity(), mDistanceLineChart, new String[]{"X轴位移", "y轴位移", "x轴位移"}, COLOR, dataMarkerX, dataX, dataY, Arrays.asList("mm", "mm", "mm"));
+    }
 
     private void refreshDataUI() {
         if (mData == null) {
@@ -440,8 +470,8 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
 
             //沉降
             mAlarmHeightIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldz(), mTiltSensorAlarmBean.getSettlement()));
-//            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
-            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSpaceZ(mData.getObdFirstOldz()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldz(), "mm"));
+//            mAlarmHeightTv.setText("高度：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
+            mAlarmHeightTv.setText("高度：" + TiltSensorStateUtils.formatSpaceZ(mData.getObdFirstOldz()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldz(), "mm"));
             //空间X轴位移
             mAlarmDistanceXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldx(), mTiltSensorAlarmBean.getSettlement()));
             mAlarmDistanceXTv.setText("X轴位移：" + TiltSensorStateUtils.formatSpaceX(mData.getObdFirstOldx()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldx(), "mm"));
@@ -476,6 +506,11 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     @Override
     public void onSetAllMessage(@TiltSensorParaState String isOnOff) {//监测点开关回调
         mParaState = isOnOff;
+        if (isOnOff.equals(TiltSensorParaState.OPEN)) {
+            showMsg("开启监测点成功");
+        } else if (isOnOff.equals(TiltSensorParaState.CLOSE)) {
+            showMsg("关闭监测点成功");
+        }
         mParaList.get(mParamTitleSp.getSelectedItemPosition()).setStates(mParaState);
         refreshState();
     }
@@ -718,7 +753,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     }
 
     @OnClick({R.id.tiltSensorSettingIv, R.id.tiltSensorSatesIv, R.id.tiltSensorSwitchIv, R.id.tiltSensorLeftIv,
-            R.id.tiltSensorRightIv, R.id.tiltSensorMoreTv, R.id.tiltSensorHeightMoreTv, R.id.tiltSensorAlarmIv})
+            R.id.tiltSensorRightIv, R.id.tiltSensorMoreTv, R.id.tiltSensorHeightMoreTv, R.id.tiltSensorDistanceMoreTv, R.id.tiltSensorAlarmIv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tiltSensorSettingIv:
@@ -730,10 +765,16 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
             case R.id.tiltSensorSwitchIv:
                 if (mParaState.equals(TiltSensorParaState.UNKNOWN)) {
                     showMsg("没有数据");
-                } else if (mParaState.equals(TiltSensorParaState.OPEN)) {
-                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.CLOSE + "");
                 } else {
-                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.OPEN + "");
+                    CommonDialog.newInstance(getActivity())
+                            .setMsg("是否" + (mParaState.equals(TiltSensorParaState.OPEN) ? "开启" : "关闭") + "监测点")
+                            .setLeftClick(v -> {
+                                if (mParaState.equals(TiltSensorParaState.OPEN)) {
+                                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.CLOSE + "");
+                                } else {
+                                    mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.OPEN + "");
+                                }
+                            }).show();
                 }
                 break;
             case R.id.tiltSensorLeftIv:
@@ -756,7 +797,9 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                 if (!mTiltSensorAlarmBean.isAlreadySet() && mData != null) {
                     mTiltSensorAlarmBean.setAxisX(mData.getFirstOldx());
                     mTiltSensorAlarmBean.setAxisY(mData.getFirstOldy());
-                    mTiltSensorAlarmBean.setSettlement(mData.getCdObdAdd());
+                    mTiltSensorAlarmBean.setSettlement(mData.getObdFirstOldz());
+                    mTiltSensorAlarmBean.setDistanceX(mData.getObdFirstOldx());
+                    mTiltSensorAlarmBean.setDistanceY(mData.getObdFirstOldy());
                     mTiltSensorAlarmBean.setSpace(mData.getHightObdAdd());
                     mTiltSensorAlarmBean.setHorizontalFloatingLeft(mData.getFloatObdLeft());
                     mTiltSensorAlarmBean.setHorizontalFloatingRight(mData.getFloatObdRight());
@@ -778,6 +821,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                     TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), false, time1.substring(3, 13));
                 }
                 break;
+            case R.id.tiltSensorDistanceMoreTv:
             case R.id.tiltSensorHeightMoreTv:
                 String time2 = mTimeTv.getText().toString();
                 if (TextUtils.isEmpty(time2) || time2.equals(getResources().getString(R.string.empty_time))) {
@@ -786,6 +830,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                     TiltSensorChartActivity.newInstance(getActivity(), mCamId, mParaList, mParamTitleSp.getSelectedItemPosition(), true, time2.substring(3, 13));
                 }
                 break;
+
         }
     }
 }

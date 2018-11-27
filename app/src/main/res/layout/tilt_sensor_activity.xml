@@ -355,7 +355,7 @@
                         android:layout_below="@id/tiltSensorAlarmYTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmHeightIv"
-                        android:text="沉降:-"
+                        android:text="高度:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
 
@@ -435,7 +435,7 @@
             <com.hc.hmsmoblie.utils.chart.ChartLineView
                 android:id="@+id/tiltSensorLineChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="280dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -481,7 +481,52 @@
             <com.hc.hmsmoblie.utils.chart.ChartLineView
                 android:id="@+id/tiltSensorHeightLineChart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="280dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_more_small"
+                android:paddingBottom="@dimen/activity_margin_small"
+                android:text="注:每10分钟一个点"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/small_more_size" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_margin_small"
+                android:background="#f9f9f9" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="位移"
+                    android:textColor="@color/colorBlack3"
+                    android:textSize="@dimen/small_size" />
+
+                <TextView
+                    android:id="@+id/tiltSensorDistanceMoreTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="查看更多"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/small_size" />
+            </RelativeLayout>
+
+            <com.hc.hmsmoblie.utils.chart.ChartLineView
+                android:id="@+id/tiltSensorDistanceLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="280dp" />
 
             <TextView
                 android:layout_width="wrap_content"

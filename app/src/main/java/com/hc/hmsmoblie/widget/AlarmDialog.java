@@ -30,6 +30,8 @@ public class AlarmDialog extends Dialog {
     EditText alarmAxisYEdt;
     //    @BindView(R.id.alarmSettlementEdt)
     EditText alarmSettlementEdt;
+    EditText alarmDistanceXEdt;
+    EditText alarmDistanceYEdt;
     //    @BindView(R.id.alarmSpaceEdt)
     EditText alarmSpaceEdt;
     //    @BindView(R.id.alarmHFLeftEdt)
@@ -42,6 +44,7 @@ public class AlarmDialog extends Dialog {
     TextView alarmLeftTv;
     //    @BindView(R.id.alarmRightTv)
     TextView alarmRightTv;
+
     private RightClick mRightClick;
     private LeftClick mLeftClick;
     private TiltSensorAlarmBean mTiltSensorAlarmBean;
@@ -66,6 +69,8 @@ public class AlarmDialog extends Dialog {
         alarmAxisYEdt = findViewById(R.id.alarmAxisYEdt);
 
         alarmSettlementEdt = findViewById(R.id.alarmSettlementEdt);
+        alarmDistanceXEdt = findViewById(R.id.alarmDistanceXEdt);
+        alarmDistanceYEdt = findViewById(R.id.alarmDistanceYEdt);
         alarmSpaceEdt = findViewById(R.id.alarmSpaceEdt);
         alarmHFLeftEdt = findViewById(R.id.alarmHFLeftEdt);
 
@@ -93,6 +98,8 @@ public class AlarmDialog extends Dialog {
                     mTiltSensorAlarmBean.setAxisX(Double.parseDouble(alarmAxisXEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setAxisY(Double.parseDouble(alarmAxisYEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setSettlement(Double.parseDouble(alarmSettlementEdt.getText().toString().trim()));
+                    mTiltSensorAlarmBean.setDistanceX(Double.parseDouble(alarmDistanceXEdt.getText().toString().trim()));
+                    mTiltSensorAlarmBean.setDistanceY(Double.parseDouble(alarmDistanceYEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setSpace(Double.parseDouble(alarmSpaceEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setHorizontalFloatingLeft(Double.parseDouble(alarmHFLeftEdt.getText().toString().trim()));
                     mTiltSensorAlarmBean.setHorizontalFloatingRight(Double.parseDouble(alarmHFRightEdt.getText().toString().trim()));
@@ -120,12 +127,14 @@ public class AlarmDialog extends Dialog {
 
     public AlarmDialog setAlarmData(TiltSensorAlarmBean alarmData) {
         mTiltSensorAlarmBean = new TiltSensorAlarmBean(alarmData);
-        alarmAxisXEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getAxisX()) + "");
-        alarmAxisYEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getAxisY()) + "");
-        alarmSettlementEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getSettlement()) + "");
-        alarmSpaceEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getSpace()) + "");
-        alarmHFLeftEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getHorizontalFloatingLeft()) + "");
-        alarmHFRightEdt.setText(FormatUtils.stripTrailingZeros(mTiltSensorAlarmBean.getHorizontalFloatingRight()) + "");
+        alarmAxisXEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getAxisX())) + "");
+        alarmAxisYEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getAxisY())) + "");
+        alarmSettlementEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getSettlement())) + "");
+        alarmDistanceXEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getDistanceX())) + "");
+        alarmDistanceYEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getDistanceY())) + "");
+        alarmSpaceEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getSpace())) + "");
+        alarmHFLeftEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getHorizontalFloatingLeft())) + "");
+        alarmHFRightEdt.setText(FormatUtils.stripTrailingZeros(Math.abs(mTiltSensorAlarmBean.getHorizontalFloatingRight())) + "");
         alarmIsOpenCb.setChecked(mTiltSensorAlarmBean.isOpen());
         return this;
     }
