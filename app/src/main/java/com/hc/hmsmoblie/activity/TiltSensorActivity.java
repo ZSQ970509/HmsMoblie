@@ -250,12 +250,13 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
      */
     private void refreshState() {
         mParaList.get(mParamTitleSp.getSelectedItemPosition()).setStates(mParaState);
+        //因为开关为操作按钮，所以显示图标跟状态相反
         if (mParaState.equals(TiltSensorParaState.OPEN)) {
-            mSwitchIv.setImageResource(R.drawable.ic_open);
+            mSwitchIv.setImageResource(R.drawable.ic_close);
         } else if (mParaState.equals(TiltSensorParaState.UNKNOWN)) {
             mSwitchIv.setImageResource(R.drawable.ic_open233);
         } else {
-            mSwitchIv.setImageResource(R.drawable.ic_close);
+            mSwitchIv.setImageResource(R.drawable.ic_open);
         }
     }
 
@@ -287,7 +288,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
 
     private TiltSensorAllJson.DatTiltSensorBean mData;//状态数据
     private List<TiltSensorAllJson.DatTiltSensorListBean> mDataChartAngle;//倾角图表数据
-    private List<TiltSensorAllJson.DatTiltSensorListTimeBean> mDataChartHeight;//高度图表数据
+    private List<TiltSensorAllJson.DatTiltSensorListTimeBean> mDataChartHeight;//沉降图表数据
     private List<TiltSensorAllJson.DatTiltSensorListStageBean> mDataChartDistance;//位移图表数据
     private int[] COLOR;
 
@@ -357,7 +358,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
             dataX.add(x.substring(x.length() - 9));
             dataY.add(mDataChartHeight.get(i).getObd());
         }
-        ChartUtils.setData(getActivity(), mHeightLineChart, new String[]{"高度"}, COLOR, dataMarkerX, dataX, Arrays.asList(dataY), Arrays.asList("mm"));
+        ChartUtils.setData(getActivity(), mHeightLineChart, new String[]{"沉降"}, COLOR, dataMarkerX, dataX, Arrays.asList(dataY), Arrays.asList("mm"));
     }
 
     private void refreshDistance() {
@@ -470,8 +471,8 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
 
             //沉降
             mAlarmHeightIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldz(), mTiltSensorAlarmBean.getSettlement()));
-//            mAlarmHeightTv.setText("高度：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
-            mAlarmHeightTv.setText("高度：" + TiltSensorStateUtils.formatSpaceZ(mData.getObdFirstOldz()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldz(), "mm"));
+//            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSettlement(mData.getCdObdAdd()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getCdObdAdd())) + "mm");
+            mAlarmHeightTv.setText("沉降：" + TiltSensorStateUtils.formatSpaceZ(mData.getObdFirstOldz()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldz(), "mm"));
             //空间X轴位移
             mAlarmDistanceXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getObdFirstOldx(), mTiltSensorAlarmBean.getSettlement()));
             mAlarmDistanceXTv.setText("X轴位移：" + TiltSensorStateUtils.formatSpaceX(mData.getObdFirstOldx()) + TiltSensorStateUtils.getFormAdsData(mData.getObdFirstOldx(), "mm"));
@@ -504,7 +505,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     }
 
     @Override
-    public void onSetAllMessage(@TiltSensorParaState String isOnOff) {//监测点开关回调
+    public void onSetAllMessageSuccess(@TiltSensorParaState String isOnOff) {//监测点开关回调
         mParaState = isOnOff;
         if (isOnOff.equals(TiltSensorParaState.OPEN)) {
             showMsg("开启监测点成功");
@@ -516,14 +517,14 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     }
 
     @Override
-    public void onGetDeviceState(TiltSensorStateJson tiltSensorStateJson) {//获取设备状态（华为接口）
+    public void onGetDeviceStateSuccess(TiltSensorStateJson tiltSensorStateJson) {//获取设备状态（华为接口）
         DeviceStateDialog.newInstance(getActivity())
                 .setData(tiltSensorStateJson)
                 .show();
     }
 
     @Override
-    public void onGetDeviceSetting(TiltSensorStateJson tiltSensorStateJson) {
+    public void onGetDeviceSettingSuccess(TiltSensorStateJson tiltSensorStateJson) {
         if (tiltSensorStateJson.getTotalCount() != 0) {
             List<TiltSensorStateJson.DevicesBean.ServicesBean> servicesBean = tiltSensorStateJson.getDevices().get(0).getServices();
             for (TiltSensorStateJson.DevicesBean.ServicesBean servicesBeans : servicesBean) {
@@ -767,7 +768,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                     showMsg("没有数据");
                 } else {
                     CommonDialog.newInstance(getActivity())
-                            .setMsg("是否" + (mParaState.equals(TiltSensorParaState.OPEN) ? "开启" : "关闭") + "监测点")
+                            .setMsg("是否" + (mParaState.equals(TiltSensorParaState.OPEN) ? "关闭" :"开启" ) + "监测点")
                             .setLeftClick(v -> {
                                 if (mParaState.equals(TiltSensorParaState.OPEN)) {
                                     mPresenter.setAllMessage(mParaID, mSeq, TiltSensorParaState.CLOSE + "");

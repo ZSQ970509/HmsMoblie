@@ -26,7 +26,7 @@
     <color name="tiltSensorColorLineBlue">#03A9F4</color>
     <color name="tiltSensorColorLineGreen">#4cAF50</color>
     <color name="tiltSensorColorLineBlue2">#303F9F</color>
-
+    <color name="tiltSensorColorLineGreen2">#76EE00</color>
     <color name="alarmColorBad">#F44336</color>
     <color name="alarmColorGray">#37474F</color>
 </resources>

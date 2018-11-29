@@ -1,7 +1,6 @@
 package com.hc.hmsmoblie.bean.domain;
 
 import com.hc.hmsmoblie.R;
-import com.hc.hmsmoblie.bean.json.TiltSensorChartJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
 import com.hc.hmsmoblie.bean.type.TiltSensorDataProcessingType;
 import com.hc.hmsmoblie.bean.type.TiltSensorType;
@@ -36,7 +35,7 @@ public class TiltSensorBeanNew {
         List<Boolean> isDottedLines;
         List<List<Double>> datas = new ArrayList<>();
         List<String> unit = new ArrayList<>();//单位
-        List<Integer> processingType;//数据处理方式
+//        List<Integer> processingType;//数据处理方式
         switch (type) {
             default:
             case TiltSensorType.A_ANGLE_VALUE:
@@ -44,89 +43,90 @@ public class TiltSensorBeanNew {
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.B_SINGLE_ANGLE_DIFFERENCE:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.C_STAGE_ANGLE_DIFFERENCE:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.D_CUMULATIVE_ANGLE_DIFFERENCE:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen);
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.E_SINGLE_SETTLEMENT:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
-                        , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+                        , R.color.tiltSensorColorLineGreen2, R.color.tiltSensorColorLineBlue2
+                        , R.color.tiltSensorColorLineBlue2);
+                isDottedLines = Arrays.asList(false, false, false, false, false, true, true);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.F_STAGE_SETTLEMENT:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
-                        , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
+                        , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen2
                         , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+                isDottedLines = Arrays.asList(false, false, false, false, false, true, true);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.G_ACCUMULATIVE_SETTLEMENT:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
-                        , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen
+                        , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen2
                         , R.color.tiltSensorColorLineBlue2, R.color.tiltSensorColorLineBlue2);
-                isDottedLines = Arrays.asList(false, false, false, false, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+                isDottedLines = Arrays.asList(false, false, false, false, false, true, true);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
             case TiltSensorType.H_PARALLELISM:
                 colors = Arrays.asList(R.color.tiltSensorColorLineRed, R.color.tiltSensorColorLineYellow
                         , R.color.tiltSensorColorLineBlue, R.color.tiltSensorColorLineBlue
                         , R.color.tiltSensorColorLineGreen, R.color.tiltSensorColorLineGreen);
                 isDottedLines = Arrays.asList(false, false, true, true, true, true);
-                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
-                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
+//                processingType = Arrays.asList(TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4
+//                        , TiltSensorDataProcessingType.KEEP_DECIMAL_4, TiltSensorDataProcessingType.KEEP_DECIMAL_4);
                 break;
         }
         TiltSensorChartJsonNew.DataBeanX.DataBean tempItem;
-        for (int i = 0; i < mAllData.getData().size(); i++) {
+        for (int i = 0; i < colors.size(); i++) {
             tempItem = mAllData.getData().get(i);
             datas.add(tempItem.getTiltSensorData());
             unit.add(tempItem.getUnit());
             names.add(tempItem.getName());
         }
-        for (int i = 0; i < datas.size(); i++) {
+        for (int i = 0; i < names.size(); i++) {
             TiltSensorBeanNew.DataBean dataBean = new DataBean();
             dataBean.setmColorReId(colors.get(i));
             dataBean.setmName(names.get(i));
             dataBean.setmIsDottedLine(isDottedLines.get(i));
             dataBean.setmData(datas.get(i));
             dataBean.setUnit(unit.get(i));
-            dataBean.setProcessingType(processingType.get(i));
+//            dataBean.setProcessingType(processingType.get(i));
             dataBeans.add(dataBean);
         }
         return dataBeans;

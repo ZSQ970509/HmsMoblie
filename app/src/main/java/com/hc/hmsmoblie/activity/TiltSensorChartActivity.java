@@ -3,6 +3,7 @@ package com.hc.hmsmoblie.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -202,7 +203,7 @@ public class TiltSensorChartActivity extends YcMvpAppCompatActivity<TiltSensorCh
 
         mChartLegendAdapter = new ChartLegendAdapter(getActivity());
         mChartLegendAdapter.setAllData(tiltSensorDatas);
-        mChartLegendRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mChartLegendRv.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mChartLegendRv.setAdapter(mChartLegendAdapter);
         //初始化图表里的LineDataSet(线)数据
         List<ChartMarkerDataBeanNew> markerData = new ArrayList<>();
@@ -238,6 +239,7 @@ public class TiltSensorChartActivity extends YcMvpAppCompatActivity<TiltSensorCh
         lineChart.getLegend().setEnabled(false);
         ChartUtils.setLeftYAxis(lineChart.getAxisLeft());
         ChartUtils.setXAxis(lineChart.getXAxis(), xAisData, -60f);
+        lineChart.moveViewToX(xAisData.size() - 1);
         //刷新图表
         lineChart.notifyDataSetChanged();
         lineChart.invalidate();

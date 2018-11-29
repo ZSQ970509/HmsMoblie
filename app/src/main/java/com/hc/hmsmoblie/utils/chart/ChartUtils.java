@@ -124,7 +124,6 @@ public class ChartUtils {
 //        xAxis.setLabelCount(7);//设置
         xAxis.setLabelRotationAngle(angle);//文字倾斜避免不够显示
         xAxis.setValueFormatter(formatter);
-
     }
 
     /**

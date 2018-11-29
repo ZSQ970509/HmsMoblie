@@ -18,9 +18,9 @@ public class TiltSensorActivityC {
         void onGetTiltSensorParaFail(String msgFail);
         void onGetTitAllSuccess(TiltSensorAllJson tiltSensorJson);
         void onGetTitAllFail(String msgFail);
-        void onSetAllMessage(@TiltSensorParaState String isOnOff);
-        void onGetDeviceState(TiltSensorStateJson tiltSensorStateJson);
-        void onGetDeviceSetting(TiltSensorStateJson tiltSensorStateJson);
+        void onSetAllMessageSuccess(@TiltSensorParaState String isOnOff);
+        void onGetDeviceStateSuccess(TiltSensorStateJson tiltSensorStateJson);
+        void onGetDeviceSettingSuccess(TiltSensorStateJson tiltSensorStateJson);
         void setIotDeviceInfoSuccess(boolean xy,boolean reportTime,boolean Switch);
         void setAllIotDeviceInfoSuccess(TiltSensorSettingJson tiltSensorSettingJson1, TiltSensorSettingJson tiltSensorSettingJson2
                 , TiltSensorSettingJson tiltSensorSettingJson3, String seq);

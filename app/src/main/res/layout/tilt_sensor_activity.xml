@@ -355,7 +355,7 @@
                         android:layout_below="@id/tiltSensorAlarmYTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmHeightIv"
-                        android:text="高度:-"
+                        android:text="沉降:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
 

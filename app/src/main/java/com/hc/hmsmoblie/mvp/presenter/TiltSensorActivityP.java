@@ -1,7 +1,5 @@
 package com.hc.hmsmoblie.mvp.presenter;
 
-import android.util.Log;
-
 import com.hc.hmsmoblie.bean.domain.TiltSensorSettingPostBean;
 import com.hc.hmsmoblie.bean.json.TiltSensorAllJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorParaJson;
@@ -76,7 +74,7 @@ public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> im
                 .subscribe(new BaseObserver<TiltSensorStateJson>() {
                     @Override
                     public void onSuccess(TiltSensorStateJson tiltSensorStateJson) {
-                        getIView().onGetDeviceSetting(tiltSensorStateJson);
+                        getIView().onGetDeviceSettingSuccess(tiltSensorStateJson);
                     }
 
                     @Override
@@ -94,7 +92,7 @@ public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> im
                 .subscribe(new BaseObserver<TiltSensorStateJson>() {
                     @Override
                     public void onSuccess(TiltSensorStateJson tiltSensorStateJson) {
-                        getIView().onGetDeviceState(tiltSensorStateJson);
+                        getIView().onGetDeviceStateSuccess(tiltSensorStateJson);
                     }
 
                     @Override
@@ -116,9 +114,9 @@ public class TiltSensorActivityP extends BasePresenter<TiltSensorActivityC.V> im
                             getIView().showMsg("没有数据返回");
                         } else if (json.getData() != null) {
                             if (json.getData().equals(TiltSensorParaState.OPEN)) {
-                                getIView().onSetAllMessage(TiltSensorParaState.OPEN);
+                                getIView().onSetAllMessageSuccess(TiltSensorParaState.OPEN);
                             } else {
-                                getIView().onSetAllMessage(TiltSensorParaState.CLOSE);
+                                getIView().onSetAllMessageSuccess(TiltSensorParaState.CLOSE);
                             }
                         } else {
                             getIView().showMsg(json.getMsg());
