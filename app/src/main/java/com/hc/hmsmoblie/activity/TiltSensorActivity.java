@@ -135,6 +135,9 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
     ChartLineView mHeightLineChart;
     @BindView(R.id.tiltSensorDistanceLineChart)
     ChartLineView mDistanceLineChart;
+    @BindView(R.id.tiltSensorDeflectionTv)
+    TextView mDeflectionTv;
+
     private String mCamId;
     @TiltSensorParaState
     private String mParaState = TiltSensorParaState.UNKNOWN;//监测点开启或者关闭状态
@@ -399,6 +402,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
             mYIv.setVisibility(View.INVISIBLE);
             mHeightTv.setText("高度：-");
             mHeightIv.setVisibility(View.INVISIBLE);
+            mDeflectionTv.setText("挠度：-");
             mAlarmXTv.setText("X轴：-");
             mAlarmXIv.setVisibility(View.INVISIBLE);
             mAlarmYTv.setText("Y轴：-");
@@ -460,6 +464,7 @@ public class TiltSensorActivity extends BaseMvpActivity<TiltSensorActivityP> imp
                 mHeightIv.setImageResource(TiltSensorStateUtils.getState(mData.getCdObd()));
                 mHeightIv.setVisibility(View.VISIBLE);
             }
+            mDeflectionTv.setText("挠度：" + TiltSensorStateUtils.getFormData(mData.getDeflection(), "mm"));
 //            mAlarmXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFirstOldx(), mTiltSensorAlarmBean.getAxisX()));
             mAlarmXIv.setVisibility(isShowAlarm(mTiltSensorAlarmBean.isOpen(), mData.getFirstOldx(), mTiltSensorAlarmBean.getAxisX()));
 //            mAlarmXTv.setText("X轴：" + TiltSensorStateUtils.formatX(mData.getFirstOldx()) + FormatUtils.stripTrailingZeros(Math.abs(mData.getFirstOldx())) + "°");

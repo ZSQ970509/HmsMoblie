@@ -89,6 +89,15 @@ public class TiltSensorAllJson implements Serializable {
         private double ObdFirstOldx;
         private double ObdFirstOldy;
         private double ObdFirstOldz;
+        private double deflection;
+
+        public double getDeflection() {
+            return deflection;
+        }
+
+        public void setDeflection(double deflection) {
+            this.deflection = deflection;
+        }
 
         public String getStates() {
             return States;

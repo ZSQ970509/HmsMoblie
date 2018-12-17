@@ -148,7 +148,6 @@
                         android:layout_below="@id/tiltSensorXTv"
                         android:layout_marginLeft="@dimen/image_size_small"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
-                        android:gravity="center"
                         android:text="高度:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -189,6 +188,17 @@
                         android:layout_height="@dimen/image_size_small"
                         android:layout_toRightOf="@id/tiltSensorYTv"
                         android:src="@drawable/ic_none" />
+                    <TextView
+                        android:id="@+id/tiltSensorDeflectionTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/image_size_small"
+                        android:layout_below="@id/tiltSensorYTv"
+                        android:layout_marginLeft="@dimen/image_size_small"
+                        android:layout_marginTop="@dimen/activity_margin_more_small"
+                        android:text="挠度:-"
+                        android:singleLine="true"
+                        android:textColor="@color/colorGray6"
+                        android:textSize="@dimen/small_size" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -249,7 +259,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/image_size_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmXIv"
-                        android:gravity="center"
                         android:text="X轴:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -269,7 +278,6 @@
                         android:layout_below="@id/tiltSensorAlarmXTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmSpaceIv"
-                        android:gravity="center"
                         android:text="空间位移:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -289,7 +297,6 @@
                         android:layout_below="@id/tiltSensorAlarmSpaceTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmHFLeftIv"
-                        android:gravity="center"
                         android:text="x轴位移:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -309,7 +316,6 @@
                         android:layout_below="@id/tiltSensorAlarmDistanceXTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmHFLeftIv"
-                        android:gravity="center"
                         android:text="左端浮动:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -335,7 +341,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/image_size_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmYIv"
-                        android:gravity="center"
                         android:text="Y轴:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -374,7 +379,6 @@
                         android:layout_below="@id/tiltSensorAlarmHeightTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmDistanceYIv"
-                        android:gravity="center"
                         android:text="Y轴位移:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
@@ -394,7 +398,6 @@
                         android:layout_below="@id/tiltSensorAlarmDistanceYTv"
                         android:layout_marginTop="@dimen/activity_margin_more_small"
                         android:layout_toRightOf="@id/tiltSensorAlarmHFRightIv"
-                        android:gravity="center"
                         android:text="右端浮动:-"
                         android:textColor="@color/colorGray6"
                         android:textSize="@dimen/small_size" />
