@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:background="@color/colorTrance">
+
+    <LinearLayout
+        android:layout_width="@dimen/x650"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/x40"
+        android:background="@drawable/shape_white_round"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/deviceStateDialogTitleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_margin_small_x"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:text="地磅称重记录单"
+            android:textColor="@color/itemContentColor"
+            android:textSize="22dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y810"
+            android:fillViewport="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:background="@drawable/boder_line_black"
+                android:layout_margin="@dimen/x10"
+                android:orientation="vertical">
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        android:id="@+id/deviceStateDialogBatTv"
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="项目名称" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_ProName"
+                        android:layout_width="@dimen/x468"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y16"
+                        android:layout_marginRight="@dimen/y16"
+                        android:singleLine="true"
+                        android:text="万科天城花园一标段智能地磅系统"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="供货单位" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Supply_Unit"
+                        android:layout_width="@dimen/x460"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:singleLine="true"
+                        android:text="万科天城花园一标段智能地磅系统"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="称重日期" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Date"
+                        android:layout_width="@dimen/x460"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:singleLine="true"
+                        android:text="2019-01-09 16:46:52"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="流水号" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Serial_Number"
+                        android:layout_width="@dimen/x460"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:singleLine="true"
+                        android:text="CN000001"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        android:id="@+id/deviceStateDialogSignalTv"
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="品名规格" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Specifications"
+                        android:layout_width="@dimen/y129"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="!80"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="司磅员" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_WeighingAgent"
+                        android:layout_width="@dimen/y130"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="admin"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        android:id="@+id/deviceStateDialogAutoSwitchTv"
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="车牌号" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_CardNum"
+                        android:layout_width="@dimen/y129"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="闽AS1Z80"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="司机" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Driver"
+                        android:layout_width="@dimen/y130"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="admin"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+                </LinearLayout>
+
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y68"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        android:id="@+id/deviceStateDialogHandSwitchTv"
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="称重重量" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Weighing_Weight"
+                        android:layout_width="@dimen/y129"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="70"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="结算重量" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Settlement_Weight"
+                        android:layout_width="@dimen/y130"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/y15"
+                        android:layout_marginRight="@dimen/y15"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="70"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+
+
+
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                  <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="@dimen/y1100"
+                       android:orientation="horizontal">
+
+                       <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                       <TextView
+                           android:id="@+id/deviceStateDialogBatStateTv"
+                           style="@style/DialogWeighingMachineTvStyle"
+                           android:layout_gravity="center"
+                           android:text="视频截图" />
+
+                       <View
+                           style="@style/DialogWeighingMachineLineVertvcalStyle"
+                           android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                       <LinearLayout
+                           android:layout_width="@dimen/x490"
+                           android:layout_height="match_parent"
+                           android:orientation="vertical">
+
+                           <TextView
+                               style="@style/DialogWeighingMachineTvStyle"
+                               android:text="1.全景图" />
+
+                           <ImageView
+                               android:id="@+id/weighing_Machine_Dialog_Panorama"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/y300"
+                               android:layout_margin="@dimen/y10"
+                               android:scaleType="fitXY" />
+
+                           <TextView
+                               style="@style/DialogWeighingMachineTvStyle"
+                               android:text="2.车头图" />
+
+                           <ImageView
+                               android:id="@+id/weighing_Machine_Dialog_HeadstockPlan"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/y300"
+                               android:layout_margin="@dimen/y10"
+                               android:scaleType="fitXY" />
+
+                           <TextView
+                               style="@style/DialogWeighingMachineTvStyle"
+                               android:text="3.车尾图" />
+
+                           <ImageView
+                               android:id="@+id/weighing_Machine_Dialog_Tail_Diagram"
+                               android:layout_width="match_parent"
+                               android:layout_height="@dimen/y300"
+                               android:layout_margin="@dimen/y10"
+                               android:scaleType="fitXY" />
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+                <View style="@style/DialogWeighingMachineLineStyle" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y136"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:text="备注:" />
+
+
+                    <TextView
+                        android:id="@+id/weighing_Machine_Dialog_Note"
+                        android:layout_width="@dimen/y509"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:lines="4"
+                        android:text="70"
+                        android:textColor="#37474F"
+                        android:textSize="@dimen/y24" />
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y11"></LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <Button
+            android:id="@+id/weighing_Machine_Dialog_ConfirmBtn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/shape_blue_left_right"
+            android:text="确定"
+            android:textColor="@color/colorWhiteGray"
+            android:layout_marginTop="@dimen/y15"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -20,7 +20,7 @@ public static String BASE_URL = "http://120.35.11.49:26969/";//外网测试地�
     public static final String BASE_API = "ApiCamera.ashx?action=";
     public static final String API_UPDATE = "api.ashx?action=";//版本更新的api
 
-
+    public static final String API_TILT_WEIGHING_MACH = "OpenInterface/WeighbridgeService.ashx?action=";//地磅
     public static final String API_TILT_SENSOR = "OpenInterface/TiltSensorHandler.ashx?action=";//倾角的api
     public static final String API_TILT_SENSOR_2 = "OpenInterface/SystemDependentService.ashx?action=";//朱强倾角的api
 }

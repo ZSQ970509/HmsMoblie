@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y250">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y230"
+        android:layout_margin="@dimen/y15"
+        android:padding="@dimen/activity_margin_small"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvWeighingMachineProName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/x10"
+                android:singleLine="true"
+                android:text="供应单位:重庆鸿才建材有限公司"
+                android:textColor="#000000"
+                android:textSize="@dimen/y26" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineSerialNumber"
+                android:layout_width="@dimen/x230"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvWeighingMachineProName"
+                android:layout_below="@+id/tvWeighingMachineProName"
+                android:singleLine="true"
+                android:text="流水号:CN00000101"
+                android:textColor="#666666"
+                android:textSize="@dimen/y24"
+                android:layout_marginTop="@dimen/y10"/>
+
+            <TextView
+                android:id="@+id/tvWeighingMachineWeighingAgent"
+                android:layout_width="@dimen/x180"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvWeighingMachineSerialNumber"
+                android:layout_alignBottom="@+id/tvWeighingMachineSerialNumber"
+                android:layout_alignEnd="@+id/tvWeighingMachineDate"
+                android:singleLine="true"
+                android:text="司磅员:adminin"
+                android:textColor="#666666"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineSpecifications"
+                android:layout_width="@dimen/x180"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvWeighingMachineWeighingAgent"
+                android:layout_alignBottom="@+id/tvWeighingMachineWeighingAgent"
+                android:layout_toEndOf="@+id/tvWeighingMachineWeighingAgent"
+                android:singleLine="true"
+                android:text="品名规格:*2000"
+                android:textColor="#666666"
+                android:layout_marginLeft="@dimen/y10"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineDriverNum"
+                android:layout_width="@dimen/x230"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvWeighingMachineSerialNumber"
+                android:layout_below="@+id/tvWeighingMachineSerialNumber"
+                android:layout_marginTop="@dimen/y10"
+                android:singleLine="true"
+                android:text="车牌号:闽AS1Z80"
+                android:textColor="#666666"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineDriver"
+                android:layout_width="@dimen/x180"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvWeighingMachineDriverNum"
+                android:layout_alignBottom="@+id/tvWeighingMachineDriverNum"
+                android:layout_toEndOf="@+id/tvWeighingMachineDriverNum"
+                android:singleLine="true"
+                android:text="司机:adminin"
+                android:textColor="#666666"
+                android:layout_marginLeft="@dimen/y10"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineWeighingWeight"
+                android:layout_width="@dimen/x230"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvWeighingMachineDriverNum"
+                android:layout_below="@+id/tvWeighingMachineDriverNum"
+                android:singleLine="true"
+                android:text="称重重量:10000t"
+                android:textColor="#666666"
+                android:layout_marginTop="@dimen/y10"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineSettlementWeight"
+                android:layout_width="@dimen/x180"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvWeighingMachineWeighingWeight"
+                android:layout_alignBottom="@+id/tvWeighingMachineWeighingWeight"
+                android:layout_toEndOf="@+id/tvWeighingMachineWeighingWeight"
+                android:singleLine="true"
+                android:text="结算重量:10000t"
+                android:layout_marginLeft="@dimen/y10"
+                android:textColor="#666666"
+                android:textSize="@dimen/y24" />
+
+            <TextView
+                android:id="@+id/tvWeighingMachineDate"
+                android:layout_width="@dimen/y420"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvWeighingMachineWeighingWeight"
+                android:layout_below="@+id/tvWeighingMachineWeighingWeight"
+                android:singleLine="true"
+                android:text="称重日期:2018-01-30- 06:16:13"
+                android:textColor="#666666"
+                android:layout_marginTop="@dimen/y10"
+                android:textSize="@dimen/y24" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

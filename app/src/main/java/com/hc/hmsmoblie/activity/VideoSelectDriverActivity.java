@@ -89,7 +89,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                         videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
                         videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
                         videoBean.setVideoId(dataList.get(position).getVideoId() + "");
-                        if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
+                       if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
                             //塔吊
                             LadderControlDeviceListActivity.newInstance(getActivity(), mProID, item.getCamId());
                         } else if (item.getCamTypeId().equals("210") || item.getCamTypeId().equals("230")) {
@@ -173,111 +173,27 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                     showToast("此视频维护或不在线");
                                 }
                             }
-
-                       /* if (videoBean.getCamFlowState().equals("15")) {
-                            String type = videoBean.getmType();
-                            //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
-                            if (type.equals("2") || type.equals("5") || type.equals("8")) {
-                                HuXinVideoActivity.newInstance(getActivity(), videoBean);
-//                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
-                            } else if (type.equals("15")) {//海康8700
-//                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
-                                HKVideoActivity.newInstance(getActivity(), videoBean);
-                            } else {
-                                showToast("此视频暂不支持播放");
-//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
-
-                            }
-                        } else {
-                            showToast("此视频维护或不在线");
-                        }*/
                         }
-                        //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
                     }else{
-                        CommonListDialog.newInstanceType(getActivity(),3)
-                                .setTextViewDipAngleClick(v -> {
-                                    TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
-//                                    DipRealTimeDataActivity.newInstance(getActivity(), item.getCamId() + "");
-                                })
-                                .setTextViewImageLogClick(v -> {
-                                    ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
-                                })
-                                .show();
+                        if(item.getCamTypeId().equals("501")){
+                            //地磅的条件不满足
+                            WeighingMachineActivity.newInstance(getActivity(), mProID);
+                        } else {
+                            CommonListDialog.newInstanceType(getActivity(),3)
+                                    .setTextViewDipAngleClick(v -> {
+                                        TiltSensorActivity.newInstance(getActivity(), item.getCamId() + "");
+                                    })
+                                    .setTextViewImageLogClick(v -> {
+                                        ImageLogPanoramaListActivity.newInstance(getActivity(), item.getCamId() + "");
+                                    })
+                                    .show();
+                        }
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                /*if (dataList.get(position).getCamFlowState() != 16) {
-                    if (EmptyUtils.getString(dataList.get(position).getDevStatus()).equals("1")) {
-                        //通电";
-                        if (EmptyUtils.getString(dataList.get(0).getDevNetStatus()).equals("1")) {
-                            //通网";
-                            try {
-                                VideoBean videoBean  = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
 
-                                //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
-                                videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
-                                videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
-                                if (videoBean.getCamFlowState().equals("15")) {
-                                    String type = videoBean.getmType();
-                                    //2,5,8为互信、3中星微2.1、7中星微3.3、15海康8700
-                                    if (type.equals("2") || type.equals("5") || type.equals("8")) {
-                                        HuXinVideoActivity.newInstance(getActivity(),videoBean);
-//                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
-                                    } else if (type.equals("15")) {//海康8700
-//                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
-                                   } else {
-//                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
-
-                                    }
-                                } else {
-                                    showToast("此视频维护或不在线");
-                                }
-                            //VideoProjectDetailsActivity.newInstance(getActivity(), ((ProjectJson.ListBean) adapter.getItem(position)).getProjID());
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else if (EmptyUtils.getString(dataList.get(0).getDevNetStatus()).equals("0")) {
-                            //断网";
-                            CommonDialog.newInstance(getActivity())
-                                    .setTitle("警告")
-                                    .setMsg("设备处于断网状态!")
-                                    .setSingleBtnText("确定")
-                                    .show();
-                        } else {
-                            //未开通断网设备";
-                            CommonDialog.newInstance(getActivity())
-                                    .setTitle("警告")
-                                    .setMsg("未开通断网设备!")
-                                    .setSingleBtnText("确定")
-                                    .show();
-                        }
-
-                    } else if (EmptyUtils.getString(dataList.get(position).getDevStatus()).equals("0")) {
-                        //断电";
-                        CommonDialog.newInstance(getActivity())
-                                .setTitle("警告")
-                                .setMsg("设备处于断电状态!")
-                                .setSingleBtnText("确定")
-                                .show();
-                    } else {
-                        //未开通断电设备";
-                        CommonDialog.newInstance(getActivity())
-                                .setTitle("警告")
-                                .setMsg("未开通断电设备!")
-                                .setSingleBtnText("确定")
-                                .show();
-                    }
-
-                }else{
-                    //设备维修中
-                    CommonDialog.newInstance(getActivity())
-                            .setTitle("警告")
-                            .setMsg("设备维护中...")
-                            .setSingleBtnText("确定")
-                            .show();
-                }*/
             }
         });
         selectDriverVideoAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

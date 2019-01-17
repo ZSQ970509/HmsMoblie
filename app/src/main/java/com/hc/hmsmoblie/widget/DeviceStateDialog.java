@@ -21,6 +21,7 @@ import butterknife.OnClick;
  * 设备状态的对话框
  */
 public class DeviceStateDialog extends Dialog {
+
     TextView mBatTv;
     TextView mSignalTv;
     TextView mAutoSwitchTv;

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/actionbar_layout" />
+
+    <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y104">
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y56"
+            android:layout_marginLeft="@dimen/x24"
+            android:layout_marginTop="@dimen/y24"
+            android:gravity="center_vertical"
+            android:text="开始时间"
+            android:textColor="#333333"
+            android:textSize="@dimen/y24" />
+
+        <TextView
+            android:id="@+id/tvWeighingMachineStartTime"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/y56"
+
+            android:layout_alignTop="@+id/tv_8"
+            android:layout_toEndOf="@+id/tv_8"
+            android:background="@drawable/boder_line"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#333333"
+            android:textSize="@dimen/y24" />
+
+        <TextView
+            android:id="@+id/tv_9"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y56"
+            android:layout_alignTop="@+id/tvWeighingMachineStartTime"
+            android:layout_toEndOf="@+id/tvWeighingMachineStartTime"
+            android:gravity="center"
+            android:text="结束时间"
+            android:textColor="#333333"
+            android:textSize="@dimen/y24" />
+
+        <TextView
+            android:id="@+id/tvWeighingMachineEndTime"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/y56"
+            android:layout_alignTop="@+id/tv_9"
+            android:layout_toEndOf="@+id/tv_9"
+            android:background="@drawable/boder_line"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#333333"
+            android:textSize="@dimen/y24" />
+
+        <Button
+            android:id="@+id/tvWeighingMachineSearch"
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y56"
+            android:layout_alignTop="@+id/tvWeighingMachineEndTime"
+            android:layout_marginLeft="@dimen/x12"
+            android:layout_toEndOf="@+id/tvWeighingMachineEndTime"
+            android:background="@drawable/btn_query"
+            android:text="" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srlWeighingMachine"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/titleBar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvWeighingMachine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

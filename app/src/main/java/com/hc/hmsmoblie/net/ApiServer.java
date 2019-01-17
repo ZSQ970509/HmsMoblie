@@ -22,6 +22,8 @@ import com.hc.hmsmoblie.bean.json.VideoDriverJson;
 import com.hc.hmsmoblie.bean.json.ImageLogNodeJson;
 import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
 import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
+import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
+import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
 import com.yc.yclibrary.YcInit;
 
@@ -142,5 +144,13 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_SENSOR_2 + "getTitAll")
     Observable<HttpResponse<TiltSensorAllJson>> getTitAll(@Field("ParaID") String paraID);
 
+    @FormUrlEncoded
+    @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridgeList")
+    Observable<HttpResponse<WeighingMachineJson>> getWeighbridgeList(@Field("projId") String projId
+            , @Field("pageindex") int pageindex, @Field("pagesize") int pagesize, @Field("openingTimeBegin") String openingTimeBegin
+            , @Field("openingTimeEnd") String openingTimeEnd);
 
+    @FormUrlEncoded
+    @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridge")
+    Observable<HttpResponse<WeighingMachineMsg>> getWeighbridge(@Field("recordId") String recordId);
 }
