@@ -1,7 +1,9 @@
 package com.hc.hmsmoblie.net;
 
+import com.hc.hmsmoblie.bean.json.DevicePtzJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
+import com.hc.hmsmoblie.bean.json.GetDevUrlJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
@@ -27,15 +29,23 @@ import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
 import com.yc.yclibrary.YcInit;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 /**
@@ -153,4 +163,21 @@ public interface ApiServer {
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridge")
     Observable<HttpResponse<WeighingMachineMsg>> getWeighbridge(@Field("recordId") String recordId);
+
+//    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
+    @GET("openInterface/SystemDependentService.ashx?action=GetDevUrl")
+    Observable<HttpResponse<GetDevUrlJson>> getDevUrl(@Query("ip") String ip, @Query("port") String port, @Query("account") String account,
+                                        @Query("password") String password, @Query("deviceNum") String deviceNum, @Query("method") String method);
+//    @Multipart
+//    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:803/")
+//    @POST(UrlHelper.API_HUIYAN)
+//    Observable<GetDevUrlJson> getDevUrl(@PartMap Map<String, RequestBody> requestBodyMap);
+
+//    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
+    @GET("openInterface/SystemDependentService.ashx?action=DevicePtz")
+    Observable<DevicePtzJson> devicePtzs(@Query("ip") String ip, @Query("port") String port, @Query("account") String account,
+                                         @Query("password") String password, @Query("deviceNum") String deviceNum, @Query("method") String method,
+                                         @Query("speed") String speed, @Query("ptz") String ptz, @Query("isSpecial") String isSpecial);
+
+
 }

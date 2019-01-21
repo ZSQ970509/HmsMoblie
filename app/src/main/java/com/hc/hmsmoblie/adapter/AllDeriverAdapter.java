@@ -32,7 +32,8 @@ public class AllDeriverAdapter extends BaseItemDraggableAdapter<TiltSensorParaJs
         if (states.size() - 1 >= position) {
             checkBox.setChecked(states.get(position));
         } else {
-            states.add(checkBox.isChecked());
+            states.add(false);
+            checkBox.setChecked(false);
         }
         checkBox.setOnCheckedChangeListener(
                 (buttonView, isChecked) -> {

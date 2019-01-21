@@ -36,7 +36,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 梯控设备列表
+ * 地磅列表
  */
 
 public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> implements WeighingMachineC.V {
@@ -85,13 +85,14 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         mAdapter = new BaseItemDraggableAdapter<WeighingMachineJson.ListBean, BaseViewHolder>(R.layout.weighing_machine_item, null) {
             @Override
             protected void convert(BaseViewHolder helper, WeighingMachineJson.ListBean item) {
-                helper.setText(R.id.tvWeighingMachineSerialNumber, "流水号:" + EmptyUtils.getString(item.getSwiftNumber(),"-"))
+                helper.setText(R.id.tvWeighingMachineProName, EmptyUtils.getString(item.getProjName(), "-"))
+                        .setText(R.id.tvWeighingMachineSerialNumber, "流水号:" + EmptyUtils.getString(item.getSwiftNumber(), "-"))
                         .setText(R.id.tvWeighingMachineWeighingAgent, "司磅员:" + EmptyUtils.getString(item.getWeighing(), "-"))
                         .setText(R.id.tvWeighingMachineSpecifications, "品名规格:" + EmptyUtils.getString(item.getMerchandise(), "-"))
-                        .setText(R.id.tvWeighingMachineDriverNum, "车牌号:"+ EmptyUtils.getString(item.getPlate(), "-"))
+                        .setText(R.id.tvWeighingMachineDriverNum, "车牌号:" + EmptyUtils.getString(item.getPlate(), "-"))
                         .setText(R.id.tvWeighingMachineDriver, "司机:" + EmptyUtils.getString(item.getCart(), "-"))
-                        .setText(R.id.tvWeighingMachineWeighingWeight, "称重重量:" + EmptyUtils.getString(item.getWeighM()+"", "-"))
-                        .setText(R.id.tvWeighingMachineSettlementWeight, "结算重量:" + EmptyUtils.getString(item.getWeighW()+"", "-"))
+                        .setText(R.id.tvWeighingMachineWeighingWeight, "称重重量:" + EmptyUtils.getString(item.getWeighM() + "", "-", "kg"))
+                        .setText(R.id.tvWeighingMachineSettlementWeight, "结算重量:" + EmptyUtils.getString(item.getWeighW() + "", "-", "kg"))
                         .setText(R.id.tvWeighingMachineDate, "称重日期:" + EmptyUtils.getString(item.getCreateTime(), "-"));
             }
         };
@@ -111,14 +112,14 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
             searchDeviceList();
         });
         mAdapter.setOnItemClickListener((BaseQuickAdapter adapter, View view, int position) ->
-                mPresenter.getWeighbridge(((WeighingMachineJson.ListBean) adapter.getItem(position)).getRecordId()+"")
+                mPresenter.getWeighbridge(((WeighingMachineJson.ListBean) adapter.getItem(position)).getRecordId() + "")
         );
         initRefreshAndLoadMore();
         searchDeviceList();
     }
 
     private void searchDeviceList() {
-        mPresenter.getWeighbridgeList(mProID, mPageIndex, mPageSize,mTvStartTime.getText().toString(), mTvEndTime.getText().toString());
+        mPresenter.getWeighbridgeList(mProID, mPageIndex, mPageSize, mTvStartTime.getText().toString(), mTvEndTime.getText().toString());
     }
 
     @Override
@@ -136,9 +137,9 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
 
     @Override
     public void onGetWeighbridgeSuccess(WeighingMachineMsg weighingMachineMsg) {
-        Log.e("test",weighingMachineMsg.toString()+"");
+        Log.e("test", weighingMachineMsg.toString() + "");
         WeighingMachineDialog.newInstance(getActivity())
-                .setData(getActivity(),weighingMachineMsg)
+                .setData(getActivity(), weighingMachineMsg)
                 .show();
     }
 

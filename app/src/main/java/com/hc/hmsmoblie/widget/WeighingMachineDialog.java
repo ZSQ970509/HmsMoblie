@@ -21,6 +21,7 @@ import com.hc.hmsmoblie.bean.domain.TiltSensorSettingBean;
 import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.utils.BatAndSignalUtil;
+import com.hc.hmsmoblie.utils.EmptyUtils;
 import com.hc.hmsmoblie.utils.FormatUtils;
 import com.hc.hmsmoblie.utils.LoadImgUtils;
 
@@ -75,7 +76,7 @@ public class WeighingMachineDialog extends Dialog {
         weighing_Machine_Dialog_Note = findViewById(R.id.weighing_Machine_Dialog_Note);
         weighing_Machine_Dialog_Panorama = findViewById(R.id.weighing_Machine_Dialog_Panorama);
         weighing_Machine_Dialog_HeadstockPlan = findViewById(R.id.weighing_Machine_Dialog_HeadstockPlan);
-        weighing_Machine_Dialog_Tail_Diagram = findViewById(R.id.weighing_Machine_Dialog_Tail_Diagram );
+        weighing_Machine_Dialog_Tail_Diagram = findViewById(R.id.weighing_Machine_Dialog_Tail_Diagram);
         findViewById(R.id.weighing_Machine_Dialog_ConfirmBtn).setOnClickListener(v -> dismiss());
         //设置对话框位置大小
         Window dialogWindow = getWindow();
@@ -96,12 +97,12 @@ public class WeighingMachineDialog extends Dialog {
         weighingMachineDialogWeighingAgent.setText(weighingMachineMsg.getWeighing());
         weighingMachineDialogCardNum.setText(weighingMachineMsg.getPlate());
         weighingMachineDialogDriver.setText(weighingMachineMsg.getCart());
-        weighingMachineDialogWeighingWeight.setText(weighingMachineMsg.getWeighM()+"");
-        weighingMachineDialogSettlementWeight.setText(weighingMachineMsg.getWeighW()+"");
+        weighingMachineDialogWeighingWeight.setText(EmptyUtils.getString(weighingMachineMsg.getWeighM() + "", "-", "kg"));
+        weighingMachineDialogSettlementWeight.setText(EmptyUtils.getString(weighingMachineMsg.getWeighW() + "", "-", "kg"));
         weighing_Machine_Dialog_Note.setText(weighingMachineMsg.getNote());
-        LoadImgUtils.loadImg(context,weighingMachineMsg.getPuzzleImg(),weighing_Machine_Dialog_Panorama);
-        LoadImgUtils.loadImg(context,weighingMachineMsg.getCartBImg(),weighing_Machine_Dialog_HeadstockPlan);
-        LoadImgUtils.loadImg(context,weighingMachineMsg.getCartEImg(),weighing_Machine_Dialog_Tail_Diagram);
+        LoadImgUtils.loadImg(context, weighingMachineMsg.getPuzzleImg(), weighing_Machine_Dialog_Panorama);
+        LoadImgUtils.loadImg(context, weighingMachineMsg.getCartBImg(), weighing_Machine_Dialog_HeadstockPlan);
+        LoadImgUtils.loadImg(context, weighingMachineMsg.getCartEImg(), weighing_Machine_Dialog_Tail_Diagram);
         return this;
     }
 }

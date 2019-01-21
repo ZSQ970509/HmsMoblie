@@ -43,6 +43,8 @@ public class VideoBeanXmlUtil {
                         dataBean.setCamName(parser.nextText());
                     } else if ("hikxml".equals(nodeName)) {
                         dataBean.setmRtsp(parser.nextText());
+                    }else if ("deviceNum".equals(nodeName)) {
+                        dataBean.setmDeviceNum(parser.nextText());
                     }
                     break;
                 }

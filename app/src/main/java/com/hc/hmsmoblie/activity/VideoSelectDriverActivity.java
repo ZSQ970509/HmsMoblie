@@ -83,8 +83,6 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                     if(dataList.get(position).getCam_Config()!= null) {
                         VideoBean videoBean = VideoBeanXmlUtil.parseXMLWithPull(dataList.get(position).getCam_Config());
 
-
-
                         //videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_PUID());
                         videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
                         videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
@@ -119,7 +117,9 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                                 } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
                                                     HKVideoActivity.newInstance(getActivity(), videoBean);
-                                                } else {
+                                                } else if(type.equals("13")){//慧眼视频
+                                                    HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                                }else{
                                                     showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
                                                 }
@@ -128,6 +128,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                             }
                                         })
                                         .show();
+
                                 }else {
                                     CommonListDialog.newInstanceType(getActivity(),2)
                                             .setTextViewImageLogClick(v -> {
@@ -143,7 +144,9 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                                     } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
                                                         HKVideoActivity.newInstance(getActivity(), videoBean);
-                                                    } else {
+                                                    }  else if(type.equals("13")){//慧眼视频
+                                                        HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                                    }else {
                                                         showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
 
@@ -164,7 +167,9 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                                     } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
                                         HKVideoActivity.newInstance(getActivity(), videoBean);
-                                    } else {
+                                    }  else if(type.equals("13")){//慧眼视频
+                                        HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                    }else {
                                         showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
 

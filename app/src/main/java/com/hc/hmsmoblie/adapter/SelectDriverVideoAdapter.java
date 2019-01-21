@@ -26,8 +26,9 @@ public class SelectDriverVideoAdapter extends BaseItemDraggableAdapter<VideoDriv
         helper.setText(R.id.tv_Driver_Name_Select_Driver, item.getCamName());
         helper.addOnClickListener(R.id.iv_Driver_Panorama);
         //1:通电" 0:断电 null:未开通断电设备
-
-        if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
+        if(item.getCamTypeId().equals("501")){
+            helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.dibang1);
+        }else if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
             //塔吊
             helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.shebei);
             helper.getView(R.id.iv_Net_Select_Driver).setVisibility(View.INVISIBLE);

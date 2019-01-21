@@ -21,25 +21,17 @@ public class VideoBean implements Serializable {
     private String mRtsp;
     private String camFlowState;
     private String VideoId;
+    private String mDeviceNum;
     public VideoBean() {
     }
-
-
-
-    public VideoBean(String mUserName, String mPassword, String mSysCode, String mIp, String mPort, String mType, String cam_Dx_Puid, String camId, String camName, String camFlowState) {
-        this.mUserName = mUserName;
-        this.mPassword = mPassword;
-        this.mSysCode = mSysCode;
-        this.mIp = mIp;
-        this.mPort = mPort;
-        this.mType = mType;
-        Cam_Dx_Puid = cam_Dx_Puid;
-        this.camId = camId;
-
-        this.camName = camName;
-        this.camFlowState = camFlowState;
-
+    public String getmDeviceNum() {
+        return mDeviceNum;
     }
+
+    public void setmDeviceNum(String mDeviceNum) {
+        this.mDeviceNum = mDeviceNum;
+    }
+
     public String getVideoId() {
         return VideoId;
     }

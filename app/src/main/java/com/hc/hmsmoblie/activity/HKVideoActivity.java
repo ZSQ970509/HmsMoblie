@@ -200,7 +200,6 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                         break;
                     case 2:
                         AnimationUtil.rightRotation(imageView_main);
-
                         type = 0;
                         break;
                 }
@@ -235,44 +234,44 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                 if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_UP;
                     ptzBtnOnClick();
-                    //splay.control(videoBean.getmUserName(), "1", speedNum);//1 向上
+                    //splay.control(videoBean.getmUserName(), "1", mSpeedNum);//1 向上
                 } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_ZOOM_IN;
                     ptzBtnOnClick();
-                    // splay.control(videoBean.getmUserName(), "7", speedNum);//7 放大
+                    // splay.control(videoBean.getmUserName(), "7", mSpeedNum);//7 放大
                 }
                 break;
             case R.id.control_Left:
                 if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_LEFT;
                     ptzBtnOnClick();
-                    // splay.control(videoBean.getmUserName(), "3", speedNum);//2 向左
+                    // splay.control(videoBean.getmUserName(), "3", mSpeedNum);//2 向左
                 } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_IRIS_UP;
                     ptzBtnOnClick();
-                    //splay.control(videoBean.getmUserName(), "5", speedNum);//5 变亮
+                    //splay.control(videoBean.getmUserName(), "5", mSpeedNum);//5 变亮
                 }
                 break;
             case R.id.control_Down:
                 if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_DOWN;
                     ptzBtnOnClick();
-                    // splay.control(videoBean.getmUserName(), "2", speedNum);//3 向下
+                    // splay.control(videoBean.getmUserName(), "2", mSpeedNum);//3 向下
                 } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_ZOOM_OUT;
                     ptzBtnOnClick();
-                    //splay.control(videoBean.getmUserName(), "8", speedNum);//8 缩小
+                    //splay.control(videoBean.getmUserName(), "8", mSpeedNum);//8 缩小
                 }
                 break;
             case R.id.control_Right:
                 if (controlType == 1) {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_RIGHT;
                     ptzBtnOnClick();
-                    // splay.control(videoBean.getmUserName(), "4", speedNum);//4 向右
+                    // splay.control(videoBean.getmUserName(), "4", mSpeedNum);//4 向右
                 } else {
                     mPtzCommand = SDKConstant.PTZCommandConstant.CUSTOM_CMD_IRIS_DOWN;
                     ptzBtnOnClick();
-                    // splay.control(videoBean.getmUserName(), "6", speedNum);//6 变暗
+                    // splay.control(videoBean.getmUserName(), "6", mSpeedNum);//6 变暗
                 }
                 break;
         }
@@ -313,8 +312,6 @@ public class HKVideoActivity extends BaseMvpActivity<LoginP> implements LoginC.V
                     });
                 }
             });
-
-
         }
     }
 
