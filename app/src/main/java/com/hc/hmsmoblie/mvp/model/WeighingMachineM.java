@@ -24,4 +24,10 @@ public class WeighingMachineM implements IModel{
                 .getWeighbridge(recordId)
                 .compose(NetTransformer.compose());
     }
+    public Observable getWeighGroupList(String proId) {
+        return RetrofitUtils.Instance
+                .getApiService(ApiServer.class)
+                .getWeighGroupList(proId)
+                .compose(NetTransformer.compose());
+    }
 }

@@ -3,6 +3,7 @@ package com.hc.hmsmoblie.mvp.presenter;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
+import com.hc.hmsmoblie.bean.json.WeightGroupJson;
 import com.hc.hmsmoblie.mvp.contact.WeighingMachineC;
 import com.hc.hmsmoblie.mvp.model.WeighingMachineM;
 import com.hc.hmsmoblie.net.HttpResponse;
@@ -48,6 +49,24 @@ public class WeighingMachineP extends BasePresenter<WeighingMachineC.V> implemen
                     @Override
                     public void onFail(ApiException msg) {
                         getIView().onGetWeighbridgeFail(msg);
+                    }
+                });
+    }
+
+    @Override
+    public void getWeighGroupList(String proId) {
+        new WeighingMachineM()
+                .getWeighGroupList(proId)
+                .compose(getIView().bindLifecycle())
+                .subscribe(new NetObserver<HttpResponse<WeightGroupJson>>() {
+                    @Override
+                    public void onSuccess(HttpResponse<WeightGroupJson> bean) {
+                        getIView().onGetWeighGroupListSuccess(bean.getData());
+                    }
+
+                    @Override
+                    public void onFail(ApiException msg) {
+                        getIView().onGetWeighGroupListFail(msg);
                     }
                 });
     }

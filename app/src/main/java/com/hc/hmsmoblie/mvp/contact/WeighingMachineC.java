@@ -3,6 +3,7 @@ package com.hc.hmsmoblie.mvp.contact;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
+import com.hc.hmsmoblie.bean.json.WeightGroupJson;
 import com.hc.hmsmoblie.net.HttpResponse;
 import com.yc.yclibrary.exception.ApiException;
 import com.yc.yclibrary.mvp.IView;
@@ -20,10 +21,15 @@ public class WeighingMachineC {
         void onGetWeighbridgeSuccess(WeighingMachineMsg weighingMachineMsg);
 
         void onGetWeighbridgeFail(ApiException apiException);
+
+        void onGetWeighGroupListSuccess(WeightGroupJson weightGroupJson);
+
+        void onGetWeighGroupListFail(ApiException apiException);
     }
 
     public interface P {
         void getWeighbridgeList(String  projId,int pageIndex, int pageSize, String openingTimeBegin, String openingTimeEnd);
         void getWeighbridge(String  recordId);
+        void getWeighGroupList(String proId);
     }
 }
