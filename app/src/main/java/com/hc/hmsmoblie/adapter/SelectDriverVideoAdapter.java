@@ -136,11 +136,12 @@ public class SelectDriverVideoAdapter extends BaseItemDraggableAdapter<VideoDriv
                         break;
                 }
             }else{
-                if (item.getCamFlowState() == 16) {
-                    helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.kekong_fail);
-                } else {
-                    helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.kekong);
-                }
+                    if (item.getCamFlowState() == 16) {
+                        helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.kekong_fail);
+                    } else {
+                        helper.setImageResource(R.id.iv_Driver_Icon_Select_Driver, R.drawable.kekong);
+                    }
+
             }
         }
         //getCamFlowState() == 16 维护中。

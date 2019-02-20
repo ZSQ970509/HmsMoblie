@@ -87,7 +87,10 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                         videoBean.setCam_Dx_Puid(dataList.get(position).getCam_DX_VideoId());
                         videoBean.setCamFlowState(dataList.get(position).getCamFlowState() + "");
                         videoBean.setVideoId(dataList.get(position).getVideoId() + "");
-                       if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
+                        if(item.getCamTypeId().equals("501")){
+                            //地磅的条件不满足
+                            WeighingMachineActivity.newInstance(getActivity(), mProID);
+                        } else   if (item.getCamTypeId().equals("401") || item.getCamTypeId().equals("421")) {
                             //塔吊
                             LadderControlDeviceListActivity.newInstance(getActivity(), mProID, item.getCamId());
                         } else if (item.getCamTypeId().equals("210") || item.getCamTypeId().equals("230")) {
@@ -116,9 +119,11 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
 //                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
                                                 } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+
+
                                                     HKVideoActivity.newInstance(getActivity(), videoBean);
                                                 } else if(type.equals("13")){//慧眼视频
-                                                    HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                                    //HuiYanVideoActivity.newInstance(getActivity(),videoBean);
                                                 }else{
                                                     showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
@@ -143,9 +148,10 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
 //                                        JumpToUtils.toHuXinVideoActivity(getActivity(), ivms_8700_bean);
                                                     } else if (type.equals("15")) {//海康8700
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
+
                                                         HKVideoActivity.newInstance(getActivity(), videoBean);
                                                     }  else if(type.equals("13")){//慧眼视频
-                                                        HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                                        //HuiYanVideoActivity.newInstance(getActivity(),videoBean);
                                                     }else {
                                                         showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
@@ -168,7 +174,8 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
 //                                        JumpToUtils.toHKVideoActivity(getActivity(), ivms_8700_bean);
                                         HKVideoActivity.newInstance(getActivity(), videoBean);
                                     }  else if(type.equals("13")){//慧眼视频
-                                        HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+                                        //HuiYanVideoActivity.newInstance(getActivity(),videoBean);
+
                                     }else {
                                         showToast("此视频暂不支持播放");
 //                                        JumpToUtils.toRtspVideoAc(getActivity(), ivms_8700_bean.getmRtsp());
@@ -180,6 +187,7 @@ public class VideoSelectDriverActivity extends BaseMvpActivity<VideoSelectDriver
                             }
                         }
                     }else{
+
                         if(item.getCamTypeId().equals("501")){
                             //地磅的条件不满足
                             WeighingMachineActivity.newInstance(getActivity(), mProID);
