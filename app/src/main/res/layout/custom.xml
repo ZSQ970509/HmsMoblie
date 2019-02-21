@@ -1,23 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:background="@color/white"
     android:gravity="center"
-    android:background="@color/white">
+    android:orientation="horizontal">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="总重量大于"
         android:gravity="center"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        android:text="总重量大于" />
 
     <EditText
         android:id="@+id/weight_Group_EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         android:ems="5"
-        android:inputType="number" />
+        android:inputType="number"
+        android:text="0" />
 
     <TextView
         android:id="@+id/btn"

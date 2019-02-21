@@ -13,29 +13,24 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
-import com.hc.hmsmoblie.bean.json.ImageLogPanoramaListJson;
-import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.bean.json.WeightGroupJson;
-import com.hc.hmsmoblie.mvp.contact.LadderControlDeviceListC;
 import com.hc.hmsmoblie.mvp.contact.WeighingMachineC;
-import com.hc.hmsmoblie.mvp.presenter.LadderControlDeviceListP;
 import com.hc.hmsmoblie.mvp.presenter.WeighingMachineP;
 import com.hc.hmsmoblie.utils.EmptyUtils;
 import com.hc.hmsmoblie.utils.TimePickerUtils;
 import com.hc.hmsmoblie.widget.WeighingMachineDialog;
 import com.yc.yclibrary.exception.ApiException;
 import com.zxl.library.DropDownMenu;
+import com.zxl.library.WeighingSelectorType;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -56,6 +51,10 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     TextView mTvStartTime;
     @BindView(R.id.tvWeighingMachineEndTime)
     TextView mTvEndTime;
+    @BindView(R.id.tvWeighingMachineWeighMSum)
+    TextView mTvWeighMSum;
+    @BindView(R.id.tvWeighingMachineWeighWSum)
+    TextView mTvWeighWSum;
     @BindView(R.id.tvWeighingMachineSearch)
     Button tvWeighingMachineSearch;
     @BindView(R.id.dropDownMenu)
@@ -68,8 +67,11 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     private String mProID;
     private static final String PRO_ID = "pro_id";
 
-    private String headers[] = {"品名规则", "供应单位", "司磅员", "总重量"};
-    private int[] types = new int[]{DropDownMenu.TYPE_LIST_CITY, DropDownMenu.TYPE_LIST_SIMPLE, DropDownMenu.TYPE_LIST_CITY, DropDownMenu.TYPE_CUSTOM};
+    private String headers[] = {"品名规则", "供应单位", "司磅人", "总重量"};
+    private String mSelectorMerchandise = "";//刷选条件：品名规格
+    private String mSelectorSupplier = "";//刷选条件：供应单位
+    private String mSelectorWeighing = "";//刷选条件：司磅员
+    private double mSelectorWeight = 0;//刷选条件：重量
 
     public static void newInstance(Activity activity, String proId) {
         Intent intent = new Intent(activity, WeighingMachineActivity.class);
@@ -92,11 +94,9 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     protected void initView(Bundle bundle) {
         setToolBar("智能地磅");
         mProID = getIntent().getStringExtra(PRO_ID);
-        mPresenter.getWeighGroupList(mProID);
-        initView();
+        initDropDownView();
         mTvStartTime.setText(TimePickerUtils.getMonthFirstDay());
         mTvEndTime.setText(TimePickerUtils.getMonthToday());
-
         mAdapter = new BaseItemDraggableAdapter<WeighingMachineJson.ListBean, BaseViewHolder>(R.layout.weighing_machine_item, null) {
             @Override
             protected void convert(BaseViewHolder helper, WeighingMachineJson.ListBean item) {
@@ -130,70 +130,66 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                 mPresenter.getWeighbridge(((WeighingMachineJson.ListBean) adapter.getItem(position)).getRecordId() + "")
         );
         initRefreshAndLoadMore();
+        mPresenter.getWeighGroupList(mProID);
         searchDeviceList();
     }
 
-    private void initView() {
-       contentView = getLayoutInflater().inflate(R.layout.weight_machine_content_activity, null);
-       mRecyclerView = contentView.findViewById(R.id.rvWeighingMachine);
-        mSwipeRefreshLayout= contentView.findViewById(R.id.srlWeighingMachine);
+    private void initDropDownView() {
+        contentView = getLayoutInflater().inflate(R.layout.weight_machine_content_activity, null);
+        mRecyclerView = contentView.findViewById(R.id.rvWeighingMachine);
+        mSwipeRefreshLayout = contentView.findViewById(R.id.srlWeighingMachine);
 
         //该监听回调只监听默认类型，如果是自定义view请自行设置，参照demo
-        mDropDownMenu.addMenuSelectListener(new DropDownMenu.OnDefultMenuSelectListener() {
+        mDropDownMenu.addMenuSelectListener(new DropDownMenu.OnMenuSelectListener() {
+
             @Override
-            public void onSelectDefaultMenu(int index, int pos, String clickstr) {
-                //index:点击的tab索引，pos：单项菜单中点击的位置索引，clickstr：点击位置的字符串
-                Toast.makeText(getBaseContext(), clickstr, Toast.LENGTH_SHORT).show();
+            public void onSelectDefaultMenu(int type, String date) {
+                dropDropFinal(type, date);
             }
         });
     }
+
     /**
      * 设置类型和数据源：
      * DropDownMenu.KEY对应类型（DropDownMenu中的常量，参考上述核心源码）
      * DropDownMenu.VALUE对应数据源：key不是TYPE_CUSTOM则传递string[],key是TYPE_CUSTOM类型则传递对应view
      */
-    private List<HashMap<String, Object>> initViewData(WeightGroupJson weightGroupJson) {
-        List<HashMap<String, Object>> viewDatas = new ArrayList<>();
-        HashMap<String, Object> map;
-        for (int i = 0; i < headers.length; i++) {
-            map = new HashMap<String, Object>();
-            map.put(DropDownMenu.KEY, types[i]);
-            switch (types[i]) {
-                case DropDownMenu.TYPE_LIST_CITY:
-                    if(headers[i].equals("品名规则")){
-                        map.put(DropDownMenu.VALUE, weightGroupJson.getMerchandiseList().toArray(new String[weightGroupJson.getMerchandiseList().size()]));
-                    }else if(headers[i].equals("司磅员")){
-                        map.put(DropDownMenu.VALUE, weightGroupJson.getWeighingList().toArray(new String[weightGroupJson.getWeighingList().size()]));
-                    }
-                    break;
-                case DropDownMenu.TYPE_LIST_SIMPLE:
-                    map.put(DropDownMenu.VALUE, weightGroupJson.getSupplierList().toArray(new String[weightGroupJson.getSupplierList().size()]));
-                    break;
-                case DropDownMenu.TYPE_GRID:
-                    map.put(DropDownMenu.VALUE, weightGroupJson.getWeighingList().toArray(new String[weightGroupJson.getWeighingList().size()]));
-                    break;
-                default:
-                    map.put(DropDownMenu.VALUE, getCustomView());
-                    break;
-            }
-            viewDatas.add(map);
-        }
-        return viewDatas;
+    private List<HashMap<String, Object>> initDropDownViewData(WeightGroupJson weightGroupJson) {
+        List<HashMap<String, Object>> viewDates = new ArrayList<>();
+        viewDates.add(createDropDate(weightGroupJson.getMerchandiseList(), WeighingSelectorType.merchandise));
+        viewDates.add(createDropDate(weightGroupJson.getSupplierList(), WeighingSelectorType.supplier));
+        viewDates.add(createDropDate(weightGroupJson.getWeighingList(), WeighingSelectorType.weighing));
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put(DropDownMenu.KEY, WeighingSelectorType.weight);
+        map.put(DropDownMenu.VALUE, getCustomView());
+        viewDates.add(map);
+        return viewDates;
     }
+
+    private HashMap<String, Object> createDropDate(List<String> date, int key) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put(DropDownMenu.KEY, key);
+        List<String> putDate = new ArrayList<>();
+        putDate.add("全部");
+        putDate.addAll(date);
+        map.put(DropDownMenu.VALUE, putDate.toArray(new String[putDate.size()]));
+        return map;
+    }
+
     private View getCustomView() {
         View v = getLayoutInflater().inflate(R.layout.custom, null);
         TextView btn = (TextView) v.findViewById(R.id.btn);
-        EditText editText= v.findViewById(R.id.weight_Group_EditText);
+        EditText editText = v.findViewById(R.id.weight_Group_EditText);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!editText.getText().toString().equals("")){
-                    mDropDownMenu.setTabText(3,">"+editText.getText().toString());//设置tab标签文字
+                if (!editText.getText().toString().equals("")) {
+                    mDropDownMenu.setTabText(3, ">" + editText.getText().toString());//设置tab标签文字
+                    dropDropFinal(WeighingSelectorType.weight, editText.getText().toString());
                     mDropDownMenu.closeMenu();//关闭menu
-                }else {
+                } else {
                     showToast("设置的数目不能为空！");
                 }
-
             }
         });
         return v;
@@ -208,12 +204,56 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
             super.onBackPressed();
         }
     }
+
+    /**
+     * 刷选框结束后调用搜索列表事件
+     *
+     * @param type 类型（选中了第几个tab）
+     * @param date 数据
+     */
+    private void dropDropFinal(@WeighingSelectorType int type, String date) {
+        if (date.equals("全部")) {
+            date = "";
+            mDropDownMenu.setTabText(type - 1, headers[type - 1]);
+        }
+        switch (type) {
+            case WeighingSelectorType.merchandise:
+                mSelectorMerchandise = date;
+                break;
+            case WeighingSelectorType.supplier:
+                mSelectorSupplier = date;
+                break;
+            case WeighingSelectorType.weighing:
+                mSelectorWeighing = date;
+                break;
+            case WeighingSelectorType.weight:
+                try {
+                    mSelectorWeight = Double.parseDouble(date);
+                } catch (Exception e) {
+                    mSelectorWeight = 0;
+                }
+                if(mSelectorWeight==0){
+                    mDropDownMenu.setTabText(type - 1, headers[type - 1]);
+                }
+                break;
+        }
+        initRefreshAndLoadMore();
+        searchDeviceList();
+    }
+
     private void searchDeviceList() {
-        mPresenter.getWeighbridgeList(mProID, mPageIndex, mPageSize, mTvStartTime.getText().toString(), mTvEndTime.getText().toString());
+        mPresenter.getWeighbridgeList(mProID, mPageIndex, mPageSize, mTvStartTime.getText().toString(), mTvEndTime.getText().toString(), mSelectorSupplier, mSelectorMerchandise, mSelectorWeighing, mSelectorWeight);
     }
 
     @Override
     public void onGetWeighbridgeListSuccess(WeighingMachineJson weighingMachineJson) {
+        if (weighingMachineJson == null) {
+            mTvWeighMSum.setText("总称重重量:-");
+            mTvWeighWSum.setText("总结算重量:-");
+        } else {
+            mTvWeighMSum.setText("总称重重量:" + weighingMachineJson.getWeighMSum());
+            mTvWeighWSum.setText("总结算重量:" + weighingMachineJson.getWeighWSum());
+        }
         mPageTotal = (weighingMachineJson.getTotal() + mPageSize - 1) / mPageSize;
         mAdapter.addData(weighingMachineJson.getList());
         finishRefreshAndLoadMore();
@@ -227,7 +267,7 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
 
     @Override
     public void onGetWeighbridgeSuccess(WeighingMachineMsg weighingMachineMsg) {
-        Log.e("test", weighingMachineMsg.toString() + "");
+//        Log.e("test", weighingMachineMsg.toString() + "");
         WeighingMachineDialog.newInstance(getActivity())
                 .setData(getActivity(), weighingMachineMsg)
                 .show();
@@ -240,21 +280,19 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
 
     @Override
     public void onGetWeighGroupListSuccess(WeightGroupJson weightGroupJson) {
-
-        mDropDownMenu.setDropDownMenu(Arrays.asList(headers), initViewData(weightGroupJson), contentView);
-
+        mDropDownMenu.setDropDownMenu(Arrays.asList(headers), initDropDownViewData(weightGroupJson), contentView);
     }
 
     @Override
     public void onGetWeighGroupListFail(ApiException apiException) {
-
+        showToast(apiException.getMessage());
     }
 
     private void initRefreshAndLoadMore() {
         mSwipeRefreshLayout.setRefreshing(true);
         mPageIndex = 1;
         mPageTotal = 1;
-        mAdapter.setNewData(null);//重新开启下拉加载更多
+        mAdapter.setNewData(null);//重新开启上拉加载更多
     }
 
     private void finishRefreshAndLoadMore() {

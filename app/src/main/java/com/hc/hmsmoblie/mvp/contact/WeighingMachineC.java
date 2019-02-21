@@ -28,7 +28,8 @@ public class WeighingMachineC {
     }
 
     public interface P {
-        void getWeighbridgeList(String  projId,int pageIndex, int pageSize, String openingTimeBegin, String openingTimeEnd);
+        void getWeighbridgeList(String  projId,int pageIndex, int pageSize, String openingTimeBegin, String openingTimeEnd,
+                                String supplier, String merchandise, String weighing, double weigh);
         void getWeighbridge(String  recordId);
         void getWeighGroupList(String proId);
     }

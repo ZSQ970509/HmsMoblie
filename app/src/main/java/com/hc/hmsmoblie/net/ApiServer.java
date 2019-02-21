@@ -1,9 +1,11 @@
 package com.hc.hmsmoblie.net;
 
 //import com.hc.hmsmoblie.bean.json.DevicePtzJson;
+import com.hc.hmsmoblie.bean.json.DevicePtzJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
 //import com.hc.hmsmoblie.bean.json.GetDevUrlJson;
+import com.hc.hmsmoblie.bean.json.GetDevUrlJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
@@ -14,7 +16,6 @@ import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.json.LoginJson;
 import com.hc.hmsmoblie.bean.json.SensorLogJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorAllJson;
-import com.hc.hmsmoblie.bean.json.TiltSensorJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorSettingJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorStateJson;
 import com.hc.hmsmoblie.bean.json.TiltSensorChartJsonNew;
@@ -27,26 +28,18 @@ import com.hc.hmsmoblie.bean.json.ImageLogWideAngleJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.bean.json.WeightGroupJson;
-import com.hc.hmsmoblie.widget.TitleSenorSettingDialog;
 import com.yc.yclibrary.YcInit;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 /**
@@ -159,7 +152,8 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridgeList")
     Observable<HttpResponse<WeighingMachineJson>> getWeighbridgeList(@Field("projId") String projId
             , @Field("pageindex") int pageindex, @Field("pagesize") int pagesize, @Field("openingTimeBegin") String openingTimeBegin
-            , @Field("openingTimeEnd") String openingTimeEnd);
+            , @Field("openingTimeEnd") String openingTimeEnd,@Field("supplier") String supplier,@Field("merchandise") String merchandise
+            ,@Field("weighing") String weighing,@Field("type") int type,@Field("weighM") double weigh);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridge")
@@ -170,20 +164,15 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighGroupList")
     Observable<HttpResponse<WeightGroupJson>> getWeighGroupList(@Field("projId") String projId);
 
-//    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
-    /*@GET("openInterface/SystemDependentService.ashx?action=GetDevUrl")
+    //    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
+    @GET("openInterface/SystemDependentService.ashx?action=GetDevUrl")
     Observable<HttpResponse<GetDevUrlJson>> getDevUrl(@Query("ip") String ip, @Query("port") String port, @Query("account") String account,
-                                        @Query("password") String password, @Query("deviceNum") String deviceNum, @Query("method") String method);
-//    @Multipart
-//    @Headers(YcInit.OTHER_BASE_URL+":"+"http://10.1.3.86:803/")
-//    @POST(UrlHelper.API_HUIYAN)
-//    Observable<GetDevUrlJson> getDevUrl(@PartMap Map<String, RequestBody> requestBodyMap);
+                                                      @Query("password") String password, @Query("deviceNum") String deviceNum, @Query("method") String method);
 
-//    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
+    //    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://10.1.3.68:42173/")
     @GET("openInterface/SystemDependentService.ashx?action=DevicePtz")
     Observable<DevicePtzJson> devicePtzs(@Query("ip") String ip, @Query("port") String port, @Query("account") String account,
                                          @Query("password") String password, @Query("deviceNum") String deviceNum, @Query("method") String method,
-                                         @Query("speed") String speed, @Query("ptz") String ptz, @Query("isSpecial") String isSpecial);*/
-
+                                         @Query("speed") String speed, @Query("ptz") String ptz, @Query("isSpecial") String isSpecial);
 
 }

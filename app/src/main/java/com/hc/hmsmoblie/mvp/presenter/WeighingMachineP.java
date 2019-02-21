@@ -18,9 +18,10 @@ import com.yc.yclibrary.mvp.BasePresenter;
 public class WeighingMachineP extends BasePresenter<WeighingMachineC.V> implements WeighingMachineC.P {
 
     @Override
-    public void getWeighbridgeList(String  projId,int pageIndex, int pageSize, String openingTimeBegin, String openingTimeEnd) {
+    public void getWeighbridgeList(String projId, int pageIndex, int pageSize, String openingTimeBegin, String openingTimeEnd,
+                                   String supplier, String merchandise, String weighing, double weigh) {
         new WeighingMachineM()
-                .getWeighbridgeList(projId, pageIndex, pageSize,openingTimeBegin,openingTimeEnd)
+                .getWeighbridgeList(projId, pageIndex, pageSize, openingTimeBegin, openingTimeEnd, supplier, merchandise, weighing, weigh)
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<WeighingMachineJson>>() {
                     @Override
@@ -36,7 +37,7 @@ public class WeighingMachineP extends BasePresenter<WeighingMachineC.V> implemen
     }
 
     @Override
-    public void getWeighbridge(String  recordId) {
+    public void getWeighbridge(String recordId) {
         new WeighingMachineM()
                 .getWeighbridge(recordId)
                 .compose(getIView().bindLifecycle())
@@ -57,6 +58,8 @@ public class WeighingMachineP extends BasePresenter<WeighingMachineC.V> implemen
     public void getWeighGroupList(String proId) {
         new WeighingMachineM()
                 .getWeighGroupList(proId)
+                .doOnSubscribe(disposable -> getIView().showLoading("加载中..."))
+                .doFinally(() -> getIView().hideLoading())
                 .compose(getIView().bindLifecycle())
                 .subscribe(new NetObserver<HttpResponse<WeightGroupJson>>() {
                     @Override

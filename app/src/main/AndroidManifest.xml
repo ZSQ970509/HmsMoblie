@@ -153,12 +153,12 @@
             android:name=".activity.TiltSensorChartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.DipRealTimeDataActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+        <!--<activity-->
+            <!--android:name=".activity.DipRealTimeDataActivity"-->
+            <!--android:launchMode="singleTop"-->
+            <!--android:screenOrientation="portrait">-->
 
-        </activity>
+        <!--</activity>-->
         <activity
             android:name=".activity.WeighingMachineActivity"
             android:launchMode="singleTop"

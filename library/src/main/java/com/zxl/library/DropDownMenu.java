@@ -59,7 +59,6 @@ public class DropDownMenu extends LinearLayout {
     //tab未选中图标
     private int menuUnselectedIcon;
 
-
     public DropDownMenu(Context context) {
         super(context, null);
     }
@@ -109,13 +108,13 @@ public class DropDownMenu extends LinearLayout {
 
     }
 
-    public interface OnDefultMenuSelectListener {
-        void onSelectDefaultMenu(int index, int pos, String clickstr);
+    public interface OnMenuSelectListener {
+        void onSelectDefaultMenu(int type, String date);
     }
 
-    private OnDefultMenuSelectListener lis;
+    private OnMenuSelectListener lis;
 
-    public void addMenuSelectListener(OnDefultMenuSelectListener lis) {
+    public void addMenuSelectListener(OnMenuSelectListener lis) {
         this.lis = lis;
     }
 
@@ -123,10 +122,10 @@ public class DropDownMenu extends LinearLayout {
     public static final String VALUE = "type_value";
     public static final String SELECT_POSITION = "type_position";
     //一共包含四中类型：三种默认和自定义
-    public static final int TYPE_LIST_CITY = 1;
-    public static final int TYPE_LIST_SIMPLE = 2;
-    public static final int TYPE_GRID = 3;
-    public static final int TYPE_CUSTOM = 4;
+//    public static final int TYPE_LIST_CITY = 1;
+//    public static final int TYPE_LIST_SIMPLE = 2;
+//    public static final int TYPE_GRID = 3;
+//    public static final int TYPE_CUSTOM = 4;
 
     /**
      * 初始化DropDownMenu
@@ -146,13 +145,15 @@ public class DropDownMenu extends LinearLayout {
         containerView.addView(contentView, 0);
 
         maskView = new View(getContext());
-        maskView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        maskView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
         maskView.setBackgroundColor(maskColor);
         maskView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((TextView) tabMenuView.getChildAt(current_tab_position)).setTextColor(textUnselectedColor);
-                closeMenu();
+                if (isShowing()) {
+                    ((TextView) tabMenuView.getChildAt(current_tab_position)).setTextColor(textUnselectedColor);
+                    closeMenu();
+                }
             }
         });
         containerView.addView(maskView, 1);
@@ -174,47 +175,40 @@ public class DropDownMenu extends LinearLayout {
             if (select_position != -1 && select_position < 0) {
                 throw new IllegalArgumentException("the select_position must be >= 0");
             }
-            Log.d("zxl", "***********" + select_position);
             switch (key) {
-                case TYPE_LIST_CITY:
+                case WeighingSelectorType.weighing:
+                case WeighingSelectorType.merchandise:
+                case WeighingSelectorType.supplier:
                     if (value instanceof String[] && select_position < ((String[]) value).length)
-                        view = setCityListView((String[]) value, i, select_position);
+                        view = setCityListView((String[]) value, i, key, select_position);
                     else
                         throw new IllegalArgumentException("the type TYPE_LIST_CITY should mapping String[] and the select_position must be < array length");
                     break;
-                case TYPE_LIST_SIMPLE:
-                    if (value instanceof String[] && select_position < ((String[]) value).length)
-                        view = setSimpleListView((String[]) value, i, select_position);
-                    else
-                        throw new IllegalArgumentException("the type TYPE_LIST_SIMPLE should mapping String[] and the select_position must be < array length");
-                    break;
-                case TYPE_GRID:
-                    if (value instanceof String[] && select_position < ((String[]) value).length)
-                        view = setGridView((String[]) value, i, select_position);
-                    else
-                        throw new IllegalArgumentException("the type TYPE_GRID should mapping String[] and the select_position must be < array length");
-                    break;
-                default:
+//                case WeighingSelectorType.supplier:
+//                    if (value instanceof String[] && select_position < ((String[]) value).length)
+//                        view = setSimpleListView((String[]) value, i, key, select_position);
+//                    else
+//                        throw new IllegalArgumentException("the type TYPE_LIST_SIMPLE should mapping String[] and the select_position must be < array length");
+//                    break;
+
+                case WeighingSelectorType.weight:
                     if (value instanceof View)
                         view = (View) value;
                     else
                         throw new IllegalArgumentException("the type TYPE_CUSTOM should mapping View");
                     break;
             }
-           // if(key == TYPE_GRID){
-                //view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ViewGroup.LayoutParams.WRAP_CONTENT ));
+            // if(key == TYPE_GRID){
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,  ViewGroup.LayoutParams.WRAP_CONTENT ));
          /*   }else {
           }*/
-
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, menuMaxHeight == -1 ? ViewGroup.LayoutParams.WRAP_CONTENT : menuMaxHeight));
-
-
+//            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, menuMaxHeight == -1 ? ViewGroup.LayoutParams.WRAP_CONTENT : menuMaxHeight));
             popupMenuViews.addView(view, i);
         }
 
     }
 
-    private View setCityListView(final String[] arr, final int index, int select_position) {
+    private View setCityListView(final String[] arr, final int index, final @WeighingSelectorType int type, int select_position) {
         ListView view = new ListView(getContext());
         view.setDividerHeight(0);
         final GirdDropDownAdapter adapter = new GirdDropDownAdapter(getContext(), Arrays.asList(arr));
@@ -229,13 +223,13 @@ public class DropDownMenu extends LinearLayout {
                 adapter.setCheckItem(position);
                 setTabText(current_tab_position, arr[position]);
                 closeMenu();
-                lis.onSelectDefaultMenu(index, position, adapter.getItem(position));
+                lis.onSelectDefaultMenu(type, adapter.getItem(position));
             }
         });
         return view;
     }
 
-    private View setSimpleListView(final String[] arr, final int index, int select_position) {
+    private View setSimpleListView(final String[] arr, final int index, final @WeighingSelectorType int type, int select_position) {
         ListView view = new ListView(getContext());
         view.setDividerHeight(0);
         final ListDropDownAdapter adapter = new ListDropDownAdapter(getContext(), Arrays.asList(arr));
@@ -250,13 +244,13 @@ public class DropDownMenu extends LinearLayout {
                 adapter.setCheckItem(position);
                 setTabText(current_tab_position, arr[position]);
                 closeMenu();
-                lis.onSelectDefaultMenu(index, position, adapter.getItem(position));
+                lis.onSelectDefaultMenu(type, adapter.getItem(position));
             }
         });
         return view;
     }
 
-    private View setGridView(final String[] arr, final int index, int select_position) {
+    private View setGridView(final String[] arr, final int index, final @WeighingSelectorType int type, int select_position) {
         final ConstellationAdapter adapter = new ConstellationAdapter(getContext(), Arrays.asList(arr));
         LayoutInflater li = LayoutInflater.from(getContext());
         View v = li.inflate(R.layout.drop_menu_grid_layout, null);
@@ -272,7 +266,7 @@ public class DropDownMenu extends LinearLayout {
                 adapter.setCheckItem(position);
                 setTabText(current_tab_position, arr[position]);
                 closeMenu();
-                lis.onSelectDefaultMenu(index, position, adapter.getItem(position));
+                lis.onSelectDefaultMenu(type, adapter.getItem(position));
             }
         });
         return v;
