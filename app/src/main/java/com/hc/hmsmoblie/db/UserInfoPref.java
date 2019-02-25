@@ -13,6 +13,7 @@ public class UserInfoPref {
     private static final String mUserAccount = "mUserAccount";//用户账号
     private static final String mUserPassword = "mUserPassword";//用户密码
     private static final String mUserToken = "mUserToken";//用户登录后的Token标示
+    private static final String mUserWeighingMachineFrist = "mUserWeighingMachineFrist";//用户是否第一次使用地磅系统
 
     private static final String mSavePassWord = "mSavePassWord";//是否记住密码 true  false
     private static final String mUserTypeId = "mUserTypeId";//用户类型id
@@ -97,6 +98,13 @@ public class UserInfoPref {
         mPrefHelper.setPref(mSavePassWord, loginState);
     }
 
+    public static boolean getmUserWeighingMachineFrist() {
+        return mPrefHelper.getPref(mUserWeighingMachineFrist, true);
+    }
+
+    public static void setmUserWeighingMachineFrist(@NonNull boolean userToken) {
+        mPrefHelper.setPref(mUserWeighingMachineFrist, userToken);
+    }
     /**
      * 保存用户登录信息
      */

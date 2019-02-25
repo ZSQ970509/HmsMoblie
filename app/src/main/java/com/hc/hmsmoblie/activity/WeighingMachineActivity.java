@@ -15,6 +15,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
@@ -25,6 +27,8 @@ import com.hc.hmsmoblie.base.BaseMvpActivity;
 import com.hc.hmsmoblie.bean.json.WeighingMachineJson;
 import com.hc.hmsmoblie.bean.json.WeighingMachineMsg;
 import com.hc.hmsmoblie.bean.json.WeightGroupJson;
+import com.hc.hmsmoblie.db.PrefHelper;
+import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.WeighingMachineC;
 import com.hc.hmsmoblie.mvp.presenter.WeighingMachineP;
 import com.hc.hmsmoblie.utils.EmptyUtils;
@@ -62,6 +66,18 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     Button tvWeighingMachineSearch;
     @BindView(R.id.dropDownMenu)
     DropDownMenu mDropDownMenu;
+    @BindView(R.id.main_drawerLayout)
+    LinearLayout maindrawerLayout;
+    @BindView(R.id.linearLayoutYinDao)
+    RelativeLayout linearLayoutYinDao;
+    @BindView(R.id.ImageYinDao)
+    ImageView ImageYinDao;
+    @BindView(R.id.ImageYinDaoNext)
+    ImageView ImageYinDaoNext;
+    @BindView(R.id.ImageYinDaoSkip)
+    TextView ImageYinDaoSkip;
+    //用于标识引导页面
+    private int yinDaoIndex=0;
     private int mPageIndex = 1;
     private final int mPageSize = 10;
     private int mPageTotal = 1;
@@ -97,6 +113,7 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     protected void initView(Bundle bundle) {
         setToolBar("智能地磅");
         mProID = getIntent().getStringExtra(PRO_ID);
+        initFrist();
         initDropDownView();
         mTvStartTime.setText(TimePickerUtils.getMonthFirstDay());
         mTvEndTime.setText(TimePickerUtils.getMonthToday());
@@ -135,6 +152,27 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         initRefreshAndLoadMore();
         searchDeviceList();
         mPresenter.getWeighGroupList(mProID);
+    }
+
+    private void initFrist() {
+        if(UserInfoPref.getmUserWeighingMachineFrist()){
+            switch (yinDaoIndex){
+                case 0:
+                    maindrawerLayout.setVisibility(View.GONE);
+                    linearLayoutYinDao.setVisibility(View.VISIBLE);
+                    yinDaoIndex = 1;
+                    break;
+                case 1:
+                    ImageYinDao.setImageResource(R.drawable.weighing_guide_2);
+                    yinDaoIndex = 2;
+                    break;
+                case 2:
+                    ImageYinDao.setImageResource(R.drawable.weighing_guide_3);
+                    ImageYinDaoNext.setImageResource(R.drawable.weighing_guide_ok);
+                    yinDaoIndex = 3;
+                    break;
+            }
+        }
     }
 
     private void initDropDownView() {
@@ -311,7 +349,7 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         }
     }
 
-    @OnClick({R.id.tvWeighingMachineSearch, R.id.tvWeighingMachineEndTime, R.id.tvWeighingMachineStartTime})
+    @OnClick({R.id.tvWeighingMachineSearch, R.id.tvWeighingMachineEndTime, R.id.tvWeighingMachineStartTime, R.id.ImageYinDaoNext, R.id.ImageYinDaoSkip})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvWeighingMachineSearch:
@@ -326,6 +364,21 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                     TimePickerUtils.showPickerView(getActivity(), "", mTvEndTime, mTvEndTime.getText().toString(), "1234-10-11", "");
                 else
                     TimePickerUtils.showPickerView(getActivity(), "", mTvEndTime, mTvEndTime.getText().toString(), mTvStartTime.getText().toString(), "");
+                break;
+            case R.id.ImageYinDaoNext:
+                if(yinDaoIndex != 3){
+                    initFrist();
+                }else{
+                    maindrawerLayout.setVisibility(View.VISIBLE);
+                    linearLayoutYinDao.setVisibility(View.GONE);
+                    UserInfoPref.setmUserWeighingMachineFrist(false);
+                }
+
+                break;
+            case R.id.ImageYinDaoSkip:
+                maindrawerLayout.setVisibility(View.VISIBLE);
+                linearLayoutYinDao.setVisibility(View.GONE);
+                UserInfoPref.setmUserWeighingMachineFrist(false);
                 break;
         }
     }
