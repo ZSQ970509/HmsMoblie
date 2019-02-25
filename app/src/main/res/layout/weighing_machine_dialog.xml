@@ -2,16 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:background="@color/colorTrance">
+    android:background="@color/colorTrance"
+    android:gravity="center_vertical">
 
     <LinearLayout
         android:layout_width="@dimen/x650"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
         android:layout_margin="@dimen/x40"
         android:background="@drawable/shape_white_round"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -28,16 +28,15 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="@dimen/y810"
-            android:fillViewport="true"
-            >
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:background="@drawable/boder_line_black"
                 android:layout_margin="@dimen/x10"
+                android:background="@drawable/boder_line_black"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <View style="@style/DialogWeighingMachineLineStyle" />
@@ -346,70 +345,74 @@
                         android:textSize="@dimen/y24" />
 
 
+                </LinearLayout>
+
+                <View style="@style/DialogWeighingMachineLineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y1100"
+                    android:orientation="horizontal">
+
+                    <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
+
+                    <TextView
+                        android:id="@+id/deviceStateDialogBatStateTv"
+                        style="@style/DialogWeighingMachineTvStyle"
+                        android:layout_gravity="center"
+                        android:text="视频截图" />
+
+                    <View
+                        style="@style/DialogWeighingMachineLineVertvcalStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_small_x" />
+
+                    <LinearLayout
+                        android:layout_width="@dimen/x490"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/DialogWeighingMachineTvStyle"
+                            android:text="1.全景图" />
+
+                        <ImageView
+                            android:id="@+id/weighing_Machine_Dialog_Panorama"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y300"
+                            android:layout_margin="@dimen/y10"
+                            android:scaleType="fitXY"
+                            android:transitionName="@string/transitionNameShowImg" />
+
+                        <TextView
+                            style="@style/DialogWeighingMachineTvStyle"
+                            android:text="2.车头图" />
+
+                        <ImageView
+                            android:id="@+id/weighing_Machine_Dialog_HeadstockPlan"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y300"
+                            android:layout_margin="@dimen/y10"
+                            android:scaleType="fitXY"
+                            android:transitionName="@string/transitionNameShowImg" />
+
+                        <TextView
+                            style="@style/DialogWeighingMachineTvStyle"
+                            android:text="3.车尾图" />
+
+                        <ImageView
+                            android:id="@+id/weighing_Machine_Dialog_Tail_Diagram"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/y300"
+                            android:layout_margin="@dimen/y10"
+                            android:scaleType="fitXY"
+                            android:transitionName="@string/transitionNameShowImg" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <View style="@style/DialogWeighingMachineLineStyle" />
 
-                  <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="@dimen/y1100"
-                       android:orientation="horizontal">
-
-                       <View style="@style/DialogWeighingMachineLineVertvcalStyle" />
-
-                       <TextView
-                           android:id="@+id/deviceStateDialogBatStateTv"
-                           style="@style/DialogWeighingMachineTvStyle"
-                           android:layout_gravity="center"
-                           android:text="视频截图" />
-
-                       <View
-                           style="@style/DialogWeighingMachineLineVertvcalStyle"
-                           android:layout_marginLeft="@dimen/activity_margin_small_x" />
-
-                       <LinearLayout
-                           android:layout_width="@dimen/x490"
-                           android:layout_height="match_parent"
-                           android:orientation="vertical">
-
-                           <TextView
-                               style="@style/DialogWeighingMachineTvStyle"
-                               android:text="1.全景图" />
-
-                           <ImageView
-                               android:id="@+id/weighing_Machine_Dialog_Panorama"
-                               android:layout_width="match_parent"
-                               android:layout_height="@dimen/y300"
-                               android:layout_margin="@dimen/y10"
-                               android:scaleType="fitXY" />
-
-                           <TextView
-                               style="@style/DialogWeighingMachineTvStyle"
-                               android:text="2.车头图" />
-
-                           <ImageView
-                               android:id="@+id/weighing_Machine_Dialog_HeadstockPlan"
-                               android:layout_width="match_parent"
-                               android:layout_height="@dimen/y300"
-                               android:layout_margin="@dimen/y10"
-                               android:scaleType="fitXY" />
-
-                           <TextView
-                               style="@style/DialogWeighingMachineTvStyle"
-                               android:text="3.车尾图" />
-
-                           <ImageView
-                               android:id="@+id/weighing_Machine_Dialog_Tail_Diagram"
-                               android:layout_width="match_parent"
-                               android:layout_height="@dimen/y300"
-                               android:layout_margin="@dimen/y10"
-                               android:scaleType="fitXY" />
-
-                       </LinearLayout>
-
-                   </LinearLayout>
-                <View style="@style/DialogWeighingMachineLineStyle" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y136"
@@ -434,19 +437,21 @@
                 </LinearLayout>
 
                 <View style="@style/DialogWeighingMachineLineStyle" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/y11"></LinearLayout>
             </LinearLayout>
         </ScrollView>
+
         <Button
             android:id="@+id/weighing_Machine_Dialog_ConfirmBtn"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="@dimen/y15"
             android:background="@drawable/shape_blue_left_right"
             android:text="确定"
             android:textColor="@color/colorWhiteGray"
-            android:layout_marginTop="@dimen/y15"
             android:textSize="18dp" />
 
     </LinearLayout>

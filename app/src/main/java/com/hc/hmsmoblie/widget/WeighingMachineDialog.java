@@ -101,8 +101,22 @@ public class WeighingMachineDialog extends Dialog {
         weighingMachineDialogSettlementWeight.setText(EmptyUtils.getString(weighingMachineMsg.getWeighW() + "", "-", "kg"));
         weighing_Machine_Dialog_Note.setText(weighingMachineMsg.getNote());
         LoadImgUtils.loadImg(context, weighingMachineMsg.getPuzzleImg(), weighing_Machine_Dialog_Panorama);
+        weighing_Machine_Dialog_Panorama.setOnClickListener(v -> {if(mImgClick!=null)mImgClick.onClick(weighingMachineMsg.getPuzzleImg(),weighing_Machine_Dialog_Panorama);});
         LoadImgUtils.loadImg(context, weighingMachineMsg.getCartBImg(), weighing_Machine_Dialog_HeadstockPlan);
+        weighing_Machine_Dialog_HeadstockPlan.setOnClickListener(v -> {if(mImgClick!=null)mImgClick.onClick(weighingMachineMsg.getCartBImg(),weighing_Machine_Dialog_HeadstockPlan);});
         LoadImgUtils.loadImg(context, weighingMachineMsg.getCartEImg(), weighing_Machine_Dialog_Tail_Diagram);
+        weighing_Machine_Dialog_Tail_Diagram.setOnClickListener(v -> {if(mImgClick!=null)mImgClick.onClick(weighingMachineMsg.getCartEImg(),weighing_Machine_Dialog_Tail_Diagram);});
         return this;
+    }
+
+    private ImgClick mImgClick;
+
+    public WeighingMachineDialog setImgClick(ImgClick imgClick) {
+        mImgClick = imgClick;
+        return this;
+    }
+
+    public interface ImgClick {
+        void onClick(String imgUrl,ImageView imageView);
     }
 }

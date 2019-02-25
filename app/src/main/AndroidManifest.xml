@@ -153,6 +153,10 @@
             android:name=".activity.TiltSensorChartActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.ShowImgActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/TranceTheme"
+            android:screenOrientation="portrait" />
         <!--<activity-->
             <!--android:name=".activity.DipRealTimeDataActivity"-->
             <!--android:launchMode="singleTop"-->

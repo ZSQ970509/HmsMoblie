@@ -3,6 +3,8 @@ package com.hc.hmsmoblie.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
@@ -130,8 +133,8 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                 mPresenter.getWeighbridge(((WeighingMachineJson.ListBean) adapter.getItem(position)).getRecordId() + "")
         );
         initRefreshAndLoadMore();
-        mPresenter.getWeighGroupList(mProID);
         searchDeviceList();
+        mPresenter.getWeighGroupList(mProID);
     }
 
     private void initDropDownView() {
@@ -270,9 +273,13 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
 //        Log.e("test", weighingMachineMsg.toString() + "");
         WeighingMachineDialog.newInstance(getActivity())
                 .setData(getActivity(), weighingMachineMsg)
+                .setImgClick(this::toShowImgActivity)
                 .show();
     }
-
+    private void toShowImgActivity(String imgUrl, ImageView imageView){
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), new Pair<>(imageView, getString(R.string.transitionNameShowImg)));
+        ShowImgActivity.newInstance(getActivity(),imgUrl,optionsCompat);
+    }
     @Override
     public void onGetWeighbridgeFail(ApiException apiException) {
         showToast(apiException.getMessage());
@@ -302,7 +309,6 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         if (mAdapter != null && mAdapter.isLoading()) {
             mAdapter.loadMoreComplete();
         }
-        hideLoading();
     }
 
     @OnClick({R.id.tvWeighingMachineSearch, R.id.tvWeighingMachineEndTime, R.id.tvWeighingMachineStartTime})
