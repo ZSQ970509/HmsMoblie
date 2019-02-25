@@ -6,9 +6,19 @@
     android:layout_alignParentStart="true"
     android:layout_below="@+id/titleBar">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvWeighingMachine"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <include
+            layout="@layout/layout_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvWeighingMachine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

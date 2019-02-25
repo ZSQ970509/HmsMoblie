@@ -77,7 +77,8 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     @BindView(R.id.ImageYinDaoSkip)
     TextView ImageYinDaoSkip;
     //用于标识引导页面
-    private int yinDaoIndex=0;
+    private int yinDaoIndex = 0;
+    TextView mEmptyTv;
     private int mPageIndex = 1;
     private final int mPageSize = 10;
     private int mPageTotal = 1;
@@ -86,7 +87,7 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     private String mProID;
     private static final String PRO_ID = "pro_id";
 
-    private String headers[] = {"品名规则", "供应单位", "司磅人", "总重量"};
+    private String headers[] = {"品名规格", "供应单位", "司磅人", "总重量"};
     private String mSelectorMerchandise = "";//刷选条件：品名规格
     private String mSelectorSupplier = "";//刷选条件：供应单位
     private String mSelectorWeighing = "";//刷选条件：司磅员
@@ -155,8 +156,8 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
     }
 
     private void initFrist() {
-        if(UserInfoPref.getmUserWeighingMachineFrist()){
-            switch (yinDaoIndex){
+        if (UserInfoPref.getmUserWeighingMachineFrist()) {
+            switch (yinDaoIndex) {
                 case 0:
                     maindrawerLayout.setVisibility(View.GONE);
                     linearLayoutYinDao.setVisibility(View.VISIBLE);
@@ -179,7 +180,7 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         contentView = getLayoutInflater().inflate(R.layout.weight_machine_content_activity, null);
         mRecyclerView = contentView.findViewById(R.id.rvWeighingMachine);
         mSwipeRefreshLayout = contentView.findViewById(R.id.srlWeighingMachine);
-
+        mEmptyTv = contentView.findViewById(R.id.layoutEmptyTv);
         //该监听回调只监听默认类型，如果是自定义view请自行设置，参照demo
         mDropDownMenu.addMenuSelectListener(new DropDownMenu.OnMenuSelectListener() {
 
@@ -221,16 +222,23 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
         View v = getLayoutInflater().inflate(R.layout.custom, null);
         TextView btn = (TextView) v.findViewById(R.id.btn);
         EditText editText = v.findViewById(R.id.weight_Group_EditText);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!editText.getText().toString().equals("")) {
-                    mDropDownMenu.setTabText(3, ">" + editText.getText().toString());//设置tab标签文字
-                    dropDropFinal(WeighingSelectorType.weight, editText.getText().toString());
-                    mDropDownMenu.closeMenu();//关闭menu
-                } else {
-                    showToast("设置的数目不能为空！");
+                int num;
+                try {
+                    num = Integer.parseInt(editText.getText().toString());
+                } catch (Exception e) {
+                    num = 0;
                 }
+                if (num == 0) {
+                    mDropDownMenu.setTabText(3, headers[3]);//设置tab标签文字
+                } else {
+                    mDropDownMenu.setTabText(3, ">" + num);//设置tab标签文字
+                }
+                dropDropFinal(WeighingSelectorType.weight, num + "");
+                mDropDownMenu.closeMenu();//关闭menu
             }
         });
         return v;
@@ -273,9 +281,6 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                 } catch (Exception e) {
                     mSelectorWeight = 0;
                 }
-                if(mSelectorWeight==0){
-                    mDropDownMenu.setTabText(type - 1, headers[type - 1]);
-                }
                 break;
         }
         initRefreshAndLoadMore();
@@ -288,12 +293,14 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
 
     @Override
     public void onGetWeighbridgeListSuccess(WeighingMachineJson weighingMachineJson) {
-        if (weighingMachineJson == null) {
+        if (weighingMachineJson == null || weighingMachineJson.getList() == null || weighingMachineJson.getList().size() == 0) {
             mTvWeighMSum.setText("总称重重量:-");
             mTvWeighWSum.setText("总结算重量:-");
+            mEmptyTv.setVisibility(View.VISIBLE);
         } else {
-            mTvWeighMSum.setText("总称重重量:" + weighingMachineJson.getWeighMSum());
-            mTvWeighWSum.setText("总结算重量:" + weighingMachineJson.getWeighWSum());
+            mEmptyTv.setVisibility(View.GONE);
+            mTvWeighMSum.setText("总称重重量:" + weighingMachineJson.getWeighMSum() + "(kg)");
+            mTvWeighWSum.setText("总结算重量:" + weighingMachineJson.getWeighWSum() + "(kg)");
         }
         mPageTotal = (weighingMachineJson.getTotal() + mPageSize - 1) / mPageSize;
         mAdapter.addData(weighingMachineJson.getList());
@@ -314,10 +321,12 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                 .setImgClick(this::toShowImgActivity)
                 .show();
     }
-    private void toShowImgActivity(String imgUrl, ImageView imageView){
+
+    private void toShowImgActivity(String imgUrl, ImageView imageView) {
         ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), new Pair<>(imageView, getString(R.string.transitionNameShowImg)));
-        ShowImgActivity.newInstance(getActivity(),imgUrl,optionsCompat);
+        ShowImgActivity.newInstance(getActivity(), imgUrl, optionsCompat);
     }
+
     @Override
     public void onGetWeighbridgeFail(ApiException apiException) {
         showToast(apiException.getMessage());
@@ -366,9 +375,9 @@ public class WeighingMachineActivity extends BaseMvpActivity<WeighingMachineP> i
                     TimePickerUtils.showPickerView(getActivity(), "", mTvEndTime, mTvEndTime.getText().toString(), mTvStartTime.getText().toString(), "");
                 break;
             case R.id.ImageYinDaoNext:
-                if(yinDaoIndex != 3){
+                if (yinDaoIndex != 3) {
                     initFrist();
-                }else{
+                } else {
                     maindrawerLayout.setVisibility(View.VISIBLE);
                     linearLayoutYinDao.setVisibility(View.GONE);
                     UserInfoPref.setmUserWeighingMachineFrist(false);

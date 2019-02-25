@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-
-
     <LinearLayout
         android:id="@+id/main_drawerLayout"
         android:layout_width="match_parent"
@@ -38,7 +35,6 @@
                 android:id="@+id/tvWeighingMachineStartTime"
                 android:layout_width="@dimen/x180"
                 android:layout_height="@dimen/y56"
-
                 android:layout_alignTop="@+id/tv_8"
                 android:layout_toEndOf="@+id/tv_8"
                 android:background="@drawable/boder_line"
@@ -80,54 +76,6 @@
                 android:background="@drawable/btn_query"
                 android:text="" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x18"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="品名规则"
-                android:textColor="#333333"
-                android:textSize="@dimen/y24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x18"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="供应单位"
-                android:textColor="#333333"
-                android:textSize="@dimen/y24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x18"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="司磅员"
-                android:textColor="#333333"
-                android:textSize="@dimen/y24" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/x18"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="总重量"
-                android:textColor="#333333"
-                android:textSize="@dimen/y24" />
-        </LinearLayout>
-
         <com.zxl.library.DropDownMenu
             android:id="@+id/dropDownMenu"
             android:layout_width="match_parent"
@@ -169,11 +117,12 @@
                 android:textSize="@dimen/y24" />
         </LinearLayout>
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/linearLayoutYinDao"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/ImageYinDao"
@@ -182,6 +131,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/weighing_guide_1" />
+
         <ImageView
             android:id="@+id/ImageYinDaoNext"
             android:layout_width="wrap_content"
@@ -202,6 +152,4 @@
             android:textColor="#fff"
             android:textSize="@dimen/y30" />
     </RelativeLayout>
-
-
 </FrameLayout>
