@@ -7,11 +7,13 @@ package com.hc.hmsmoblie.net;
 public class UrlHelper {
     //地址
 //    public static String BASE_URL = "http://10.1.3.68:42173/";//朱强电脑
-    //public static String BASE_URL = "http://api.jsqqy.com/";//外网
 
-//        public static String BASE_URL = "http://192.168.1.85:26969/";//内网测试地址，正式数据
-    public final static String BASE_URL_TEST = "http://10.1.3.86:8023/";//小温
+
+    //        public static String BASE_URL = "http://192.168.1.85:26969/";//内网测试地址，正式数据
+//    public final static String BASE_URL_TEST = "http://10.1.3.86:8023/";//小温
     public static String BASE_URL = "http://120.35.11.49:26969/";//外网测试地址，数据正式
+//    public static String BASE_URL = "http://10.1.3.133:42173/";//潘工测试地址
+//        public static String BASE_URL = "http://api.jsqqy.com/";//正式地址
     public final static String BASE_URL_UPDATE = "http://api.jsqqy.com/";//
 
     public final static String BASE_TITLE_SENSOR = "http://27.155.102.250:8869/";

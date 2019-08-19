@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/actionbar_layout" />
+
+    <EditText
+        android:id="@+id/searchProjectKeywordEdt"
+        android:layout_width="@dimen/x600"
+        android:layout_height="@dimen/y56"
+        android:layout_below="@+id/titleBar"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/x24"
+        android:layout_marginTop="@dimen/y24"
+        android:background="@drawable/select_search"
+        android:ems="10"
+        android:hint="请输入项目名称"
+        android:inputType="textPersonName"
+        android:textSize="@dimen/y30" />
+
+    <Button
+        android:id="@+id/searchProjectBtn"
+        android:layout_width="@dimen/x90"
+        android:layout_height="@dimen/y56"
+        android:layout_below="@+id/titleBar"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginTop="@dimen/y24"
+        android:layout_toEndOf="@+id/searchProjectKeywordEdt"
+        android:background="@drawable/search"
+        android:text="" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/searchProjectSRL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchProjectBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="16dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/searchProjectRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

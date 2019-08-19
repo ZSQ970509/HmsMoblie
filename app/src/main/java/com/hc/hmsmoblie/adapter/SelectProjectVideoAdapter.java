@@ -17,9 +17,9 @@
      }
      @Override
      protected void convert(BaseViewHolder helper, ProjectJson.ListBean item) {
-         helper.setText(R.id.item_Project_Video_Name,item.getProjName())
-                 .setText(R.id.item_Project_Video_Address,item.getProjAddress())
-                 .setText(R.id.item_Project_Video_Status,item.getProjStatusCurrent());
+         helper.setText(R.id.itemSelectProFileName,item.getProjName())
+                 .setText(R.id.itemSelectProFileAddress,item.getProjAddress())
+                 .setText(R.id.itemSelectProFileStatus,item.getProjStatusCurrent());
           //helper.addOnClickListener(R.id.text_samll);
  
      }

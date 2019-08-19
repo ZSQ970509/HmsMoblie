@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
@@ -60,9 +59,9 @@ public class LadderControlProjectListActivity extends BaseMvpActivity<LadderCont
         mAdapter = new BaseItemDraggableAdapter<ProjectJson.ListBean, BaseViewHolder>(R.layout.item_select_project, null) {
             @Override
             protected void convert(BaseViewHolder helper, ProjectJson.ListBean item) {
-                helper.setText(R.id.item_Project_Video_Name, item.getProjName())
-                        .setText(R.id.item_Project_Video_Address, item.getProjAddress())
-                        .setText(R.id.item_Project_Video_Status, item.getProjStatusCurrent());
+                helper.setText(R.id.itemSelectProFileName, item.getProjName())
+                        .setText(R.id.itemSelectProFileAddress, item.getProjAddress())
+                        .setText(R.id.itemSelectProFileStatus, item.getProjStatusCurrent());
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {

@@ -1,11 +1,13 @@
 package com.hc.hmsmoblie.net;
 
 //import com.hc.hmsmoblie.bean.json.DevicePtzJson;
+
 import com.hc.hmsmoblie.bean.json.DevicePtzJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDetailsJson;
 import com.hc.hmsmoblie.bean.json.EnvironmentDeviceListJson;
 //import com.hc.hmsmoblie.bean.json.GetDevUrlJson;
 import com.hc.hmsmoblie.bean.json.GetDevUrlJson;
+import com.hc.hmsmoblie.bean.json.GetProListByArea;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsErrorJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDetailsOperationJson;
 import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
@@ -69,6 +71,11 @@ public interface ApiServer {
             , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid, @Field("account") String account, @Field("TokenId") String tokenId);
 
     @FormUrlEncoded
+    @POST(UrlHelper.API_TILT_SENSOR_2 + "GetProjListByAear")
+    Observable<HttpResponse<GetProListByArea>> getProListByArea(@Field("projregioncode") String projregioncode, @Field("arealevel") int arealevel, @Field("pageindex") int pageindex
+            , @Field("pagesize") int pagesize, @Field("sysId") String sysId, @Field("userid") String userid, @Field("TokenId") String tokenId);
+
+    @FormUrlEncoded
     @POST(UrlHelper.BASE_API + "getCameradetails")
     Observable<HttpResponse<ArrayList<ProjectDetailsJson>>> getCameradetails(@Field("projId") String projId, @Field("systemid") int systemid);
 
@@ -104,7 +111,9 @@ public interface ApiServer {
     @POST(UrlHelper.BASE_API + "getEnvironmentalListdetails")
     Observable<HttpResponse<List<EnvironmentDeviceListJson>>> getEnvironmentDeviceList(@Field("projId") String projId, @Field("systemid") String systemid);
 
+    //TODO 接口因需要用于演示无法发布到api服务器上，先写成26969服务器上，等潘工发布到api上后再改回去
     @FormUrlEncoded
+    @Headers(YcInit.OTHER_BASE_URL + ":" + "http://120.35.11.49:26969/")
     @POST(UrlHelper.BASE_API + "GetPanoramaImg")
     Observable<HttpResponse<ImageLogPanoramaListJson>> getPanoramaList(@Field("camId") String camId, @Field("startime") String starTime, @Field("endTime") String endTime, @Field("pageindex") int pageIndex, @Field("pagesize") int pageSize);
 
@@ -152,15 +161,15 @@ public interface ApiServer {
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridgeList")
     Observable<HttpResponse<WeighingMachineJson>> getWeighbridgeList(@Field("projId") String projId
             , @Field("pageindex") int pageindex, @Field("pagesize") int pagesize, @Field("openingTimeBegin") String openingTimeBegin
-            , @Field("openingTimeEnd") String openingTimeEnd,@Field("supplier") String supplier,@Field("merchandise") String merchandise
-            ,@Field("weighing") String weighing,@Field("type") int type,@Field("weighM") double weigh);
+            , @Field("openingTimeEnd") String openingTimeEnd, @Field("supplier") String supplier, @Field("merchandise") String merchandise
+            , @Field("weighing") String weighing, @Field("type") int type, @Field("weighM") double weigh);
 
     @FormUrlEncoded
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighbridge")
     Observable<HttpResponse<WeighingMachineMsg>> getWeighbridge(@Field("recordId") String recordId);
 
     @FormUrlEncoded
-    @Headers(YcInit.OTHER_BASE_URL + ":" + UrlHelper.BASE_URL_TEST)
+//    @Headers(YcInit.OTHER_BASE_URL + ":" + UrlHelper.BASE_URL_TEST)
     @POST(UrlHelper.API_TILT_WEIGHING_MACH + "GetWeighGroupList")
     Observable<HttpResponse<WeightGroupJson>> getWeighGroupList(@Field("projId") String projId);
 

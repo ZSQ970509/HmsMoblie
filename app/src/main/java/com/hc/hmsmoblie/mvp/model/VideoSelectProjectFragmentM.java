@@ -16,7 +16,7 @@ public class VideoSelectProjectFragmentM implements IModel {
     public Observable getCameraList(String keyword, int pageindex, int pagesize, String sysId, String userid) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getCameraList(keyword, pageindex, pagesize, sysId, userid, UserInfoPref.getUserAccount(), UserInfoPref.getUserToken())
+                .getCameraList(keyword, pageindex, pagesize, sysId, userid, UserInfoPref.getUserAccount(), UserInfoPref.getUserHeadSculpture())
                 .compose(NetTransformer.compose());
     }
 }

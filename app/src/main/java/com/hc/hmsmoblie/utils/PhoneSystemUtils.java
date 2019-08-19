@@ -140,6 +140,7 @@ public class PhoneSystemUtils {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setProgressDrawable(activity.getResources().getDrawable(R.drawable.progessbar));
         mProgressDialog.setMessage("正在下载更新");
+        mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setProgressNumberFormat("");
         x.http().get(requestParams, new Callback.ProgressCallback<File>() {

@@ -9,13 +9,13 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="@dimen/x570"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/y370"
         android:gravity="center_horizontal"
-        android:text="远程视频大数据管控系统"
+        android:text="@string/app_name"
         android:textColor="#317bf6"
         android:textSize="@dimen/y48" />
 </RelativeLayout>

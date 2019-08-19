@@ -12,7 +12,7 @@ public class UserInfoPref {
     private static final String mUId = "mUId";//用户名id
     private static final String mUserAccount = "mUserAccount";//用户账号
     private static final String mUserPassword = "mUserPassword";//用户密码
-    private static final String mUserToken = "mUserToken";//用户登录后的Token标示
+    private static final String mUserHeadSculpture = "mUserHeadSculpture";//
     private static final String mUserWeighingMachineFrist = "mUserWeighingMachineFrist";//用户是否第一次使用地磅系统
 
     private static final String mSavePassWord = "mSavePassWord";//是否记住密码 true  false
@@ -30,12 +30,12 @@ public class UserInfoPref {
         mPrefHelper.setPref(mUserTypeId, userTypeId);
     }
 
-    public static String getUserToken() {
-        return mPrefHelper.getPref(mUserToken, "");
+    public static String getUserHeadSculpture() {
+        return mPrefHelper.getPref(mUserHeadSculpture, "");
     }
 
-    public static void setUserToken(@NonNull String userToken) {
-        mPrefHelper.setPref(mUserToken, userToken);
+    public static void setUserHeadSculpture(@NonNull String userToken) {
+        mPrefHelper.setPref(mUserHeadSculpture, userToken);
     }
 
     public static String getUrl() {

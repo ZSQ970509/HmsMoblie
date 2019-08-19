@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.CheckBox;
 
 import com.hc.hmsmoblie.R;
@@ -20,8 +19,7 @@ import com.hc.hmsmoblie.db.UserInfoPref;
 import com.hc.hmsmoblie.mvp.contact.LoginC;
 import com.hc.hmsmoblie.mvp.presenter.LoginP;
 import com.hc.hmsmoblie.utils.PhoneSystemUtils;
-import com.hc.hmsmoblie.widget.CommonDialog;
-import com.hc.hmsmoblie.widget.LogonServerDialog;
+import com.hc.hmsmoblie.widget.LoginServerDialog;
 import com.yc.yclibrary.utils.ActivityUtils;
 
 import java.math.BigDecimal;
@@ -72,8 +70,11 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
     @Override
     public void onLoginSuccess(LoginJson loginJs) {
         UserInfoPref.setSavePassWord(mIsSavePasswordCb.isChecked());
-        //MainActivity.newInstance(getActivity());
-        VideoSelectProjectActivity.newInstance(getActivity(), "11");
+//        if(getResources().getBoolean(R.bool.is_yx)){
+            MainActivityNew.newInstance(getActivity());
+//        }else {
+//            VideoSelectProjectActivity.newInstance(getActivity(), "11");
+//        }
     }
 
     @Override
@@ -110,6 +111,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                                 setNegativeButton("取消", null);
                 // 生产对话框
                 AlertDialog alertDialog = builder.create();
+                alertDialog.setCancelable(false);
                 alertDialog.setCanceledOnTouchOutside(false);
                 // 显示对话框
                 alertDialog.show();
@@ -150,7 +152,7 @@ public class LoginActivity extends BaseMvpActivity<LoginP> implements LoginC.V {
                 mIsSavePasswordCb.setChecked(!mIsSavePasswordCb.isChecked());
                 break;
             case R.id.ivLoginSetting:
-                LogonServerDialog.newInstance(getActivity())
+                LoginServerDialog.newInstance(getActivity())
                         .setLeftOnClick((url, port, userTypeId) -> {
                             UserInfoPref.setUrl(url);
                             UserInfoPref.setPort(port);

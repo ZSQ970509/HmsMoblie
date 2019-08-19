@@ -6,6 +6,7 @@
     <color name="colorTrance">#00000000</color>
     <color name="colorTrance2">#20000000</color>
     <color name="colorWhiteGray">#FAFAFA</color>
+    <color name="colorGrayBg">#F3F1F1</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorBlack3">#333333</color>

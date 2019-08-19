@@ -96,13 +96,15 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
             }
         });
     }
+
     boolean isLoaded = false;
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         //防止加载图片时，mIvPanorama的高宽还未获取到
         if (!isLoaded) {
-            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getThumbnailsAuto());
             isLoaded = true;
         }
     }
@@ -111,7 +113,7 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
     private void before() {
         if (mSelectPosition > 0) {
             mSelectPosition--;
-            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getThumbnailsAuto());
         } else {
             showToast("已经是第一张！");
         }
@@ -121,7 +123,7 @@ public class ImageLogPanoramaDetailActivity extends BaseMvpActivity<ImageLogPano
     private void next() {
         if (mSelectPosition < mData.size() - 1) {
             mSelectPosition++;
-            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getPuzzleImg());
+            mIvPanorama.loadNetImage(mData.get(mSelectPosition).getThumbnailsAuto());
         } else {
             mPageIndex++;
             if (mPageIndex >= mPageTotal) {

@@ -78,7 +78,7 @@ public class ImageLogPanoramaListActivity extends BaseMvpActivity<ImageLogPanora
             @Override
             protected void convert(BaseViewHolder helper, ImageLogPanoramaListJson.ListBean item) {
                 ImageView imageView = helper.getView(R.id.ivImageLogPanoramaItem);
-                LoadImgUtils.loadImg(getActivity(), item.getPuzzleImg(), imageView);
+                LoadImgUtils.loadImg(getActivity(), item.getThumbnails(), imageView);
                 helper.setText(R.id.tvImageLogPanoramaItemTime, item.getStartTime());
             }
         };

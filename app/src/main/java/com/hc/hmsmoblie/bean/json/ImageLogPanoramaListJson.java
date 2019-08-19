@@ -59,6 +59,24 @@ public class ImageLogPanoramaListJson implements Serializable{
         private String Pictrait;
         private String CutImage;
         private int PanoramicCount;
+        private String thumbnails;
+        private String thumbnailsAuto;
+
+        public String getThumbnails() {
+            return thumbnails;
+        }
+
+        public void setThumbnails(String thumbnails) {
+            this.thumbnails = thumbnails;
+        }
+
+        public String getThumbnailsAuto() {
+            return thumbnailsAuto;
+        }
+
+        public void setThumbnailsAuto(String thumbnailsAuto) {
+            this.thumbnailsAuto = thumbnailsAuto;
+        }
 
         public int getRecordId() {
             return RecordId;

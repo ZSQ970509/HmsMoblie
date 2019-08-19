@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 
 import com.chad.library.adapter.base.BaseItemDraggableAdapter;
@@ -15,14 +14,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.base.BaseMvpActivity;
-import com.hc.hmsmoblie.bean.json.LadderControlDeviceListJson;
 import com.hc.hmsmoblie.bean.json.ProjectJson;
 import com.hc.hmsmoblie.bean.type.ProTypeEnum;
-import com.hc.hmsmoblie.mvp.contact.LadderControlDeviceListC;
 import com.hc.hmsmoblie.mvp.contact.LadderControlProjectListC;
-import com.hc.hmsmoblie.mvp.presenter.LadderControlDeviceListP;
 import com.hc.hmsmoblie.mvp.presenter.LadderControlProjectListP;
-import com.hc.hmsmoblie.utils.EmptyUtils;
 import com.yc.yclibrary.exception.ApiException;
 
 import butterknife.BindView;
@@ -66,9 +61,9 @@ public class ImageLogProjectListActivity extends BaseMvpActivity<LadderControlPr
         mAdapter = new BaseItemDraggableAdapter<ProjectJson.ListBean, BaseViewHolder>(R.layout.item_select_project, null) {
             @Override
             protected void convert(BaseViewHolder helper, ProjectJson.ListBean item) {
-                helper.setText(R.id.item_Project_Video_Name, item.getProjName())
-                        .setText(R.id.item_Project_Video_Address, item.getProjAddress())
-                        .setText(R.id.item_Project_Video_Status, item.getProjStatusCurrent());
+                helper.setText(R.id.itemSelectProFileName, item.getProjName())
+                        .setText(R.id.itemSelectProFileAddress, item.getProjAddress())
+                        .setText(R.id.itemSelectProFileStatus, item.getProjStatusCurrent());
             }
         };
         mAdapter.setOnLoadMoreListener(() -> {

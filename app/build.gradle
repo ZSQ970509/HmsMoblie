@@ -8,6 +8,7 @@ android {
         targetSdkVersion 26
         versionCode 5
         versionName "2.3"
+        flavorDimensions "1"//androidStudio 3.3版本后分包需添加此参数
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,15 +17,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        app {
+            versionCode 5
+            versionName "2.3"
+            applicationId "com.hc.hmsmoblie"
+            resValue "string", "app_name", "远程视频大数据管控系统"
+            resValue "string", "file_provider", "com.hc.hmsmoblie"
+            resValue "bool", "is_yx", "false"
+            // 定义app_icon字段，在AndroidManifest.xml文件中用到
+            manifestPlaceholders = [app_icon: "@drawable/logo2"]
+        }
+        app_yx {
+            versionCode 5
+            versionName "2.3"
+            applicationId "com.hc.hmsmoblie_yx"
+            resValue "string", "app_name", "宜兴市建设工程信息化综合监管平台"
+            resValue "string", "file_provider", "com.hc.hmsmoblie_yx"
+            resValue "bool", "is_yx", "true"
+            // 定义app_icon字段，在AndroidManifest.xml文件中用到
+            manifestPlaceholders = [app_icon: "@drawable/logo2"]
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-//    repositories {
-//        flatDir {
-//            dirs 'libs'
-//        }
-//    }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -37,7 +56,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.+'
     implementation 'com.android.support:support-annotations:26.1.0'
     implementation 'com.android.support:design:26.1.0'
-    testImplementation 'junit:junit:4.12'
+//    testImplementation 'junit:junit:4.12'
     implementation 'com.github.ychxx:YcMvp:1.0.3'
     /* view依赖注入 */
     implementation 'com.jakewharton:butterknife:8.6.0'
@@ -66,5 +85,8 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:3.2.7'
     /* 筛选菜单库 */
     //    compile 'com.github.fg2q1q3q:DropDownMenu:1.1.1'
+    /* 刷新和加载更多 */
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-28'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-28'//没有使用特殊Header，可以不加这行
     implementation project(':library')
 }

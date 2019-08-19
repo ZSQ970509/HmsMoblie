@@ -6,26 +6,21 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.classic.adapter.BaseAdapterHelper;
-import com.classic.adapter.CommonAdapter;
 import com.hc.hmsmoblie.R;
 import com.hc.hmsmoblie.bean.type.UserTypeId;
 
 import org.angmarch.views.NiceSpinner;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 登录服务器（对话框）
  */
 
-public class LogonServerDialog extends Dialog {
+public class LoginServerDialog extends Dialog {
     private TextView mTvUrl; //地址
     private EditText mTvPort; //端口
     private NiceSpinner mSpUserType;//用户类型
@@ -35,15 +30,15 @@ public class LogonServerDialog extends Dialog {
 
 //    private final List<String> mData = Arrays.asList(UserTypeId.HSM.getTypeName(), UserTypeId.PECN.getTypeName(), UserTypeId.MCC.getTypeName());
 
-    public static LogonServerDialog newInstance(@NonNull Context context) {
-        return new LogonServerDialog(context);
+    public static LoginServerDialog newInstance(@NonNull Context context) {
+        return new LoginServerDialog(context);
     }
 
-    private LogonServerDialog(@NonNull Context context) {
+    private LoginServerDialog(@NonNull Context context) {
         this(context, R.style.CommonDialogStyle);
     }
 
-    private LogonServerDialog(@NonNull Context context, int theme) {
+    private LoginServerDialog(@NonNull Context context, int theme) {
         super(context, theme);
         initViews(context);
     }
@@ -69,24 +64,24 @@ public class LogonServerDialog extends Dialog {
         });
     }
 
-    public LogonServerDialog setUrl(String url) {
+    public LoginServerDialog setUrl(String url) {
         if (!TextUtils.isEmpty(url))
             mTvUrl.setText(url);
         return this;
     }
 
-    public LogonServerDialog setPort(String port) {
+    public LoginServerDialog setPort(String port) {
         if (!TextUtils.isEmpty(port))
             mTvPort.setText(port);
         return this;
     }
 
-    public LogonServerDialog setUserType(UserTypeId userType) {
+    public LoginServerDialog setUserType(UserTypeId userType) {
         mSpUserType.setSelectedIndex(userType.getIndex());
         return this;
     }
 
-    public LogonServerDialog setLeftOnClick(OnClick onClick) {
+    public LoginServerDialog setLeftOnClick(OnClick onClick) {
         mClickLeft = onClick;
         return this;
     }

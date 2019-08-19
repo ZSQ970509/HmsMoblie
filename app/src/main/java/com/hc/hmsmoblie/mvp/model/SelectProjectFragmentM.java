@@ -12,11 +12,11 @@ import io.reactivex.Observable;
  *
  */
 
-public class LadderControlProjectListM implements IModel{
-    public Observable getCameraList(String keyword, int pageindex, int pagesize, String sysId, String userid) {
+public class SelectProjectFragmentM implements IModel {
+    public Observable getProListByArea(String folderId, int folderLevel, int pageIndex, int pageSize, String sysId) {
         return RetrofitUtils.Instance
                 .getApiService(ApiServer.class)
-                .getCameraList(keyword, pageindex,pagesize,sysId,userid, UserInfoPref.getUserAccount(),UserInfoPref.getUserHeadSculpture())
+                .getProListByArea(folderId, folderLevel, pageIndex, pageSize, sysId, UserInfoPref.getUserId(), UserInfoPref.getUserHeadSculpture())
                 .compose(NetTransformer.compose());
     }
 }
